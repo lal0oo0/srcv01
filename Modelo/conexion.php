@@ -1,15 +1,7 @@
 <?php
-
-function conectar(){
-    $user="root";
-    $pass="";
-    $server="localhost";
-    $database="srcv1";
-    $conect = mysql_connect ($server,$user,$pass) or die ("error de conexion con bd".mysql_error());
-    mysql_select_db ($database,$conect);
-
-    return $conect;
+$link = new mysqli("localhost", "root", "", "srcv");
+if($link->connect_errno) {
+    echo "<b>Fallo al conectar a la BD: </b>" . $mysqli->connect_errno . "---" . $mysqli-> connect_error;
+    exit();
 }
-
-
 ?>
