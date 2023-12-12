@@ -15,8 +15,7 @@
    }*/
 
    .navbar-custom {
-    background-color: #1947AF; /* Puedes ajustar el código de color según tu preferencia */
-    color: #FFFFFF;
+    background-color: #1947AF; /* Darle color al NAV, del color que se necesite */
   }
 </style>
 
@@ -56,6 +55,73 @@
   </div>
 </nav>
 </header>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-*-*">
+    <div class="table-responsive my-custom-scrollbar">
+  <table class="table table-bordered table-striped mb-0">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido Paterno</th>
+        <th scope="col">Apellido Materno</th>
+        <th scope="col">Visita</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td>Sí</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <th scope="row">4</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td>Sí</td>
+      </tr>
+      <tr>
+        <th scope="row">5</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <th scope="row">6</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+        <td>Sí</td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+</div>
+    </div>
+    
+  </div>
+</div>
 
 
 
