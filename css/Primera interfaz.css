@@ -9,7 +9,7 @@
 body{
   margin: 0;
   padding: 0;
-  background: #e9edae;
+  background: #66dddf;
 
   font-family: sans-serif;
 }
@@ -30,11 +30,11 @@ h1{
 
 }
 .header .logo img{
-    height: 70px;
+    height: 40px;
     width: auto;
     transition: all 0.3s;
 }
-.header .logo img:hover{
+.header .logo .btn-group img:hover{
     transform: scale(1.2);
 }
 .header .nav-links{
@@ -55,8 +55,8 @@ h1{
 .header .nav-links li a:hover{
     color: #efff11;
 }
-.header .btn button{
-    font-weight: 750;
+.agregar .btn button{
+    font-weight: 700;
     color: #1b3039;
     padding: 9px 25px;
     background: #eceff1;
@@ -65,8 +65,36 @@ h1{
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }
-.header .btn button:hover{
+.agregar .btn button:hover{
     background-color: #e2f1f8;
     color: #00737b;
     transform: scale(1.1);
+}
+
+.table{
+    position: absolute;
+    text-align: center;
+    margin-left: 30px;
+    margin-right: 40px;
+    margin-top: 30px;
+    margin: auto;
+}
+.tabla{
+    height: 540px;
+    position: relative;
+    background-color: #00737b;
+    display: grid;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 0px;
+}
+.agregar{
+    text-align: center;
+    position: relative;
+    background-color: #1a2e3f;
+    display: grid;
+    margin-left: 30px;
+    margin-right: 30px;
+    bottom: 0px; 
 }
