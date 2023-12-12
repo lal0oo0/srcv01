@@ -9,9 +9,12 @@
 </head>
 <body>
   <?php
-    include("../Modelo/conexion2.php");
-    $sql="select * from srcv_visitas";
-    $resultado=mysqli_query($conexion.$sql);
+    require_once("../Modelo/conexion2.php");
+    $conexion = conect();
+    $query = mysqli_query ($conexion, "select * from srcv_visitas");
+    
+    /*$sql="select * from srcv_visitas";
+    $resultado=mysqli_query($conexion.$sql);*/
   ?>
   <header class="header">
     <div class="logo">
@@ -52,15 +55,18 @@
   <tr>
     <tbody>
       <?php
-      while($filas  = mysqli_fetch_assoc($resultado)){
+      while($filas  = mysqli_fetch_assoc($query)){
       ?>
       <tr>
     <td><?php echo $filas['HORA_ENTRADA'] ?></td>
     <td><?php echo $filas ['FECHA'] ?></td>
     <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
     <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
-    <td><?php echo $filas[''] ?></td>
-    <td><?php echo $filas['ID_VISITA'] ?></td>
+    <td><?php echo $filas['NOMBRE'] ?></td>
+    <td><?php echo $filas['HORA_SALIDA'] ?></td>
+    <td><?php echo $filas['EMPRESA'] ?></td>
+    <td><?php echo $filas['ASUNTO'] ?></td>
+    <td><?php echo $filas['ANFITRION'] ?></td>
     <td><?php echo $filas['ID_VISITA'] ?></td>
       </tr>
       <?php
