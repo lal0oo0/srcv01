@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="Primera interfaz.css">
+    <link rel="stylesheet" href="../css/Primera interfaz.css">
     <title>Primera interfaz</title>
 </head>
 <body>
@@ -12,40 +12,35 @@
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
     $query = mysqli_query ($conexion, "select * from srcv_visitas");
-    
-    /*$sql="select * from srcv_visitas";
-    $resultado=mysqli_query($conexion.$sql);*/
   ?>
   <header class="header">
     <div class="logo">
         <img src="../imagenes/logo.png" alt="">
     </div>
-    <div class="btn-group">
-      <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Menu
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Parte del menu</a></li>
-        <li><a class="dropdown-item" href="#">Parte del menu</a></li>
-        <li><a class="dropdown-item" href="#">Parte del menu</a></li>
-      </ul>
-    </div>
-    <nav>
-        <ul class="nav-links">
-            <li><center></center></li>
 
-        </ul>
-    </nav>
+    <div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Action
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Historial</a></li>
+    <li><a class="dropdown-item" href="#">Cerrar sesion</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="#">Cerrar aplicacion</a></li>
+  </ul>
+</div>
+
     <a href="#" class="btn"><button>Inicio</button></a>
 </header>
-    <script src="../js/bootstrap.min.js"></script>
-
+<br>
 <table class="table table-success table-striped">
   <tr>
     <thead>
     <th>Hora de entrada</th>
     <th>Fecha</th>
-    <th>Nombre completo</th>
+    <th>Nombre</th>
+    <th>Apellido paterno</th>
+    <th>Apellido materno</th>
     <th>Empresa</th>
     <th>Asunto</th>
     <th>Hora de salida</th>
@@ -60,14 +55,13 @@
       <tr>
     <td><?php echo $filas['HORA_ENTRADA'] ?></td>
     <td><?php echo $filas ['FECHA'] ?></td>
+    <td><?php echo $filas['NOMBRE'] ?></td>
     <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
     <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
-    <td><?php echo $filas['NOMBRE'] ?></td>
-    <td><?php echo $filas['HORA_SALIDA'] ?></td>
     <td><?php echo $filas['EMPRESA'] ?></td>
     <td><?php echo $filas['ASUNTO'] ?></td>
-    <td><?php echo $filas['ANFITRION'] ?></td>
-    <td><?php echo $filas['ID_VISITA'] ?></td>
+    <td><?php echo $filas['HORA_SALIDA'] ?></td>
+    <td>iconos</td>
       </tr>
       <?php
     }
@@ -76,5 +70,9 @@
   </tr>
 </table>
 <a href="#">Mas</a>
+
+
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
