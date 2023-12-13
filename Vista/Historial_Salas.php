@@ -7,28 +7,11 @@
     
     <title>Registros de visitas</title>
 </head>
-<style>
-
-  table.table th,
-  table.table td {
-    text-align: center;
-  }
-
-  .my-custom-scrollbar {
-  position: relative;
-  height: 200px;
-  overflow: auto;
-  }
-  .table-wrapper-scroll-y {
-  display: block;
-  }
-
-</style>
 <header>
 
 <nav class="navbar navbar-dark bg-danger fixed-top navbar-custom">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img id="logo" src="../imagenes/Logo-Urspace.png" width="95">SRCV SALAS</a>
+    <a class="navbar-brand" href="#"><img id="logo" src="../imagenes/Logo-Urspace.png" width="95">HISTORIAL DE RESERVACIONES</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -43,12 +26,6 @@
             <a class="nav-link active" aria-current="page" href="#">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Mapa</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Historial</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="#">Cerrar Sesion</a>
           </li>
           <li class="nav-item">
@@ -59,52 +36,6 @@
   </div>
 </nav>
 </header>
-<br>
-<br>
-<br>
-<br>
-<h3><center>REGISTROS DE SALAS</center></h3>
-<br>
-<div class="container">
-  <div class="row">
-    <div class="col">
-    <div class="table-responsive my-custom-scrollbar">
-  <table class="table table-bordered table-striped mb-0">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Nombre de la Sala</th>
-        <th scope="col">Estatus</th>
-      </tr>
-    </thead>
-    <?php
-            require_once("../Modelo/conexion2.php");
-            $conexion = conect();
-            $query = mysqli_query ($conexion, "select * from srcv_salas");
-            while($filas  = mysqli_fetch_assoc($query)){
-        ?>
-        <tr>
-            <td><?php echo$filas ["ID_SALA"] ?></td>
-            <td><?php echo$filas ["NOMBRE"] ?></td>
-            <td><?php echo$filas ["ESTATUS"] ?></td>
-        </tr>
-        <?php
-        };
-        ?>
-  </table>
-
-</div>
-    </div>
-    
-  </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-    <button type="button" class="btn btn-danger">AGREGAR SALA</button>
-    </div>
-  </div>
-</div>
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
