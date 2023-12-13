@@ -40,7 +40,7 @@
   <nav class="navbar navbar-expand-lg  navbar-dark navbar-custom">
   <!--<nav  class="navbar navbar-expand-lg navbar-light bg-light navbar-with-bg">--> <!-- IMAGEN DE FONDO -->
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Historial de Visitas</a>
+ 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -57,6 +57,7 @@
           </ul>
         </li>
       </ul>
+      <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Historial de Visitas</a>
       <div class="container">
         <div class="row">
             <div class="col-md-7">
