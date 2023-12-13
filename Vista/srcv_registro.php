@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     
-    <title>Historial de visitas</title>
+    <title>Registar</title>
 </head>
 <style>
 
-   .navbar-custom {
+   .navbar navbar-dark bg-dark fixed-top {
     background-color: #1947AF; /* Darle color al NAV, del color que se necesite */
     font-size: 18px; /* Hacer las letras más grandes */
   }
@@ -36,10 +36,10 @@
     $query = mysqli_query ($conexion, "select * from srcv_visitas");
   ?>
  
- <header>
+  <header>
   <nav class="navbar navbar-dark bg-primary  fixed-top " >
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="../imagenes/IT_logo1.png" width="100px"> SRCV Historial</a>
+    <a class="navbar-brand" href="#"><img src="../imagenes/IT_logo1.png" width="100px"> SRCV Registros</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -51,7 +51,7 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Registro</a>
+            <a class="nav-link active" href="#">Historial</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="#">Cerrar Sesion</a>
@@ -71,7 +71,10 @@
   </div>
 </nav>
 </header>
-<br><br><br><br>
+<br>
+<br>
+<br>
+<br>
 <div class="container">
   <div class="row">
     <div class="col-*-*">
@@ -105,8 +108,8 @@
                     <td><?php echo $filas['ASUNTO'] ?></td>
                     <td><?php echo $filas['HORA_SALIDA'] ?></td>
                     <td>
-                        <a href="#"><img src="../imagenes/actualizar.png" width="20px"></a>
-                        <a href="#"><img src="../imagenes/borra.png" width="20px"></a>
+                        <a href="#"><button type="button" class="btn btn-secondary btn-sm"><img src="../imagenes/actualizar.png" width="20px"></button></a>
+                        <a href="#"><button type="button" class="btn btn-secondary btn-sm"><img src="../imagenes/borra.png" width="20px"></button></a>
                     </td>
       </tr>
       <?php
@@ -122,13 +125,9 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            hola
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-12">
         <div class="d-grid gap-2">
-  <button class="btn btn-primary" style="background-color:#008000;" type="button"><img src="../imagenes/excel.png" width="35px">Informe </button>
+  <button class="btn btn-primary" style="background-color:	#008B8B;" type="button">Nuevo </button>
 </div>
         </div>
     </div>
