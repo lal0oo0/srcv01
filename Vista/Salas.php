@@ -8,9 +8,6 @@
     <title>Primera interfaz</title>
 </head>
 <style>
-  body{
-    background-image: url("../imagenes/fondo2.jpeg");
-  }
 
   table.table th,
   table.table td {
@@ -25,14 +22,13 @@
   .table-wrapper-scroll-y {
   display: block;
   }
-  
+
 </style>
 <header>
 
 <nav class="navbar navbar-dark bg-danger fixed-top navbar-custom">
   <div class="container-fluid">
-    <img id="logo" src="../imagenes/UrSpace.jpeg" width="90">
-    <a class="navbar-brand" href="#">REGISTRO DE SALAS</a>
+    <a class="navbar-brand" href="#"><img id="logo" src="../imagenes/Logo-Urspace.png" width="95">SRCV SALAS</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -67,6 +63,8 @@
 <br>
 <br>
 <br>
+<h3><center>REGISTROS DE SALAS</center></h3>
+<br>
 <div class="container">
   <div class="row">
     <div class="col">
@@ -100,7 +98,13 @@
     
   </div>
 </div>
-
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+    <button type="button" class="btn btn-danger">AGREGAR SALA</button>
+    </div>
+  </div>
+</div>
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
