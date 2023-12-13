@@ -5,18 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     
-    <title>Primera interfaz</title>
+    <title>Historial de visitas</title>
 </head>
 <style>
-   /*.navbar-with-bg {
-      background-image: url('../imagenes/navbar.jpg');
-      background-size: cover; 
-      background-position: center; 
-   }*/
 
    .navbar-custom {
     background-color: #1947AF; /* Darle color al NAV, del color que se necesite */
+    font-size: 18px; /* Hacer las letras más grandes */
   }
+
+  table.table th,
+  table.table td {
+    text-align: center;
+  }
+
+  .my-custom-scrollbar {
+  position: relative;
+  height: 200px;
+  overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }
+  
 </style>
 
 <body>
@@ -60,6 +71,7 @@
   <div class="row">
     <div class="col-*-*">
     <div class="table-responsive my-custom-scrollbar">
+  <!-- Estos son datos de ejemplo -->
   <table class="table table-bordered table-striped mb-0">
     <thead>
       <tr>
@@ -124,9 +136,41 @@
 </div>
 
 
+<div class="container">
+  <div class="row">
+    <div class="col">
+     
+    </div>
+    <div class="col">
+      <h1>Prueba2</h1>
+    </div>
+  </div>
 
- <!--<script src="../js/bootstrap.min.js"></script> Sólo se inclye bundle o este -->
- <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
+  </div>
+</div>
+<div class="container">
+<div class="row">
+    <div class="col">
+<form>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1">
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+  </div>
+</div>
+<script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
