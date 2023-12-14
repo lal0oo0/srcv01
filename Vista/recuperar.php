@@ -18,11 +18,6 @@
     font-size: 20px;
   }
 
-  .imagen{
-    background-image: url("/unnamed.jpg");
-
-  }
-
   .submit{
     font-size: 20px;
   }

@@ -65,7 +65,7 @@
                 Te falto la contraseña
               </div>
             </div>
-            <br><br><br><br>
+            <br><br><br><br><br>
             </div>
             <div class="col-12">
               <button class="btn btn-primary" type="submit" href="index.php">Registrarse</button>
