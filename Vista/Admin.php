@@ -5,14 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     
-    <title>Registar</title>
+    <title>Agregar Usuarios</title>
 </head>
 <style>
-
-   .navbar  {
-    background-color: #8E4566; /* Darle color al NAV, del color que se necesite */
-    font-size: 18px; /* Hacer las letras más grandes */
-  }
 
   table.table th,
   table.table td {
@@ -21,30 +16,22 @@
 
   .my-custom-scrollbar {
   position: relative;
-  height: 500px;
+  height: 200px;
   overflow: auto;
   }
   .table-wrapper-scroll-y {
   display: block;
   }
-  .navbar-custom {
-    background-color: #64BAFF; /* Darle color al NAV, del color que se necesite */
-    font-size: 18px; /* Hacer las letras más grandes */
+  .navbar-custom{
+    background-color: #64BAFF; 
+    font-size: 18px;
   }
   .Titulo{
-    color: white;
+    color:white;
   }
 </style>
-
-<body>
-<?php
-    require_once("../Modelo/conexion2.php");
-    $conexion = conect();
-    $query = mysqli_query ($conexion, "select * from srcv_visitas");
-  ?>
- 
-  <header>
-  <nav class="navbar navbar-dark  fixed-top navbar-custom" >
+<header>
+<nav class="navbar navbar-dark  fixed-top navbar-custom" >
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Registros</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
@@ -58,7 +45,7 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" href="http://localhost/srcv01/Vista/srcv_historial1.php">Historial</a>
+            <a class="nav-link active" href="http://localhost/srcv01/Vista/categorias.php">Categorias</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="#">Cerrar Sesion</a>
@@ -82,48 +69,39 @@
 <br>
 <br>
 <br>
-
+<br>
 <div class="container">
   <div class="row">
-    <div class="col-*-*">
+    <div class="col">
     <div class="table-responsive my-custom-scrollbar">
-  <!-- Estos son datos de ejemplo -->
   <table class="table table-bordered table-striped mb-0">
     <thead>
       <tr>
-        <th scope="col">Hora de entrada</th>
-        <th scope="col">Fecha</th>
+        <th scope="col">ID</th>
         <th scope="col">Nombre</th>
         <th scope="col">Apellido Paterno</th>
         <th scope="col">Apellido Materno</th>
-        <th scope="col">Empresa</th>
-        <th scope="col">Asunto</th>
-        <th scope="col">Hora de salida</th>
-        <th scope="col">Acciones</th>
+        <th scope="col">Correo Electronico</th>
+        <th scope="col">Rol</th>
       </tr>
     </thead>
-    <tbody>
     <?php
-            while ($filas = mysqli_fetch_assoc($query)) {
-            ?>
-      <tr>
-      <td><?php echo $filas['HORA_ENTRADA'] ?></td>
-                    <td><?php echo $filas['FECHA'] ?></td>
-                    <td><?php echo $filas['NOMBRE'] ?></td>
-                    <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
-                    <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
-                    <td><?php echo $filas['EMPRESA'] ?></td>
-                    <td><?php echo $filas['ASUNTO'] ?></td>
-                    <td><?php echo $filas['HORA_SALIDA'] ?></td>
-                    <td>
-                        <a href="#"><button type="button" class="btn btn-secondary btn-sm" style="background-color:	#8AB7B0;"><img src="../imagenes/actualizar.png" width="20px"></button></a>
-                        <a href="#"><button type="button" class="btn btn-secondary btn-sm" style="background-color:	#8AB7B0;"><img src="../imagenes/borra.png" width="20px"></button></a>
-                    </td>
-      </tr>
-      <?php
-            }
-            ?>
-    </tbody>
+            require_once("../Modelo/conexion2.php");
+            $conexion = conect();
+            $query = mysqli_query ($conexion, "select * from srcv_administradores");
+            while($filas  = mysqli_fetch_assoc($query)){
+        ?>
+        <tr>
+            <td><?php echo$filas ["ID_ADMINISTRADOR"] ?></td>
+            <td><?php echo$filas ["NOMBRE"] ?></td>
+            <td><?php echo$filas ["APELLIDO_PATERNO"] ?></td>
+            <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
+            <td><?php echo $filas['CORREO_ELECTRONICO'] ?></td>
+            <td><?php echo $filas['ROL'] ?></td>
+        </tr>
+        <?php
+        };
+        ?>
   </table>
 
 </div>
@@ -132,15 +110,13 @@
   </div>
 </div>
 <div class="container">
-    <div class="row">
-        <div class="col-md-3">
-        <div class="d-grid gap-2">
-  <button class="btn btn-primary" style="background-color:	#008B8B;" type="button">Nuevo </button>
-</div>
-        </div>
+  <div class="row">
+    <div class="col-12">
+    <button type="button" class="btn btn-primary" style="background-color:	#008B8B;" >AGREGAR USUARIO</button>
     </div>
+  </div>
 </div>
-<script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
+<script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

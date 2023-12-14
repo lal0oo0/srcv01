@@ -10,7 +10,7 @@
 <style>
 
    .navbar-custom {
-    background-color: #1947AF; /* Darle color al NAV, del color que se necesite */
+    background-color: #64BAFF; /* Darle color al NAV, del color que se necesite */
     font-size: 18px; /* Hacer las letras más grandes */
   }
 
@@ -27,6 +27,10 @@
   .table-wrapper-scroll-y {
   display: block;
   }
+
+  .tituloM{
+    color: white;
+  }
 </style>
 
 <body>
@@ -37,15 +41,15 @@
   ?>
  
  <header>
-  <nav class="navbar navbar-dark bg-primary  fixed-top " >
+  <nav class="navbar navbar-dark  fixed-top navbar-custom  " >
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Historial</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-end text-bg-primary" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+    <div class="offcanvas offcanvas-end  navbar-dark  navbar-custom tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
+        <h5 class="offcanvas-title tituloM" id="offcanvasDarkNavbarLabel">Menu</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
