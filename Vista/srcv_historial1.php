@@ -39,7 +39,7 @@
  <header>
   <nav class="navbar navbar-dark bg-primary  fixed-top " >
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="../imagenes/IT_logo1.png" width="100px"> SRCV Historial</a>
+    <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Historial</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -51,7 +51,7 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Registro</a>
+            <a class="nav-link active" href="http://localhost/srcv01/Vista/srcv_registro.php">Registro</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="#">Cerrar Sesion</a>
