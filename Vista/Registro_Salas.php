@@ -70,7 +70,13 @@
 <br>
 <h3><center>REGISTROS DE SALAS</center></h3>
 <br>
-
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    <button type="button" class="btn btn-danger">NUEVO REGISTRO</button>
+    </div>
+  </div>
+</div>
 <div class="container">
   <div class="row">
     <div class="col">
@@ -102,13 +108,7 @@
     </div> 
   </div>
 </div>
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-    <button type="button" class="btn btn-danger">AGREGAR SALA</button>
-    </div>
-  </div>
-</div>
+
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
