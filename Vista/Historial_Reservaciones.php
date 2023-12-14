@@ -8,7 +8,10 @@
     <title>Reservaciones</title>
 </head>
 <style>
-
+.navbar-custom {
+    background-color: #F73B3B; /* Darle color al NAV, del color que se necesite */
+    font-size: 18px; /* Hacer las letras más grandes */
+  }
   table.table th,
   table.table td {
     text-align: center;
@@ -22,25 +25,34 @@
   .table-wrapper-scroll-y {
   display: block;
   }
+  .tit-color{
+    color:white;
+  }
 
 </style>
 <header>
 
-<nav class="navbar navbar-dark bg-danger fixed-top navbar-custom">
+<nav class="navbar navbar-dark fixed-top navbar-custom">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><img id="logo" src="../imagenes/Logo-Urspace.png" width="95">SRCV SALAS</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-end text-bg-danger" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+    <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MENU</h5>
+        <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel">MENU</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+            <a class="nav-link active" aria-current="page" href="#">Mapa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="Registro_Salas.php">Registro de salas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="Historial_Reservaciones.php">Historial de reservaciones</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Cerrar Sesion</a>
@@ -107,6 +119,18 @@
         };
         ?>
   </table>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">  
+        </div>
+        <div class="col-md-3">
+        <div class="d-grid gap-2">
+  <button class="btn btn-primary" style="background-color:#008000;" type="button"><img src="../imagenes/excel.png" width="35px">Informe </button>
+</div>
+        </div>
+    </div>
+</div>
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
