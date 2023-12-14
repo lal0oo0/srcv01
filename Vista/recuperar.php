@@ -11,14 +11,16 @@
 <style>
 
   body{
+    display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     font-size: 20px;
   }
 
-  .inputemail{
-    border-radius: 5px;
+  .imagen{
+    background-image: url("/unnamed.jpg");
+
   }
 
   .submit{
@@ -27,31 +29,38 @@
 
 </style>
 <body>
+ <div class="imagen"></div>
   <div class="container text-center">
-  <div class="row justify-content-center">
-  <div class="dropdown">
-  <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-    Dropdown form
-  </button>
-  <form class="dropdown-menu p-4">
-    <div class="mb-3">
-      <label for="exampleDropdownFormEmail2" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
-    </div>
-    <div class="mb-3">
-      <label for="exampleDropdownFormPassword2" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
-    </div>
-    <div class="mb-3">
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="dropdownCheck2">
-        <label class="form-check-label" for="dropdownCheck2">
-          Remember me
-        </label>
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <form class="row g-3 needs-validation" novalidate>
+          <div class="col-12">
+            <label for="validationexampleInputEmail1" class="form-label">Correo Electronico</label>
+            <div class="input-group has-validation">
+              <input type="email" class="form-control" id="exampleInputEmail1" id="validationCustom01" aria-describedby="emailHelp" required>
+              <div class="invalid-feedback">
+                Te falto el Correo Electronico
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="validationCustom03" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" id="validationCustom02" required>
+            <div class="invalid-feedback">
+              Te falto la contraseña
+            </div>
+          </div>
+          <br><br><br><br>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit" href="inicio_sesion">Registrarse</button>
+          </div>
+          <br><br>
+        </form>
+        <div class="dropdown-divider"></div>
+        <p class="fs-6"><a class="btn btn-link" class="text-decorative-none" href="#">¿Haz olvidado tu contraseña?</a></p>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </form>
   </div>
     <script src="Validacion.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
