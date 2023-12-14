@@ -8,11 +8,22 @@
 </head>
 <style>
 
+html{
+    background-image: url(https://yt3.ggpht.com/a/AATXAJzXppmgHIkJuqcYvDWEiSuYygBWJlYlHHR9kw=s900-c-k-c0xffffffff-no-rj-mo);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
   body{
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    max width: 400px;
+    background-image: url(https://yt3.ggpht.com/a/AATXAJzXppmgHIkJuqcYvDWEiSuYygBWJlYlHHR9kw=s900-c-k-c0xffffffff-no-rj-mo);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto;
     font-size: 20px;
   }
 
@@ -26,9 +37,9 @@
 <body>
     <div class="container text-center">
       <div class="row justify-content-center">
-        <div class="col-12">
+        <div class="col-5">
           <form class="row g-3 needs-validation" novalidate>
-            <div class="col-12">
+            <div class="col-sm-12">
               <label for="validationCustom01" class="form-label">Nombre</label>
               <input type="text" class="form-control" id="validationCustom01" required>
               <div class="invalid-feedback">
@@ -60,9 +71,9 @@
             </div>
             <div class="col-12">
               <label for="validationCustom03" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" id="validationCustom02" required>
+              <input type="password" class="form-control" id="exampleInputPassword1" id="validationCustom02" aria-describedby="passwordHelpBlock" required>
               <div class="invalid-feedback">
-                Te falto la contraseña
+                Su contraseña debe de tener entre 8 y 16 caracteres, contener letras y numeros, y no debe contener espacios, caracteres especiales ni emoji
               </div>
             </div>
             <br><br><br><br><br>
