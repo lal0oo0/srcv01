@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    
+    <title>Mapa</title>
+</head>
+<style>
+.navbar-custom {
+    background-color: #F73B3B; /* Darle color al NAV, del color que se necesite */
+    font-size: 18px; /* Hacer las letras más grandes */
+  }
+  table.table th,
+  table.table td {
+    text-align: center;
+  }
+
+  .my-custom-scrollbar {
+  position: relative;
+  height: 200px;
+  overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }
+  .tit-color{
+    color:white;
+  }
+</style>
+<header>
+
+<nav class="navbar navbar-dark  fixed-top navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><img id="logo" src="../imagenes/Logo-Urspace.png" width="95">SRCV SALAS</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel">MENU</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Mapa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="Registro_Salas.php">Registro de salas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Historial_Reservaciones.php">Historial de reservaciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cerrar Sesion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cerrar Aplicacion</a>
+          </li>
+      </div>
+    </div>
+  </div>
+</nav>
+</header>
+<br><br><br><br><br><br><br>
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
+    <span class="border border-5">Hola</span>
+    </div>
+    <div class="col order-5">
+    <span class="border border-5">hola</span>
+    </div>
+    <div class="col order-1">
+    <span class="border border-5">hola</span>
+    </div>
+    <div class="col order-1">
+    <span class="border border-5">hola</span>
+    </div>
+  </div>
+  <br><br><br><br>
+  <div class="row">
+    <div class="col order-5">
+    <span class="border border-5">hola</span>
+    </div>
+    <div class="col order-1">
+    <span class="border border-5">hola</span>
+    </div>
+    <div class="col order-1">
+    <span class="border border-5">hola</span>
+    </div>
+    <div class="col order-1">
+    <span class="border border-5">hola</span>
+    </div>
+  </div>
+  <br><br><br><br>
+  <div class="row">
+    <div class="col order-5">
+    <span class="border border-5">hola</span>
+    </div>
+    <div class="col order-1">
+    <span class="border border-5">hola</span>
+    </div>
+    <div class="col order-1">
+    <span class="border border-5">hola</span>
+    </div>
+    <div class="col order-1">
+    <span class="border border-5">hola</span>
+    </div>
+  </div>
+</div>
+<script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
+<script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
