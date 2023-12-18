@@ -18,19 +18,6 @@
     background-color: #F73B3B;
     font-size: 18px;
   }
-  table.table th,
-  table.table td {
-    text-align: center;
-  }
-
-  .my-custom-scrollbar {
-    position: relative;
-    height: 200px;
-    overflow: auto;
-  }
-  .table-wrapper-scroll-y {
-    display: block;
-  }
   .tit-color{
     color:white;
   }
@@ -77,7 +64,7 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link" href="#">Mapa</a>
+              <a class="nav-link" href="mapa1.php">Mapa</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="Registro_Salas.php">Registro de salas</a>
