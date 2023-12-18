@@ -29,7 +29,7 @@
   .container{
     min-height: 420px;
     width: 520px;
-    border: 0.5px solid #999;
+    border: 2px solid #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,6 +40,15 @@
     position: relative;
     overflow: hidden;
     padding: 3.5rem;
+  }
+
+  .container input{
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #ffffff;
+    border-radius: 30px;
+    font-size: #fff;
   }
 
 </style>

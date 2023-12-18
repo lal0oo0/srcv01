@@ -9,7 +9,7 @@
 <style>
 
   body{
-    background-image: url(https://static.vecteezy.com/system/resources/previews/000/429/911/original/world-map-with-global-network-vector.jpg);
+    background-image: url(https://thumbs.dreamstime.com/b/stream-binary-code-eps-vector-background-39246644.jpg);
     background-size: cover;
     width: 100%;
     display: flex;
@@ -27,7 +27,7 @@
   .container{
     min-height: 520px;
     width: 520px;
-    border: 0.5px solid #999;
+    border: 2px solid #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,6 +40,14 @@
     padding: 3.5rem;
   }
   
+  .container input{
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #ffffff;
+    border-radius: 30px;
+    font-size: #fff;
+  }
 
 </style>
 <body>
