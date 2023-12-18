@@ -39,9 +39,9 @@
   .caja {
     background-color: #158C10;
     box-sizing: border-box;
-    width: 100px;
-    height: 100px;
-    margin: 20px;
+    width: 140px;
+    height: 140px;
+    margin: 50px;
     color: white;
     border-radius: 10px;
     display: flex;
