@@ -9,7 +9,7 @@
 <style>
 
   body{
-    background-image: url(https://th.bing.com/th/id/R.eef843e4e0f3fd858375d3ae3001b587?rik=0jc%2blWjUeq69dg&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f06%2fLight-blue-abstract-wallpaper.jpg&ehk=GvbynSMqWxoQqT2yTEwm9mIa%2faAMGPhSh4Y%2fxGxrZbY%3d&risl=&pid=ImgRaw&r=0);
+    background-image: url(https://static.vecteezy.com/system/resources/previews/000/429/911/original/world-map-with-global-network-vector.jpg);
     background-size: cover;
     width: 100%;
     display: flex;
@@ -25,7 +25,7 @@
   }
 
   .container{
-    min-height: 720px;
+    min-height: 520px;
     width: 520px;
     border: 0.5px solid #999;
     display: flex;

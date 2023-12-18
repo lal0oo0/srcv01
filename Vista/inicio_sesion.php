@@ -11,7 +11,7 @@
 <style>
 
   body{
-    background-image: url(https://th.bing.com/th/id/R.eef843e4e0f3fd858375d3ae3001b587?rik=0jc%2blWjUeq69dg&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f06%2fLight-blue-abstract-wallpaper.jpg&ehk=GvbynSMqWxoQqT2yTEwm9mIa%2faAMGPhSh4Y%2fxGxrZbY%3d&risl=&pid=ImgRaw&r=0);
+    background-image: url(https://thumbs.dreamstime.com/b/stream-binary-code-eps-vector-background-39246644.jpg);
     background-size: cover;
     width: 100%;
     display: flex;
@@ -72,10 +72,9 @@
           <br><br>
         </form>
         <div class="dropdown-divider"></div>
-        <p class="fs-6"><a class="btn btn-link" class="text-decorative-none" href="recuperar.php">¿Haz olvidado tu contraseña?</a></p>
+        <p class="fs-6"><a class="link-light" class="text-decorative-none" href="srcv_recuperar_contraseña.php">¿Haz olvidado tu contraseña?</a></p>
       </div>
     </div>
-    <script src="valer.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
