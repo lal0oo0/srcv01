@@ -11,7 +11,7 @@
 <style>
 
   body{
-    background-image: url(https://thumbs.dreamstime.com/b/stream-binary-code-eps-vector-background-39246644.jpg);
+    background-image: url(https://th.bing.com/th/id/OIP.I7nhMVv7VInEc1BpBatiPQAAAA?rs=1&pid=ImgDetMain);
     background-size: cover;
     width: 100%;
     display: flex;
@@ -27,31 +27,30 @@
   }
 
   .container{
-    min-height: 420px;
-    width: 520px;
-    border: 2px solid #ffffff;
+    min-height: 20px;
+    width: 820px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
     padding: 3.5rem;
   }
-
-  .container input{
-    background: transparent;
-    border: none;
-    outline: none;
-    border: 2px solid #ffffff;
-    border-radius: 30px;
-    font-size: #fff;
+  
+  .logo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 100px;
+    left: calc(50% - 50px);
   }
 
+
 </style>
+<img src="../imagenes/unnamed.jpg" alt="" class="logo">
 <body>
   <div class="container text-center">
     <div class="row justify-content-center">

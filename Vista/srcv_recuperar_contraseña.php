@@ -9,7 +9,7 @@
 <style>
 
   body{
-    background-image: url(https://thumbs.dreamstime.com/b/stream-binary-code-eps-vector-background-39246644.jpg);
+    background-image: url(https://www.3monlinestore-pro.jp/img/goods/L/CAL-JS-66102XL.jpg);
     background-size: cover;
     width: 100%;
     display: flex;
@@ -39,15 +39,8 @@
     overflow: hidden;
     padding: 3.5rem;
   }
+
   
-  .container input{
-    background: transparent;
-    border: none;
-    outline: none;
-    border: 2px solid #ffffff;
-    border-radius: 30px;
-    font-size: #fff;
-  }
 
 </style>
 <body>

@@ -9,7 +9,7 @@
 <style>
 
   body{
-    background-image: url(https://thumbs.dreamstime.com/b/stream-binary-code-eps-vector-background-39246644.jpg);
+    background-color: #4ca1f5;
     background-size: cover;
     width: 100%;
     display: flex;
@@ -25,61 +25,59 @@
   }
 
   .container{
-    min-height: 520px;
-    width: 520px;
-    border: 2px solid #ffffff;
+    min-height: 20px;
+    width: 820px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
     padding: 3.5rem;
   }
-
-  .container input{
-    background: transparent;
-    border: none;
-    outline: none;
-    border: 2px solid #ffffff;
-    border-radius: 30px;
-    font-size: #fff;
-  }
   
+  .logo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 100px;
+    left: calc(50% - 50px);
+  }
 
 </style>
+<img src="../imagenes/unnamed.jpg" alt="" class="logo">
 <body>
     <div class="container text-center">
-      <img class="logo" url=() alt="">
+    <br><br><br>
       <div class="row justify-content-center">
         <div class="col-11">
           <div class="card-body">
+            <br>
           <form class="row g-3 needs-validation" novalidate>
-            <div class="col-sm-12">
+            <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Nombre</label>
               <input type="text" class="form-control" id="validationCustom01" required>
               <div class="invalid-feedback">
               Rellene este campo, por favor
               </div>
             </div>
-            <div class="col-12">
+            <div class="col-md-6">
               <label for="validationCustom02" class="form-label">Apellido Paterno</label>
               <input type="text" class="form-control" id="validationCustom02" required>
               <div class="invalid-feedback">
                 Rellene este campo, por favor
               </div>
             </div>
-            <div class="col-12">
+            <div class="col-md-6">
               <label for="validationCustom03" class="form-label">Apellido Materno</label>
               <input type="text" class="form-control" id="validationCustom03" required>
               <div class="invalid-feedback">
               Rellene este campo, por favor
               </div>
             </div>
-            <div class="col-12">
+            <div class="col-md-6">
               <label for="validationexampleInputEmail1" class="form-label">Correo Electronico</label>
               <div class="input-group has-validation">
                 <input type="email" class="form-control" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
@@ -88,14 +86,14 @@
                 </div>
               </div>
             </div>
-            <div class="col-12">
+            <div class="col-md-6">
               <label for="validationCustom03" class="form-label">Contraseña</label>
               <input type="password" class="form-control" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
                 Su contraseña debe de tener entre 8 y 16 caracteres, contener letras y numeros, y no debe contener espacios.
               </div>
             </div>
-            <br><br><br><br><br>
+            <br><br><br><br>
             <div class="col-12">
               <button class="btn btn-primary" type="submit" href="#">Registrarse</button>
             </div>
