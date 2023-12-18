@@ -86,7 +86,7 @@
     <div class="row">
         <div class="col-md-3">
         <div class="d-grid gap-2">
-  <button class="btn btn-primary" style="background-color:	#008B8B;" type="button">Nuevo </button>
+  <button class="btn btn-primary" style="background-color:	#008B8B;" type="button" href="">Nuevo </button>
 </div>
         </div>
     </div>
