@@ -82,7 +82,15 @@
 <br>
 <br>
 <br>
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+        <div class="d-grid gap-2">
+  <button class="btn btn-primary" style="background-color:	#008B8B;" type="button">Nuevo </button>
+</div>
+        </div>
+    </div>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-*-*">
@@ -131,15 +139,7 @@
     
   </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
-        <div class="d-grid gap-2">
-  <button class="btn btn-primary" style="background-color:	#008B8B;" type="button">Nuevo </button>
-</div>
-        </div>
-    </div>
-</div>
+
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
 </body>

@@ -72,6 +72,13 @@
 <br>
 <div class="container">
   <div class="row">
+    <div class="col-12">
+    <button type="button" class="btn btn-primary" style="background-color:	#008B8B;" >Nuevo Registro</button>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
     <div class="col">
     <div class="table-responsive my-custom-scrollbar">
   <table class="table table-bordered table-striped mb-0">
@@ -109,13 +116,7 @@
     
   </div>
 </div>
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-    <button type="button" class="btn btn-primary" style="background-color:	#008B8B;" >AGREGAR USUARIO</button>
-    </div>
-  </div>
-</div>
+
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
