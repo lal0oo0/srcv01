@@ -103,30 +103,32 @@
       </div>
       <div class="modal-body">
 
-      <form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="row g-3 needs-validation" novalidate>
+      <form action="../Controlador/visitas.php" method="post" class="row g-3 needs-validation" novalidate>
             <h1>Rellene los campos</h1>
 
             <div class="row">
+
             <div class="col">
-              <label for="fecha" class="form-label">Fecha</label>
-              <input type="date" class="form-control" id="fecha" disable="" required>
+              <label for="he" class="form-label">Hora de entrada</label>
+              <input type="time" class="form-control" id="he" name="he" required>
               <div class="invalid-feedback">
               Verifique los datos
               </div>
             </div>
 
             <div class="col">
-              <label for="he" class="form-label">Hora de entrada</label>
-              <input type="time" class="form-control" id="he" required>
+              <label for="fecha" class="form-label">Fecha</label>
+              <input type="date" class="form-control" id="fecha" name="fecha" disable="" required>
               <div class="invalid-feedback">
               Verifique los datos
               </div>
             </div>
+
             </div>
 
             <div class="col">
               <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre" required>
+              <input type="text" class="form-control" id="nombre" name="nombre" required>
               <div class="invalid-feedback">
               Verifique los datos
               </div>
@@ -135,7 +137,7 @@
             <div class="row">
             <div class="col">
               <label for="ap" class="form-label">Apellido Paterno</label>
-              <input type="text" class="form-control" id="ap" required>
+              <input type="text" class="form-control" id="ap" name="ap" required>
               <div class="invalid-feedback">
               Verifique los datos
               </div>
@@ -143,7 +145,7 @@
 
             <div class="col">
               <label for="am" class="form-label">Apellido Materno</label>
-              <input type="text" class="form-control" id="am" required>
+              <input type="text" class="form-control" id="am" name="am" required>
               <div class="invalid-feedback">
               Verifique los datos
               </div>
@@ -153,7 +155,7 @@
             <div class="row">
             <div class="col">
              <label class="form-label" for="empresa">Empresa</label><br>
-              <select class="custom-select mr-sm-2" id="empresa">
+              <select class="custom-select mr-sm-2" id="empresa" name="empresa">
                <option selected>Elige</option>
                
     <?php
@@ -171,7 +173,7 @@
 
             <div class="col">
              <label class="form-label" for="asunto">Asunto</label><br>
-              <select class="custom-select mr-sm-2" id="asunto">
+              <select class="custom-select mr-sm-2" id="asunto" name="asunto" >
                <option selected>Elige</option>
                
     <?php
@@ -189,23 +191,23 @@
 
             <div class="col">
               <label for="hs" class="form-label">Hora de salida</label>
-              <input type="time" class="form-control" id="hs" required>
+              <input type="time" class="form-control" id="hs" name="hs" required>
               <div class="invalid-feedback">
               Verifique los datos
               </div>
             </div>
             </div>
-
+            <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Confirmar</button>
+      </div>
             <br><br><br><br>
           </form>
 
         
       </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Confirmar</button>
-      </div>
+
     </div>
   </div>
 </div>
@@ -263,5 +265,7 @@
 
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
+
+
 </body>
 </html>
