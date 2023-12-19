@@ -28,6 +28,10 @@
   .tit-color{
     color:white;
   }
+  .caja{
+    border: 1px solid #000;
+    padding: 20px;
+  }
 </style>
 <header>
 
@@ -71,83 +75,59 @@
 <h3><center>REGISTROS DE SALAS</center></h3>
 <br>
 
-
-<!-- Button trigger modal -->
-<div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+      <div class="table-responsive my-custom-scrollbar">
+      <table class="table table-bordered table-striped mb-0">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre de la Sala</th>
+            <th scope="col">Estatus</th>
+          </tr>
+        </thead>
+          <?php
+              require_once("../Modelo/conexion2.php");
+              $conexion = conect();
+              $query = mysqli_query ($conexion, "select * from srcv_salas");
+              while($filas  = mysqli_fetch_assoc($query)){
+          ?>
+          <tr>
+              <td><?php echo$filas ["ID_SALA"] ?></td>
+              <td><?php echo$filas ["NOMBRE"] ?></td>
+              <td><?php echo$filas ["ESTATUS"] ?></td>
+          </tr>
+          <?php
+          };
+          ?>
+      </table>
+      </div>
+      </div> 
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="container caja">
   <div class="row">
     <div class="col-md-12">
-
-    <form action="" class="formulario" method="post">
-      <div class="row g-3 align-items-center">
-        <div class="col-md-2">
-        <label for="Nombre" class="col-form-label">Nombre de la sala:</label>
+      <form action="../Controlador/controlador_registro_salas.php" class="formulario" method="post">
+        <div class="row g-3 align-items-center">
+          <div class="col-md-2">
+          <label for="Nombre" class="col-form-label">Nombre de la sala:</label>
+          </div>
+          <div class="col-md-9">
+          <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
+          </div>
+          <div class="col-md-1">
+          <button type="submit" class="btn btn-danger">AGREGAR</button>
+          </div>
         </div>
-        <div class="col-md-9">
-        <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
-        </div>
-      </div>
-    </form>
-
-    
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      NUEVO REGISTRO
-    </button>
+      </form>
     </div>
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-    <div class="table-responsive my-custom-scrollbar">
-  <table class="table table-bordered table-striped mb-0">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Nombre de la Sala</th>
-        <th scope="col">Estatus</th>
-      </tr>
-    </thead>
-    <?php
-            require_once("../Modelo/conexion2.php");
-            $conexion = conect();
-            $query = mysqli_query ($conexion, "select * from srcv_salas");
-            while($filas  = mysqli_fetch_assoc($query)){
-        ?>
-        <tr>
-            <td><?php echo$filas ["ID_SALA"] ?></td>
-            <td><?php echo$filas ["NOMBRE"] ?></td>
-            <td><?php echo$filas ["ESTATUS"] ?></td>
-        </tr>
-        <?php
-        };
-        ?>
-  </table>
-</div>
-    </div> 
-  </div>
-</div>
 
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
