@@ -11,7 +11,8 @@
 <?php
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
-    $query = mysqli_query ($conexion, "select * from srcv_listas");
+    $queryempresa = mysqli_query ($conexion, "select * from srcv_listas WHERE CATEGORIA='empresa'");
+    $queryasunto = mysqli_query ($conexion, "select * from srcv_listas WHERE CATEGORIA='asunto'");
   ?>
     <style>
 
@@ -75,27 +76,35 @@
              <label class="form-label" for="empresa">Empresa</label><br>
               <select class="custom-select mr-sm-2" id="empresa">
                <option selected>Elige</option>
-               <?php
-    while ($filas = mysqli_fetch_assoc($query)) {
-        if ($filas['CATEGORIA'] == 'empresa') {
-?>
+               
+    <?php
+    while ($filas = mysqli_fetch_assoc($queryempresa)) 
+    {
+    ?>
             <option value="<?php echo $filas['ID_LISTA']; ?>">
                 <?php echo $filas['NOMBRE']; ?>
             </option>
-<?php
-        }
-    }
-?>
+            <?php
+            }
+            ?>
               </select>
             </div>
 
             <div class="col-2">
              <label class="form-label" for="asunto">Asunto</label><br>
-              <select class="custom-select mr" id="asunto">
+              <select class="custom-select mr-sm-2" id="asunto">
                <option selected>Elige</option>
-               <option value="1">One</option>
-               <option value="2">Two</option>
-               <option value="3">Three</option>
+               
+    <?php
+    while ($filas = mysqli_fetch_assoc($queryasunto)) 
+    {
+    ?>
+            <option value="<?php echo $filas['ID_LISTA']; ?>">
+                <?php echo $filas['NOMBRE']; ?>
+            </option>
+            <?php
+            }
+            ?>
               </select>
             </div>
 

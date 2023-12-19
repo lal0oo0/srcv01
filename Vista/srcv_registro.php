@@ -40,7 +40,9 @@
 <?php
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
-    $query = mysqli_query ($conexion, "select * from srcv_visitas");
+    $queryVisitas = mysqli_query ($conexion, "select * from srcv_visitas");
+    $queryempresa = mysqli_query ($conexion, "select * from srcv_listas WHERE CATEGORIA='empresa'");
+    $queryasunto = mysqli_query ($conexion, "select * from srcv_listas WHERE CATEGORIA='asunto'");
   ?>
  
   <header>
@@ -69,6 +71,7 @@
         </ul>
         </ul>
         </ul>
+
         <form class="d-flex mt-3" role="search">
           <input class="form-control me-2" type="Buscar" placeholder="Buscar" aria-label="Buscar">
           <button class="btn btn-success" type="submit">Buscar</button>
@@ -82,15 +85,133 @@
 <br>
 <br>
 <br>
+
 <div class="container">
-    <div class="row">
-        <div class="col-md-3">
-        <div class="d-grid gap-2">
-  <button class="btn btn-primary" style="background-color:	#008B8B;" type="button" href="">Nuevo </button>
+    <div class="row-md-8">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" style="background-color: #008B8B" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+       Nuevo Registro
+      </button>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+          Nuevo Registro
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      <form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="row g-3 needs-validation" novalidate>
+            <h1>Rellene los campos</h1>
+
+            <div class="row">
+            <div class="col">
+              <label for="fecha" class="form-label">Fecha</label>
+              <input type="date" class="form-control" id="fecha" disable="" required>
+              <div class="invalid-feedback">
+              Verifique los datos
+              </div>
+            </div>
+
+            <div class="col">
+              <label for="he" class="form-label">Hora de entrada</label>
+              <input type="time" class="form-control" id="he" required>
+              <div class="invalid-feedback">
+              Verifique los datos
+              </div>
+            </div>
+            </div>
+
+            <div class="col">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" required>
+              <div class="invalid-feedback">
+              Verifique los datos
+              </div>
+            </div>
+
+            <div class="row">
+            <div class="col">
+              <label for="ap" class="form-label">Apellido Paterno</label>
+              <input type="text" class="form-control" id="ap" required>
+              <div class="invalid-feedback">
+              Verifique los datos
+              </div>
+            </div>
+
+            <div class="col">
+              <label for="am" class="form-label">Apellido Materno</label>
+              <input type="text" class="form-control" id="am" required>
+              <div class="invalid-feedback">
+              Verifique los datos
+              </div>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="col">
+             <label class="form-label" for="empresa">Empresa</label><br>
+              <select class="custom-select mr-sm-2" id="empresa">
+               <option selected>Elige</option>
+               
+    <?php
+    while ($filas = mysqli_fetch_assoc($queryempresa)) 
+    {
+    ?>
+            <option value="<?php echo $filas['ID_LISTA']; ?>">
+                <?php echo $filas['NOMBRE']; ?>
+            </option>
+            <?php
+            }
+            ?>
+              </select>
+            </div>
+
+            <div class="col">
+             <label class="form-label" for="asunto">Asunto</label><br>
+              <select class="custom-select mr-sm-2" id="asunto">
+               <option selected>Elige</option>
+               
+    <?php
+    while ($filas = mysqli_fetch_assoc($queryasunto)) 
+    {
+    ?>
+            <option value="<?php echo $filas['ID_LISTA']; ?>">
+                <?php echo $filas['NOMBRE']; ?>
+            </option>
+            <?php
+            }
+            ?>
+              </select>
+            </div>
+
+            <div class="col">
+              <label for="hs" class="form-label">Hora de salida</label>
+              <input type="time" class="form-control" id="hs" required>
+              <div class="invalid-feedback">
+              Verifique los datos
+              </div>
+            </div>
+            </div>
+
+            <br><br><br><br>
+          </form>
+
+        
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Confirmar</button>
+      </div>
+    </div>
+  </div>
 </div>
-        </div>
     </div>
 </div>
+
 <div class="container">
   <div class="row">
     <div class="col-*-*">
@@ -112,7 +233,7 @@
     </thead>
     <tbody>
     <?php
-            while ($filas = mysqli_fetch_assoc($query)) {
+            while ($filas = mysqli_fetch_assoc($queryVisitas)) {
             ?>
       <tr>
       <td><?php echo $filas['HORA_ENTRADA'] ?></td>
