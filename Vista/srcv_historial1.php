@@ -10,7 +10,7 @@
 <style>
 
    .navbar-custom {
-    background-color: #1947AF; /* Darle color al NAV, del color que se necesite */
+    background-color: #64BAFF; /* Darle color al NAV, del color que se necesite */
     font-size: 18px; /* Hacer las letras más grandes */
   }
 
@@ -27,6 +27,10 @@
   .table-wrapper-scroll-y {
   display: block;
   }
+
+  .tituloM{
+    color: white;
+  }
 </style>
 
 <body>
@@ -36,12 +40,11 @@
     $query = mysqli_query ($conexion, "select * from srcv_visitas");
   ?>
  
-  <header>
-  <nav class="navbar navbar-expand-lg  navbar-dark navbar-custom">
-  <!--<nav  class="navbar navbar-expand-lg navbar-light bg-light navbar-with-bg">--> <!-- IMAGEN DE FONDO -->
+ <header>
+  <nav class="navbar navbar-dark  fixed-top navbar-custom  " >
   <div class="container-fluid">
- 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Historial</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -65,7 +68,7 @@
             <div class="col-md-5">
       <form class="d-flex ">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-success" type="submit">Search</button>
+        <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
 
       </div>
@@ -75,7 +78,7 @@
   </div>
 </nav>
 </header>
-<br>
+<br><br><br><br>
 <div class="container">
   <div class="row">
     <div class="col-*-*">
@@ -127,8 +130,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md-6">
-            hola
+        <div class="col-md-6">  
         </div>
         <div class="col-md-3">
         <div class="d-grid gap-2">

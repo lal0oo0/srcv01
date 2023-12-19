@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     
-    <title>Primera interfaz</title>
+    <title>Agregar Listas</title>
 </head>
 <style>
-  body{
-    background-image: url("../imagenes/fondo2.jpeg");
-  }
 
   table.table th,
   table.table td {
@@ -25,39 +22,44 @@
   .table-wrapper-scroll-y {
   display: block;
   }
-  
+  .navbar-custom{
+    background-color: #64BAFF; 
+    font-size: 18px;
+  }
+  .Titulo{
+    color:white;
+  }
 </style>
 <header>
-
-<nav class="navbar navbar-dark bg-danger fixed-top navbar-custom">
+<nav class="navbar navbar-dark  fixed-top navbar-custom" >
   <div class="container-fluid">
-    <img id="logo" src="../imagenes/UrSpace.jpeg" width="90">
-    <a class="navbar-brand" href="#">REGISTRO DE SALAS</a>
+    <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Registros</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-end text-bg-danger" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+    <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MENU</h5>
+        <h5 class="offcanvas-title Titulo" id="offcanvasDarkNavbarLabel">Menu</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+            <a class="nav-link active" href="http://localhost/srcv01/Vista/admin.php">Usuarios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Mapa</a>
+            <a class="nav-link active" href="#">Cerrar Sesion</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Historial</a>
+            <a class="nav-link active" href="#">Cerrar Aplicacion</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar Sesion</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar Aplicacion</a>
-          </li>
+        </ul>
+        </ul>
+        </ul>
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="Buscar" placeholder="Buscar" aria-label="Buscar">
+          <button class="btn btn-success" type="submit">Buscar</button>
+        </form>
       </div>
     </div>
   </div>
@@ -67,6 +69,14 @@
 <br>
 <br>
 <br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+    <button type="button" class="btn btn-primary" style="background-color:	#008B8B;" >Nuevo Registro</button>
+    </div>
+  </div>
+</div>
 <div class="container">
   <div class="row">
     <div class="col">
@@ -75,20 +85,20 @@
     <thead>
       <tr>
         <th scope="col">ID</th>
-        <th scope="col">Nombre de la Sala</th>
-        <th scope="col">Estatus</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Categoria</th>
       </tr>
     </thead>
     <?php
             require_once("../Modelo/conexion2.php");
             $conexion = conect();
-            $query = mysqli_query ($conexion, "select * from srcv_salas");
+            $query = mysqli_query ($conexion, "select * from srcv_listas");
             while($filas  = mysqli_fetch_assoc($query)){
         ?>
         <tr>
-            <td><?php echo$filas ["ID_SALA"] ?></td>
+            <td><?php echo$filas ["ID_LISTA"] ?></td>
             <td><?php echo$filas ["NOMBRE"] ?></td>
-            <td><?php echo$filas ["ESTATUS"] ?></td>
+            <td><?php echo$filas ["CATEGORIA"] ?></td>
         </tr>
         <?php
         };
@@ -101,7 +111,7 @@
   </div>
 </div>
 
-<script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
+<script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
