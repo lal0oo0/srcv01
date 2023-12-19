@@ -118,18 +118,18 @@
         <?php
         };
         ?>
-  </table>
-  <div class="container">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">  
-        </div>
-        <div class="col-md-3">
-        <div class="d-grid gap-2">
-  <button class="btn btn-primary" style="background-color:#008000;" type="button"><img src="../imagenes/excel.png" width="35px">Informe </button>
-</div>
-        </div>
+    </table>
     </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-10">
+  </div>
+  <div class="col-md-2">
+  <button class="btn btn-primary" style="background-color:#008000;"  type="button"><img src="../imagenes/excel.png" width="35px">Informe </button>
+  </div>
 </div>
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
