@@ -94,7 +94,8 @@
       ?>
      
       <!-- Button trigger modal -->
-<button type="button" class="boton btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+<button type="button" class="boton btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="setSelectedRoom('<?php echo $filas['ID_SALA'] ?>')">
+
 <?php echo $filas['NOMBRE'] ?>
       </button>
 <!-- Modal -->
@@ -104,21 +105,22 @@
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">
           <?php echo $filas['NOMBRE'] ?></h1>
+            <input  id="salaSeleccionada" name="salaSeleccionada" value="">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
 
-    <form action="" class="formulario" method="post">
+    <form action="../Controlador/controlador_registro_reservacion.php" class="formulario" method="post">
       <div class="input-group mb-3">
-       <input type="text" class="form-control" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
+       <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
       </div>
       <div class="input-group mb-3">
-       <input type="text" class="form-control" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1">
-       <input type="text" class="form-control" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1">
+       <input type="text" class="form-control" name="Apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1">
+       <input type="text" class="form-control" name="Apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1">
       </div>
       <br>
       <div class="input-group mb-6">
-       <input type="email" class="form-control" placeholder="Correo electronico" aria-label="Correo electronico" aria-describedby="basic-addon1">
+       <input type="email" class="form-control" name="Correo" placeholder="Correo electronico" aria-label="Correo electronico" aria-describedby="basic-addon1">
       </div>
       <br>
       <div class="input-group mb-3">
@@ -128,8 +130,8 @@
            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
           Fecha de finalizacion</label>
         </div>
-        <input type="date" class="form-control" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1">
-        <input type="date" class="form-control" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1">
+        <input type="date" class="form-control" name="Fechainicio" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1">
+        <input type="date" class="form-control" name="Fechafinalizacion" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1">
       </div>
       <br>
       <div class="input-group mb-3">
@@ -139,15 +141,17 @@
            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
           Hora de finalizacion</label>
         </div>
-        <input type="time" class="form-control" placeholder="Hora de inicio" aria-label="Hora de inicio" aria-describedby="basic-addon1">
-        <input type="time" class="form-control" placeholder="Hora de finalizacion" aria-label="Hora  de finalizacion" aria-describedby="basic-addon1">
+        <input type="time" class="form-control" name="Horainicio" placeholder="Hora de inicio" aria-label="Hora de inicio" aria-describedby="basic-addon1">
+        <input type="time" class="form-control" name="Horafinalizacion" placeholder="Hora de finalizacion" aria-label="Hora  de finalizacion" aria-describedby="basic-addon1">
       </div>
       <br>
       <div class="input-group mb-3">
-       <input type="number" class="form-control" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1">
-       <input type="number" class="form-control" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1">
-       <input type="number" class="form-control" placeholder="Liquidacion" aria-label="Liquidacion" aria-describedby="basic-addon1">
+       <input type="number" class="form-control" name="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1">
+       <input type="number" class="form-control" name="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1">
+       <input type="number" class="form-control" name="Liquidacion" placeholder="Liquidacion" aria-label="Liquidacion" aria-describedby="basic-addon1">
       </div>
+    
+      <button type="submit" class="btn btn-primary">Confirmar</button>
     </form>
 
         ...
@@ -169,5 +173,12 @@
 
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
+
+<script>
+  function setSelectedRoom(nombreSala) {
+    // Asigna el nombre de la sala al campo oculto en el formulario
+    document.getElementById('salaSeleccionada').value = nombreSala;
+  }
+</script>
 </body>
 </html>
