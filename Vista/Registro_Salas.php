@@ -70,13 +70,53 @@
 <br>
 <h3><center>REGISTROS DE SALAS</center></h3>
 <br>
+
+
+<!-- Button trigger modal -->
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-    <button type="button" class="btn btn-danger">NUEVO REGISTRO</button>
+    <div class="col-md-12">
+
+    <form action="" class="formulario" method="post">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-2">
+        <label for="Nombre" class="col-form-label">Nombre de la sala:</label>
+        </div>
+        <div class="col-md-9">
+        <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
+        </div>
+      </div>
+    </form>
+
+    
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      NUEVO REGISTRO
+    </button>
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <div class="container">
   <div class="row">
     <div class="col">
