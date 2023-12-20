@@ -19,7 +19,7 @@
 
   .my-custom-scrollbar {
   position: relative;
-  height: 200px;
+  height: 300px;
   overflow: auto;
   }
   .table-wrapper-scroll-y {
@@ -123,7 +123,7 @@
     </div>
   </div>
 </div>
-
+<div class="mb-3"></div> 
 <div class="row">
   <div class="col-md-10">
   </div>

@@ -7,6 +7,11 @@
     
     <title>Agregar Listas</title>
 </head>
+  <?php
+    require_once("../Modelo/conexion2.php");
+    $conexion = conect();
+    $categorias = mysqli_query ($conexion, "select * from srcv_listas");
+  ?>
 <style>
 
   table.table th,
@@ -93,6 +98,7 @@
             require_once("../Modelo/conexion2.php");
             $conexion = conect();
             $query = mysqli_query ($conexion, "select * from srcv_listas");
+            
             while($filas  = mysqli_fetch_assoc($query)){
         ?>
         <tr>
@@ -108,6 +114,43 @@
 </div>
     </div>
     
+  </div>
+</div>
+
+<div class="container caja">
+  <div class="row">
+    <div class="col-md-12">
+      <form action="../Controlador/controlador_registro_categoria.php" class="formulario" method="post">
+        <div class="row g-3 align-items-center">
+          <div class="col-md-2">
+          <label for="Nombre" class="col-form-label">Nombre:</label>
+          </div>
+          <div class="col-md-6">
+          <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
+          </div>
+          <div class="col-md-3">
+          <select class="form-select" name="Categoria" aria-label="Default select example">
+            <option selected>Categoria</option>
+            <option value="1">
+              <?php
+              while ($filas = mysqli_fetch_assoc($categorias)) 
+              {
+              ?>
+              <option value="">
+                  <?php echo $filas['CATEGORIA']; ?>
+              </option>
+              <?php
+              }
+              ?>
+            </option>
+          </select>
+          </div>
+          <div class="col-md-1">
+          <button type="submit" class="btn btn-danger">AGREGAR</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
