@@ -18,7 +18,7 @@ if ($ejecutar) {
 	echo 'éxito';
 }
 else{
-	echo 'nel';
+	echo mysqli_error($conexion);
 }
 
 
