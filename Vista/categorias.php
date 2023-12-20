@@ -71,11 +71,13 @@
 <br>
 <br>
 <div class="container">
+
   <div class="row">
     <div class="col-12">
     <button type="button" class="btn btn-primary" style="background-color:	#008B8B;" >Nuevo Registro</button>
     </div>
   </div>
+  
 </div>
 <div class="container">
   <div class="row">
