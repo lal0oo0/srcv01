@@ -120,8 +120,8 @@
       </div>
       <div class="modal-body">
 
-      <form action="../Controlador/visitas.php" method="post" class="row g-3 needs-validation" novalidate>
-            <h1>Rellene los campos</h1>
+      <form id="myForm" action="../Controlador/visitas.php" method="post" class="row g-3 needs-validation" novalidate>
+            <h5>Rellene los campos</h5>
 
             <div class="mb-3"></div> <!-- Salto de línea -->
 
@@ -173,7 +173,10 @@
             <div class="row">
             <div class="col">
              <label class="form-label" for="empresa">Empresa</label><br>
-              <select class="custom-select mr-sm-2" id="empresa" name="empresa">
+              <select class="custom-select mr-sm-2" id="empresa" name="empresa" required>
+              <div class="invalid-feedback">
+              Verifique los datos
+              </div>
                <option selected>Elige</option>
                
             <?php
@@ -191,7 +194,10 @@
 
             <div class="col">
              <label class="form-label" for="asunto">Asunto</label><br>
-              <select class="custom-select mr-sm-2" id="asunto" name="asunto" >
+              <select class="form-select mr-sm-2" id="asunto" name="asunto" requerid>
+              <div class="invalid-feedback">
+              Verifique los datos
+              </div>
                <option selected>Elige</option>
                
             <?php
@@ -283,7 +289,32 @@
 
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script>
 
+document.getElementById('myForm').addEventListener('submit', function(event) {
+      var selectedDateValue = document.getElementById('fecha').value;
+
+      // Verificar si el campo está vacío
+      if (!selectedDateValue) {
+        document.getElementById('fecha').classList.add('is-invalid');
+        event.preventDefault(); // Evitar que el formulario se envíe
+        return;
+      }
+
+      // Obtener la fecha actual en formato ISO sin la zona horaria
+      var currentDate = new Date().toISOString().split('T')[0];
+
+      // Verificar si la fecha seleccionada es anterior o igual a la fecha actual
+      if (selectedDateValue < currentDate) {
+        document.getElementById('fecha').classList.add('is-invalid');
+        event.preventDefault(); // Evitar que el formulario se envíe
+      } else {
+        // Si la fecha es válida, eliminar la marca de inválido
+        document.getElementById('fecha').classList.remove('is-invalid');
+      }
+    });
+
+</script>
 
 </body>
 </html>
