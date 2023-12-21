@@ -195,8 +195,8 @@ $(document).ready(function() {
                 if (response.success) {
                     // Muestra una alerta de éxito con SweetAlert
                     swal({
-                        title: 'Good job!',
-                        text: 'You clicked the button!',
+                        title: 'Registro exitoso!',
+                        text: 'La categoría se encuentra registrada exitosamente!',
                         icon: 'success'
                     }).then(function() {
                         // Recarga la página después de cerrar la alerta (opcional)
