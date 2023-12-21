@@ -1,3 +1,7 @@
+<?php
+  $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,13 +28,16 @@
   height: 500px;
   overflow: auto;
   }
+
   .table-wrapper-scroll-y {
   display: block;
   }
+
   .navbar-custom {
     background-color: #64BAFF; /* Darle color al NAV, del color que se necesite */
     font-size: 18px; /* Hacer las letras más grandes */
   }
+
   .Titulo{
     color: white;
   }
@@ -92,22 +99,33 @@
       <button type="button" class="btn btn-primary" style="background-color: #008B8B" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
        Nuevo Registro
       </button>
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">
-          Nuevo Registro
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      
+      <!-- ALERTA -->
+      <div id="mensaje">
+          <?php echo $mensaje; ?>
+      </div>
+      <div class="mb-3"></div> 
+      
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                Nuevo Registro
+          
+       
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+
       </div>
       <div class="modal-body">
 
-      <form action="../Controlador/visitas.php" method="post" class="row g-3 needs-validation" novalidate>
-            <h1>Rellene los campos</h1>
+      <form id="myForm" action="../Controlador/visitas.php" method="post" class="row g-3 needs-validation" novalidate>
+            <h5>Rellene los campos</h5>
+
+            <div class="mb-3"></div> <!-- Salto de línea -->
 
             <div class="row">
-
             <div class="col">
               <label for="he" class="form-label">Hora de entrada</label>
               <input type="time" class="form-control" id="he" name="he" required>
@@ -122,10 +140,10 @@
               <div class="invalid-feedback">
               Verifique los datos
               </div>
+              </div>
             </div>
 
-            </div>
-
+            <br>
             <div class="col">
               <label for="nombre" class="form-label">Nombre</label>
               <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -155,38 +173,44 @@
             <div class="row">
             <div class="col">
              <label class="form-label" for="empresa">Empresa</label><br>
-              <select class="custom-select mr-sm-2" id="empresa" name="empresa">
+              <select class="custom-select mr-sm-2" id="empresa" name="empresa" required>
+              <div class="invalid-feedback">
+              Verifique los datos
+              </div>
                <option selected>Elige</option>
                
-    <?php
-    while ($filas = mysqli_fetch_assoc($queryempresa)) 
-    {
-    ?>
-            <option value="<?php echo $filas['ID_LISTA']; ?>">
-                <?php echo $filas['NOMBRE']; ?>
+            <?php
+            while ($filas = mysqli_fetch_assoc($queryempresa)) 
+            {
+            ?>
+            <option value="<?php echo $filas['NOMBRE']; ?>">
+            <?php echo $filas['NOMBRE']; ?>
             </option>
             <?php
             }
             ?>
-              </select>
+            </select>
             </div>
 
             <div class="col">
              <label class="form-label" for="asunto">Asunto</label><br>
-              <select class="custom-select mr-sm-2" id="asunto" name="asunto" >
+              <select class="form-select mr-sm-2" id="asunto" name="asunto" requerid>
+              <div class="invalid-feedback">
+              Verifique los datos
+              </div>
                <option selected>Elige</option>
                
-    <?php
-    while ($filas = mysqli_fetch_assoc($queryasunto)) 
-    {
-    ?>
-            <option value="<?php echo $filas['ID_LISTA']; ?>">
+            <?php
+            while ($filas = mysqli_fetch_assoc($queryasunto)) 
+            {
+            ?>
+            <option value="<?php echo $filas['NOMBRE']; ?>">
                 <?php echo $filas['NOMBRE']; ?>
             </option>
             <?php
             }
             ?>
-              </select>
+            </select>
             </div>
 
             <div class="col">
@@ -198,9 +222,9 @@
             </div>
             </div>
             <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Confirmar</button>
-      </div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Confirmar</button>
+          </div>
             <br><br><br><br>
           </form>
 
@@ -265,7 +289,32 @@
 
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script>
 
+document.getElementById('myForm').addEventListener('submit', function(event) {
+      var selectedDateValue = document.getElementById('fecha').value;
+
+      // Verificar si el campo está vacío
+      if (!selectedDateValue) {
+        document.getElementById('fecha').classList.add('is-invalid');
+        event.preventDefault(); // Evitar que el formulario se envíe
+        return;
+      }
+
+      // Obtener la fecha actual en formato ISO sin la zona horaria
+      var currentDate = new Date().toISOString().split('T')[0];
+
+      // Verificar si la fecha seleccionada es anterior o igual a la fecha actual
+      if (selectedDateValue < currentDate) {
+        document.getElementById('fecha').classList.add('is-invalid');
+        event.preventDefault(); // Evitar que el formulario se envíe
+      } else {
+        // Si la fecha es válida, eliminar la marca de inválido
+        document.getElementById('fecha').classList.remove('is-invalid');
+      }
+    });
+
+</script>
 
 </body>
 </html>

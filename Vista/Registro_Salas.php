@@ -126,7 +126,7 @@
       </form>
     </div>
   </div>
-</div>
+  </div>
 
 
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->

@@ -6,10 +6,12 @@ $conexion = conect();
 
 /*Para capturar los campos*/
 $Nombre = $_POST['Nombre'];
+$Categoria = $_POST['Categoria'];
 //y$variable11= $_POST['salaSeleccionada'];
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$consulta = "INSERT INTO srcv_salas(NOMBRE)
-VALUES ('$Nombre')";
+$consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA)
+VALUES ('$Nombre', '$Categoria')";
+
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $consulta); 
 
