@@ -16,9 +16,13 @@ $variable8 = $_POST['Horafinalizacion'];
 $variable9 = $_POST['Total'];
 $variable10 = $_POST['Enganche'];
 $variable11= $variable9-$variable10;
+
+$idSala = $_POST['idSalaModal'];
+
+
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$consulta = "INSERT INTO srcv_reservaciones(NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, TOTAL, ENGANCHE, LIQUIDACION) 
-VALUES ('$variable1', '$variable2', '$variable3', '$variable4', '$variable5', '$variable6', '$variable7', '$variable8', '$variable9', '$variable10', '$variable11')";
+$consulta = "INSERT INTO srcv_reservaciones (ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, TOTAL, ENGANCHE, LIQUIDACION) 
+VALUES ('$idSala', '$variable1', '$variable2', '$variable3', '$variable4', '$variable5', '$variable6', '$variable7', '$variable8', '$variable9', '$variable10', '$variable11')";
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $consulta); 
 

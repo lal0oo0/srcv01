@@ -101,18 +101,21 @@
       ?>
      
       <!-- Button trigger modal -->
-<button type="button" class="boton btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="setSelectedRoom('<?php echo $filas['ID_SALA'] ?>')">
-
-<?php echo $filas['NOMBRE'] ?>
-      </button>
+      <button type="button" class="boton btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_<?php echo $filas['ID_SALA'] ?>" onclick="setSelectedRoom('<?php echo $filas['ID_SALA'] ?>')">
+  <?php echo $filas['NOMBRE'] ?>
+</button>
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop_<?php echo $filas['ID_SALA'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">
           <?php echo $filas['NOMBRE'] ?></h1>
-            <input  id="salaSeleccionada" name="salaSeleccionada" value="">
+          <input id="salaSeleccionada_<?php echo $filas['ID_SALA'] ?>" name="salaSeleccionada" value="" hidden>
+          
+          <!--Aquí se guarda el ID de la sala -->
+          <input type="hidden" name="IdSala" id="idSala" value="">
+
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -180,10 +183,11 @@
 <script src="../js/bootstrap.bundle.min.js"></script>
 
 <script>
-  function setSelectedRoom(nombreSala) {
-    // Asigna el nombre de la sala al campo oculto en el formulario
-    document.getElementById('salaSeleccionada').value = nombreSala;
+  function setSelectedRoom(idSala) {
+    // Asigna el ID de la sala al campo oculto en el formulario
+    document.getElementById('salaSeleccionada_' + idSala).value = idSala;
   }
 </script>
+
 </body>
 </html>
