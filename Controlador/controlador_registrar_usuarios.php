@@ -13,7 +13,7 @@ $contrasenia = $_POST['pass'];
 $rol = $_POST['rol'];
 $pregunta = $_POST['pregunta'];
 $respuesta = $_POST['respuesta'];
-//y$variable11= $_POST['salaSeleccionada'];
+
 /*Codigo para guardar un registro temporalmente en una variable php*/
 $usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASEÑA, ROL, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA) 
 VALUES ('$nombre', '$ap', '$am', '$correo','$contrasenia','$rol','$pregunta','$respuesta')";

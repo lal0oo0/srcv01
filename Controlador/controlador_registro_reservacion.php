@@ -26,7 +26,7 @@ VALUES ('$idSala', '$variable1', '$variable2', '$variable3', '$variable4', '$var
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $consulta); 
 
-
+/* Falta cambiar aquí las alertas */
 if ($ejecutar) {
 	echo 'éxito';
 }
