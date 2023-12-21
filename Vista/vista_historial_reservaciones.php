@@ -46,13 +46,13 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="mapa1.php">Mapa</a>
+            <a class="nav-link active" aria-current="page" href="vista_mapa_salas.php">Mapa</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="Registro_Salas.php">Registro de salas</a>
+            <a class="nav-link active" aria-current="page" href="vista_registro_salas.php">Registro de salas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="Historial_Reservaciones.php">Historial de reservaciones</a>
+            <a class="nav-link active" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Cerrar Sesion</a>

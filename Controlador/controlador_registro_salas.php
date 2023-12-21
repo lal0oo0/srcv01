@@ -5,37 +5,28 @@ include '../Modelo/conexion2.php';
 $conexion = conect();
 
 /*Para capturar los campos*/
-$Nombre = $_POST['Nombre'];
-//y$variable11= $_POST['salaSeleccionada'];
-/*Codigo para guardar un registro temporalmente en una variable php*/
-$consulta = "INSERT INTO srcv_salas(NOMBRE)
-VALUES ('$Nombre')";
-/*Para ejecutar la consulta*/
-$ejecutar = mysqli_query($conexion, $consulta); 
+$nombre = $_POST['Nombre'];
 
 
-if ($ejecutar) {
-	echo 'éxito';
-}
-else{
-	echo mysqli_error($conexion);
-}
+// Verificar si NOMBRE ya existe
+$verificacion = mysqli_query($conexion, "SELECT * FROM srcv_salas WHERE NOMBRE = '$nombre' ");
+    if (mysqli_num_rows($verificacion) > 0) {
+        echo json_encode(array('success' => false, 'error' => 'El nombre de la sala que ingreso ya existe.'));
+        exit();
+    }
 
+    /*Codigo para guardar un registro temporalmente en una variable php*/
+	$consulta = "INSERT INTO srcv_salas(NOMBRE, ESTATUS)
+	VALUES ('$nombre','1')";
 
-/*if ($ejecutar) {
-	echo '
-	<script>
-	alert ("Resevacion exitosa");
-	window.location="../Mapa_Salas.php";
-	</script>';
-}
-else{
-	echo '
-	<script>
-	alert ("Error en su reservacion");
-	window.location="../Mapa_Salas.php";
-	</script>';
-}*/
+	/*Para ejecutar la consulta*/
+    $ejecutar = mysqli_query($conexion, $consulta);
+
+    if ($ejecutar) {
+        echo json_encode(array('success' => true));
+    } else {
+        echo json_encode(array('success' => false, 'error' => mysqli_error($conexion)));
+    }
 
 
 /*Para cerrar conexion*/
