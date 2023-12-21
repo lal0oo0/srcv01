@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     
     <title>Agregar Listas</title>
+
+    
 </head>
   <?php
     require_once("../Modelo/conexion2.php");
@@ -82,6 +84,7 @@
     <button type="button" class="btn btn-primary" style="background-color:	#008B8B;" >Nuevo Registro</button>
     </div>
   </div>
+  <br> <!-- Otra forma de poner un salto de línea -->
   
 </div>
 <div class="container">
@@ -118,7 +121,7 @@
     
   </div>
 </div>
-
+<br>
 <div class="container caja">
   <div class="row">
     <div class="col-md-12">
@@ -132,19 +135,9 @@
           </div>
           <div class="col-md-3">
           <select class="form-select" name="Categoria" aria-label="Default select example">
-            <option selected>Categoria</option>
-            <option value="1">
-              <?php
-              while ($filas = mysqli_fetch_assoc($categorias)) 
-              {
-              ?>
-              <option value="">
-                  <?php echo $filas['CATEGORIA']; ?>
-              </option>
-              <?php
-              }
-              ?>
-            </option>
+            <option selected>Categoría</option>
+            <option value="Empresa">Empresa</option>
+            <option value="Asunto">Asunto</option>
           </select>
           </div>
           <div class="col-md-1">
@@ -155,8 +148,56 @@
     </div>
   </div>
 </div>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+// Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
+$(document).ready(function() {
+    // Captura el evento de envío del formulario con la clase 'formulario'
+    $(".formulario").submit(function(e) {
+        // Previene el comportamiento predeterminado del formulario
+        e.preventDefault();
+        
+        // Realiza una solicitud Ajax al servidor
+        $.ajax({
+            // Especifica el método de la solicitud (POST en este caso)
+            type: "POST",
+            // Obtiene la URL del atributo 'action' del formulario
+            url: $(this).attr('action'),
+            // Serializa los datos del formulario para enviarlos al servidor
+            data: $(this).serialize(),
+            // Especifica que se espera recibir datos en formato JSON
+            dataType: "json",
+            // Función que se ejecuta cuando la solicitud Ajax tiene éxito
+            success: function(response) {
+                // Verifica si la operación en el servidor fue exitosa
+                if (response.success) {
+                    // Muestra una alerta de éxito con SweetAlert
+                    swal({
+                        title: 'Good job!',
+                        text: 'You clicked the button!',
+                        icon: 'success'
+                    }).then(function() {
+                        // Recarga la página después de cerrar la alerta (opcional)
+                        location.reload();
+                    });
+                } else {
+                    // Muestra una alerta de error con SweetAlert
+                    swal('Error', response.error, 'error');
+                }
+            }
+        });
+    });
+});
+</script>
+
+
+
+
+
+
 </body>
 </html>
