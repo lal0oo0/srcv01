@@ -25,7 +25,8 @@
   }
 
   .container{
-    background: #87CEFA;
+    background: #FFFFFF;
+    border:#000000;
     min-height: 320px;
     width: 820px;
     display: flex;
@@ -36,12 +37,14 @@
     position: relative;
     overflow: hidden;
     padding: 3.5rem;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.7);
   }
   
   .logo{
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
+    border: 2.5px solid #1E90FF;
     position: absolute;
     top: 100px;
     left: calc(50% - 50px);
@@ -64,7 +67,7 @@
             <div class="col-12">
               <label for="validationexampleInputEmail1" class="form-label">Correo Electronico</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" style="border: 2px solid #1E90FF" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
                 Rellene este campo, por favor
                 </div>
@@ -72,7 +75,7 @@
             </div>
             <div class="col-12">
               <label for="validationCustom03" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
+              <input type="password" class="form-control" style="border: 2px solid #1E90FF" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
                 Su contraseña debe de tener entre 8 y 16 caracteres, contener letras y numeros, y no debe contener espacios.
               </div>

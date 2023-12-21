@@ -26,7 +26,7 @@
   }
 
   .container{
-    background: #87CEFA;
+    background: #FFFFFF;
     min-height: 20px;
     width: 820px;
     display: flex;
@@ -37,16 +37,23 @@
     position: relative;
     overflow: hidden;
     padding: 3.5rem;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.7);
   }
   
   .logo{
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
+    border: 2.5px solid #1E90FF;
     position: absolute;
     top: 100px;
     left: calc(50% - 50px);
     margin-top: -50px;
+  }
+
+  .box {
+    width: 300px;
+    transform: translate(10%, 0%);
   }
 
 
@@ -63,22 +70,23 @@
             </div>
           <form class="row g-3 needs-validation" novalidate>
             <div class="col-md-12">
+              <h6></h6>
               <label for="validationCustom01" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="validationCustom01" required>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF" id="validationCustom01" required>
               <div class="invalid-feedback">
               Rellene este campo, por favor
               </div>
             </div>
             <div class="col-md-6">
               <label for="validationCustom02" class="form-label">Apellido Paterno</label>
-              <input type="text" class="form-control" id="validationCustom02" required>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" id="validationCustom02" required>
               <div class="invalid-feedback">
                 Rellene este campo, por favor
               </div>
             </div>
             <div class="col-md-6">
               <label for="validationCustom03" class="form-label">Apellido Materno</label>
-              <input type="text" class="form-control" id="validationCustom03" required>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" id="validationCustom03" required>
               <div class="invalid-feedback">
               Rellene este campo, por favor
               </div>
@@ -86,33 +94,33 @@
             <div class="col-md-6">
               <label for="validationexampleInputEmail1" class="form-label">Correo Electronico</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" style="border: 2px solid #1E90FF;" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
                 Rellene este campo, por favor
                 </div>
               </div>
             </div>
             <div class="col-md-6">
-              <label for="validationCustom03" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
+              <label for="validationCustom04" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" style="border: 2px solid #1E90FF;" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
                 Su contraseña debe de tener entre 8 y 16 caracteres, contener letras y numeros, y no debe contener espacios.
               </div>
+              <br>
             </div>
-            <div class="col-md-12">
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Seleccione la cual se identifique</option>
+            <div class="col-md-6">
+            <select class="form-select" style="border: 2px solid #000000;">
+              <option selected disabled>Seleccione la cual se identifique </option>
               <option value="1">Nombre del mejor amigo</option>
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
               </select>
-             <input type="text" class="form-control form-control-sm" id="validationCustom08" required>
+             <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="validationCustom07" required>
               <div class="invalid-feedback">
                 </div>
-            </div>
-            <br>
+             </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" href="#">Registrarse</button>
+              <button class="btn btn-primary" type="submit" href="inicio_sesion.php">Registrarse</button>
             </div>
           </form>
           </div>
@@ -144,34 +152,5 @@
     }, false)
   })
 })()
-  </script>
-  <script>
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-checkboxes.forEach((checkbox) => {
-  checkbox.addEventListener('change', (event) => {
-    if (event.target.checked) {
-      checkboxes.forEach((c) => {
-        if (c !== event.target) {
-          c.disabled = true;
-        }
-      });
-    } else {
-      checkboxes.forEach((c) => {
-        c.disabled = false;
-      });
-    }
-  });
-});
-Array.from(forms).forEach(checkbox => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      form.classList.add('was-validated')
-    }, false)
-  })
-()
   </script>
 </html>
