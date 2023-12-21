@@ -19,6 +19,12 @@
     text-align: center;
   }
 
+  thead{/*EStilos para la cabecera fija de la tabla*/
+    position: sticky;
+    top:0;
+    background-color: #F32B2B;
+  }
+
   .my-custom-scrollbar {
   position: relative;
   height: 500px;
@@ -43,7 +49,7 @@
  <header>
   <nav class="navbar navbar-dark  fixed-top navbar-custom" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Historial</a>
+    <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Historial de Visitas</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -55,7 +61,7 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" href="http://localhost/srcv01/Vista/srcv_registro.php">Registro</a>
+            <a class="nav-link active" href="http://localhost/srcv01/Vista/vista_registro_visitas.php">Registro de Visitas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="#">Cerrar Sesion</a>
