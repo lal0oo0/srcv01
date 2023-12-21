@@ -11,7 +11,7 @@
 <?php
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
-    $query = mysqli_query($conexion, "select * from srcv_salas");
+    $query = mysqli_query($conexion, "select * from srcv_salas WHERE ESTATUS = 1");
   ?>
 
 <style>
