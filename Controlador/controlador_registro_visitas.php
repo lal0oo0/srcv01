@@ -23,7 +23,10 @@ $ejecutar = mysqli_query($conexion, $visita);
 
 if ($ejecutar) {
     // Éxito: alerta de Bootstrap éxito
-    $mensaje = '<div class="alert alert-success" role="alert">Registro exitoso</div>';
+    $mensaje = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Exito!</strong> El registro se ha guardado correctamente
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
 } else {
     // Error: alerta de Bootstrap error con detalles
     $mensaje = '<div class="alert alert-danger" role="alert">Error en la consulta: ' . mysqli_error($conexion) . '</div>';
@@ -31,7 +34,7 @@ if ($ejecutar) {
 
 mysqli_close($conexion);
 
-header("location: ../Vista/srcv_registro.php?mensaje=" . urlencode($mensaje));
+header("location: ../Vista/vista_registro_visitas.php?mensaje=" . urlencode($mensaje));
 
 
 ?>

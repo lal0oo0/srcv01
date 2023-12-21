@@ -6,6 +6,11 @@
     <title>iniciar sesion</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
+<?php
+    require_once("../Modelo/conexion2.php");
+    $conexion = conect();
+    $categorias = mysqli_query ($conexion, "select * from srcv_administradores");
+  ?>
 <style>
 
   body{
@@ -63,7 +68,7 @@
             <div class="col-12 user-img">
             <img src="../imagenes/unnamed.jpg" alt="" class="logo">
             </div>
-          <form class="row g-3 needs-validation" novalidate>
+            <form action="../Controlador/controlador_registro_usuario.php" action="POST" class="row g-3 needs-validation" novalidate>
             <div class="col-12">
               <label for="validationexampleInputEmail1" class="form-label">Correo Electronico</label>
               <div class="input-group has-validation">

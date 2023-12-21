@@ -23,6 +23,12 @@
     text-align: center;
   }
 
+  thead{/*EStilos para la cabecera fija de la tabla*/
+    position: sticky;
+    top:0;
+    background-color: #F32B2B;
+  }
+
   .my-custom-scrollbar {
   position: relative;
   height: 500px;
@@ -55,7 +61,7 @@
   <header> 
    <nav class="navbar navbar-dark  fixed-top navbar-custom" >
     <div class="container-fluid">
-         <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Registros</a>
+         <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Registro de Visitas</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
@@ -67,7 +73,7 @@
          <div class="offcanvas-body">
          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
            <li class="nav-item">
-            <a class="nav-link active" href="http://localhost/srcv01/Vista/srcv_historial1.php">Historial</a>
+            <a class="nav-link active" href="http://localhost/srcv01/Vista/vista_historial_visitas.php">Historial de Visitas</a>
            </li>
            <li class="nav-item">
             <a class="nav-link active" href="#">Cerrar Sesion</a>
@@ -118,7 +124,7 @@
 
              <!--aqui va el formulario-->
 
-             <form id="myForm" action="../Controlador/visitas.php" method="post" class="row g-3 needs-validation" novalidate>
+             <form id="myForm" action="../Controlador/controlador_registro_visitas.php" method="post" class="row g-3 needs-validation" novalidate>
              <h5>Rellene los campos</h5>
 
              <div class="mb-3"></div> <!-- Salto de línea -->
@@ -149,9 +155,10 @@
                  Verifique los datos
                 </div>
               </div>
-
+              
             <div class="row">
               <div class="col">
+              <div class="mb-3"></div> <!-- Salto de línea -->
                 <label for="ap" class="form-label">Apellido Paterno</label>
                 <input type="text" class="form-control" id="ap" name="ap" required>
                 <div class="invalid-feedback">
@@ -160,6 +167,7 @@
               </div>
 
               <div class="col">
+              <div class="mb-3"></div> <!-- Salto de línea -->
                 <label for="am" class="form-label">Apellido Materno</label>
                 <input type="text" class="form-control" id="am" name="am" required>
                 <div class="invalid-feedback">
@@ -170,12 +178,13 @@
 
             <div class="row">
               <div class="col">
+              <div class="mb-3"></div> <!-- Salto de línea -->
                <label class="form-label" for="empresa">Empresa</label><br>
                <select class="form-select mr-sm-2" id="empresa" name="empresa" required>
                <div class="invalid-feedback">
                 Verifique los datos
                </div>
-               <option selected>Elige</option>
+               <option selected value="">Elige</option>
                <!--Se muestran las opciones de EMPRESA 
                previamente registradas en la tabla listas-->
                 <?php
@@ -192,12 +201,13 @@
               </div>
 
              <div class="col">
+             <div class="mb-3"></div> <!-- Salto de línea -->
                <label class="form-label" for="asunto">Asunto</label><br>
                <select class="form-select mr-sm-2" id="asunto" name="asunto" required>
                <div class="invalid-feedback">
                 Verifique los datos
                </div>
-               <option selected>Elige</option>
+               <option selected value="" >Elige</option>
                <!--Se muestran las opciones de ASUNTO
                previamente registradas en la tabla listas-->
                <?php
@@ -214,11 +224,12 @@
              </div>
 
                 <div class="col">
+                <div class="mb-3"></div> <!-- Salto de línea -->
                  <label for="hs" class="form-label">Hora de salida</label>
-                 <input type="time" class="form-control" id="hs" name="hs" required>
-                  <div class="invalid-feedback">
-                   Verifique los datos
-                  </div>
+                 <input type="time" class="form-control" id="hs" name="hs">
+                 <div class="invalid-feedback">
+                 Verifique los datos
+                 </div>
                 </div>
             </div>
                <!--Botones para cancelar o enviar fromulario del modal-->
@@ -309,29 +320,22 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
         // Si la fecha es válida, eliminar la marca de inválido
         document.getElementById('fecha').classList.remove('is-invalid');
       }
-      
+
+      //VALIDAR HORA DE SALIDA
+      var selectedTimeValue = document.getElementById('hs').value;
+      var selectedTimeValue2 = document.getElementById('he').value;
+
+
+
+// Verificar si la hora de salida es congruente 
+if (selectedTimeValue < selectedTimeValue2) {
+  document.getElementById('hs').classList.add('is-invalid');
+  event.preventDefault(); // Evitar que el formulario se envíe
+} else {
+  // Si la hora es válida, eliminar la marca de inválido
+  document.getElementById('hs').classList.remove('is-invalid');
+}
     });
-//Validacion Bootstrap
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
-
 
 </script>
 
