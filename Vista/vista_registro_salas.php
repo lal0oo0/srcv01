@@ -16,7 +16,6 @@
   thead{/*EStilos para la cabecera fija de la tabla*/
     position: sticky;
     top:0;
-    background-color: #F32B2B;
   }
 
   table.table th,
@@ -60,7 +59,7 @@
     </button>
     <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel">MENU</h5>
+        <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel">MENÚ</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -75,10 +74,10 @@
             <a class="nav-link" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar Sesion</a>
+            <a class="nav-link" href="#">Cerrar Sesión</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar Aplicacion</a>
+            <a class="nav-link" href="#">Cerrar Aplicación</a>
           </li>
         </ul>
       </div>
@@ -127,10 +126,7 @@
     </div>
   </div>
 
-  <br>
-  <br>
-
-  <div class="mb-3"></div> <!--Salto de linea-->
+  <div class="mb-5"></div> <!--Salto de linea-->
   <div class="container caja">
     <div class="row">
       <div class="col-md-12">

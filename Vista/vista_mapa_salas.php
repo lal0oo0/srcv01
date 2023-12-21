@@ -4,23 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    
-    <title>Mapa</title>
+    <title>Mapa salas</title>
 </head>
+
 <body>
 <?php
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
     $query = mysqli_query($conexion, "select * from srcv_salas");
   ?>
+
 <style>
 .navbar-custom {
     background-color: #F73B3B;
     font-size: 18px;
   }
+
   .tit-color{
     color:white;
   }
+
   .outer-container {
     display: flex;
     flex-wrap: wrap;
@@ -30,12 +33,14 @@
     width: 100%;
     padding: 20px;
   }
+
   .inner-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
   }
+
   .boton {
     background-color: #158C10;
     box-sizing: border-box;
@@ -49,6 +54,7 @@
     align-items: center;
   }
 </style>
+
 <header>
   <nav class="navbar navbar-dark  fixed-top navbar-custom">
     <div class="container-fluid">
@@ -58,7 +64,7 @@
       </button>
       <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel">MENU</h5>
+          <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel">MENÚ</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -73,10 +79,10 @@
               <a class="nav-link" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Cerrar Sesion</a>
+              <a class="nav-link" href="#">Cerrar Sesión</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Cerrar Aplicacion</a>
+              <a class="nav-link" href="#">Cerrar Aplicación</a>
             </li>
           </ul>
         </div>
@@ -86,6 +92,7 @@
 </header>
 
 <br><br><br><br><br>
+<h3><center>LISTA DE SALAS</center></h3>
 
 <div class="outer-container text-center">
   <div class="inner-container">
@@ -138,8 +145,8 @@
         <div class="input-group mb-12">
         <label for="Hora inicio">Hora de inicio</label>
         <label for="Hora finalizacion">
-           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-          Hora de finalizacion</label>
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+          Hora de finalización</label>
         </div>
         <input type="time" class="form-control" name="Horainicio" placeholder="Hora de inicio" aria-label="Hora de inicio" aria-describedby="basic-addon1">
         <input type="time" class="form-control" name="Horafinalizacion" placeholder="Hora de finalizacion" aria-label="Hora  de finalizacion" aria-describedby="basic-addon1">
@@ -150,14 +157,13 @@
        <input type="number" class="form-control" name="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1">
        <input type="number" class="form-control" name="Liquidacion" placeholder="Liquidacion" aria-label="Liquidacion" aria-describedby="basic-addon1">
       </div>
-    
-      <button type="submit" class="btn btn-primary">Confirmar</button>
+      <div class="mb-5"></div> <!--Salto de linea-->
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Confirmar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
     </form>
 
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>
