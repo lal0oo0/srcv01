@@ -69,7 +69,7 @@
             <img src="../imagenes/unnamed.jpg" alt="" class="logo">
             </div>
           <form class="row g-3 needs-validation" novalidate>
-            <div class="col-md-6">
+            <div class="col-md-12">
               <h6></h6>
               <label for="validationCustom01" class="form-label">Nombre</label>
               <input type="text" class="form-control" style="border: 2px solid #1E90FF" id="validationCustom01" required>
