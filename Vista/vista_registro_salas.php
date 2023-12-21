@@ -52,7 +52,6 @@
 </style>
 
 <header>
-
 <nav class="navbar navbar-dark  fixed-top navbar-custom">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><img id="logo" src="../imagenes/Logo-Urspace.png" width="95">SRCV SALAS</a>
@@ -81,11 +80,13 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Cerrar Aplicacion</a>
           </li>
+        </ul>
       </div>
     </div>
-  </div>
+  </div>  
 </nav>
 </header>
+
 <br>
 <br>
 <br>
@@ -106,27 +107,29 @@
             <th scope="col">Estatus</th>
           </tr>
         </thead>
-          <?php
-              require_once("../Modelo/conexion2.php");
-              $conexion = conect();
-              $query = mysqli_query ($conexion, "select * from srcv_salas WHERE ESTATUS = 1");
-              while($filas  = mysqli_fetch_assoc($query)){
-          ?>
-          <tr>
-              <td><?php echo$filas ["ID_SALA"] ?></td>
-              <td><?php echo$filas ["NOMBRE"] ?></td>
-              <td><?php echo$filas ["ESTATUS"] ?></td>
-          </tr>
-          <?php
-          };
-          ?>
+        <?php
+          require_once("../Modelo/conexion2.php");
+          $conexion = conect();
+          $query = mysqli_query ($conexion, "select * from srcv_salas WHERE ESTATUS = 1");
+          while($filas  = mysqli_fetch_assoc($query)){
+        ?>
+        <tr>
+          <td><?php echo$filas ["ID_SALA"] ?></td>
+          <td><?php echo$filas ["NOMBRE"] ?></td>
+          <td><?php echo$filas ["ESTATUS"] ?></td>
+        </tr>
+        <?php
+        };
+        ?>
       </table>
       </div>
       </div> 
     </div>
   </div>
+
   <br>
   <br>
+
   <div class="mb-3"></div> <!--Salto de linea-->
   <div class="container caja">
     <div class="row">
@@ -135,6 +138,7 @@
       </div>
     </div>
   </div>
+
   <div class="container caja2">
     <div class="row">
       <div class="col-md-12">
