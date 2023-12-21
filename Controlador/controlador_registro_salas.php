@@ -15,7 +15,7 @@ $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_salas WHERE NOMBRE =
         exit();
     }
 
-    /*Codigo para guardar un registro temporalmente en una variable php*/
+	/*Codigo para guardar un registro temporalmente en una variable php*/
 	$consulta = "INSERT INTO srcv_salas(NOMBRE, ESTATUS)
 	VALUES ('$nombre','1')";
 

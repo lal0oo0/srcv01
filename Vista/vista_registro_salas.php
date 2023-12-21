@@ -92,7 +92,7 @@
 <br>
 <br>
 <br>
-<h3><center>LISTA DE SALAS</center></h3>
+<h3><center>LISTA DE SALAS</center></h3> 
 <br>
 
   <div class="container">
@@ -134,7 +134,7 @@
   <div class="container caja">
     <div class="row">
       <div class="col-md-12">
-      <label for="Nombre" class="col-form-label">Registar una nueva sala</label>
+      <label for="Nombre" class="col-form-label">Registro de una nueva sala</label>
       </div>
     </div>
   </div>
@@ -159,7 +159,7 @@
     </div>
   </div>
 
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
 
@@ -187,8 +187,8 @@ $(document).ready(function() {
                 if (response.success) {
                     // Muestra una alerta de éxito con SweetAlert
                     swal({
-                        title: 'Good job!',
-                        text: 'You clicked the button!',
+                        title: 'Registro exitoso!',
+                        text: 'La sala ya se encuentra registrada exitosamente!',
                         icon: 'success'
                     }).then(function() {
                         // Recarga la página después de cerrar la alerta (opcional)
