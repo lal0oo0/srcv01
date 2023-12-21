@@ -1,3 +1,7 @@
+<?php
+  $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,73 +77,79 @@
             <div class="col-12 user-img">
             <img src="../imagenes/unnamed.jpg" alt="" class="logo">
             </div>
-          <form class="row g-3 needs-validation" novalidate>
+          <form action="../Controlador/controlador_registrar_usuarios.php" action="POST" class="row g-3 needs-validation" novalidate>
             <div class="col-md-12">
               <h6></h6>
-              <label for="validationCustom01" class="form-label">Nombre</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF" id="validationCustom01" required>
+
+                    <!-- ALERTA -->
+            <div id="mensaje">
+             <?php echo $mensaje; ?>
+            </div>
+            <div class="mb-3"></div> 
+      
+
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="nombre" required>
               <div class="invalid-feedback">
               Rellene este campo, por favor
               </div>
             </div>
             <div class="col-md-6">
-              <label for="validationCustom02" class="form-label">Apellido Paterno</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" id="validationCustom02" required>
+              <label for="ap" class="form-label">Apellido Paterno</label>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="ap" required>
               <div class="invalid-feedback">
                 Rellene este campo, por favor
               </div>
             </div>
             <div class="col-md-6">
-              <label for="validationCustom03" class="form-label">Apellido Materno</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" id="validationCustom03" required>
+              <label for="am" class="form-label">Apellido Materno</label>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="am" required>
               <div class="invalid-feedback">
               Rellene este campo, por favor
               </div>
             </div>
             <div class="col-md-6">
-              <label for="validationexampleInputEmail1" class="form-label">Correo Electronico</label>
+              <label for="email" class="form-label">Correo Electronico</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" style="border: 2px solid #1E90FF;" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" style="border: 2px solid #1E90FF;" name="email" id="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
                 Rellene este campo, por favor
                 </div>
               </div>
             </div>
             <div class="col-md-6">
-              <label for="validationCustom04" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" style="border: 2px solid #1E90FF;" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
+              <label for="pass" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" style="border: 2px solid #1E90FF;" name="pass" id="pass" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
                 Su contraseña debe de tener entre 8 y 16 caracteres, contener letras y numeros, y no debe contener espacios.
               </div>
               <br>
             </div>
             <div class="col-md-6">
-            <select class="form-select" style="border: 2px solid #1E90FF;">
-              <option selected disabled>Seleccione cual es su Rol </option>
-              <option value="1">Superadministrador</option>
-              <option value="2">Recepcion IT-Global</option>
-              <option value="3">Recepcion UrSpace</option>
-              <option value="4">Guardia</option>
-              </select>
+            <select class="form-select" id="rol" name="rol" style="border: 2px solid #1E90FF;" required>
+              <option selected value="" >Seleccione cual es su Rol </option>
+              <option value="1">Recepcion IT-Global</option>
+              <option value="2">Recepcion UrSpace</option>
+              <option value="3">Seguridad</option>
+            </select>
              </div>
              <div class="col-md-6">
-            <select class="form-select" style="border: 2px solid #1E90FF;">
-              <option selected disabled>Seleccione la cual se identifique </option>
+            <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #1E90FF;" required>
+              <option selected value="">Seleccione con la que mejor se identifique </option>
               <option value="1">Nombre del mejor amigo</option>
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
               </select>
-             <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="validationCustom07" required>
+             <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="respuesta" name="respuesta" required>
              </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" href="inicio_sesion.php">Registrarse</button>
+              <input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></button>
             </div>
             </form>
           </div>
         </div>
       </div>
     </div>
-    <script src="jquery/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
