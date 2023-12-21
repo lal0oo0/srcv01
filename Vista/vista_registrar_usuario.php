@@ -6,6 +6,11 @@
     <title>Registrarse</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
+<?php
+    require_once("../Modelo/conexion2.php");
+    $conexion = conect();
+    $categorias = mysqli_query ($conexion, "select * from srcv_administradores");
+  ?>
 <style>
 
   body{
@@ -109,20 +114,27 @@
               <br>
             </div>
             <div class="col-md-6">
-            <select class="form-select" style="border: 2px solid #000000;">
+            <select class="form-select" style="border: 2px solid #1E90FF;">
+              <option selected disabled>Seleccione cual es su Rol </option>
+              <option value="1">Superadministrador</option>
+              <option value="2">Recepcion IT-Global</option>
+              <option value="3">Recepcion UrSpace</option>
+              <option value="4">Guardia</option>
+              </select>
+             </div>
+             <div class="col-md-6">
+            <select class="form-select" style="border: 2px solid #1E90FF;">
               <option selected disabled>Seleccione la cual se identifique </option>
               <option value="1">Nombre del mejor amigo</option>
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
               </select>
              <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="validationCustom07" required>
-              <div class="invalid-feedback">
-                </div>
              </div>
             <div class="col-12">
               <button class="btn btn-primary" type="submit" href="inicio_sesion.php">Registrarse</button>
             </div>
-          </form>
+            </form>
           </div>
         </div>
       </div>

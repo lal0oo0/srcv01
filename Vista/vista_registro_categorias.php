@@ -4,39 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    
     <title>Agregar Listas</title>
-
-    
 </head>
+
   <?php
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
     $categorias = mysqli_query ($conexion, "select * from srcv_listas");
   ?>
-<style>
 
+<style>
   table.table th,
   table.table td {
     text-align: center;
   }
 
+  thead{/*EStilos para la cabecera fija de la tabla*/
+    position: sticky;
+    top:0;
+  }
+
   .my-custom-scrollbar {
   position: relative;
-  height: 200px;
+  height: 300px;
   overflow: auto;
   }
+
   .table-wrapper-scroll-y {
   display: block;
   }
+
   .navbar-custom{
     background-color: #64BAFF; 
     font-size: 18px;
   }
+
   .Titulo{
     color:white;
   }
+
+  .caja{
+    border: 1px solid #B0ADAD;
+    padding: 20px;
+    height: 70px;
+  }
+
+  .caja2{
+    border: 1px solid #B0ADAD;
+    padding: 20px;
+    height: 90px
+  }
 </style>
+
 <header>
 <nav class="navbar navbar-dark  fixed-top navbar-custom" >
   <div class="container-fluid">
@@ -46,7 +65,7 @@
     </button>
     <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title Titulo" id="offcanvasDarkNavbarLabel">Menu</h5>
+        <h5 class="offcanvas-title Titulo" id="offcanvasDarkNavbarLabel">Menú</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -55,13 +74,11 @@
             <a class="nav-link active" href="http://localhost/srcv01/Vista/admin.php">Usuarios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Cerrar Sesion</a>
+            <a class="nav-link active" href="#">Cerrar Sesión</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Cerrar Aplicacion</a>
+            <a class="nav-link active" href="#">Cerrar Aplicación</a>
           </li>
-        </ul>
-        </ul>
         </ul>
         <form class="d-flex mt-3" role="search">
           <input class="form-control me-2" type="Buscar" placeholder="Buscar" aria-label="Buscar">
@@ -77,65 +94,66 @@
 <br>
 <br>
 <br>
-<div class="container">
+<h3><center>LISTA DE CATEGORÍAS<center></h3>
+<div class="mb-5"></div> <!--Salto de linea-->
 
-  <div class="row">
-    <div class="col-12">
-    <button type="button" class="btn btn-primary" style="background-color:	#008B8B;" >Nuevo Registro</button>
-    </div>
-  </div>
-  <br> <!-- Otra forma de poner un salto de línea -->
-  
-</div>
 <div class="container">
   <div class="row">
     <div class="col">
-    <div class="table-responsive my-custom-scrollbar">
-  <table class="table table-bordered table-striped mb-0">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Categoria</th>
-      </tr>
-    </thead>
-    <?php
+      <div class="table-responsive my-custom-scrollbar">
+        <table class="table table-bordered table-striped mb-0">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Categoría</th>
+            </tr>
+          </thead>
+          <?php
             require_once("../Modelo/conexion2.php");
             $conexion = conect();
             $query = mysqli_query ($conexion, "select * from srcv_listas");
-            
+                  
             while($filas  = mysqli_fetch_assoc($query)){
-        ?>
-        <tr>
+          ?>
+          <tr>
             <td><?php echo$filas ["ID_LISTA"] ?></td>
             <td><?php echo$filas ["NOMBRE"] ?></td>
             <td><?php echo$filas ["CATEGORIA"] ?></td>
-        </tr>
-        <?php
-        };
-        ?>
-  </table>
-
-</div>
+          </tr>
+          <?php
+          };
+          ?>
+        </table>
+      </div>
     </div>
-    
   </div>
 </div>
 <br>
+
+<div class="mb-5"></div> <!--Salto de linea-->
 <div class="container caja">
+  <div class="row">
+    <div class="col-md-12">
+        <label for="Nombre" class="col-form-label">Registro de una nueva categoría</label>
+    </div>
+  </div>
+</div>
+
+<div class="container caja2">
   <div class="row">
     <div class="col-md-12">
       <form action="../Controlador/controlador_registro_categoria.php" class="formulario" method="post">
         <div class="row g-3 align-items-center">
           <div class="col-md-2">
-          <label for="Nombre" class="col-form-label">Nombre:</label>
+          <label for="Nombre" class="col-form-label">Nombre de la categoría:</label>
           </div>
           <div class="col-md-6">
-          <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
+          <input type="text" class="form-control" name="Nombre" placeholder="Ingresa el nombre de la categoría" aria-label="Nombre" aria-describedby="basic-addon1">
           </div>
           <div class="col-md-3">
           <select class="form-select" name="Categoria" aria-label="Default select example">
-            <option selected>Categoría</option>
+            <option selected>Selecciona la categoría</option>
             <option value="Empresa">Empresa</option>
             <option value="Asunto">Asunto</option>
           </select>
@@ -177,8 +195,8 @@ $(document).ready(function() {
                 if (response.success) {
                     // Muestra una alerta de éxito con SweetAlert
                     swal({
-                        title: 'Good job!',
-                        text: 'You clicked the button!',
+                        title: 'Registro exitoso!',
+                        text: 'La categoría se encuentra registrada exitosamente!',
                         icon: 'success'
                     }).then(function() {
                         // Recarga la página después de cerrar la alerta (opcional)
@@ -193,11 +211,6 @@ $(document).ready(function() {
     });
 });
 </script>
-
-
-
-
-
 
 </body>
 </html>

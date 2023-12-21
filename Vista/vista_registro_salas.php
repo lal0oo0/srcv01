@@ -16,7 +16,6 @@
   thead{/*EStilos para la cabecera fija de la tabla*/
     position: sticky;
     top:0;
-    background-color: #F32B2B;
   }
 
   table.table th,
@@ -60,7 +59,7 @@
     </button>
     <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel">MENU</h5>
+        <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel">MENÚ</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -75,10 +74,10 @@
             <a class="nav-link" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar Sesion</a>
+            <a class="nav-link" href="#">Cerrar Sesión</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar Aplicacion</a>
+            <a class="nav-link" href="#">Cerrar Aplicación</a>
           </li>
         </ul>
       </div>
@@ -92,7 +91,7 @@
 <br>
 <br>
 <br>
-<h3><center>LISTA DE SALAS</center></h3>
+<h3><center>LISTA DE SALAS</center></h3> 
 <br>
 
   <div class="container">
@@ -127,14 +126,11 @@
     </div>
   </div>
 
-  <br>
-  <br>
-
-  <div class="mb-3"></div> <!--Salto de linea-->
+  <div class="mb-5"></div> <!--Salto de linea-->
   <div class="container caja">
     <div class="row">
       <div class="col-md-12">
-      <label for="Nombre" class="col-form-label">Registar una nueva sala</label>
+      <label for="Nombre" class="col-form-label">Registro de una nueva sala</label>
       </div>
     </div>
   </div>
@@ -159,7 +155,7 @@
     </div>
   </div>
 
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
 
@@ -187,8 +183,8 @@ $(document).ready(function() {
                 if (response.success) {
                     // Muestra una alerta de éxito con SweetAlert
                     swal({
-                        title: 'Good job!',
-                        text: 'You clicked the button!',
+                        title: 'Registro exitoso!',
+                        text: 'La sala ya se encuentra registrada exitosamente!',
                         icon: 'success'
                     }).then(function() {
                         // Recarga la página después de cerrar la alerta (opcional)
