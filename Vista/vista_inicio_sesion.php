@@ -87,7 +87,7 @@
             </div>
             <br><br><br>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" href="#">Registrarse</button>
+              <button class="btn btn-primary" type="submit" href="#">Iniciar sesion</button>
             </div>
           </form>
           </div>
