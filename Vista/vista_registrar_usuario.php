@@ -19,14 +19,14 @@
 <style>
 
   body{
-    background-image:url(https://th.bing.com/th/id/OIP.I7nhMVv7VInEc1BpBatiPQAAAA?rs=1&pid=ImgDetMain) ;
+    background-color: blue;
     background-size: cover;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    max width: 400px;
+    /*max width: 400px;*/
     font-size: 20px;
   }
 
@@ -43,7 +43,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border radius: 8px;
+   /* border radius: 8px;*/
     position: relative;
     overflow: hidden;
     padding: 3.5rem;
@@ -156,9 +156,8 @@
     </div>
     
     <!--ESTO SE TIENE QUE CAMBIAR A LOCAL -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
   </body>
   
   

@@ -297,47 +297,51 @@
 <script src="../js/bootstrap.bundle.min.js"></script>
 
 <script>
-//VALIDACIONES
-//Validacion de fecha
 document.getElementById('myForm').addEventListener('submit', function(event) {
-      var selectedDateValue = document.getElementById('fecha').value;
+  // Validación de fecha
+  var selectedDateValue = document.getElementById('fecha').value;
 
-      // Verificar si el campo está vacío
-      if (!selectedDateValue) {
-        document.getElementById('fecha').classList.add('is-invalid');
-        event.preventDefault(); // Evitar que el formulario se envíe
-        return;
-      }
+  if (!selectedDateValue) {
+    document.getElementById('fecha').classList.add('is-invalid');
+    event.preventDefault();
+    return;
+  }
 
-      // Obtener la fecha actual en formato ISO sin la zona horaria
-      var currentDate = new Date().toISOString().split('T')[0];
+  var currentDate = new Date().toISOString().split('T')[0];
 
-      // Verificar si la fecha seleccionada es anterior o igual a la fecha actual
-      if (selectedDateValue < currentDate) {
-        document.getElementById('fecha').classList.add('is-invalid');
-        event.preventDefault(); // Evitar que el formulario se envíe
-      } else {
-        // Si la fecha es válida, eliminar la marca de inválido
-        document.getElementById('fecha').classList.remove('is-invalid');
-      }
+  if (selectedDateValue < currentDate) {
+    document.getElementById('fecha').classList.add('is-invalid');
+    event.preventDefault();
+  } else {
+    document.getElementById('fecha').classList.remove('is-invalid');
+  }
 
-      //VALIDAR HORA DE SALIDA
-      var selectedTimeValue = document.getElementById('hs').value;
-      var selectedTimeValue2 = document.getElementById('he').value;
+  // Validación de horas de entrada y salida
+  var selectedTimeValue = document.getElementById('hs').value;
+  var selectedTimeValue2 = document.getElementById('he').value;
 
+  if (selectedTimeValue != 0 && selectedTimeValue < selectedTimeValue2) {
+    document.getElementById('hs').classList.add('is-invalid');
+    event.preventDefault();
+  } else {
+    document.getElementById('hs').classList.remove('is-invalid');
+  }
 
+  // Validación de otros campos
+  var fieldsToValidate = ['he', 'nombre', 'ap', 'am', 'empresa', 'asunto'];
 
-// Verificar si la hora de salida es congruente 
-if (selectedTimeValue < selectedTimeValue2) {
-  document.getElementById('hs').classList.add('is-invalid');
-  event.preventDefault(); // Evitar que el formulario se envíe
-} else {
-  // Si la hora es válida, eliminar la marca de inválido
-  document.getElementById('hs').classList.remove('is-invalid');
-}
-    });
-
+  fieldsToValidate.forEach(function(fieldId) {
+    var fieldValue = document.getElementById(fieldId).value;
+    if (!fieldValue) {
+      document.getElementById(fieldId).classList.add('is-invalid');
+      event.preventDefault();
+    } else {
+      document.getElementById(fieldId).classList.remove('is-invalid');
+    }
+  });
+});
 </script>
+
 
 </body>
 </html>
