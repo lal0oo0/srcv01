@@ -114,7 +114,7 @@
           <input id="salaSeleccionada_<?php echo $filas['ID_SALA'] ?>" name="salaSeleccionada" value="" hidden>
           
           <!--Aquí se guarda el ID de la sala -->
-          <input type="hidden" name="IdSala" id="idSala" value="">
+          <input type="hidden" name="idSala" id="idSala" value="">
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>

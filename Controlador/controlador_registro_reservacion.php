@@ -15,9 +15,9 @@ $variable7 = $_POST['Horainicio'];
 $variable8 = $_POST['Horafinalizacion'];
 $variable9 = $_POST['Total'];
 $variable10 = $_POST['Enganche'];
-$variable11= $variable9-$variable10;
+$variable11 = $variable9-$variable10;
 
-$idSala = $_POST['idSalaModal'];
+$idSala = $_POST['idSala'];
 
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
