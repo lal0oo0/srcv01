@@ -15,7 +15,7 @@ $pregunta = $_POST['pregunta'];
 $respuesta = $_POST['respuesta'];
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASEÑA, ROL, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA) 
+$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, ROL, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA) 
 VALUES ('$nombre', '$ap', '$am', '$correo','$contrasenia','$rol','$pregunta','$respuesta')";
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $usuario); 

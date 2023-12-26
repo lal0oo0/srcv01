@@ -14,7 +14,7 @@
 <style>
 
   body{
-    background-image:url(https://th.bing.com/th/id/OIP.I7nhMVv7VInEc1BpBatiPQAAAA?rs=1&pid=ImgDetMain);
+    background-color: blue;
     background-size: cover;
     width: 100%;
     display: flex;
@@ -68,11 +68,11 @@
             <div class="col-12 user-img">
             <img src="../imagenes/unnamed.jpg" alt="" class="logo">
             </div>
-            <form action="../Controlador/controlador_registro_usuario.php" action="POST" class="row g-3 needs-validation" novalidate>
+            <form action="../Controlador/controlador_inicio_sesion.php"  method="POST" class="row g-3 needs-validation" novalidate>
             <div class="col-12">
               <label for="validationexampleInputEmail1" class="form-label">Correo Electronico</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" style="border: 2px solid #1E90FF" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" style="border: 2px solid #1E90FF" name="correoelectronico" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
                 Rellene este campo, por favor
                 </div>
@@ -80,26 +80,25 @@
             </div>
             <div class="col-12">
               <label for="validationCustom03" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" style="border: 2px solid #1E90FF" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
+              <input type="password" class="form-control" style="border: 2px solid #1E90FF" name="contrasena" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
                 Su contraseña debe de tener entre 8 y 16 caracteres, contener letras y numeros, y no debe contener espacios.
               </div>
             </div>
             <br><br><br>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" href="#">Iniciar sesion</button>
+            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
             </div>
           </form>
           </div>
           <br>
         </div>
         <div class="dropdown-divider"></div>
-        <p class="fs-6"><a class="link-primary" class="text-decorative-none" href="srcv_recuperar_contraseña.php">¿Haz olvidado tu contraseña?</a></p>
+        <p class="fs-6"><a class="link-primary" class="text-decorative-none" href="vista_recuperar_contraseña.php">¿Haz olvidado tu contraseña?</a></p>
       </div>
     </div>
-    <script src="jquery/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
   </body>
   <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
