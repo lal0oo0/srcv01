@@ -30,14 +30,20 @@ $con = $_POST["contrasena"];
     $contraDesencrip = des_encrypt($con, $clave);
     //Fin del metodo de des-encriptar
 
-// Verificar la existencia del usuario
+// Consulta para verificar roles
+
+//Rol UrSpace
 $sql1 =  (" SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correoelectronico' and CONTRASENA = '$contraDesencrip' AND ROL='UrSpace' AND ESTATUS=1");
 $urspace=$conexion->query($sql1);
 
+//Rol IT-GLOBAL
+
 if($urspace->num_rows==1){ 
     $usuario=$urspace->fetch_assoc();
-    $_SESSION=["correo"]=$usuario["CORREO_ELECTRONICO"];
-    $_SESSION["rol"]="urspace";
+
+    $_SESSION["correo"] = $usuario["CORREO_ELECTRONICO"];
+    $_SESSION["rol"] = "urspace";
+
     header("Location: ../Vista/vista_mapa_salas.php");
     exit();
 }
