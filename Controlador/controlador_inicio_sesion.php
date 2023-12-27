@@ -30,14 +30,6 @@ $con = $_POST["contrasena"];
     $contraDesencrip = des_encrypt($con, $clave);
     //Fin del metodo de des-encriptar
 
-// Verificar si contraseña o correo es incorrecto
-    $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CONTRASENA = '$con' and CORREO_ELECTRONICO = '$correoelectronico' ");
-    if (mysqli_num_rows($verificacion) > 0) {
-        echo json_encode(array('success' => false, 'error' => 'El correo elctrónico y/o contraseña son incorrectos.
-        Inténte de nuevo.'));
-        exit();
-    }
-
 
 // Consulta para verificar roles
 
