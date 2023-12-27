@@ -6,9 +6,9 @@ include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
 
+
 // Recibir datos del formulario
 $correoelectronico = $_POST['correoelectronico'];
-
 $con = $_POST["contrasena"];
 
     // Metodo para des-encriptar la contrasenia
@@ -29,6 +29,15 @@ $con = $_POST["contrasena"];
     //Encriptacion de la contrasenia:
     $contraDesencrip = des_encrypt($con, $clave);
     //Fin del metodo de des-encriptar
+
+// Verificar si contraseña o correo es incorrecto
+    $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CONTRASENA = '$con' and CORREO_ELECTRONICO = '$correoelectronico' ");
+    if (mysqli_num_rows($verificacion) > 0) {
+        echo json_encode(array('success' => false, 'error' => 'El correo elctrónico y/o contraseña son incorrectos.
+        Inténte de nuevo.'));
+        exit();
+    }
+
 
 // Consulta para verificar roles
 
@@ -59,18 +68,11 @@ if($urspace->num_rows==1){
 
 } else {
     $error = 'yes';
-    header("Location: ../Vista/vista_inicio_sesion.php?error=" . urlencode($error));
+    echo $error;
     exit();
 }
 
-/*
-if ($datos=$sql->fetch_object()){
-    
-        // Redirigir al usuario a la página de inicio
-        header("Location: ../Vista/vista_mapa_salas.php");
-    } else {
-        echo 'mal';
-    }*/
+
 
 $conexion->close();
 ?>

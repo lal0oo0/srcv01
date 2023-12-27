@@ -259,7 +259,7 @@ $CORREO=$_SESSION['correo'];
     <div class="col-*-*">
     <div class="table-responsive my-custom-scrollbar">
      <table class="table table-bordered table-striped mb-0">
-        <thead>
+        <thead class="table-dark">
            <tr>
              <th scope="col">Hora de entrada</th>
              <th scope="col">Fecha</th>
