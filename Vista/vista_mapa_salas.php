@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+$ROL=$_SESSION['rol'];
+$CORREO=$_SESSION['correo'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -9,14 +9,34 @@ $nombre = $_POST['nombre'];
 $ap = $_POST['ap'];
 $am = $_POST['am'];
 $correo = $_POST['email'];
-$contrasenia = md5 ($_POST['pass']);
+
+$contrasenia = $_POST['pass'];
+  // Metodo para encriptar la contrasenia
+  $clave = "55Eu47x";
+
+  function encrypt($string, $key)
+  {
+      $result = '';
+      for ($i = 0; $i < strlen($string); $i++) {
+          $char = substr($string, $i, 1);
+          $keychar = substr($key, ($i % strlen($key)) - 1, 1);
+          $char = chr(ord($char) + ord($keychar));
+          $result .= $char;
+      }
+      return base64_encode($result);
+  }
+
+  //Encriptacion de la contrasenia:
+  $contraEncrip = encrypt($contrasenia, $clave);
+  //Fin del metodo de encriptar
+
 $rol = $_POST['rol'];
 $pregunta = $_POST['pregunta'];
 $respuesta = $_POST['respuesta'];
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
 $usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, ROL, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA) 
-VALUES ('$nombre', '$ap', '$am', '$correo','$contrasenia','$rol','$pregunta','$respuesta')";
+VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$rol','$pregunta','$respuesta')";
 
 $norepetir = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$correo'");
 if(mysqli_num_rows($norepetir) > 0){
