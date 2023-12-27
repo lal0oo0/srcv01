@@ -41,6 +41,10 @@ $urspace=$conexion->query($sql1);
 $sql2 =  (" SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correoelectronico' and CONTRASENA = '$contraDesencrip' AND ROL='Recepcion' AND ESTATUS=1");
 $recepcion=$conexion->query($sql2);
 
+//Rol Seguridad
+$sql3 =  (" SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correoelectronico' and CONTRASENA = '$contraDesencrip' AND ROL='Seguridad' AND ESTATUS=1");
+$seguridad=$conexion->query($sql3);
+
 
 if($urspace->num_rows==1){ 
     $usuario=$urspace->fetch_assoc();
@@ -55,10 +59,20 @@ if($urspace->num_rows==1){
 
     $_SESSION["correo"] = $usuario["CORREO_ELECTRONICO"];
     $_SESSION["rol"] = "recepcion";
-    header("Location: ../Vista/vista_registro_visitas.php");
+    header("Location: ../Vista/vista_historial_visitas.php");
     exit();
 
-} else {
+} else if($seguridad->num_rows==1){
+    $usuario=$seguridad->fetch_assoc();
+
+    $_SESSION["correo"] = $usuario["CORREO_ELECTRONICO"];
+    $_SESSION["rol"] = "seguridad";
+    header("Location: ../Vista/vista_historial_visitas.php");
+    exit();
+
+} 
+
+else {
     $error = 'yes';
     echo $error;
     exit();

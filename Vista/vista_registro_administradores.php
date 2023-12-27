@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +56,7 @@
             <a class="nav-link active" href="vista_registro_categorias.php">Categorias</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Cerrar Sesion</a>
+            <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesion</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="#">Cerrar Aplicacion</a>

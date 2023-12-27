@@ -1,9 +1,5 @@
 <?php
-
 session_start();
-$ROL=$_SESSION['rol'];
-$CORREO=$_SESSION['correo'];
-
 ?>
 
 <?php
@@ -84,7 +80,7 @@ $CORREO=$_SESSION['correo'];
             <a class="nav-link active" href="http://localhost/srcv01/Vista/vista_historial_visitas.php">Historial de Visitas</a>
            </li>
            <li class="nav-item">
-            <a class="nav-link active" href="#">Cerrar Sesion</a>
+            <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesion</a>
            </li>
            <li class="nav-item">
             <a class="nav-link active" href="#">Cerrar Aplicacion</a>
@@ -103,7 +99,9 @@ $CORREO=$_SESSION['correo'];
 <br>
 <br>
 <br>
-
+<div class="mb-4"></div> <!--Salto de linea-->
+<h3><center>REGISTRO DE VISITAS</center></h3> 
+<br>
 <div class="container">
     <div class="row-md-8">
       <!-- Button trigger modal -->

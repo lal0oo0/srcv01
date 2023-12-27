@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,7 +79,7 @@
             <a class="nav-link" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar Sesión</a>
+            <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Cerrar Aplicación</a>

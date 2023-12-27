@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,7 +79,7 @@
             <a class="nav-link active" href="vista_registro_administradores.php">Historial Administradores</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Cerrar Sesión</a>
+            <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="#">Cerrar Aplicación</a>
