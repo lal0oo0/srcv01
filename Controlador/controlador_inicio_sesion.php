@@ -37,14 +37,29 @@ $sql1 =  (" SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$corr
 $urspace=$conexion->query($sql1);
 
 //Rol IT-GLOBAL
+$sql2 =  (" SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correoelectronico' and CONTRASENA = '$contraDesencrip' AND ROL='Recepcion' AND ESTATUS=1");
+$recepcion=$conexion->query($sql2);
+
 
 if($urspace->num_rows==1){ 
     $usuario=$urspace->fetch_assoc();
 
     $_SESSION["correo"] = $usuario["CORREO_ELECTRONICO"];
     $_SESSION["rol"] = "urspace";
-
     header("Location: ../Vista/vista_mapa_salas.php");
+    exit();
+
+}else if($recepcion->num_rows==1){
+    $usuario=$recepcion->fetch_assoc();
+
+    $_SESSION["correo"] = $usuario["CORREO_ELECTRONICO"];
+    $_SESSION["rol"] = "recepcion";
+    header("Location: ../Vista/vista_registro_visitas.php");
+    exit();
+
+} else {
+    $error = 'yes';
+    header("Location: ../Vista/vista_inicio_sesion.php?error=" . urlencode($error));
     exit();
 }
 

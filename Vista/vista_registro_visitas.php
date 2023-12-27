@@ -1,4 +1,12 @@
 <?php
+
+session_start();
+$ROL=$_SESSION['rol'];
+$CORREO=$_SESSION['correo'];
+
+?>
+
+<?php
   $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 ?>
 
