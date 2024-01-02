@@ -20,14 +20,14 @@
 <style>
 
   body{
-    background-color: blue;
+    background-image:url(https://th.bing.com/th/id/OIP.I7nhMVv7VInEc1BpBatiPQAAAA?rs=1&pid=ImgDetMain) ;
     background-size: cover;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /*max width: 400px;*/
+    max width: 400px;
     font-size: 20px;
   }
 
@@ -44,7 +44,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-   /* border radius: 8px;*/
+    border radius: 8px;
     position: relative;
     overflow: hidden;
     padding: 3.5rem;
@@ -141,14 +141,14 @@
              <div class="col-md-6">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #1E90FF;" required>
               <option selected value="">Seleccione con la que mejor se identifique </option>
-              <option value="1">Nombre del mejor amigo</option>
+              <option value="1">Nombre del mejor amig@</option>
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
               </select>
              <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="respuesta" name="respuesta" required>
              </div>
             <div class="col-12">
-              <input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></button>
+              <input type="submit" value="Registrarse" class="btn btn-primary" href= "vista_inicio_sesion.php" name="Registrar"></button>
             </div>
             </form>
           </div>
