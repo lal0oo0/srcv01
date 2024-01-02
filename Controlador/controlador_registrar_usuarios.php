@@ -71,7 +71,6 @@ if ($ejecutar) {
 mysqli_close($conexion);
 
 header("location: ../Vista/vista_registro_administradores.php?mensaje=" . urlencode($mensaje));
-header("location: ../Vista/vista_registro_administradores.php?mensaje=" . urlencode($mensaje2));
 
 
 ?>

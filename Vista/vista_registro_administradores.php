@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <?php
   $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
@@ -34,6 +35,7 @@ session_start();
   }
   .table-wrapper-scroll-y {
   display: block;
+
   }
   .navbar-custom{
     background-color: #64BAFF; 
@@ -85,21 +87,23 @@ session_start();
 <br>
 <h3><center>HISTORIAL ADMINISTRADORES</center></h3> 
 <div class="mb-3"></div> <!--Salto de linea-->
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-    
-    <!--Aqui va el modal de formulario-->
             <!-- ALERTA -->
             <div id="mensaje">
              <?php echo $mensaje; ?>
             </div>
             <div class="mb-3"></div> 
-            <!-- ALERTA -->
-            <div id="mensaje2">
+             <!-- ALERTA -->
+            <div id="mensaje">
              <?php echo $mensaje2; ?>
             </div>
             <div class="mb-3"></div> 
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+    
+    <!--Aqui va el modal de formulario-->
+
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Nuevo Registro
@@ -123,11 +127,11 @@ session_start();
             <div class="col-md-12">
               <h6></h6>
 
-            <!-- ALERTA -->
+            <!-- ALERTA 
             <div id="mensaje">
              <?php echo $mensaje; ?>
             </div>
-            <div class="mb-3"></div> 
+            <div class="mb-3"></div> -->
       
 
               <label for="nombre" class="form-label">Nombre</label>

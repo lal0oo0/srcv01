@@ -1,3 +1,4 @@
+
 <?php
   $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   $mensaje2 = isset($_GET['mensaje2']) ? urldecode($_GET["mensaje2"]) : "";
