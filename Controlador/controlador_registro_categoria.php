@@ -17,11 +17,11 @@ $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_listas WHERE NOMBRE 
 
     if ($Categoria === "Empresa") {
         $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA) 
-        VALUES ('$nombre', 'empresa')";
+        VALUES ('$nombre', 'Empresa')";
     
     } elseif ($Categoria === "Asunto") {
         $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA) 
-        VALUES ('$nombre', 'asunto')";
+        VALUES ('$nombre', 'Asunto')";
     } else {
         echo "Categoría no válida";
         exit();

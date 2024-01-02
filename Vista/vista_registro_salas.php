@@ -45,13 +45,15 @@ session_start();
   .caja{
     border: 1px solid #B0ADAD;
     padding: 20px;
-    height: 70px;
+    height: 50px;
+    display: flex;
+    align-items: center;
   }
 
   .caja2{
     border: 1px solid #B0ADAD;
     padding: 20px;
-    height: 90px
+    height: 90px;
   }
 </style>
 
@@ -81,9 +83,6 @@ session_start();
           <li class="nav-item">
             <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar Aplicación</a>
-          </li>
         </ul>
       </div>
     </div>
@@ -99,6 +98,38 @@ session_start();
 <h3><center>LISTA DE SALAS</center></h3> 
 <br>
 
+<!--Registrar nueva sala-->
+<div class="mb-3"></div> <!--Salto de linea-->
+  <div class="container caja">
+    <div class="row">
+      <div class="col-md-12">
+      <label for="Nombre" class="col-form-label">Registro de una nueva sala</label>
+      </div>
+    </div>
+  </div>
+  <div class="container caja2">
+    <div class="row">
+      <div class="col-md-12">
+        <form action="../Controlador/controlador_registro_salas.php" class="formulario" method="post">
+          <div class="row g-3 align-items-center">
+            <div class="col-md-2">
+            <label for="Nombre" class="col-form-label">Nombre de la sala:</label>
+            </div>
+            <div class="col-md-6">
+            <input type="text" class="form-control" name="Nombre" placeholder="Ingresa el nombre de la sala" aria-label="Nombre" aria-describedby="basic-addon1">
+            </div>
+            <div class="col-md-1">
+            <button type="submit" class="btn btn-danger">AGREGAR</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="mb-5"></div> <!--Salto de linea-->
+
+
+
   <div class="container">
     <div class="row">
       <div class="col">
@@ -109,6 +140,7 @@ session_start();
             <th scope="col">ID</th>
             <th scope="col">Nombre de la Sala</th>
             <th scope="col">Estatus</th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <?php
@@ -128,35 +160,6 @@ session_start();
       </table>
       </div>
       </div> 
-    </div>
-  </div>
-
-  <div class="mb-5"></div> <!--Salto de linea-->
-  <div class="container caja">
-    <div class="row">
-      <div class="col-md-12">
-      <label for="Nombre" class="col-form-label">Registro de una nueva sala</label>
-      </div>
-    </div>
-  </div>
-
-  <div class="container caja2">
-    <div class="row">
-      <div class="col-md-12">
-        <form action="../Controlador/controlador_registro_salas.php" class="formulario" method="post">
-          <div class="row g-3 align-items-center">
-            <div class="col-md-2">
-            <label for="Nombre" class="col-form-label">Nombre de la sala:</label>
-            </div>
-            <div class="col-md-6">
-            <input type="text" class="form-control" name="Nombre" placeholder="Ingresa el nombre de la sala" aria-label="Nombre" aria-describedby="basic-addon1">
-            </div>
-            <div class="col-md-1">
-            <button type="submit" class="btn btn-danger">AGREGAR</button>
-            </div>
-          </div>
-        </form>
-      </div>
     </div>
   </div>
 

@@ -3,6 +3,14 @@ session_start();
 $ROL=$_SESSION['rol'];
 $CORREO=$_SESSION['correo'];
 ?>
+<?php
+require_once("../Modelo/conexion2.php");
+$conexion = conect();
+$correo = $_SESSION["correo"];
+$sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ";
+$resultado = $conexion->query($sql);
+$row = $resultado->fetch_assoc();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +78,7 @@ $CORREO=$_SESSION['correo'];
       </button>
       <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel">MENÚ</h5>
+          <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel">BIENVENIDO <?php echo utf8_decode($row['NOMBRE']); ?></h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -126,46 +134,91 @@ $CORREO=$_SESSION['correo'];
       </div>
       <div class="modal-body">
 
-    <form action="../Controlador/controlador_registro_reservacion.php" class="formulario" method="post">
-      <div class="input-group mb-3">
+    <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" method="post" novalidate>
+      
+      <div class="col">
        <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
+       <div class="invalid-feedback">
+        Llene el campo
+       </div>
       </div>
-      <div class="input-group mb-3">
-       <input type="text" class="form-control" name="Apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
-       <input type="text" class="form-control" name="Apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
+      <div class="mb-2"></div> <!--Salto de linea-->
+
+      <div class="row">
+        <div class="col">
+          <input type="text" class="form-control" name="Apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
+          <div class="invalid-feedback">
+            Llene el campo
+          </div>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" name="Apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
+          <div class="invalid-feedback">
+            Llene el campo
+          </div>
+        </div>
       </div>
-      <br>
-      <div class="input-group mb-6">
+      <div class="mb-2"></div> <!--Salto de linea-->
+
+      <div class="col">
        <input type="email" class="form-control" name="Correo" placeholder="Correo electronico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
+       <div class="invalid-feedback">
+        Llene el campo
+       </div>
       </div>
-      <br>
-      <div class="input-group mb-3">
-        <div class="input-group mb-12">
-        <label for="Fecha inicio">Fecha de inicio</label>
-        <label for="Fecha finalizacion">
-           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-          Fecha de finalizacion</label>
+      <div class="mb-2"></div> <!--Salto de linea-->
+
+      <div class="row">
+        <div class="col">
+          <label for="Fecha inicio">Fecha de inicio</label>
+          <input type="date" class="form-control" name="Fechainicio" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1" required>
+          <div class="invalid-feedback">
+          Llene el campo
+          </div>
         </div>
-        <input type="date" class="form-control" name="Fechainicio" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1" required>
-        <input type="date" class="form-control" name="Fechafinalizacion" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" required>
-      </div>
-      <br>
-      <div class="input-group mb-3">
-        <div class="input-group mb-12">
-        <label for="Hora inicio">Hora de inicio</label>
-        <label for="Hora finalizacion">
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-          Hora de finalización</label>
+        <div class="col">
+          <label for="Fecha finalizacion">Fecha de finalizacion</label>
+          <input type="date" class="form-control" name="Fechafinalizacion" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" required>
+          <div class="invalid-feedback">
+          Llene el campo
+          </div>
         </div>
-        <input type="time" class="form-control" name="Horainicio" placeholder="Hora de inicio" aria-label="Hora de inicio" aria-describedby="basic-addon1" required>
-        <input type="time" class="form-control" name="Horafinalizacion" placeholder="Hora de finalizacion" aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
       </div>
-      <br>
-      <div class="input-group mb-3">
-       <input type="number" class="form-control" name="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" required>
-       <input type="number" class="form-control" name="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
-       <input type="number" class="form-control" name="Liquidacion" placeholder="Liquidacion" aria-label="Liquidacion" aria-describedby="basic-addon1">
+      <div class="mb-2"></div> <!--Salto de linea-->
+
+      <div class="row">
+        <div class="col">
+          <label for="Hora inicio">Hora de inicio</label>
+          <input type="time" class="form-control" name="Horainicio" placeholder="Hora de inicio" aria-label="Hora de inicio" aria-describedby="basic-addon1" required>
+          <div class="invalid-feedback">
+          Llene el campo
+          </div>
+        </div>
+        <div class="col">
+          <label for="Hora finalizacion">Hora de finalización</label>
+          <input type="time" class="form-control" name="Horafinalizacion" placeholder="Hora de finalizacion" aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
+          <div class="invalid-feedback">
+          Llene el campo
+          </div>   
+        </div>     
       </div>
+      <div class="mb-3"></div> <!--Salto de linea-->
+
+      <div class="row">
+        <div class="col">
+          <input type="number" class="form-control" name="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" required>
+          <div class="invalid-feedback">
+            Llene el campo
+          </div>
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" name="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
+          <div class="invalid-feedback">
+            Llene el campo
+          </div>
+        </div>
+      </div>
+
       <div class="mb-5"></div> <!--Salto de linea-->
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Confirmar</button>
