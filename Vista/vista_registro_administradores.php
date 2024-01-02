@@ -1,6 +1,11 @@
 <?php
 session_start();
 ?>
+<?php
+  $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
+  $mensaje2 = isset($_GET['mensaje2']) ? urldecode($_GET['mensaje2']) : "";
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +88,116 @@ session_start();
 <div class="container">
   <div class="row">
     <div class="col-12">
-    <a class="btn btn-primary" href="../Vista/vista_registrar_usuario.php">Nuevo Registro</a>
+    
+    <!--Aqui va el modal de formulario-->
+            <!-- ALERTA -->
+            <div id="mensaje">
+             <?php echo $mensaje; ?>
+            </div>
+            <div class="mb-3"></div> 
+            <!-- ALERTA -->
+            <div id="mensaje2">
+             <?php echo $mensaje2; ?>
+            </div>
+            <div class="mb-3"></div> 
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Nuevo Registro
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Registro</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      <div class="card-body">
+            
+            <!--Faltaba el method POST -->
+            <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation" id="myForm" novalidate>
+            
+            <div class="col-md-12">
+              <h6></h6>
+
+            <!-- ALERTA -->
+            <div id="mensaje">
+             <?php echo $mensaje; ?>
+            </div>
+            <div class="mb-3"></div> 
+      
+
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="nombre" required>
+              <div class="invalid-feedback">
+              Rellene este campo, por favor
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="ap" class="form-label">Apellido Paterno</label>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="ap" required>
+              <div class="invalid-feedback">
+                Rellene este campo, por favor
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="am" class="form-label">Apellido Materno</label>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="am" required>
+              <div class="invalid-feedback">
+              Rellene este campo, por favor
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="email" class="form-label">Correo Electronico</label>
+              <div class="input-group has-validation">
+                <input type="email" class="form-control" style="border: 2px solid #1E90FF;" name="email" id="email" aria-describedby="emailHelp" required>
+                <div class="invalid-feedback">
+                Rellene este campo, por favor
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="pass" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" style="border: 2px solid #1E90FF;" name="pass" id="pass" aria-describedby="passwordHelp" required>
+              <div class="invalid-feedback">
+                Su contraseña debe de tener entre 8 y 16 caracteres, contener letras y numeros, y no debe contener espacios.
+              </div>
+              <br>
+            </div>
+            <div class="col-md-6">
+            <select class="form-select" id="rol" name="rol" style="border: 2px solid #1E90FF;" required>
+              <option selected value="" >Seleccione cual es su Rol </option>
+              <option value="1">Recepcion IT-Global</option>
+              <option value="2">Recepcion UrSpace</option>
+              <option value="3">Seguridad</option>
+            </select>
+             </div>
+             <div class="col-md-6">
+            <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #1E90FF;" required>
+              <option selected value="">Seleccione con la que mejor se identifique </option>
+              <option value="1">Nombre del mejor amigo</option>
+              <option value="2">Nombre de la mascota</option>
+              <option value="3">Pelicula Favorita</option>
+              </select>
+             <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="respuesta" name="respuesta" required>
+             </div>
+            <div class="col-12">
+              <input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
+            </div>
+            </form>
+          </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
     </div>
   </div>
 </div>
@@ -130,5 +244,16 @@ session_start();
 
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script>
+
+  //Limpiar fromulario
+  function limpiar() {
+      var formulario = document.getElementById("myForm");
+      // Resetear el formulario
+      formulario.reset();
+    }
+
+
+</script>
 </body>
 </html>

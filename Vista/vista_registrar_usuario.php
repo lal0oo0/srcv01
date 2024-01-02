@@ -1,5 +1,6 @@
 <?php
   $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
+  $mensaje2 = isset($_GET['mensaje2']) ? urldecode($_GET["mensaje2"]) : "";
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +80,7 @@
             <img src="../imagenes/unnamed.jpg" alt="" class="logo">
             </div>
             
-            <!--Faltaba el method POST -->
+            
             <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation" novalidate>
             
             <div class="col-md-12">
@@ -155,7 +156,6 @@
       </div>
     </div>
     
-    <!--ESTO SE TIENE QUE CAMBIAR A LOCAL -->
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
   </body>

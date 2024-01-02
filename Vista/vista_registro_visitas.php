@@ -35,7 +35,7 @@ session_start();
 
   .my-custom-scrollbar {
   position: relative;
-  height: 500px;
+  height: 400px;
   overflow: auto;
   }
 
@@ -102,6 +102,12 @@ session_start();
 <div class="mb-4"></div> <!--Salto de linea-->
 <h3><center>REGISTRO DE VISITAS</center></h3> 
 <br>
+<?php
+date_default_timezone_set('America/Mexico_City');
+$fecha_actual=date("Y-m-d");
+$hora_actual=date("h:i");
+ ?>
+
 <div class="container">
     <div class="row-md-8">
       <!-- Button trigger modal -->
@@ -138,7 +144,7 @@ session_start();
             <div class="row">
               <div class="col">
                <label for="he" class="form-label">Hora de entrada</label>
-               <input type="time" class="form-control" id="he" name="he" required>
+               <input type="time" class="form-control" id="he" name="he" value="<?=$hora_actual?>" required>
                <div class="invalid-feedback">
                  Verifique los datos
                 </div>
@@ -146,7 +152,7 @@ session_start();
 
               <div class="col">
                 <label for="fecha" class="form-label">Fecha</label>
-                <input type="date" class="form-control" id="fecha" name="fecha" disable="" required>
+                <input type="date" class="form-control" id="fecha" name="fecha" disable="" value="<?=$fecha_actual ?>" required>
                 <div class="invalid-feedback">
                  Verifique los datos
                 </div>
@@ -240,7 +246,7 @@ session_start();
             </div>
                <!--Botones para cancelar o enviar fromulario del modal-->
                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="limpiar()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Confirmar</button>
                </div>
                <br><br><br><br>
@@ -303,6 +309,13 @@ session_start();
 <script src="../js/bootstrap.bundle.min.js"></script>
 
 <script>
+  //Limpiar fromulario
+      function limpiar() {
+      var formulario = document.getElementById("myForm");
+      // Resetear el formulario
+      formulario.reset();
+    }
+
 document.getElementById('myForm').addEventListener('submit', function(event) {
   // Validación de fecha
   var selectedDateValue = document.getElementById('fecha').value;
