@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+$ROL=$_SESSION['rol'];
+$CORREO=$_SESSION['correo'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +22,11 @@
     font-size: 18px; /* Hacer las letras más grandes */
   }
 
+  thead{/*EStilos para la cabecera fija de la tabla*/
+    position: sticky;
+    top:0;
+  }
+
   table.table th,
   table.table td {
     text-align: center;
@@ -27,7 +40,7 @@
 
   .my-custom-scrollbar {
   position: relative;
-  height: 500px;
+  height: 400px;
   overflow: auto;
   }
   .table-wrapper-scroll-y {
@@ -64,7 +77,7 @@
             <a class="nav-link active" href="http://localhost/srcv01/Vista/vista_registro_visitas.php">Registro de Visitas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Cerrar Sesion</a>
+            <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesion</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="#">Cerrar Aplicacion</a>
@@ -82,14 +95,16 @@
   </div>
 </nav>
 </header>
-<br><br><br><br>
+<br><br><br><br><br>
+<h3><center>HISTORIAL DE VISITAS</center></h3> 
+<div class="mb-5"></div> <!--Salto de linea-->
 <div class="container">
   <div class="row">
     <div class="col-*-*">
     <div class="table-responsive my-custom-scrollbar">
   <!-- Estos son datos de ejemplo -->
   <table class="table table-bordered table-striped mb-0">
-    <thead>
+    <thead class="table-dark">
       <tr>
         <th scope="col">Hora de entrada</th>
         <th scope="col">Fecha</th>

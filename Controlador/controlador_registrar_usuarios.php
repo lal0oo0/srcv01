@@ -1,4 +1,7 @@
 <?php
+session_start();
+$usuariom= $_SESSION['correo'];
+
 /*Codigo de conexion a la base de datos*/
 include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
@@ -9,14 +12,47 @@ $nombre = $_POST['nombre'];
 $ap = $_POST['ap'];
 $am = $_POST['am'];
 $correo = $_POST['email'];
+
+
 $contrasenia = $_POST['pass'];
+  // Metodo para encriptar la contrasenia
+  $clave = "55Eu47x";
+
+  function encrypt($string, $key)
+  {
+      $result = '';
+      for ($i = 0; $i < strlen($string); $i++) {
+          $char = substr($string, $i, 1);
+          $keychar = substr($key, ($i % strlen($key)) - 1, 1);
+          $char = chr(ord($char) + ord($keychar));
+          $result .= $char;
+      }
+      return base64_encode($result);
+  }
+
+  //Encriptacion de la contrasenia:
+  $contraEncrip = encrypt($contrasenia, $clave);
+  //Fin del metodo de encriptar
+
 $rol = $_POST['rol'];
 $pregunta = $_POST['pregunta'];
 $respuesta = $_POST['respuesta'];
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASEÑA, ROL, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA) 
-VALUES ('$nombre', '$ap', '$am', '$correo','$contrasenia','$rol','$pregunta','$respuesta')";
+$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, ROL, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
+VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$rol','$pregunta','$respuesta','$usuariom','$usuariom','1')";
+
+$norepetir = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$correo'");
+if(mysqli_num_rows($norepetir) > 0){
+  echo'
+  <script>
+     alert("Este correo ya está registrado, intenta con otro diferente");
+     window.location = "../Vista/vista_registrar_usuario.php";
+ </script>
+';
+exit(); 
+}
+
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $usuario); 
 

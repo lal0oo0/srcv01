@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,10 +76,10 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" href="http://localhost/srcv01/Vista/admin.php">Usuarios</a>
+            <a class="nav-link active" href="vista_registro_administradores.php">Historial Administradores</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Cerrar Sesión</a>
+            <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="#">Cerrar Aplicación</a>

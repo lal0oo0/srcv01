@@ -1,22 +1,30 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    
     <title>Agregar Usuarios</title>
 </head>
-<style>
 
+<style>
   table.table th,
   table.table td {
     text-align: center;
   }
 
+  thead{/*EStilos para la cabecera fija de la tabla*/
+    position: sticky;
+    top:0;
+  }
+
   .my-custom-scrollbar {
   position: relative;
-  height: 200px;
+  height: 350px;
   overflow: auto;
   }
   .table-wrapper-scroll-y {
@@ -45,10 +53,10 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" href="http://localhost/srcv01/Vista/categorias.php">Categorias</a>
+            <a class="nav-link active" href="vista_registro_categorias.php">Categorias</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Cerrar Sesion</a>
+            <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesion</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="#">Cerrar Aplicacion</a>
@@ -70,19 +78,22 @@
 <br>
 <br>
 <br>
+<h3><center>HISTORIAL ADMINISTRADORES</center></h3> 
+<div class="mb-3"></div> <!--Salto de linea-->
 <div class="container">
   <div class="row">
     <div class="col-12">
-    <button type="button" class="btn btn-primary" style="background-color:	#008B8B;" >Nuevo Registro</button>
+    <a class="btn btn-primary" href="../Vista/vista_registrar_usuario.php">Nuevo Registro</a>
     </div>
   </div>
 </div>
+<div class="mb-4"></div> <!--Salto de linea-->
 <div class="container">
   <div class="row">
     <div class="col">
     <div class="table-responsive my-custom-scrollbar">
   <table class="table table-bordered table-striped mb-0">
-    <thead>
+    <thead class="table-dark">
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Nombre</th>
