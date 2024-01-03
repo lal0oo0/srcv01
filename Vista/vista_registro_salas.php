@@ -73,7 +73,7 @@ $row = $resultado->fetch_assoc();
     </button>
     <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h3 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel"> Bienvenido <?php echo utf8_decode($row['NOMBRE']); ?> </h3>
+        <h3 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel"> Bienvenid@ <?php echo utf8_decode($row['NOMBRE']); ?> </h3>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
