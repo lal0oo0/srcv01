@@ -1,9 +1,16 @@
 <?php
-
 session_start();
 $ROL=$_SESSION['rol'];
 $CORREO=$_SESSION['correo'];
+?>
 
+<?php
+require_once("../Modelo/conexion2.php");
+$conexion = conect();
+$correo = $_SESSION["correo"];
+$sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ";
+$resultado = $conexion->query($sql);
+$row = $resultado->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +54,7 @@ $CORREO=$_SESSION['correo'];
   display: block;
   }
 
-  .tituloM{
+  .tit-color{
     color: white;
   }
 </style>
@@ -68,8 +75,7 @@ $CORREO=$_SESSION['correo'];
     </button>
     <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title tituloM" id="offcanvasDarkNavbarLabel">Menu</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <h3 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel"> Bienvenid@ <?php echo utf8_decode($row['NOMBRE']); ?> </h3>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">

@@ -3,6 +3,15 @@ session_start();
 ?>
 
 <?php
+require_once("../Modelo/conexion2.php");
+$conexion = conect();
+$correo = $_SESSION["correo"];
+$sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ";
+$resultado = $conexion->query($sql);
+$row = $resultado->fetch_assoc();
+?>
+
+<?php
   $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 ?>
 
@@ -48,7 +57,7 @@ session_start();
     font-size: 18px; /* Hacer las letras más grandes */
   }
 
-  .Titulo{
+  .tit-color{
     color: white;
   }
 </style>
@@ -70,10 +79,9 @@ session_start();
           <span class="navbar-toggler-icon"></span>
           </button>
        <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-           <div class="offcanvas-header">
-            <h5 class="offcanvas-title Titulo" id="offcanvasDarkNavbarLabel">Menu</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-           </div>
+         <div class="offcanvas-header">
+          <h3 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel"> Bienvenid@ <?php echo utf8_decode($row['NOMBRE']); ?> </h3>
+         </div>
          <div class="offcanvas-body">
          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
            <li class="nav-item">
