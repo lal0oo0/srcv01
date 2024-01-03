@@ -1,3 +1,9 @@
+<?php
+$id=$_GET["id"];
+echo $id;
+?>
+
+
 
 <?php
 require_once("../Modelo/conexion2.php");
@@ -37,7 +43,7 @@ $row = $resultado->fetch_assoc();
 
   .my-custom-scrollbar {
   position: relative;
-  height: 300px;
+  height: 400px;
   overflow: auto;
   }
 
@@ -81,13 +87,11 @@ $row = $resultado->fetch_assoc();
   </div>
 </nav>
 </header>
-
 <br>
 <br>
 <br>
+<h3 class="text-center">HISTORIAL DE RESERVACIONES</h3>
 <br>
-<br>
-<h3><center>HISTORIAL DE RESERVACIONES</center></h3>
 <br>
 
 <div class="container">
@@ -133,6 +137,84 @@ $row = $resultado->fetch_assoc();
               <td><?php echo$filas ["TOTAL"] ?></td>
               <td><?php echo$filas ["ENGANCHE"] ?></td>
               <td><?php echo$filas ["LIQUIDACION"] ?></td>
+              <td>
+                <div class="d-grid gap-2">
+
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <img src="../imagenes/posponer.png" width="20px">
+                  </button>
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel"><?php echo $filas ["ID_RESERVACION"]?></h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="mb-3"></div> <!--Salto de linea-->
+                        <div class="modal-body">
+                          <form action="" class="formulario row g-3 needs-validation" method="post" novalidate>
+                            <div class="row">
+                              <div class="col">
+                                <label for="Fecha inicio">Fecha de inicio</label>
+                                <input type="date" class="form-control" name="Fechainicio" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1" required>
+                                <div class="invalid-feedback">
+                                Verifique los datos
+                                </div>
+                              </div>
+                              <div class="col">
+                                <label for="Fecha finalizacion">Fecha de finalizacion</label>
+                                <input type="date" class="form-control" name="Fechafinalizacion" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" required>
+                                <div class="invalid-feedback">
+                                Verifique los datos
+                                </div>
+                              </div>
+                            </div>
+                            <div class="mb-2"></div> <!--Salto de linea-->
+
+                            <div class="row">
+                              <div class="col">
+                                <label for="Hora inicio">Hora de inicio</label>
+                                <input type="time" class="form-control" name="Horainicio" placeholder="Hora de inicio" aria-label="Hora de inicio" aria-describedby="basic-addon1" required>
+                                <div class="invalid-feedback">
+                                Verifique los datos
+                                </div>
+                              </div>
+                              <div class="col">
+                                <label for="Hora finalizacion">Hora de finalización</label>
+                                <input type="time" class="form-control" name="Horafinalizacion" placeholder="Hora de finalizacion" aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
+                                <div class="invalid-feedback">
+                                Verifique los datos
+                                </div>   
+                              </div>     
+                            </div>
+                            <div class="mb-3"></div> <!--Salto de linea-->
+
+                          <div class="row">
+                            <div class="col"></div>
+                            <div class="col">
+                              <input type="number" class="form-control" name="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
+                              <div class="invalid-feedback">
+                                Verifique los datos
+                              </div>
+                            </div>
+                            <div class="col"></div>
+                          </div>
+                            <div class="mb-5"></div> <!--Salto de linea-->
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-primary">Confirmar</button>
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-outline-dark btn-sm" type="button"><img src="../imagenes/cancelar.png" width="20px"></button>
+                </div>
+              </td>
           </tr>
           <?php
           };

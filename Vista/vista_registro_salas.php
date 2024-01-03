@@ -37,7 +37,7 @@ $row = $resultado->fetch_assoc();
 
   .my-custom-scrollbar {
   position: relative;
-  height: 300px;
+  height: 350px;
   overflow: auto;
   }
 
@@ -101,11 +101,10 @@ $row = $resultado->fetch_assoc();
 <br>
 <br>
 <br>
-<h3><center>LISTA DE SALAS</center></h3> 
-<br>
+<h3 class="text-center"><center>LISTA DE SALAS</center></h3> 
 
 <!--Registrar nueva sala-->
-<div class="mb-3"></div> <!--Salto de linea-->
+<div class="mb-5"></div> <!--Salto de linea-->
   <div class="container caja">
     <div class="row">
       <div class="col-md-12">
@@ -122,7 +121,7 @@ $row = $resultado->fetch_assoc();
             <label for="Nombre" class="col-form-label">Nombre de la sala:</label>
             </div>
             <div class="col-md-6">
-            <input type="text" class="form-control" name="Nombre" placeholder="Ingresa el nombre de la sala" aria-label="Nombre" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" name="Nombre" placeholder="Ingresa el nombre de la sala" aria-label="Nombre" aria-describedby="basic-addon1" required>
             </div>
             <div class="col-md-1">
             <button type="submit" class="btn btn-danger">AGREGAR</button>
@@ -132,9 +131,7 @@ $row = $resultado->fetch_assoc();
       </div>
     </div>
   </div>
-  <div class="mb-5"></div> <!--Salto de linea-->
-
-
+  <div class="mb-4"></div> <!--Salto de linea-->
 
   <div class="container">
     <div class="row">
@@ -159,6 +156,8 @@ $row = $resultado->fetch_assoc();
           <td><?php echo$filas ["ID_SALA"] ?></td>
           <td><?php echo$filas ["NOMBRE"] ?></td>
           <td><?php echo$filas ["ESTATUS"] ?></td>
+          <td><button type="button" class="btn btn-outline-dark btn-sm"><img src="../imagenes/activar.png" width="20px"></button>
+          <button type="button" class="btn btn-outline-dark btn-sm"><img src="../imagenes/cancelar.png" width="20px"></button></td>
         </tr>
         <?php
         };

@@ -103,7 +103,7 @@ $row = $resultado->fetch_assoc();
 </header>
 
 <br><br><br><br><br>
-<h3><center>LISTA DE SALAS</center></h3>
+<h3 class="text-center">LISTA DE SALAS</h3>
 
 <div class="outer-container text-center">
   <div class="inner-container">
