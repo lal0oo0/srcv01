@@ -38,18 +38,18 @@ $rol = $_POST['rol'];
 $pregunta = $_POST['pregunta'];
 $respuesta = $_POST['respuesta'];
 
+
 /*Codigo para guardar un registro temporalmente en una variable php*/
 $usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, ROL, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
 VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$rol','$pregunta','$respuesta','$usuariom','$usuariom','1')";
 
+/*Evitar que el registro se repita*/ 
 $norepetir = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$correo'");
 if(mysqli_num_rows($norepetir) > 0){
-  echo'
-  <script>
-     alert("Este correo ya está registrado, intenta con otro diferente");
-     window.location = "../Vista/vista_registrar_usuario.php";
- </script>
-';
+  $mensaje2= '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Error!</strong> El registro ya existe, intente nuevamente
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
 exit(); 
 }
 
@@ -70,7 +70,7 @@ if ($ejecutar) {
 
 mysqli_close($conexion);
 
-header("location: ../Vista/vista_registrar_usuario.php?mensaje=" . urlencode($mensaje));
+header("location: ../Vista/vista_registro_administradores.php?mensaje=" . urlencode($mensaje));
 
 
 ?>
