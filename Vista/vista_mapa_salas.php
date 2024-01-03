@@ -6,8 +6,8 @@ $CORREO=$_SESSION['correo'];
 <?php
 require_once("../Modelo/conexion2.php");
 $conexion = conect();
-$correo = $_SESSION["correo"];
-$sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ";
+$correo = $_SESSION['correo'];
+$sql  = "SELECT CORREO_ELECTRONICO, NOMBRE,  FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ";
 $resultado = $conexion->query($sql);
 $row = $resultado->fetch_assoc();
 ?>
@@ -78,7 +78,7 @@ $row = $resultado->fetch_assoc();
       </button>
       <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel">BIENVENIDO <?php echo utf8_decode($row['NOMBRE']); ?></h5>
+          <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel"> Bienvenido <?php echo utf8_decode($row['NOMBRE']); ?> </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
