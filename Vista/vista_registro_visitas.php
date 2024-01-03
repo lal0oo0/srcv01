@@ -306,12 +306,7 @@ $hora_actual=date("h:i");
 <script src="../js/bootstrap.bundle.min.js"></script>
 
 <script>
-  //Limpiar fromulario
-      function limpiar() {
-      var formulario = document.getElementById("myForm");
-      // Resetear el formulario
-      formulario.reset();
-    }
+
 
 document.getElementById('myForm').addEventListener('submit', function(event) {
   // Validación de fecha
@@ -356,6 +351,12 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
     }
   });
 });
+  //Limpiar fromulario
+  function limpiar() {
+      var formulario = document.getElementById("myForm");
+      // Resetear el formulario
+      formulario.reset();
+    }
 </script>
 
 
