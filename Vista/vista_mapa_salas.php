@@ -3,11 +3,12 @@ session_start();
 $ROL=$_SESSION['rol'];
 $CORREO=$_SESSION['correo'];
 ?>
+
 <?php
 require_once("../Modelo/conexion2.php");
 $conexion = conect();
-$correo = $_SESSION['correo'];
-$sql  = "SELECT CORREO_ELECTRONICO, NOMBRE,  FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ";
+$correo = $_SESSION["correo"];
+$sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ";
 $resultado = $conexion->query($sql);
 $row = $resultado->fetch_assoc();
 ?>
@@ -78,25 +79,21 @@ $row = $resultado->fetch_assoc();
       </button>
       <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel"> Bienvenido <?php echo utf8_decode($row['NOMBRE']); ?> </h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <h3 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel"> Bienvenido <?php echo utf8_decode($row['NOMBRE']); ?> </h3>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link" href="vista_mapa_salas.php">Mapa</a>
+              <a class="nav-link active" aria-current="page" href="vista_mapa_salas.php">Mapa de salas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="vista_registro_salas.php">Registro de salas</a>
+              <a class="nav-link" aria-current="page" href="vista_registro_salas.php">Registro de salas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
+              <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Cerrar Aplicación</a>
+              <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
             </li>
           </ul>
         </div>
@@ -139,7 +136,7 @@ $row = $resultado->fetch_assoc();
       <div class="col">
        <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
        <div class="invalid-feedback">
-        Llene el campo
+        Verifique los datos
        </div>
       </div>
       <div class="mb-2"></div> <!--Salto de linea-->
@@ -148,13 +145,13 @@ $row = $resultado->fetch_assoc();
         <div class="col">
           <input type="text" class="form-control" name="Apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
-            Llene el campo
+            Verifique los datos
           </div>
         </div>
         <div class="col">
           <input type="text" class="form-control" name="Apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
-            Llene el campo
+            Verifique los datos
           </div>
         </div>
       </div>
@@ -163,7 +160,7 @@ $row = $resultado->fetch_assoc();
       <div class="col">
        <input type="email" class="form-control" name="Correo" placeholder="Correo electronico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
        <div class="invalid-feedback">
-        Llene el campo
+        Verifique los datos
        </div>
       </div>
       <div class="mb-2"></div> <!--Salto de linea-->
@@ -173,14 +170,14 @@ $row = $resultado->fetch_assoc();
           <label for="Fecha inicio">Fecha de inicio</label>
           <input type="date" class="form-control" name="Fechainicio" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
-          Llene el campo
+          Verifique los datos
           </div>
         </div>
         <div class="col">
           <label for="Fecha finalizacion">Fecha de finalizacion</label>
           <input type="date" class="form-control" name="Fechafinalizacion" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
-          Llene el campo
+          Verifique los datos
           </div>
         </div>
       </div>
@@ -191,14 +188,14 @@ $row = $resultado->fetch_assoc();
           <label for="Hora inicio">Hora de inicio</label>
           <input type="time" class="form-control" name="Horainicio" placeholder="Hora de inicio" aria-label="Hora de inicio" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
-          Llene el campo
+          Verifique los datos
           </div>
         </div>
         <div class="col">
           <label for="Hora finalizacion">Hora de finalización</label>
           <input type="time" class="form-control" name="Horafinalizacion" placeholder="Hora de finalizacion" aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
-          Llene el campo
+          Verifique los datos
           </div>   
         </div>     
       </div>
@@ -208,13 +205,13 @@ $row = $resultado->fetch_assoc();
         <div class="col">
           <input type="number" class="form-control" name="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
-            Llene el campo
+            Verifique los datos
           </div>
         </div>
         <div class="col">
           <input type="number" class="form-control" name="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
-            Llene el campo
+            Verifique los datos
           </div>
         </div>
       </div>

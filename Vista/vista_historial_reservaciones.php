@@ -1,5 +1,12 @@
+
 <?php
+require_once("../Modelo/conexion2.php");
+$conexion = conect();
 session_start();
+$correo = $_SESSION["correo"];
+$sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ";
+$resultado = $conexion->query($sql);
+$row = $resultado->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -52,25 +59,21 @@ session_start();
     </button>
     <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel">MENÚ</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <h3 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel"> Bienvenido <?php echo utf8_decode($row['NOMBRE']); ?> </h3>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="vista_mapa_salas.php">Mapa</a>
+            <a class="nav-link" aria-current="page" href="vista_mapa_salas.php">Mapa</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="vista_registro_salas.php">Registro de salas</a>
+            <a class="nav-link" aria-current="page" href="vista_registro_salas.php">Registro de salas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar Aplicación</a>
+            <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
           </li>
         </ul>
       </div>
