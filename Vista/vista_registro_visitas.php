@@ -82,9 +82,6 @@ session_start();
            <li class="nav-item">
             <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesion</a>
            </li>
-           <li class="nav-item">
-            <a class="nav-link active" href="#">Cerrar Aplicacion</a>
-           </li>
          </ul>
            <form class="d-flex mt-3" role="search">
            <input class="form-control me-2" type="Buscar" placeholder="Buscar" aria-label="Buscar">
@@ -235,14 +232,6 @@ $hora_actual=date("h:i");
                </select>
              </div>
 
-                <div class="col">
-                <div class="mb-3"></div> <!-- Salto de línea -->
-                 <label for="hs" class="form-label">Hora de salida</label>
-                 <input type="time" class="form-control" id="hs" name="hs">
-                 <div class="invalid-feedback">
-                 Verifique los datos
-                 </div>
-                </div>
             </div>
                <!--Botones para cancelar o enviar fromulario del modal-->
                <div class="modal-footer">
