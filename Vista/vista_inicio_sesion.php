@@ -74,7 +74,7 @@
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #1E90FF" name="correoelectronico" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
-                Verifique si sus datos son correctos
+                Verifique los datos 
                 </div>
               </div>
             </div>
@@ -82,7 +82,7 @@
               <label for="validationCustom03" class="form-label">Contraseña</label>
               <input type="password" class="form-control" style="border: 2px solid #1E90FF" name="contrasena" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
-              Verifique si sus datos son correctos
+              Verifique los datos 
               </div>
             </div>
             <br><br><br>
