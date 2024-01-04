@@ -6,10 +6,15 @@
     <title>Recuperar contraseña</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
+<?php
+    require_once("../Modelo/conexion2.php");
+    $conexion = conect();
+    $categorias = mysqli_query ($conexion, "select * from srcv_administradores");
+  ?>
 <style>
 
   body{
-    background-image:url(https://th.bing.com/th/id/OIP.I7nhMVv7VInEc1BpBatiPQAAAA?rs=1&pid=ImgDetMain);
+    background-color: #007AB6 ;
     background-size: cover;
     width: 100%;
     display: flex;
@@ -43,7 +48,7 @@
     width: 110px;
     height: 110px;
     border-radius: 50%;
-    border: 2.5px solid #1E90FF;
+    border: 2.5px solid #007AB6;
     position: absolute;
     top: 100px;
     left: calc(50% - 50px);
@@ -68,12 +73,12 @@
             <div class="col-12 user-img">
             <img src="../imagenes/unnamed.jpg" alt="" class="logo">
             </div>
-            <form action="enviar.php" action="POST" class="row g-3 needs-validation" novalidate>
+            <form action="controlador_recuperar_contrasena.php" action="POST" class="row g-3 needs-validation" novalidate>
             <div class="col-12">
               <h3>Recuperar contraseña</h3>
               <label for="validationexampleInputEmail1" class="form-label">Ingrese su correo electronico</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" name="email" style="border: 2px solid #1E90FF" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
+              <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
                 Verifique si sus datos son correctos
                 </div>
@@ -89,9 +94,8 @@
       </div>
     </div>
     <script src="jquery/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="../js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="../js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
   <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields

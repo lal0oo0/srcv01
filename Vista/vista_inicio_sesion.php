@@ -14,7 +14,7 @@
 <style>
 
   body{
-    background-color: blue;
+    background-color: #007AB6;
     background-size: cover;
     width: 100%;
     display: flex;
@@ -49,7 +49,7 @@
     width: 110px;
     height: 110px;
     border-radius: 50%;
-    border: 2.5px solid #1E90FF;
+    border: 2.5px solid #007AB6;
     position: absolute;
     top: 100px;
     left: calc(50% - 50px);
@@ -72,17 +72,17 @@
             <div class="col-12">
               <label for="validationexampleInputEmail1" class="form-label">Correo Electronico</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" style="border: 2px solid #1E90FF" name="correoelectronico" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" style="border: 2px solid #007AB6" name="correoelectronico" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
-                Verifique los datos 
+                Campo obligatorio
                 </div>
               </div>
             </div>
             <div class="col-12">
               <label for="validationCustom03" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" style="border: 2px solid #1E90FF" name="contrasena" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6" name="contrasena" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
-              Verifique los datos 
+              Campo obligatorio
               </div>
             </div>
             <br><br><br>
@@ -121,6 +121,25 @@
     }, false)
   })
 })()
+
+const form = document.getElementById('formulario');
+const forms = document.querySelectorAll('.needs-validation')
+
+const expresiones = {
+  correoelectronico: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+  contrasena: /^.{5,8}$/, 
+}
+
+const validarFormulario = event => {
+  switch (e.target.name){
+    case: "correoelectronico":
+      if (expresiones.correoelectronico.test(e.target.value)) {
+        
+      } else {
+        document.getElementById('exampleInputEmail1').classList.add('was-validated')
+      }
+  }
+}
 
   </script>
 </html>

@@ -21,7 +21,7 @@
 <style>
 
   body{
-    background-image:url(https://th.bing.com/th/id/OIP.I7nhMVv7VInEc1BpBatiPQAAAA?rs=1&pid=ImgDetMain) ;
+    background-color: #007AB6;
     background-size: cover;
     width: 100%;
     display: flex;
@@ -56,7 +56,7 @@
     width: 110px;
     height: 110px;
     border-radius: 50%;
-    border: 2.5px solid #1E90FF;
+    border: 2.5px solid #007AB6;
     position: absolute;
     top: 100px;
     left: calc(50% - 50px);
@@ -95,44 +95,44 @@
       
 
               <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="nombre" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="nombre" required>
               <div class="invalid-feedback">
-              Verifique los datos 
+              Campo obligatorio
               </div>
             </div>
             <div class="col-md-6">
               <label for="ap" class="form-label">Apellido Paterno</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="ap" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="ap" required>
               <div class="invalid-feedback">
-                Verifique los datos 
+                Campo obligatorio
               </div>
             </div>
             <div class="col-md-6">
               <label for="am" class="form-label">Apellido Materno</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="am" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="am" required>
               <div class="invalid-feedback">
-              Verifique los datos 
+              Campo obligatorio
               </div>
             </div>
             <div class="col-md-6">
               <label for="email" class="form-label">Correo Electronico</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" style="border: 2px solid #1E90FF;" name="email" id="email" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
-                Verifique los datos 
+                Campo obligatorio
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <label for="pass" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" style="border: 2px solid #1E90FF;" name="pass" id="pass" aria-describedby="passwordHelp" required>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="pass" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
-              Verifique los datos 
+              Campo obligatorio
               </div>
               <br>
             </div>
             <div class="col-md-6">
-            <select class="form-select" id="rol" name="rol" style="border: 2px solid #1E90FF;" required>
+            <select class="form-select" id="rol" name="rol" style="border: 2px solid #007AB6;" required>
               <option selected value="" >Seleccione cual es su Rol </option>
               <option value="1">Recepcion IT-Global</option>
               <option value="2">Recepcion UrSpace</option>
@@ -140,13 +140,13 @@
             </select>
              </div>
              <div class="col-md-6">
-            <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #1E90FF;" required>
+            <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
               <option selected value="">Seleccione con la que mejor se identifique </option>
               <option value="1">Nombre del mejor amig@</option>
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
               </select>
-             <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="respuesta" name="respuesta" required>
+             <input type="text" class="form-control form-control-sm" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
              </div>
             <div class="col-12">
               <input type="submit" value="Registrarse" class="btn btn-primary" href= "vista_inicio_sesion.php" name="Registrar"></button>
