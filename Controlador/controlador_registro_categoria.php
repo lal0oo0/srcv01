@@ -11,7 +11,7 @@ $Categoria = $_POST['Categoria'];
 // Verificar si la combinación de CATEGORIA y NOMBRE ya existe
 $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_listas WHERE NOMBRE = '$nombre' AND CATEGORIA = '$Categoria'");
     if (mysqli_num_rows($verificacion) > 0) {
-        echo json_encode(array('success' => false, 'error' => 'La combinación de CATEGORÍA y NOMBRE ya existe en la base de datos.'));
+        echo json_encode(array('success' => false, 'error' => 'La combinación de CATEGORÍA y NOMBRE ya se encuentra registrada.'));
         exit();
     }
 

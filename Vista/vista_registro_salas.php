@@ -156,8 +156,10 @@ $row = $resultado->fetch_assoc();
           <td><?php echo$filas ["ID_SALA"] ?></td>
           <td><?php echo$filas ["NOMBRE"] ?></td>
           <td><?php echo$filas ["ESTATUS"] ?></td>
-          <td><button type="button" class="btn btn-outline-dark btn-sm"><img src="../imagenes/activar.png" width="20px"></button>
-          <button type="button" class="btn btn-outline-dark btn-sm"><img src="../imagenes/cancelar.png" width="20px"></button></td>
+          <td>
+            <button type="button" class="btn btn-outline-dark btn-sm"><img src="../imagenes/activar.png" width="20px"></button>
+            <button type="button" class="btn btn-outline-dark btn-sm"><img src="../imagenes/cancelar.png" width="20px"></button>
+          </td>
         </tr>
         <?php
         };
