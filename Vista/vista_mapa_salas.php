@@ -132,7 +132,7 @@ $row = $resultado->fetch_assoc();
       <div class="modal-body">
 
     <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" method="post" novalidate>
-      
+    <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
       <div class="col">
        <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
        <div class="invalid-feedback">
