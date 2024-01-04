@@ -22,6 +22,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
 
   <title>Registar</title>
 </head>
@@ -68,7 +69,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 </style>
 
 <body>
-  <?php
+<?php
   require_once("../Modelo/conexion2.php");
   $conexion = conect();
   $queryVisitas = mysqli_query($conexion, "select * from srcv_visitas");
@@ -111,7 +112,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <br>
   <div class="mb-4"></div> <!--Salto de linea-->
   <h3>
-    <center>REGISTRO DE VISITAS</center>
+    <center>REGISTRO DE VISITAS</center> <!--Cambiar a bootstrap en center-->
   </h3>
   <br>
   <?php
@@ -297,10 +298,12 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <td>
 
                     <!-- Boton de editar -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>" onclick="Visita('<?php $filas['ID_VISITA'] ?>')" >
+                    <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php //echo $filas['ID_VISITA'] ?>" onclick="Visita('<?// $filas['ID_VISITA'] ?>')" >
                     <img src="../imagenes/actualizar.png" width="20px">
-                    </button>
+                    </button>-->
 
+                    <!--AQUI VAS A PONER EL ICONO <A HREF="#">CLASE DEL ICONO</A> -->
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>" onclick="Visita('<?php $filas['ID_VISITA'] ?>')" > <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal_<?php echo $filas['ID_VISITA'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
@@ -308,7 +311,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Actualizar <?= $filas['NOMBRE'] ?></h5>
                             <input id="Visita_<?php echo $filas['ID_VISITA'] ?>" name="Visita" value="" hidden>
-                            <input type="hidden" name="idVisita" id="idVisita" value="<?php echo $filas['ID_VISITA'] ?>"">
+                            <input type="hidden" name="idVisita" id="idVisita" value="<?php echo $filas['ID_VISITA'] ?>">
 
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
@@ -316,10 +319,15 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                             
 
                             <!--Formulario de edicion-->
-                            <form id="myForm2" action="../Controlador/controlador_editar_visitas.php" method="post" class="row g-3 needs-validation" novalidate>
+                            <form id="myForm2"  
+                            method="post" 
+                            action="../Controlador/controlador_editar_visitas.php"
+                            class="row g-3 needs-validation" novalidate>
 
+                            
                 <div class="mb-3"></div> <!-- Salto de línea -->
-                <input type="hidden" name="id" value="<?= $filas['ID_VISITA'] ?>">
+                <input type="hidden" name="id" id="id" value="<?= $filas['ID_VISITA'] ?>">
+                <input type="hidden" name="he" id="he" value="<?= $filas['HORA_ENTRADA']?>" >
                 <div class="col">
                   <label for="nombre" class="form-label">Nombre</label>
                   <input type="text" class="form-control" id="nombre" name="nombre" value=" <?= $filas['NOMBRE'] ?> " required>
@@ -357,7 +365,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <!--Botones para cancelar o enviar fromulario del modal-->
                 <div class="modal-footer">
                   <button type="button" onclick="limpiar()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" id="Actualizar" class="btn btn-primary">Confirmar</button>
+                  <button type="submit" name="Actualizar" id="Actualizar" class="btn btn-primary" value="Guardar">Actualizar</button>
                 </div>
                 <br><br><br><br>
               </form>
@@ -369,7 +377,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                       </div>
                     </div>
 
-                    <a href="#"><button type="button" class="btn btn-secondary btn-sm" style="background-color:	#8AB7B0;"><img src="../imagenes/borra.png" width="20px"></button></a>
+                    <a href="#" ><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    <!--<a href="#"><button type="button" class="btn btn-secondary btn-sm" style="background-color:	#8AB7B0;"><img src="../imagenes/borra.png" width="20px"></button></a>-->
 
                   </td>
                 </tr>
@@ -395,7 +404,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
     document.getElementById('myForm').addEventListener('submit', function(event) {
       // Validación de fecha
-      /*var selectedDateValue = document.getElementById('fecha').value;
+      var selectedDateValue = document.getElementById('fecha').value;
 
       if (!selectedDateValue) {
         document.getElementById('fecha').classList.add('is-invalid');
@@ -421,7 +430,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
         event.preventDefault();
       } else {
         document.getElementById('hs').classList.remove('is-invalid');
-      }*/
+      }
 
       // Validación de otros campos
       var fieldsToValidate = ['he', 'nombre', 'ap', 'am', 'empresa', 'asunto'];
