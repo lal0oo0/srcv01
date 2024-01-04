@@ -140,32 +140,37 @@ $row = $resultado->fetch_assoc();
               <td>
                 <div class="d-grid gap-2">
 
-                  <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <!-- Modificar reservaciones -->
+                  <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_RESERVACION'] ?>" onclick="Reservacion('<?php $filas['ID_RESERVACION'] ?>')">
                   <img src="../imagenes/posponer.png" width="20px">
                   </button>
-                  <!-- Modal -->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <!-- Modal para modificar reservaciones-->
+                  <div class="modal fade" id="exampleModal_<?php echo $filas['ID_RESERVACION'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel"><?php echo $filas ["ID_RESERVACION"]?></h1>
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar reservacion de <?= $filas['NOMBRE_CLIENTE'] ?></h1>
+                          <input id="Reservacion_<?php echo $filas['ID_RESERVACION'] ?>" name="Reservacion" value="" hidden>
+                            <input type="hidden" name="idreservacion" id="idreservacion" value="<?php echo $filas['ID_RESERVACION'] ?>">
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="mb-3"></div> <!--Salto de linea-->
+
                         <div class="modal-body">
-                          <form action="" class="formulario row g-3 needs-validation" method="post" novalidate>
+                          <form action="../Controlador/controlador_posponer_reservacion.php" class="formulario row g-3 needs-validation" method="post" novalidate>
+                            <div class="mb-3"></div> <!-- Salto de línea -->
+                              <input type="hidden" name="id" value="<?= $filas['ID_RESERVACION'] ?>">
                             <div class="row">
                               <div class="col">
                                 <label for="Fecha inicio">Fecha de inicio</label>
-                                <input type="date" class="form-control" name="Fechainicio" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1" required>
+                                <input type="date" class="form-control" name="Fechainicio" value="<?=$filas['FECHA_ENTRADA']?>" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1" required>
                                 <div class="invalid-feedback">
                                 Verifique los datos
                                 </div>
                               </div>
                               <div class="col">
                                 <label for="Fecha finalizacion">Fecha de finalizacion</label>
-                                <input type="date" class="form-control" name="Fechafinalizacion" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" required>
+                                <input type="date" class="form-control" name="Fechafinalizacion" value="<?=$filas['FECHA_SALIDA']?>" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" required>
                                 <div class="invalid-feedback">
                                 Verifique los datos
                                 </div>
@@ -176,14 +181,14 @@ $row = $resultado->fetch_assoc();
                             <div class="row">
                               <div class="col">
                                 <label for="Hora inicio">Hora de inicio</label>
-                                <input type="time" class="form-control" name="Horainicio" placeholder="Hora de inicio" aria-label="Hora de inicio" aria-describedby="basic-addon1" required>
+                                <input type="time" class="form-control" name="Horainicio" value="<?=$filas['HORA_ENTRADA']?>" placeholder="Hora de inicio" aria-label="Hora de inicio" aria-describedby="basic-addon1" required>
                                 <div class="invalid-feedback">
                                 Verifique los datos
                                 </div>
                               </div>
                               <div class="col">
                                 <label for="Hora finalizacion">Hora de finalización</label>
-                                <input type="time" class="form-control" name="Horafinalizacion" placeholder="Hora de finalizacion" aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
+                                <input type="time" class="form-control" name="Horafinalizacion" value="<?=$filas['HORA_SALIDA']?>"placeholder="Hora de finalizacion" aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
                                 <div class="invalid-feedback">
                                 Verifique los datos
                                 </div>   
@@ -194,7 +199,7 @@ $row = $resultado->fetch_assoc();
                           <div class="row">
                             <div class="col"></div>
                             <div class="col">
-                              <input type="number" class="form-control" name="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
+                              <input type="number" class="form-control" name="Enganche" value="<?=$filas['ENGANCHE']?>" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
                               <div class="invalid-feedback">
                                 Verifique los datos
                               </div>
@@ -236,5 +241,35 @@ $row = $resultado->fetch_assoc();
 
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+function Reservacion(idreservacion){
+    document.getElementById('Reservacion_' + idreservacion).value = idreservacion;
+    <?php $id_reservacion ?>=idreservacion;
+    }
+
+// Script para validaciones
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+</script>
+
 </body>
 </html>

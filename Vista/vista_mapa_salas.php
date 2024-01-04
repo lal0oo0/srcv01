@@ -244,7 +244,7 @@ $row = $resultado->fetch_assoc();
     document.getElementById('salaSeleccionada_' + idSala).value = idSala;
   }
 
-// Example starter JavaScript for disabling form submissions if there are invalid fields
+// Script para validaciones
 (() => {
   'use strict'
 

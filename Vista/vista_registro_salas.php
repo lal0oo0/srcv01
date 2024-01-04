@@ -101,7 +101,7 @@ $row = $resultado->fetch_assoc();
 <br>
 <br>
 <br>
-<h3 class="text-center"><center>LISTA DE SALAS</center></h3> 
+<h3 class="text-center">LISTA DE SALAS</h3> 
 
 <!--Registrar nueva sala-->
 <div class="mb-5"></div> <!--Salto de linea-->
@@ -149,7 +149,7 @@ $row = $resultado->fetch_assoc();
         <?php
           require_once("../Modelo/conexion2.php");
           $conexion = conect();
-          $query = mysqli_query ($conexion, "select * from srcv_salas WHERE ESTATUS = 1");
+          $query = mysqli_query ($conexion, "select * from srcv_salas");
           while($filas  = mysqli_fetch_assoc($query)){
         ?>
         <tr>
