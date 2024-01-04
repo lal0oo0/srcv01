@@ -12,16 +12,20 @@ $nombre = $_POST['nombre'];
 $apellidop = $_POST['ap'];
 $apellidom = $_POST['am'];
 $hora_salida = $_POST['hs'];
+//$id_visita= '';
 
+/*Codigo para guardar un registro temporalmente en una variable php
+$visita = "INSERT INTO srcv_visitas(ID_VISITA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
+VALUES ('$id','$nombre','$apellidop','$apellidom','$usuariom','$usuariom','1')";
+Para ejecutar la consulta
+$ejecutar = mysqli_query($conexion, $visita); */
 
-/*Codigo para guardar un registro temporalmente en una variable php*/
-$visita = "INSERT INTO srcv_visitas(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
-VALUES ('$nombre','$apellidop','$apellidom','$usuariom','$usuariom','1')";
-/*Para ejecutar la consulta*/
-$ejecutar = mysqli_query($conexion, $visita); 
+if(isset($_POST['Actualizar'])){
+  $consulta="UPDATE srcv_visitas SET NOMBRE='$nombre', APELLIDO_PATERNO='$apellidop', APELLIDO_MATERNO='$apellidom', HORA_SALIDA='$hora_salida', USUARIO_MODIFICACION='$usuariom'";
+  $sql=mysqli_query($conexion, $consulta);
+}
 
-
-if ($ejecutar) {
+if ($consulta) {
     // Éxito: alerta de Bootstrap éxito
     $mensaje = '<div class="alert alert-success alert-dismissible fade show" role="alert">
     <strong>Exito!</strong> El registro se ha guardado correctamente

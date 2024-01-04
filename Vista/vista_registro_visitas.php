@@ -117,7 +117,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <?php
   date_default_timezone_set('America/Mexico_City');
   $fecha_actual = date("Y-m-d");
-  $hora_actual = date("h:i");
+  $hora_actual = date("H:i");
   ?>
 
   <div class="container">
@@ -308,7 +308,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Actualizar <?= $filas['NOMBRE'] ?></h5>
                             <input id="Visita_<?php echo $filas['ID_VISITA'] ?>" name="Visita" value="" hidden>
-                            <input type="hidden" name="idVisita" id="idVisita" value="">
+                            <input type="hidden" name="idVisita" id="idVisita" value="<?php echo $filas['ID_VISITA'] ?>"">
 
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
@@ -322,7 +322,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <input type="hidden" name="id" value="<?= $filas['ID_VISITA'] ?>">
                 <div class="col">
                   <label for="nombre" class="form-label">Nombre</label>
-                  <input type="text" class="form-control" id="nombre" name="nombre" required>
+                  <input type="text" class="form-control" id="nombre" name="nombre" value=" <?= $filas['NOMBRE'] ?> " required>
                   <div class="invalid-feedback">
                     Verifique los datos
                   </div>
@@ -332,7 +332,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <div class="col">
                     <div class="mb-3"></div> <!-- Salto de línea -->
                     <label for="ap" class="form-label">Apellido Paterno</label>
-                    <input type="text" class="form-control" id="ap" name="ap" required>
+                    <input type="text" class="form-control" id="ap" name="ap" value="<?=$filas['APELLIDO_PATERNO']?>" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -341,7 +341,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <div class="col">
                     <div class="mb-3"></div> <!-- Salto de línea -->
                     <label for="am" class="form-label">Apellido Materno</label>
-                    <input type="text" class="form-control" id="am" name="am" required>
+                    <input type="text" class="form-control" id="am" name="am" value="<?=$filas['APELLIDO_MATERNO']?>" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -357,7 +357,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <!--Botones para cancelar o enviar fromulario del modal-->
                 <div class="modal-footer">
                   <button type="button" onclick="limpiar()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" class="btn btn-primary">Confirmar</button>
+                  <button type="submit" id="Actualizar" class="btn btn-primary">Confirmar</button>
                 </div>
                 <br><br><br><br>
               </form>
@@ -390,7 +390,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
     function Visita(idVisita){
     document.getElementById('Visita_' + idVisita).value = idVisita;
-    
+    <?php $id_visita ?>=idVisita;
     }
 
     document.getElementById('myForm').addEventListener('submit', function(event) {
