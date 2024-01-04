@@ -97,21 +97,21 @@
               <label for="nombre" class="form-label">Nombre</label>
               <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="nombre" required>
               <div class="invalid-feedback">
-              Rellene este campo, por favor
+              Verifique los datos 
               </div>
             </div>
             <div class="col-md-6">
               <label for="ap" class="form-label">Apellido Paterno</label>
               <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="ap" required>
               <div class="invalid-feedback">
-                Rellene este campo, por favor
+                Verifique los datos 
               </div>
             </div>
             <div class="col-md-6">
               <label for="am" class="form-label">Apellido Materno</label>
               <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="am" required>
               <div class="invalid-feedback">
-              Rellene este campo, por favor
+              Verifique los datos 
               </div>
             </div>
             <div class="col-md-6">
@@ -119,7 +119,7 @@
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #1E90FF;" name="email" id="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
-                Rellene este campo, por favor
+                Verifique los datos 
                 </div>
               </div>
             </div>
@@ -127,7 +127,7 @@
               <label for="pass" class="form-label">Contraseña</label>
               <input type="password" class="form-control" style="border: 2px solid #1E90FF;" name="pass" id="pass" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
-                Su contraseña debe de tener entre 8 y 16 caracteres, contener letras y numeros, y no debe contener espacios.
+              Verifique los datos 
               </div>
               <br>
             </div>

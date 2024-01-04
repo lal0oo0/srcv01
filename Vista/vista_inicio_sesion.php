@@ -74,7 +74,7 @@
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #1E90FF" name="correoelectronico" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
-                Rellene este campo, por favor
+                Verifique los datos 
                 </div>
               </div>
             </div>
@@ -82,7 +82,7 @@
               <label for="validationCustom03" class="form-label">Contraseña</label>
               <input type="password" class="form-control" style="border: 2px solid #1E90FF" name="contrasena" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
-                Su contraseña debe de tener entre 8 y 16 caracteres, contener letras y numeros, y no debe contener espacios.
+              Verifique los datos 
               </div>
             </div>
             <br><br><br>
@@ -94,7 +94,7 @@
           <br>
         </div>
         <div class="dropdown-divider"></div>
-        <p class="fs-6"><a class="link-primary" class="text-decorative-none" href="vista_recuperar_contraseña.php">¿Haz olvidado tu contraseña?</a></p>
+        <p class="fs-6"><a class="link-primary" class="text-decorative-none" href="vista_recuperar_contrasena.php">¿Haz olvidado tu contraseña?</a></p>
       </div>
     </div>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

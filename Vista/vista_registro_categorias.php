@@ -112,12 +112,14 @@ session_start();
               <th scope="col">ID</th>
               <th scope="col">Nombre</th>
               <th scope="col">Categoría</th>
+              <th scope="col">Estatus</th>
+              <th scope="col">Acciones</th>
             </tr>
           </thead>
           <?php
             require_once("../Modelo/conexion2.php");
             $conexion = conect();
-            $query = mysqli_query ($conexion, "select * from srcv_listas");
+            $query = mysqli_query ($conexion, "select * from srcv_listas WHERE ESTATUS = 1");
                   
             while($filas  = mysqli_fetch_assoc($query)){
           ?>
@@ -125,6 +127,14 @@ session_start();
             <td><?php echo$filas ["ID_LISTA"] ?></td>
             <td><?php echo$filas ["NOMBRE"] ?></td>
             <td><?php echo$filas ["CATEGORIA"] ?></td>
+            <td><?php echo$filas ["ESTATUS"] ?></td>
+            <td>
+              <!-- Boton de editar -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_LISTA'] ?>" onclick="Lista('<?php $filas['ID_LISTA'] ?>')" >
+                    <img src="../imagenes/actualizar.png" width="20px">
+                    </button>
+                    <a href="#"><button type="button" class="btn btn-secondary btn-sm" style="background-color:	#8AB7B0;"><img src="../imagenes/borra.png" width="20px"></button></a>
+            </td>
           </tr>
           <?php
           };
