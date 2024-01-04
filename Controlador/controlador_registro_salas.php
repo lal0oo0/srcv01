@@ -6,6 +6,7 @@ $conexion = conect();
 
 /*Para capturar los campos*/
 $nombre = $_POST['Nombre'];
+$estatus = $_POST['Estatus'];
 
 
 // Verificar si NOMBRE ya existe
@@ -16,8 +17,18 @@ $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_salas WHERE NOMBRE =
     }
 
 	/*Codigo para guardar un registro temporalmente en una variable php*/
-	$consulta = "INSERT INTO srcv_salas(NOMBRE, ESTATUS)
-	VALUES ('$nombre','1')";
+	/*$consulta = "INSERT INTO srcv_salas(NOMBRE, ESTATUS)
+	VALUES ('$nombre','1')";*/
+
+    if ($estatus === "Activa") {
+        $consulta = "INSERT INTO srcv_salas(NOMBRE, CATEGORIA) 
+        VALUES ('$nombre', '1')";
+    
+    } elseif ($Estatus === "Inactiva") {
+        $consulta = "INSERT INTO srcv_salas(NOMBRE, CATEGORIA) 
+        VALUES ('$nombre', '0')";
+        exit();
+    }
 
 	/*Para ejecutar la consulta*/
     $ejecutar = mysqli_query($conexion, $consulta);
