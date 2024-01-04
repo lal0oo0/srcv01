@@ -94,7 +94,7 @@
           <br>
         </div>
         <div class="dropdown-divider"></div>
-        <p class="fs-6"><a class="link-primary" class="text-decorative-none" href="vista_recuperar_contraseña.php">¿Haz olvidado tu contraseña?</a></p>
+        <p class="fs-6"><a class="link-primary" class="text-decorative-none" href="vista_recuperar_contrasena.php">¿Haz olvidado tu contraseña?</a></p>
       </div>
     </div>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
