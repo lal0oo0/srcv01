@@ -68,19 +68,20 @@
             <div class="col-12 user-img">
             <img src="../imagenes/unnamed.jpg" alt="" class="logo">
             </div>
-            <form action="../Controlador/controlador_registro_usuario.php" action="POST" class="row g-3 needs-validation" novalidate>
+            <form action="enviar.php" action="POST" class="row g-3 needs-validation" novalidate>
             <div class="col-12">
-              <label for="validationexampleInputEmail1" class="form-label">Correo Electronico</label>
+              <h3>Recuperar contraseña</h3>
+              <label for="validationexampleInputEmail1" class="form-label">Ingrese su correo electronico</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" style="border: 2px solid #1E90FF" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" name="email" style="border: 2px solid #1E90FF" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
-                Rellene este campo, por favor
+                Verifique si sus datos son correctos
                 </div>
               </div>
             </div>
             <br>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" href="#">Enviar</button>
+              <button class="btn btn-primary" type="submit" value="enviar" name="enviar">Enviar</button>
             </div>
           </form>
           </div>
