@@ -2,7 +2,9 @@
 $id=$_GET["id"];
 echo $id;
 ?>
-
+<?php
+$mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
+?>
 
 
 <?php
@@ -93,6 +95,14 @@ $row = $resultado->fetch_assoc();
 <h3 class="text-center">HISTORIAL DE RESERVACIONES</h3>
 <br>
 <br>
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-9" id="mensaje">
+    <?php echo $mensaje; ?>
+  </div>
+  <div class="col ms-1"></div>
+</div>
+<div class="mb-3"></div>
 
 <div class="container">
   <div class="row">
@@ -197,14 +207,18 @@ $row = $resultado->fetch_assoc();
                             <div class="mb-3"></div> <!--Salto de linea-->
 
                           <div class="row">
-                            <div class="col"></div>
                             <div class="col">
+                              <input type="hidden" name="Total" value="<?= $filas['TOTAL'] ?>">
+                            </div>
+                            <div class="col">
+                              <label for="Enganche">Enganche
+                              </label>
                               <input type="number" class="form-control" name="Enganche" value="<?=$filas['ENGANCHE']?>" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
                               <div class="invalid-feedback">
                                 Verifique los datos
                               </div>
                             </div>
-                            <div class="col"></div>
+                            <div class="col"><input type="hidden" name="Liquidacion" value="<?= $filas['LIQUIDACION'] ?>"></div>
                           </div>
                             <div class="mb-5"></div> <!--Salto de linea-->
                             <div class="modal-footer">

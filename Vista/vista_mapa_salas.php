@@ -235,6 +235,7 @@ $row = $resultado->fetch_assoc();
   </div>
 </div>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 
@@ -263,6 +264,47 @@ $row = $resultado->fetch_assoc();
     }, false)
   })
 })()
+
+
+//ALERTAS//
+// Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
+$(document).ready(function() {
+    // Captura el evento de envío del formulario con la clase 'formulario'
+    $(".formulario").submit(function(e) {
+        // Previene el comportamiento predeterminado del formulario
+        e.preventDefault();
+        
+        // Realiza una solicitud Ajax al servidor
+        $.ajax({
+            // Especifica el método de la solicitud (POST en este caso)
+            type: "POST",
+            // Obtiene la URL del atributo 'action' del formulario
+            url: $(this).attr('action'),
+            // Serializa los datos del formulario para enviarlos al servidor
+            data: $(this).serialize(),
+            // Especifica que se espera recibir datos en formato JSON
+            dataType: "json",
+            // Función que se ejecuta cuando la solicitud Ajax tiene éxito
+            success: function(response) {
+                // Verifica si la operación en el servidor fue exitosa
+                if (response.success) {
+                    // Muestra una alerta de éxito con SweetAlert
+                    swal({
+                        title: 'Registro exitoso!',
+                        text: 'Su reservacion fue registrada con éxito!',
+                        icon: 'success'
+                    }).then(function() {
+                        // Recarga la página después de cerrar la alerta (opcional)
+                        location.reload();
+                    });
+                } else {
+                    // Muestra una alerta de error con SweetAlert
+                    swal('Error', response.error, 'error');
+                }
+            }
+        });
+    });
+});
 
 
 </script>

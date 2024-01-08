@@ -28,10 +28,9 @@ $ejecutar = mysqli_query($conexion, $consulta);
 
 /* Falta cambiar aquí las alertas */
 if ($ejecutar) {
-	echo 'éxito';
-}
-else{
-	echo 'nel';
+	echo json_encode(array('success' => true));
+} else {
+	echo json_encode(array('success' => false, 'error' => mysqli_error($conexion)));
 }
 
 
