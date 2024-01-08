@@ -29,7 +29,7 @@ $ejecutar = mysqli_query($conexion, $visita); */
 
 
 
-/*if ($sql) {
+if ($sql) {
     // Éxito: alerta de Bootstrap éxito
     $mensaje = '<div class="alert alert-success alert-dismissible fade show" role="alert">
     <strong>Exito!</strong> El registro se ha actualizado correctamente
@@ -38,10 +38,10 @@ $ejecutar = mysqli_query($conexion, $visita); */
 } else {
     // Error: alerta de Bootstrap error con detalles
     $mensaje = '<div class="alert alert-danger" role="alert">Error en la consulta: ' . mysqli_error($conexion) . '</div>';
-}*/
+}
 
 mysqli_close($conexion);
-//header("location: ../Vista/vista_registro_visitas.php?mensaje=" . urlencode($mensaje));
+header("location: ../Vista/vista_registro_visitas.php?mensaje=" . urlencode($mensaje));
 
 
 ?>
