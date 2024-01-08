@@ -250,7 +250,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <!--Botones para cancelar o enviar fromulario del modal-->
                 <div class="modal-footer">
                   <button type="button" onclick="limpiar()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" class="btn btn-primary">Confirmar</button>
+                  <button type="submit" class="btn btn-primary" onclick="validar()" >Confirmar</button>
                 </div>
                 <br><br><br><br>
               </form>
@@ -302,7 +302,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <img src="../imagenes/actualizar.png" width="20px">
                     </button>-->
 
-                    <!--AQUI VAS A PONER EL ICONO <A HREF="#">CLASE DEL ICONO</A> -->
+                    
                     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>" onclick="Visita('<?php $filas['ID_VISITA'] ?>')" > <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal_<?php echo $filas['ID_VISITA'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -319,7 +319,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                             
 
                             <!--Formulario de edicion-->
-                            <form id="myForm2"  
+                            <form id="myForm"  
                             method="post" 
                             action="../Controlador/controlador_editar_visitas.php"
                             class="row g-3 needs-validation" novalidate>
@@ -358,14 +358,14 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <div class="col">
                     <label for="he" class="form-label">Hora de Salida</label>
                     <input type="time" class="form-control" id="hs" name="hs" value="<?= $hora_actual ?>" required>
-                    <!--<div class="invalid-feedback">
-                 Verifique los datos
-                </div>-->
+                    <div class="invalid-feedback">
+                     Verifique los datos
+                    </div>
                   </div>
                 <!--Botones para cancelar o enviar fromulario del modal-->
                 <div class="modal-footer">
                   <button type="button" onclick="limpiar()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" name="Actualizar" id="Actualizar" class="btn btn-primary" value="Guardar">Actualizar</button>
+                  <button type="submit" name="Actualizar" id="Actualizar" class="btn btn-primary" onclick="validar()" value="Guardar">Actualizar</button>
                 </div>
                 <br><br><br><br>
               </form>
@@ -376,8 +376,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                         </div>
                       </div>
                     </div>
-
-                    <a href="#" ><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    <!--Boton de eliminar-->
+                    <a href="#" ><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
                     <!--<a href="#"><button type="button" class="btn btn-secondary btn-sm" style="background-color:	#8AB7B0;"><img src="../imagenes/borra.png" width="20px"></button></a>-->
 
                   </td>
@@ -394,6 +394,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
   <script src="../js/jquery-3.1.1.min.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/validar_formulario.js" ></script>
 
   <script>
 
@@ -402,56 +403,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     <?php $id_visita ?>=idVisita;
     }
 
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-      // Validación de fecha
-      var selectedDateValue = document.getElementById('fecha').value;
-
-      if (!selectedDateValue) {
-        document.getElementById('fecha').classList.add('is-invalid');
-        event.preventDefault();
-        return;
-      }
-
-      var currentDate = new Date().toISOString().split('T')[0];
-
-      if (selectedDateValue < currentDate) {
-        document.getElementById('fecha').classList.add('is-invalid');
-        event.preventDefault();
-      } else {
-        document.getElementById('fecha').classList.remove('is-invalid');
-      }
-
-      // Validación de horas de entrada y salida
-      var selectedTimeValue = document.getElementById('hs').value;
-      var selectedTimeValue2 = document.getElementById('he').value;
-
-      if (selectedTimeValue != 0 && selectedTimeValue < selectedTimeValue2) {
-        document.getElementById('hs').classList.add('is-invalid');
-        event.preventDefault();
-      } else {
-        document.getElementById('hs').classList.remove('is-invalid');
-      }
-
-      // Validación de otros campos
-      var fieldsToValidate = ['he', 'nombre', 'ap', 'am', 'empresa', 'asunto'];
-
-      fieldsToValidate.forEach(function(fieldId) {
-        var fieldValue = document.getElementById(fieldId).value;
-        if (!fieldValue) {
-          document.getElementById(fieldId).classList.add('is-invalid');
-          event.preventDefault();
-        } else {
-          document.getElementById(fieldId).classList.remove('is-invalid');
-        }
-      });
-    });
-    //Limpiar fromulario
-    function limpiar() {
-      var formulario = document.getElementById("myForm");
-      // Resetear el formulario
-      formulario.reset();
-    }
-
+    
 
   </script>
 
