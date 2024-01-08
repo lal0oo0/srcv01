@@ -85,7 +85,7 @@ session_start();
 <br>
 <br>
 <br>
-<h3><center>HISTORIAL ADMINISTRADORES</center></h3> 
+<h3 class="text-center">HISTORIAL ADMINISTRADORES</h3> 
 <div class="mb-3"></div> <!--Salto de linea-->
             <!-- ALERTA -->
             <div id="mensaje">

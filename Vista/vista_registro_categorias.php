@@ -99,7 +99,7 @@ session_start();
 <br>
 <br>
 <br>
-<h3><center>LISTA DE CATEGORÍAS<center></h3>
+<h3 class="text-center">LISTA DE CATEGORÍAS</h3>
 <div class="mb-5"></div> <!--Salto de linea-->
 
 <div class="container">

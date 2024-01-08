@@ -102,7 +102,7 @@ $row = $resultado->fetch_assoc();
 </nav>
 </header>
 <br><br><br><br><br>
-<h3><center>HISTORIAL DE VISITAS</center></h3> 
+<h3 class="text-center">HISTORIAL DE VISITAS</h3> 
 <div class="mb-5"></div> <!--Salto de linea-->
 <div class="container">
   <div class="row">

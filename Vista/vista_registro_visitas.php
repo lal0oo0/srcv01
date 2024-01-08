@@ -111,9 +111,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <br>
   <br>
   <div class="mb-4"></div> <!--Salto de linea-->
-  <h3>
-    <center>REGISTRO DE VISITAS</center> <!--Cambiar a bootstrap en center-->
-  </h3>
+  <h3 class="text-center">REGISTRO DE VISITAS</h3>
   <br>
   <?php
   date_default_timezone_set('America/Mexico_City');
