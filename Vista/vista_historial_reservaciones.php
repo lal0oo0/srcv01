@@ -23,7 +23,7 @@ $row = $resultado->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    
+    <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
     <title>Reservaciones</title>
 </head>
 
@@ -111,11 +111,10 @@ $row = $resultado->fetch_assoc();
         <table class="table table-bordered table-striped mb-0">
           <thead class="table-dark">
             <tr>
-              <th scope="col">ID</th>
               <th scope="col">Nombre del cliente</th>
               <th scope="col">Apellido paterno</th>
               <th scope="col">Apellido Materno</th>
-              <th scope="col">ID Sala</th>
+              <th scope="col">Sala</th>
               <th scope="col">Correo electrónico</th>
               <th scope="col">Fecha de entrada</th>
               <th scope="col">Fecha de salida</th>
@@ -134,7 +133,6 @@ $row = $resultado->fetch_assoc();
               while($filas  = mysqli_fetch_assoc($query)){
           ?>
           <tr>
-              <td><?php echo$filas ["ID_RESERVACION"] ?></td>
               <td><?php echo$filas ["NOMBRE_CLIENTE"] ?></td>
               <td><?php echo$filas ["APELLIDO_PATERNO"] ?></td>
               <td><?php echo$filas ["APELLIDO_MATERNO"] ?></td>
@@ -148,12 +146,10 @@ $row = $resultado->fetch_assoc();
               <td><?php echo$filas ["ENGANCHE"] ?></td>
               <td><?php echo$filas ["LIQUIDACION"] ?></td>
               <td>
-                <div class="d-grid gap-2">
+                
 
                   <!-- Modificar reservaciones -->
-                  <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_RESERVACION'] ?>" onclick="Reservacion('<?php $filas['ID_RESERVACION'] ?>')">
-                  <img src="../imagenes/posponer.png" width="20px">
-                  </button>
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_RESERVACION'] ?>" onclick="Reservacion('<?php $filas['ID_RESERVACION'] ?>')"> <i class="fa fa-clock-o" aria-hidden="true"></i></a>
                   <!-- Modal para modificar reservaciones-->
                   <div class="modal fade" id="exampleModal_<?php echo $filas['ID_RESERVACION'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -230,9 +226,10 @@ $row = $resultado->fetch_assoc();
                       </div>
                     </div>
                   </div>
-
-                  <button class="btn btn-outline-dark btn-sm" type="button"><img src="../imagenes/cancelar.png" width="20px"></button>
-                </div>
+                  <!--Boton para eliminar-->
+                  <a href="" name="id" onclick="cancelar('<?php $filas['ID_RESERVACION'] ?>')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        
+                
               </td>
           </tr>
           <?php
