@@ -96,11 +96,11 @@ $row = $resultado->fetch_assoc();
 <br>
 <br>
 <div class="row">
-  <div class="col-sm-1"></div>
-  <div class="col-sm-9" id="mensaje">
+  <div class="col-md-1"></div>
+  <div class="col-md-10" id="mensaje">
     <?php echo $mensaje; ?>
   </div>
-  <div class="col ms-1"></div>
+  <div class="col md-1"></div>
 </div>
 <div class="mb-3"></div>
 
