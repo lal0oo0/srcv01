@@ -72,7 +72,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <?php
   require_once("../Modelo/conexion2.php");
   $conexion = conect();
-  $queryVisitas = mysqli_query($conexion, "select * from srcv_visitas");
+  $queryVisitas = mysqli_query($conexion, "select * from srcv_visitas where ESTATUS='1'");
   $queryempresa = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='empresa'");
   $queryasunto = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='asunto'");
   ?>
@@ -375,7 +375,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                       </div>
                     </div>
                     <!--Boton de eliminar-->
-                    <a href="#" ><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
+                    <a href="../Controlador/controlador_eliminar_visita.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
                     <!--<a href="#"><button type="button" class="btn btn-secondary btn-sm" style="background-color:	#8AB7B0;"><img src="../imagenes/borra.png" width="20px"></button></a>-->
 
                   </td>
