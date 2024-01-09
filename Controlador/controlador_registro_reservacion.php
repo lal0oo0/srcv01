@@ -5,9 +5,9 @@ include '../Modelo/conexion2.php';
 $conexion = conect();
 
 /*Para capturar los campos*/
-$variable1 = $_POST['Nombre'];
-$variable2 = $_POST['Apellidopaterno'];
-$variable3 = $_POST['Apellidomaterno'];
+$nombre = $_POST['Nombre'];
+$apellidop = $_POST['Apellidopaterno'];
+$ = $_POST['Apellidomaterno'];
 $variable4 = $_POST['Correo'];
 $variable5 = $_POST['Fechainicio'];
 $variable6 = $_POST['Fechafinalizacion'];

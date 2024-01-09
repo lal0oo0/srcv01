@@ -227,7 +227,7 @@ $row = $resultado->fetch_assoc();
                     </div>
                   </div>
                   <!--Boton para eliminar-->
-                  <a href="" name="id" onclick="cancelar('<?php $filas['ID_RESERVACION'] ?>')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                  <a href="../Controlador/controlador_eliminar_reservacion.php?id=<?=$filas ['ID_RESERVACION']?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
         
                 
               </td>
