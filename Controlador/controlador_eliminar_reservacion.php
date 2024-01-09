@@ -5,7 +5,7 @@ include '../Modelo/conexion2.php';
 $conexion = conect();
 
     $id=$_GET["id"];
-    $sql = "delete from srcv_reservaciones where ID_RESERVACION='$id'";
+    $sql = "UPDATE srcv_reservaciones SET ESTATUS='0' where ID_RESERVACION='$id'";
     $resultado=mysqli_query($conexion,$sql);
 
     if ($resultado) {

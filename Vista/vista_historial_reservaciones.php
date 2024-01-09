@@ -129,7 +129,7 @@ $row = $resultado->fetch_assoc();
           <?php
               require_once("../Modelo/conexion2.php");
               $conexion = conect();
-              $query = mysqli_query ($conexion, "select * from srcv_reservaciones");
+              $query = mysqli_query ($conexion, "select * from srcv_reservaciones where ESTATUS='1'");
               while($filas  = mysqli_fetch_assoc($query)){
           ?>
           <tr>
