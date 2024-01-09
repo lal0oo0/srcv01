@@ -7,26 +7,25 @@ $conexion = conect();
 /*Para capturar los campos*/
 $nombre = $_POST['Nombre'];
 $apellidop = $_POST['Apellidopaterno'];
-$ = $_POST['Apellidomaterno'];
-$variable4 = $_POST['Correo'];
-$variable5 = $_POST['Fechainicio'];
-$variable6 = $_POST['Fechafinalizacion'];
-$variable7 = $_POST['Horainicio'];
-$variable8 = $_POST['Horafinalizacion'];
-$variable9 = $_POST['Total'];
-$variable10 = $_POST['Enganche'];
-$variable11 = $variable9-$variable10;
+$apellidom = $_POST['Apellidomaterno'];
+$correo = $_POST['Correo'];
+$fechaini = $_POST['Fechainicio'];
+$fechafin = $_POST['Fechafinalizacion'];
+$horaini = $_POST['Horainicio'];
+$horafin = $_POST['Horafinalizacion'];
+$total = $_POST['Total'];
+$enganche = $_POST['Enganche'];
+$liquidacion = $total-$enganche;
 
 $idSala = $_POST['id_sala'];
 
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
 $consulta = "INSERT INTO srcv_reservaciones (ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, TOTAL, ENGANCHE, LIQUIDACION) 
-VALUES ('$idSala', '$variable1', '$variable2', '$variable3', '$variable4', '$variable5', '$variable6', '$variable7', '$variable8', '$variable9', '$variable10', '$variable11')";
+VALUES ('$idSala', '$nombre', '$apellidop', '$apellidom', '$correo', '$fechaini', '$fechafin', '$horaini, '$horafin', '$total', '$enganche', '$liquidacion')";
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $consulta); 
 
-/* Falta cambiar aquí las alertas */
 if ($ejecutar) {
 	echo json_encode(array('success' => true));
 } else {
