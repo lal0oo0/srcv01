@@ -20,9 +20,9 @@ $row = $resultado->fetch_assoc();
 </head>
 
 <style>
-  table.table th,
-  table.table td {
-    text-align: center;
+  .navbar-custom {
+    background-color: #F73B3B; /* Darle color al NAV, del color que se necesite */
+    font-size: 18px; /* Hacer las letras más grandes */
   }
 
   thead{/*EStilos para la cabecera fija de la tabla*/
@@ -30,31 +30,33 @@ $row = $resultado->fetch_assoc();
     top:0;
   }
 
+  table.table th,
+  table.table td {
+    text-align: center;
+  }
+
   .my-custom-scrollbar {
   position: relative;
   height: 350px;
   overflow: auto;
   }
+
   .table-wrapper-scroll-y {
   display: block;
-
-  }
-  .navbar-custom{
-    background-color: #64BAFF; 
-    font-size: 18px;
   }
 
-  .Titulo{
+  .tit-color{
     color:white;
   }
+
 </style>
 
 <header>
-<nav class="navbar navbar-dark fixed-top navbar-custom">
+<nav class="navbar navbar-dark  fixed-top navbar-custom">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><img id="logo" src="../imagenes/Logo-Urspace.png" width="95">SRCV SALAS</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
@@ -65,11 +67,11 @@ $row = $resultado->fetch_assoc();
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="vista_mapa_salas.php">Mapa</a>
           </li>
-           <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="vista_registro_salas.php">Registro de salas</a>
+            <a class="nav-link" aria-current="page" aria-current="page" href="vista_registro_salas.php">Registro de espacios</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="vista_reservaciones_canceladas.php">Historial de reservaciones canceladas</a>
@@ -80,16 +82,13 @@ $row = $resultado->fetch_assoc();
         </ul>
       </div>
     </div>
-  </div>
+  </div>  
 </nav>
 </header>
-<br>
-<br>
-<br>
+<br><br><br>
+<div class="mb-5"></div> <!--Salto de linea-->
 <h3 class="text-center">HISTORIAL DE RESERVACIONES CANCELADAS</h3>
-<br>
-<br>
-<div class="mb-3"></div>
+<div class="mb-5"></div>
 
 <div class="container">
   <div class="row">
@@ -115,7 +114,7 @@ $row = $resultado->fetch_assoc();
           <?php
               require_once("../Modelo/conexion2.php");
               $conexion = conect();
-              $query = mysqli_query ($conexion, "select * from srcv_reservaciones where ESTATUS='0'");
+              $query = mysqli_query ($conexion, "select * from srcv_reservaciones");
               while($filas  = mysqli_fetch_assoc($query)){
           ?>
           <tr>
