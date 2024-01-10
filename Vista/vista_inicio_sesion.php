@@ -70,7 +70,7 @@
             </div>
             <form action="../Controlador/controlador_inicio_sesion.php"  method="POST" class="row g-3 needs-validation" class="formulario" novalidate>
             <div class="col-12">
-              <label for="validationexampleInputEmail1" class="form-label">Correo Electronico</label>
+              <label for="validationexampleInputEmail1" class="form-label">Correo Electronico *</label>
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #007AB6" name="correoelectronico" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
@@ -79,7 +79,7 @@
               </div>
             </div>
             <div class="col-12">
-              <label for="validationCustom03" class="form-label">Contraseña</label>
+              <label for="validationCustom03" class="form-label">Contraseña *</label>
               <input type="password" class="form-control" style="border: 2px solid #007AB6" name="contrasena" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
               Campo obligatorio

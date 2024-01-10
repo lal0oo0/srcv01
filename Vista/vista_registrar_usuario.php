@@ -94,28 +94,28 @@
             <div class="mb-3"></div> 
       
 
-              <label for="nombre" class="form-label">Nombre</label>
+              <label for="nombre" class="form-label">Nombre *</label>
               <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="nombre" required>
               <div class="invalid-feedback">
               Campo obligatorio
               </div>
             </div>
             <div class="col-md-6">
-              <label for="ap" class="form-label">Apellido Paterno</label>
+              <label for="ap" class="form-label">Apellido Paterno *</label>
               <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="ap" required>
               <div class="invalid-feedback">
                 Campo obligatorio
               </div>
             </div>
             <div class="col-md-6">
-              <label for="am" class="form-label">Apellido Materno</label>
+              <label for="am" class="form-label">Apellido Materno *</label>
               <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="am" required>
               <div class="invalid-feedback">
               Campo obligatorio
               </div>
             </div>
             <div class="col-md-6">
-              <label for="email" class="form-label">Correo Electronico</label>
+              <label for="email" class="form-label">Correo Electronico *</label>
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
@@ -124,7 +124,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <label for="pass" class="form-label">Contraseña</label>
+              <label for="pass" class="form-label">Contraseña *</label>
               <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="pass" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
               Campo obligatorio
@@ -133,7 +133,7 @@
             </div>
             <div class="col-md-6">
             <select class="form-select" id="rol" name="rol" style="border: 2px solid #007AB6;" required>
-              <option selected value="" >Seleccione cual es su Rol </option>
+              <option selected value="" >Seleccione cual es su Rol *</option>
               <option value="1">Recepcion IT-Global</option>
               <option value="2">Recepcion UrSpace</option>
               <option value="3">Seguridad</option>
@@ -141,7 +141,7 @@
              </div>
              <div class="col-md-6">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
-              <option selected value="">Seleccione con la que mejor se identifique </option>
+              <option selected value="">Seleccione con la que mejor se identifique *</option>
               <option value="1">Nombre del mejor amig@</option>
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
