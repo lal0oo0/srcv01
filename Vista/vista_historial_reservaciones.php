@@ -209,8 +209,9 @@ $row = $resultado->fetch_assoc();
                               <input type="hidden" name="Total" value="<?= $filas['TOTAL'] ?>">
                             </div>
                             <div class="col">
-                              <label for="Enganche">Enganche *</label>
-                              <input type="number" class="form-control" name="Enganche" value="<?=$filas['ENGANCHE']?>" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
+                              <input type="hidden" name="enganche" value="<?= $filas['ENGANCHE'] ?>">
+                              <label for="Abono">Abono *</label>
+                              <input type="number" class="form-control" name="Abono" placeholder="Abono" aria-label="Abono" aria-describedby="basic-addon1" required>
                               <div class="invalid-feedback">
                                 Verifique los datos
                               </div>

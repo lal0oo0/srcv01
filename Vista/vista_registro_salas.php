@@ -8,7 +8,9 @@ $sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORRE
 $resultado = $conexion->query($sql);
 $row = $resultado->fetch_assoc();
 ?>
-
+<?php
+$mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +18,7 @@ $row = $resultado->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
     <title>Registros de espacios</title>
 </head>
 
@@ -135,7 +138,11 @@ $row = $resultado->fetch_assoc();
     </div>
   </div>
   <div class="mb-4"></div> <!--Salto de linea-->
-
+      <!-- ALERTA -->
+      <div id="mensaje">
+        <?php echo $mensaje; ?>
+      </div>
+      <div class="mb-3"></div>
   <div class="container">
     <div class="row">
       <div class="col">
@@ -160,8 +167,8 @@ $row = $resultado->fetch_assoc();
           <td><?php echo$filas ["NOMBRE"] ?></td>
           <td><?php echo$filas ["ESTATUS"] ?></td>
           <td>
-            <button type="button" class="btn btn-outline-dark btn-sm"><img src="../imagenes/activar.png" width="20px"></button>
-            <button type="button" class="btn btn-outline-dark btn-sm"><img src="../imagenes/cancelar.png" width="20px"></button>
+            <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>"><i class="fa fa-check" aria-hidden="true"></i></a>
+            <a href="../Controlador/controlador_desactivar_espacio.php?id=<?=$filas['ID_SALA']?>"><i class="fa fa-times" aria-hidden="true"></i></a>
           </td>
         </tr>
         <?php
