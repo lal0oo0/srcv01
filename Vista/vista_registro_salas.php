@@ -16,7 +16,7 @@ $row = $resultado->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <title>Registros de salas</title>
+    <title>Registros de espacios</title>
 </head>
 
 <style>
@@ -81,10 +81,13 @@ $row = $resultado->fetch_assoc();
             <a class="nav-link" aria-current="page" href="vista_mapa_salas.php">Mapa</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" aria-current="page" href="vista_registro_salas.php">Registro de salas</a>
+            <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
+            <a class="nav-link active" aria-current="page" aria-current="page" href="vista_registro_salas.php">Registro de espacios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="vista_reservaciones_canceladas.php">Historial de reservaciones canceladas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
@@ -101,14 +104,14 @@ $row = $resultado->fetch_assoc();
 <br>
 <br>
 <br>
-<h3 class="text-center">LISTA DE SALAS</h3> 
+<h3 class="text-center">LISTA DE ESPACIOS URSPACE</h3> 
 
 <!--Registrar nueva sala-->
 <div class="mb-5"></div> <!--Salto de linea-->
   <div class="container caja">
     <div class="row">
       <div class="col-md-12">
-      <label for="Nombre" class="col-form-label">Registro de una nueva sala</label>
+      <label for="Nombre" class="col-form-label">Registro de un nuevo espacio</label>
       </div>
     </div>
   </div>
@@ -118,10 +121,10 @@ $row = $resultado->fetch_assoc();
         <form action="../Controlador/controlador_registro_salas.php" class="formulario" method="post">
           <div class="row g-3 align-items-center">
             <div class="col-md-2">
-            <label for="Nombre" class="col-form-label">Nombre de la sala:</label>
+            <label for="Nombre" class="col-form-label">Nombre del espacio:</label>
             </div>
             <div class="col-md-6">
-            <input type="text" class="form-control" name="Nombre" placeholder="Ingresa el nombre de la sala" aria-label="Nombre" aria-describedby="basic-addon1" required>
+            <input type="text" class="form-control" name="Nombre" placeholder="Ingresa el nombre del espacio" aria-label="Nombre" aria-describedby="basic-addon1" required>
             </div>
             <div class="col-md-1">
             <button type="submit" class="btn btn-danger">AGREGAR</button>
@@ -141,7 +144,7 @@ $row = $resultado->fetch_assoc();
         <thead class="table-dark">
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Nombre de la Sala</th>
+            <th scope="col">Nombre del espacio</th>
             <th scope="col">Estatus</th>
             <th scope="col">Acciones</th>
           </tr>
