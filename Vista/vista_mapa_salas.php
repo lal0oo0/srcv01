@@ -87,10 +87,13 @@ $row = $resultado->fetch_assoc();
               <a class="nav-link active" aria-current="page" href="vista_mapa_salas.php">Mapa de salas</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" aria-current="page" href="vista_registro_salas.php">Registro de salas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
+              <a class="nav-link" aria-current="page" href="vista_reservaciones_canceladas.php">Historial de reservaciones canceladas</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
