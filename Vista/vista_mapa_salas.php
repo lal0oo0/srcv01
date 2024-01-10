@@ -73,7 +73,7 @@ $row = $resultado->fetch_assoc();
 <header>
   <nav class="navbar navbar-dark  fixed-top navbar-custom">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img id="logo" src="../imagenes/Logo-Urspace.png" width="95">SRCV SALAS</a>
+      <a class="navbar-brand" href="#"><img id="logo" src="../imagenes/Logo-Urspace.png" width="95">SRCV URSPACE</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -84,13 +84,13 @@ $row = $resultado->fetch_assoc();
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="vista_mapa_salas.php">Mapa de salas</a>
+              <a class="nav-link active" aria-current="page" href="vista_mapa_salas.php">Mapa</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="vista_registro_salas.php">Registro de salas</a>
+              <a class="nav-link" aria-current="page" href="vista_registro_salas.php">Registro de espacios</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="vista_reservaciones_canceladas.php">Historial de reservaciones canceladas</a>
@@ -106,7 +106,7 @@ $row = $resultado->fetch_assoc();
 </header>
 
 <br><br><br><br><br>
-<h3 class="text-center">LISTA DE SALAS</h3>
+<h3 class="text-center">MAPA DE ESPACIOS</h3>
 
 <div class="outer-container text-center">
   <div class="inner-container">
@@ -135,7 +135,7 @@ $row = $resultado->fetch_assoc();
       <div class="modal-body">
 
     <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" method="post" novalidate>
-      <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
+      <input type="hidden" name="nombre_sala" id="nombre_sala" value="<?= $filas['NOMBRE'] ?>">
       <div class="col">
        <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
        <div class="invalid-feedback">

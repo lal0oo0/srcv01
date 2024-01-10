@@ -75,10 +75,13 @@ $row = $resultado->fetch_assoc();
             <a class="nav-link" aria-current="page" href="vista_mapa_salas.php">Mapa</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="vista_registro_salas.php">Registro de salas</a>
+            <a class="nav-link active" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
+            <a class="nav-link" aria-current="page" href="vista_registro_salas.php">Registro de espacios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="vista_reservaciones_canceladas.php">Historial de reservaciones canceladas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
@@ -93,8 +96,7 @@ $row = $resultado->fetch_assoc();
 <br>
 <br>
 <h3 class="text-center">HISTORIAL DE RESERVACIONES</h3>
-<br>
-<br>
+<div class="mb-4"></div> <!--Salto de linea-->
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-10" id="mensaje">
@@ -114,7 +116,7 @@ $row = $resultado->fetch_assoc();
               <th scope="col">Nombre del cliente</th>
               <th scope="col">Apellido paterno</th>
               <th scope="col">Apellido Materno</th>
-              <th scope="col">Sala</th>
+              <th scope="col">Espacio</th>
               <th scope="col">Correo electrónico</th>
               <th scope="col">Fecha de entrada</th>
               <th scope="col">Fecha de salida</th>
@@ -136,7 +138,7 @@ $row = $resultado->fetch_assoc();
               <td><?php echo$filas ["NOMBRE_CLIENTE"] ?></td>
               <td><?php echo$filas ["APELLIDO_PATERNO"] ?></td>
               <td><?php echo$filas ["APELLIDO_MATERNO"] ?></td>
-              <td><?php echo$filas ["ID_SALA"] ?></td>
+              <td><?php echo$filas ["NOMBRE"] ?></td>
               <td><?php echo$filas ["CORREO_ELECTRONICO"] ?></td>
               <td><?php echo$filas ["FECHA_ENTRADA"] ?></td>
               <td><?php echo$filas ["FECHA_SALIDA"] ?></td>
