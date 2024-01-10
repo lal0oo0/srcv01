@@ -131,7 +131,7 @@ $row = $resultado->fetch_assoc();
           <?php
               require_once("../Modelo/conexion2.php");
               $conexion = conect();
-              $query = mysqli_query ($conexion, "select * from srcv_reservaciones where ESTATUS='1'");
+              $query = mysqli_query ($conexion, "SELECT * FROM srcv_reservaciones WHERE ESTATUS='1' AND USO='0' AND FECHA_ENTRADA = CURDATE() OR FECHA_SALIDA = CURDATE()");
               while($filas  = mysqli_fetch_assoc($query)){
           ?>
           <tr>
@@ -230,7 +230,7 @@ $row = $resultado->fetch_assoc();
                   </div>
                   <!--Boton para eliminar-->
                   <a href="../Controlador/controlador_eliminar_reservacion.php?id=<?=$filas ['ID_RESERVACION']?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                  <a href="#"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                  <a href="../Controlador/controlador_uso_reservacion.php?id=<?=$filas['ID_RESERVACION']?>"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
                 
               </td>
           </tr>
