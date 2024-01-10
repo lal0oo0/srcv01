@@ -21,8 +21,8 @@ $idsala = $_POST['id_sala'];
 
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$consulta = "INSERT INTO srcv_reservaciones (ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, TOTAL, ENGANCHE, LIQUIDACION, USO) 
-VALUES ('$idsala', '$nombre', '$apellidop', '$apellidom', '$correo', '$fechaini', '$fechafin', '$horaini, '$horafin', '$total', '$enganche', '$liquidacion', '0')";
+$consulta = "INSERT INTO srcv_reservaciones (ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, TOTAL, ENGANCHE, LIQUIDACION) 
+VALUES ('$idsala', '$nombre', '$apellidop', '$apellidom', '$correo', '$fechaini', '$fechafin', '$horaini, '$horafin', '$total', '$enganche', '$liquidacion')";
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $consulta); 
 
