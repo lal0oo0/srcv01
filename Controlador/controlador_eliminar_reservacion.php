@@ -7,7 +7,7 @@ $conexion = conect();
     $id=$_GET["id"];
     $sql = "UPDATE srcv_reservaciones SET ESTATUS='0' where ID_RESERVACION='$id'";
     $resultado=mysqli_query($conexion,$sql);
-
+/*cambiar alertas*/
     if ($resultado) {
         echo '<div>Registro eliminado correctamente</div>';
     } else {

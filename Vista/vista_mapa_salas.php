@@ -137,7 +137,7 @@ $row = $resultado->fetch_assoc();
     <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" method="post" novalidate>
       <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
       <div class="col">
-       <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
+       <input type="text" class="form-control" name="Nombre" placeholder="Nombre *" aria-label="Nombre" aria-describedby="basic-addon1" required>
        <div class="invalid-feedback">
         Verifique los datos
        </div>
@@ -170,15 +170,15 @@ $row = $resultado->fetch_assoc();
 
       <div class="row">
         <div class="col">
-          <label for="Fecha inicio">Fecha de inicio</label>
-          <input type="date" class="form-control" name="Fechainicio" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1" required>
+          <label for="Fecha inicio">Fecha de inicio *</label>
+          <input type="date" class="form-control" name="Fechainicio" placeholder="Fecha de inicio " aria-label="Fecha  de inicio" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
           Verifique los datos
           </div>
         </div>
         <div class="col">
-          <label for="Fecha finalizacion">Fecha de finalizacion</label>
-          <input type="date" class="form-control" name="Fechafinalizacion" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" required>
+          <label for="Fecha finalizacion">Fecha de finalizacion *</label>
+          <input type="date" class="form-control" name="Fechafinalizacion" placeholder="Fecha de finalizacion " aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
           Verifique los datos
           </div>
@@ -188,15 +188,15 @@ $row = $resultado->fetch_assoc();
 
       <div class="row">
         <div class="col">
-          <label for="Hora inicio">Hora de inicio</label>
-          <input type="time" class="form-control" name="Horainicio" placeholder="Hora de inicio" aria-label="Hora de inicio" aria-describedby="basic-addon1" required>
+          <label for="Hora inicio">Hora de inicio *</label>
+          <input type="time" class="form-control" name="Horainicio" placeholder="Hora de inicio " aria-label="Hora de inicio" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
           Verifique los datos
           </div>
         </div>
         <div class="col">
-          <label for="Hora finalizacion">Hora de finalización</label>
-          <input type="time" class="form-control" name="Horafinalizacion" placeholder="Hora de finalizacion" aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
+          <label for="Hora finalizacion">Hora de finalización *</label>
+          <input type="time" class="form-control" name="Horafinalizacion" placeholder="Hora de finalizacion " aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
           Verifique los datos
           </div>   
@@ -221,13 +221,13 @@ $row = $resultado->fetch_assoc();
 
       <div class="row">
         <div class="col">
-          <input type="number" class="form-control" name="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" required>
+          <input type="number" class="form-control" name="Total" placeholder="Total *" aria-label="Total" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
             Verifique los datos
           </div>
         </div>
         <div class="col">
-          <input type="number" class="form-control" name="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
+          <input type="number" class="form-control" name="Enganche" placeholder="Enganche *" aria-label="Enganche" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
             Verifique los datos
           </div>
