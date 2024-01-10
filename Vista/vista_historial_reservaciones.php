@@ -170,14 +170,14 @@ $row = $resultado->fetch_assoc();
                               <input type="hidden" name="id" value="<?= $filas['ID_RESERVACION'] ?>">
                             <div class="row">
                               <div class="col">
-                                <label for="Fecha inicio">Fecha de inicio</label>
+                                <label for="Fecha inicio">Fecha de inicio *</label>
                                 <input type="date" class="form-control" name="Fechainicio" value="<?=$filas['FECHA_ENTRADA']?>" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1" required>
                                 <div class="invalid-feedback">
                                 Verifique los datos
                                 </div>
                               </div>
                               <div class="col">
-                                <label for="Fecha finalizacion">Fecha de finalizacion</label>
+                                <label for="Fecha finalizacion">Fecha de finalizacion *</label>
                                 <input type="date" class="form-control" name="Fechafinalizacion" value="<?=$filas['FECHA_SALIDA']?>" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" required>
                                 <div class="invalid-feedback">
                                 Verifique los datos
@@ -188,14 +188,14 @@ $row = $resultado->fetch_assoc();
 
                             <div class="row">
                               <div class="col">
-                                <label for="Hora inicio">Hora de inicio</label>
+                                <label for="Hora inicio">Hora de inicio *</label>
                                 <input type="time" class="form-control" name="Horainicio" value="<?=$filas['HORA_ENTRADA']?>" placeholder="Hora de inicio" aria-label="Hora de inicio" aria-describedby="basic-addon1" required>
                                 <div class="invalid-feedback">
                                 Verifique los datos
                                 </div>
                               </div>
                               <div class="col">
-                                <label for="Hora finalizacion">Hora de finalización</label>
+                                <label for="Hora finalizacion">Hora de finalización *</label>
                                 <input type="time" class="form-control" name="Horafinalizacion" value="<?=$filas['HORA_SALIDA']?>"placeholder="Hora de finalizacion" aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
                                 <div class="invalid-feedback">
                                 Verifique los datos
@@ -209,8 +209,7 @@ $row = $resultado->fetch_assoc();
                               <input type="hidden" name="Total" value="<?= $filas['TOTAL'] ?>">
                             </div>
                             <div class="col">
-                              <label for="Enganche">Enganche
-                              </label>
+                              <label for="Enganche">Enganche *</label>
                               <input type="number" class="form-control" name="Enganche" value="<?=$filas['ENGANCHE']?>" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
                               <div class="invalid-feedback">
                                 Verifique los datos
@@ -254,6 +253,7 @@ $row = $resultado->fetch_assoc();
 
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../js/validaciones_reservaciones.js"></script>
 
 <script>
 
@@ -262,25 +262,7 @@ function Reservacion(idreservacion){
     <?php $id_reservacion ?>=idreservacion;
     }
 
-// Script para validaciones
-(() => {
-  'use strict'
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
 
 </script>
 

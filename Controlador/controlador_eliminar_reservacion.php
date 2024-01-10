@@ -7,6 +7,7 @@ $conexion = conect();
     $id=$_GET["id"];
     $sql = "UPDATE srcv_reservaciones SET ESTATUS='0' where ID_RESERVACION='$id'";
     $resultado=mysqli_query($conexion,$sql);
+
 /*cambiar alertas*/
     if ($resultado) {
     // Éxito: alerta de Bootstrap éxito
@@ -16,7 +17,7 @@ $conexion = conect();
   </div>';
     } else {
     // Error: alerta de Bootstrap error con detalles
-    $mensaje = '<div class="alert alert-danger" role="alert">Error en la consulta: ' . mysqli_error($conexion) . '</div>';
+    $mensaje = '<div class="alert alert-danger" role="alert">Error al eliminar su registro' . mysqli_error($conexion) . '</div>';
     }
 mysqli_close($conexion);
 

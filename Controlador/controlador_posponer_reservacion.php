@@ -12,7 +12,7 @@ $variable3 = $_POST['Horainicio'];
 $variable4 = $_POST['Horafinalizacion'];
 $variable5 = $_POST['Total'];
 $variable6 = $_POST['Enganche'];
-$variable7 = $variable5-$variable6;
+$variable7 = intval($variable5)-intval($variable6);
 
 
     $consulta="UPDATE srcv_reservaciones SET FECHA_ENTRADA='$variable1', FECHA_SALIDA='$variable2', HORA_ENTRADA='$variable3', HORA_SALIDA='$variable4', ENGANCHE='$variable6', LIQUIDACION='$variable7' WHERE ID_RESERVACION='$variable'";
