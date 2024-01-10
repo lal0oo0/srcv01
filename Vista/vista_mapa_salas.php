@@ -146,13 +146,13 @@ $row = $resultado->fetch_assoc();
 
       <div class="row">
         <div class="col">
-          <input type="text" class="form-control" name="Apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
+          <input type="text" class="form-control" name="Apellidopaterno" placeholder="Apellido paterno *" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
             Verifique los datos
           </div>
         </div>
         <div class="col">
-          <input type="text" class="form-control" name="Apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
+          <input type="text" class="form-control" name="Apellidomaterno" placeholder="Apellido materno *" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
           <div class="invalid-feedback">
             Verifique los datos
           </div>
@@ -161,7 +161,7 @@ $row = $resultado->fetch_assoc();
       <div class="mb-2"></div> <!--Salto de linea-->
 
       <div class="col">
-       <input type="email" class="form-control" name="Correo" placeholder="Correo electronico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
+       <input type="email" class="form-control" name="Correo" placeholder="Correo electronico *" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
        <div class="invalid-feedback">
         Verifique los datos
        </div>
@@ -202,7 +202,22 @@ $row = $resultado->fetch_assoc();
           </div>   
         </div>     
       </div>
-      <div class="mb-3"></div> <!--Salto de linea-->
+      <div class="mb-2"></div> <!--Salto de linea-->
+
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        <label for="personas">Numero de personas:</label>
+        <input type="number" class="form-control" name="Personas" aria-label="personas" aria-describedby="basic-addon1">
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+
+      <div class="col">
+        <label for="se">Servicios extra:</label>
+        <input type="text" class="form-control" name="Servicios" placeholder="" aria-label="servicios" aria-describedby="basic-addon1">
+      </div>
+      <div class="mb-4"></div> <!--Salto de linea-->
 
       <div class="row">
         <div class="col">

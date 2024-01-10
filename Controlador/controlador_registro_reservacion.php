@@ -13,6 +13,8 @@ $fechaini = $_POST['Fechainicio'];
 $fechafin = $_POST['Fechafinalizacion'];
 $horaini = $_POST['Horainicio'];
 $horafin = $_POST['Horafinalizacion'];
+$personas = $_POST['Personas'];
+$servicios = $_POST['Servicios'];
 $total = $_POST['Total'];
 $enganche = $_POST['Enganche'];
 $liquidacion = $total-$enganche;
@@ -21,8 +23,8 @@ $idsala = $_POST['id_sala'];
 
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$consulta = "INSERT INTO srcv_reservaciones (ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, TOTAL, ENGANCHE, LIQUIDACION) 
-VALUES ('$idsala', '$nombre', '$apellidop', '$apellidom', '$correo', '$fechaini', '$fechafin', '$horaini, '$horafin', '$total', '$enganche', '$liquidacion')";
+$consulta = "INSERT INTO srcv_reservaciones (ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE, LIQUIDACION) 
+VALUES ('$idsala', '$nombre', '$apellidop', '$apellidom', '$correo', '$fechaini', '$fechafin', '$horaini, '$horafin', '$personas', '$servicios', '$total', '$enganche', '$liquidacion')";
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $consulta); 
 
