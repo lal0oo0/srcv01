@@ -4,7 +4,6 @@ session_start();
 ?>
 <?php
   $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
-  $mensaje2 = isset($_GET['mensaje2']) ? urldecode($_GET['mensaje2']) : "";
 ?>
 
 
@@ -92,11 +91,6 @@ session_start();
              <?php echo $mensaje; ?>
             </div>
             <div class="mb-3"></div> 
-             <!-- ALERTA -->
-            <div id="mensaje">
-             <?php echo $mensaje2; ?>
-            </div>
-            <div class="mb-3"></div> 
 
 <div class="container">
   <div class="row">
@@ -137,21 +131,21 @@ session_start();
               <label for="nombre" class="form-label">Nombre *</label>
               <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="nombre" required>
               <div class="invalid-feedback">
-              Rellene este campo, por favor
+              Ingrese informacion valida.
               </div>
             </div>
             <div class="col-md-6">
               <label for="ap" class="form-label">Apellido Paterno *</label>
               <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="ap" required>
               <div class="invalid-feedback">
-                Rellene este campo, por favor
+              Ingrese informacion valida.
               </div>
             </div>
             <div class="col-md-6">
               <label for="am" class="form-label">Apellido Materno *</label>
               <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="am" required>
               <div class="invalid-feedback">
-              Rellene este campo, por favor
+              Ingrese informacion valida.
               </div>
             </div>
             <div class="col-md-6">
@@ -159,7 +153,7 @@ session_start();
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #1E90FF;" name="email" id="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
-                Rellene este campo, por favor
+                Ingrese informacion valida.
                 </div>
               </div>
             </div>
@@ -219,6 +213,8 @@ session_start();
         <th scope="col">Apellido Materno</th>
         <th scope="col">Correo Electronico</th>
         <th scope="col">Rol</th>
+        <th scope="col">Estatus</th>
+        <th scope="col">Acciones</th>
       </tr>
     </thead>
     <?php
@@ -234,6 +230,11 @@ session_start();
             <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
             <td><?php echo $filas['CORREO_ELECTRONICO'] ?></td>
             <td><?php echo $filas['ROL'] ?></td>
+            <td><?php echo $filas['ESTATUS'] ?></td>
+            <td>
+            <a href="#" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
+            <a href="#"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
+            </td>
         </tr>
         <?php
         };
@@ -257,6 +258,26 @@ session_start();
       formulario.reset();
     }
 
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
 
 </script>
 </body>
