@@ -13,6 +13,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
     <title>Agregar Usuarios</title>
 </head>
 
@@ -232,7 +233,7 @@ session_start();
             <td><?php echo $filas['ROL'] ?></td>
             <td><?php echo $filas['ESTATUS'] ?></td>
             <td>
-            <a href="#" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
+            <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
             <a href="#"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
             </td>
         </tr>
