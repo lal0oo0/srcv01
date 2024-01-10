@@ -131,7 +131,7 @@ $row = $resultado->fetch_assoc();
           <?php
               require_once("../Modelo/conexion2.php");
               $conexion = conect();
-              $query = mysqli_query ($conexion, "SELECT * FROM srcv_reservaciones WHERE ESTATUS='1' AND USO='0' AND FECHA_ENTRADA >= CURDATE() OR FECHA_SALIDA = CURDATE()");
+              $query = mysqli_query ($conexion, "SELECT * FROM srcv_reservaciones WHERE ESTATUS='1' AND USO='0' AND FECHA_ENTRADA >= CURDATE() OR ESTATUS='1' AND USO='0' AND FECHA_SALIDA = CURDATE()");
               while($filas  = mysqli_fetch_assoc($query)){
           ?>
           <tr>

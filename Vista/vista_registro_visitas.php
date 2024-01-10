@@ -154,7 +154,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
                 <div class="row">
                   <div class="col">
-                    <label for="he" class="form-label">Hora de entrada</label>
+                    <label for="he" class="form-label">Hora de entrada *</label>
                     <input type="time" class="form-control" id="he" name="he" value="<?= $hora_actual ?>" required>
                     <!--<div class="invalid-feedback">
                  Verifique los datos
@@ -162,7 +162,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   </div>
 
                   <div class="col">
-                    <label for="fecha" class="form-label">Fecha</label>
+                    <label for="fecha" class="form-label">Fecha *</label>
                     <input type="date" class="form-control" id="fecha" name="fecha" disable="" value="<?= $fecha_actual ?>" required>
                     <!--<div class="invalid-feedback">
                  Verifique los datos
@@ -172,7 +172,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
                 <br>
                 <div class="col">
-                  <label for="nombre" class="form-label">Nombre</label>
+                  <label for="nombre" class="form-label">Nombre *</label>
                   <input type="text" class="form-control" id="nombre" name="nombre" required>
                   <div class="invalid-feedback">
                     Verifique los datos
@@ -182,7 +182,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <div class="row">
                   <div class="col">
                     <div class="mb-3"></div> <!-- Salto de línea -->
-                    <label for="ap" class="form-label">Apellido Paterno</label>
+                    <label for="ap" class="form-label">Apellido Paterno *</label>
                     <input type="text" class="form-control" id="ap" name="ap" required>
                     <div class="invalid-feedback">
                       Verifique los datos
@@ -191,7 +191,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
                   <div class="col">
                     <div class="mb-3"></div> <!-- Salto de línea -->
-                    <label for="am" class="form-label">Apellido Materno</label>
+                    <label for="am" class="form-label">Apellido Materno *</label>
                     <input type="text" class="form-control" id="am" name="am" required>
                     <div class="invalid-feedback">
                       Verifique los datos
@@ -202,7 +202,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <div class="row">
                   <div class="col">
                     <div class="mb-3"></div> <!-- Salto de línea -->
-                    <label class="form-label" for="empresa">Empresa</label><br>
+                    <label class="form-label" for="empresa">Empresa *</label><br>
                     <select class="form-select mr-sm-2" id="empresa" name="empresa" required>
                       <div class="invalid-feedback">
                         Verifique los datos
@@ -224,7 +224,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
                   <div class="col">
                     <div class="mb-3"></div> <!-- Salto de línea -->
-                    <label class="form-label" for="asunto">Asunto</label><br>
+                    <label class="form-label" for="asunto">Asunto *</label><br>
                     <select class="form-select mr-sm-2" id="asunto" name="asunto" required>
                       <div class="invalid-feedback">
                         Verifique los datos
@@ -354,7 +354,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   </div>
                 </div>
                   <div class="col">
-                    <label for="he" class="form-label">Hora de Salida</label>
+                    <label for="he" class="form-label">Hora de Salida *</label>
                     <input type="time" class="form-control" id="hs" name="hs" value="<?= $hora_actual ?>" required>
                     <div class="invalid-feedback">
                      Verifique los datos
