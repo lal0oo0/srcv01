@@ -317,8 +317,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                             
 
                             <!--Formulario de edicion-->
-                            <form id="myForm"  
+                            <form id="myForm2"  
                             method="post" 
+                            onsubmit="return validar2(event);"
                             action="../Controlador/controlador_editar_visitas.php"
                             class="row g-3 needs-validation" novalidate>
 
@@ -326,44 +327,21 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <div class="mb-3"></div> <!-- Salto de línea -->
                 <input type="hidden" name="id" id="id" value="<?= $filas['ID_VISITA'] ?>">
                 <input type="hidden" name="he" id="he" value="<?= $filas['HORA_ENTRADA']?>" >
-                <div class="col">
-                  <label for="nombre" class="form-label">Nombre</label>
-                  <input type="text" class="form-control" id="nombre" name="nombre" value=" <?= $filas['NOMBRE'] ?> " required>
-                  <div class="invalid-feedback">
-                    Verifique los datos
-                  </div>
-                </div>
-
                 <div class="row">
-                  <div class="col">
-                    <div class="mb-3"></div> <!-- Salto de línea -->
-                    <label for="ap" class="form-label">Apellido Paterno</label>
-                    <input type="text" class="form-control" id="ap" name="ap" value="<?=$filas['APELLIDO_PATERNO']?>" required>
-                    <div class="invalid-feedback">
-                      Verifique los datos
-                    </div>
-                  </div>
-
-                  <div class="col">
-                    <div class="mb-3"></div> <!-- Salto de línea -->
-                    <label for="am" class="form-label">Apellido Materno</label>
-                    <input type="text" class="form-control" id="am" name="am" value="<?=$filas['APELLIDO_MATERNO']?>" required>
-                    <div class="invalid-feedback">
-                      Verifique los datos
-                    </div>
-                  </div>
-                </div>
-                  <div class="col">
-                    <label for="he" class="form-label">Hora de Salida *</label>
+                  <div class="col"></div>
+                  <div class="col-md-6">
+                    <label for="hs" class="form-label">Hora de Salida *</label>
                     <input type="time" class="form-control" id="hs" name="hs" value="<?= $hora_actual ?>" required>
                     <div class="invalid-feedback">
                      Verifique los datos
                     </div>
                   </div>
+                  <div class="col"></div>
+                </div>
                 <!--Botones para cancelar o enviar fromulario del modal-->
                 <div class="modal-footer">
-                  <button type="button" onclick="limpiar()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" name="Actualizar" id="Actualizar" class="btn btn-primary" onclick="validar()" value="Guardar">Actualizar</button>
+                  <button type="button" onclick="limpiar2()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" name="Actualizar" id="Actualizar" class="btn btn-primary">Actualizar</button>
                 </div>
                 <br><br><br><br>
               </form>
@@ -395,10 +373,23 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <script src="../js/validar_formulario.js" ></script>
 
   <script>
+  // Validación del formulario de edición
+function validar2() {
+  // Validación de horas de entrada y salida
+  var selectedTimeValue = document.getElementById('hs').value;
+  var currentTime = new Date();
+  var selectedTime = new Date('1970-01-01 ' + selectedTimeValue);
+
+  if (selectedTime !== 0 && selectedTime < currentTime) {
+    alert('Hora de salida no puede ser anterior a la hora de entrada');
+    return false;
+  }
+
+  return true;
+}
 
     function Visita(idVisita){
     document.getElementById('Visita_' + idVisita).value = idVisita;
-    <?php $id_visita ?>=idVisita;
     }
 
     

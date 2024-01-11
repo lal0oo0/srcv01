@@ -1,5 +1,6 @@
-function validar() {
+function validar(event) {
     // Validación de fecha
+
     var selectedDateValue = document.getElementById('fecha').value;
 
     if (!selectedDateValue) {
@@ -41,10 +42,47 @@ function validar() {
       }
     });
   };
+
+/* Formulario de edicion
+function validar2(event) {
+  console.log('Función validar2 iniciada');  // Nueva línea
+
+  // Validación de horas de entrada y salida
+  var selectedTimeValue = document.getElementById('hs').value;
+  var selectedTimeValue2 = document.getElementById('he').value;
+
+  console.log('selectedTimeValue: ' + selectedTimeValue);
+  console.log('selectedTimeValue2: ' + selectedTimeValue2);
+
+  var currentTime = new Date();
+  var selectedTime = new Date('1970-01-01 ' + selectedTimeValue);
+  var selectedTime2 = new Date('1970-01-01 ' + selectedTimeValue2);
+
+  console.log('currentTime: ' + currentTime);
+  console.log('selectedTime: ' + selectedTime);
+  console.log('selectedTime2: ' + selectedTime2);
+
+  // Resto de la validación...
+
+  console.log('Validación de horas finalizada');
+
+  return true;
+}*/
+
+
+
+
   
-  //Limpiar fromulario
+  //Limpiar fromulario 1
   function limpiar() {
     var formulario = document.getElementById("myForm");
     // Resetear el formulario
     formulario.reset();
   }
+
+    //Limpiar fromulario 2
+    function limpiar2() {
+      var formulario = document.getElementById("myForm2");
+      // Resetear el formulario
+      formulario.reset();
+    }

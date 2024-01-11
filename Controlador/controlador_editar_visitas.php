@@ -22,8 +22,7 @@ Para ejecutar la consulta
 $ejecutar = mysqli_query($conexion, $visita); */
 
 
-  $consulta="UPDATE srcv_visitas SET NOMBRE='$nombre', APELLIDO_PATERNO='$apellidop',
-  APELLIDO_MATERNO='$apellidom',HORA_SALIDA='$hora_salida',USUARIO_MODIFICACION='$usuariom'
+  $consulta="UPDATE srcv_visitas SET HORA_SALIDA='$hora_salida',USUARIO_MODIFICACION='$usuariom'
   WHERE ID_VISITA='$id'";
   $sql=mysqli_query($conexion, $consulta);
 
