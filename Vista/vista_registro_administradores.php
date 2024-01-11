@@ -235,6 +235,7 @@ session_start();
             <td>
             <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
             <a href="#"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
+            <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>"><i class="fa fa-check" aria-hidden="true"></i></a>
             </td>
         </tr>
         <?php
