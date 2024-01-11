@@ -75,13 +75,13 @@ $row = $resultado->fetch_assoc();
             <a class="nav-link" aria-current="page" href="vista_mapa_salas.php">Mapa</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
+            <a class="nav-link active" aria-current="page" href="vista_historial_reservaciones.php">Reservaciones</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="vista_registro_salas.php">Registro de espacios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="vista_reservaciones_canceladas.php">Historial de reservaciones canceladas</a>
+            <a class="nav-link" aria-current="page" href="vista_reservaciones_canceladas.php">Historial de reservaciones</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
@@ -131,7 +131,7 @@ $row = $resultado->fetch_assoc();
           <?php
               require_once("../Modelo/conexion2.php");
               $conexion = conect();
-              $query = mysqli_query ($conexion, "SELECT * FROM srcv_reservaciones WHERE ESTATUS='1' AND USO='0' AND FECHA_ENTRADA >= CURDATE() OR ESTATUS='1' AND USO='0' AND FECHA_SALIDA = CURDATE()");
+              $query = mysqli_query ($conexion, "SELECT * FROM srcv_reservaciones WHERE ESTATUS='1' AND USO='0'");
               while($filas  = mysqli_fetch_assoc($query)){
           ?>
           <tr>
