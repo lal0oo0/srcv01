@@ -11,7 +11,7 @@ $conexion = conect();
 $id = $_GET['id'];
 
 
-  $borrar="UPDATE srcv_visitas SET USUARIO_MODIFICACION='$usuariom', FECHA_MODIFICACION='NOW', ESTATUS='0' WHERE ID_VISITA='$id'";
+  $borrar="DELETE FROM srcv_visitas WHERE ID_VISITA='$id'";
   $sql=mysqli_query($conexion, $borrar);
 
 
