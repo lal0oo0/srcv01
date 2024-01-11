@@ -165,7 +165,14 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
         <tr>
           <td><?php echo$filas ["ID_SALA"] ?></td>
           <td><?php echo$filas ["NOMBRE"] ?></td>
-          <td><?php echo$filas ["ESTATUS"] ?></td>
+          <td><?php
+          if($filas["ESTATUS"]==='0'){
+          $filas["ESTATUS"]='Inactivo';
+        }elseif($filas['ESTATUS']==='1'){
+          $filas["ESTATUS"]='Activo';
+        }
+        echo$filas["ESTATUS"];
+          ?></td>
           <td>
             <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>"><i class="fa fa-check" aria-hidden="true"></i></a>
             <a href="../Controlador/controlador_desactivar_espacio.php?id=<?=$filas['ID_SALA']?>"><i class="fa fa-times" aria-hidden="true"></i></a>
