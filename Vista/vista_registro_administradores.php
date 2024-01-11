@@ -231,11 +231,18 @@ session_start();
             <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
             <td><?php echo $filas['CORREO_ELECTRONICO'] ?></td>
             <td><?php echo $filas['ROL'] ?></td>
-            <td><?php echo $filas['ESTATUS'] ?></td>
+            <td><?php
+          if($filas["ESTATUS"]==='0'){
+            $filas["ESTATUS"]='Inactivo';
+          }elseif($filas['ESTATUS']==='1'){
+            $filas["ESTATUS"]='Activo';
+          }
+          echo$filas["ESTATUS"];
+            ?></td>
             <td>
             <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
-            <a href="#"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
-            <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>"><i class="fa fa-check" aria-hidden="true"></i></a>
+            <a href="../Controlador/controlador_eliminar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
+            <a href="../Controlador/controlador_activar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>"><i class="fa fa-check" aria-hidden="true"></i></a>
             </td>
         </tr>
         <?php
