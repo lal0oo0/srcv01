@@ -117,7 +117,7 @@ session_start();
       <div class="card-body">
             
             <!--Faltaba el method POST -->
-            <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation" id="myForm" novalidate>
+            <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation" name="myForm" id="myForm" novalidate>
             
             <div class="col-md-12">
               <h6></h6>
@@ -152,7 +152,7 @@ session_start();
             <div class="col-md-6">
               <label for="email" class="form-label">Correo Electronico *</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" style="border: 2px solid #1E90FF;" name="email" id="email" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" style="border: 2px solid #1E90FF;" name="email" id="email" aria-describedby="emailHelp" required autocomplete="username">
                 <div class="invalid-feedback">
                 Ingrese informacion valida.
                 </div>
@@ -160,7 +160,7 @@ session_start();
             </div>
             <div class="col-md-6">
               <label for="pass" class="form-label">Contraseña *</label>
-              <input type="password" class="form-control" style="border: 2px solid #1E90FF;" name="pass" id="pass" aria-describedby="passwordHelp" required>
+              <input type="password" class="form-control" style="border: 2px solid #1E90FF;" name="pass" id="pass" aria-describedby="passwordHelp" required autocomplete="current-password">
               <div class="invalid-feedback">
                 Su contraseña debe de tener entre 8 y 16 caracteres, contener letras y numeros, y no debe contener espacios.
               </div>
@@ -184,7 +184,7 @@ session_start();
              <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="respuesta" name="respuesta" required>
              </div>
             <div class="col-12">
-              <input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></button>
+              <input type="submit" value="Registrarse" class="btn btn-primary" onclick="contra(document.myForm.pass)" name="Registrar"></button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
             </div>
             </form>
@@ -258,6 +258,7 @@ session_start();
 
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<!--script src="..js/validar_contrasena.js"></script-->
 <script>
 
   //Limpiar fromulario
@@ -287,6 +288,28 @@ session_start();
       }, false)
     })
 })()
+
+function validateForm() {
+  // Obtener el valor del campo de contraseña
+  var password = document.getElementById("pass").value;
+
+  // Patrón de validación (puedes ajustarlo según tus criterios)
+  var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
+
+  // Verificar si la contraseña cumple con el patrón
+  if (!passwordPattern.test(password)) {
+    // Mostrar mensaje de error
+    alert("La contraseña debe contener al menos 8 caracteres, incluyendo al menos un número, una letra minúscula y una letra mayúscula.");
+    // Evitar que se envíe el formulario
+    return false;
+  }
+
+  // Limpiar el mensaje de error si la contraseña es válida
+  document.getElementById("passwordError").innerHTML = "";
+
+  // Permitir el envío del formulario
+  return true;
+}
 
 </script>
 </body>
