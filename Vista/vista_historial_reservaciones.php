@@ -104,7 +104,7 @@ $row = $resultado->fetch_assoc();
   </div>
   <div class="col md-1"></div>
 </div>
-<div class="mb-3"></div>
+<div class="mb-3"></div><!--Salto de linea-->
 
 <div class="container">
   <div class="row">
