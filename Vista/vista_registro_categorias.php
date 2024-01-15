@@ -108,7 +108,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <div class="container caja2">
   <div class="row">
     <div class="col-md-12">
-      <form action="../Controlador/controlador_registro_categoria.php" class="formulario" method="post">
+      <form action="../Controlador/controlador_registro_categoria.php" class="formulario needs-validation" method="post" novalidate>
         <div class="row g-3 align-items-center">
           <div class="col-md-2">
           <label for="Nombre" class="col-form-label">Nombre de la categoría:</label>
@@ -117,8 +117,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <input type="text" class="form-control" name="Nombre" placeholder="Ingresa el nombre de la categoría" aria-label="Nombre" aria-describedby="basic-addon1" required>
           </div>
           <div class="col-md-3">
-          <select class="form-select" name="Categoria" aria-label="Default select example">
-            <option selected>Selecciona la categoría</option>
+          <select class="form-select" name="Categoria" id="validationCustom04" required>
+            <option selected value="" >Selecciona la categoría</option>
             <option value="Empresa">Empresa</option>
             <option value="Asunto">Asunto</option>
           </select>
@@ -196,6 +196,29 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
 
 <script>
+
+//VALIDACIONES
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+//ALERTAS
 // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
 $(document).ready(function() {
     // Captura el evento de envío del formulario con la clase 'formulario'
