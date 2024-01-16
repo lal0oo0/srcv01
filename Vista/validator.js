@@ -42,7 +42,7 @@ function fn(){
   else if (pass.length<6 ) {
     valid=false;
     var com=document.getElementById('pass')
-    com.innerHTML=" Debe de contener por lo menos 6 caracteres"
+    com.innerHTML=" Debe de contener 6 caracteres"
   }
   else{
     document.getElementById('pass').innerHTML='';
