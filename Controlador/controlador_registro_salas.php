@@ -1,4 +1,7 @@
 <?php
+session_start();
+$useralta= $_SESSION['correo'];
+
 /*Codigo de conexion a la base de datos*/
 include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
@@ -16,8 +19,8 @@ $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_salas WHERE NOMBRE =
     }
 
 	/*Codigo para guardar un registro temporalmente en una variable php*/
-	$consulta = "INSERT INTO srcv_salas(NOMBRE, ESTATUS)
-	VALUES ('$nombre','1')";
+	$consulta = "INSERT INTO srcv_salas(NOMBRE, ESTATUS, USUARIO_ALTA, USUARIO_MODIFICACION)
+	VALUES ('$nombre', '1', '$useralta', '$useralta')";
 
     
 
