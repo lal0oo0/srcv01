@@ -70,7 +70,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <header>
 <nav class="navbar navbar-dark  fixed-top navbar-custom">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img id="logo" src="../imagenes/Logo-Urspace.png" width="95">SRCV SALAS</a>
+    <a class="navbar-brand" href="#"><img id="logo" src="../imagenes/Logo-Urspace.png" width="95">SRCV URSPACE</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -81,16 +81,16 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="vista_mapa_salas.php">Mapa</a>
+            <a class="nav-link" aria-current="page" href="vista_mapa_espacios.php">Mapa</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Reservaciones</a>
+            <a class="nav-link" aria-current="page" href="vista_reservaciones_urspace.php">Reservaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" aria-current="page" href="vista_registro_salas.php">Registro de espacios</a>
+            <a class="nav-link active" aria-current="page" aria-current="page" href="vista_registro_espacios.php">Registro de espacios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="vista_reservaciones_canceladas.php">Historial de reservaciones</a>
+            <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
@@ -150,7 +150,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
       <table class="table table-bordered table-striped mb-0">
         <thead class="table-dark">
           <tr>
-            <th scope="col">ID</th>
             <th scope="col">Nombre del espacio</th>
             <th scope="col">Estatus</th>
             <th scope="col">Acciones</th>
@@ -163,7 +162,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           while($filas  = mysqli_fetch_assoc($query)){
         ?>
         <tr>
-          <td><?php echo$filas ["ID_SALA"] ?></td>
           <td><?php echo$filas ["NOMBRE"] ?></td>
           <td><?php
           if($filas["ESTATUS"]==='0'){

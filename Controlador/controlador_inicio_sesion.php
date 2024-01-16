@@ -51,7 +51,7 @@ if($urspace->num_rows==1){
 
     $_SESSION["correo"] = $usuario["CORREO_ELECTRONICO"];
     $_SESSION["rol"] = "urspace";
-    header("Location: ../Vista/vista_mapa_salas.php");
+    header("Location: ../Vista/vista_mapa_espacios.php");
     exit();
 
 }else if($recepcion->num_rows==1){

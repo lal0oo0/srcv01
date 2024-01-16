@@ -84,16 +84,16 @@ $row = $resultado->fetch_assoc();
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="vista_mapa_salas.php">Mapa</a>
+              <a class="nav-link active" aria-current="page" href="vista_mapa_espacios.php">Mapa</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Reservaciones</a>
+              <a class="nav-link" aria-current="page" href="vista_reservaciones_urspace.php">Reservaciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="vista_registro_salas.php">Registro de espacios</a>
+              <a class="nav-link" aria-current="page" href="vista_registro_espacios.php">Registro de espacios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="vista_reservaciones_canceladas.php">Historial de reservaciones</a>
+              <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
