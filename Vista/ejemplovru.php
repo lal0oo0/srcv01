@@ -1,8 +1,4 @@
 <?php
-$
-?>
-
-<?php
   $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   $mensaje2 = isset($_GET['mensaje2']) ? urldecode($_GET["mensaje2"]) : "";
 ?>
@@ -85,7 +81,7 @@ $
             </div>
             
             
-            <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation" id="registrationForm" novalidate>
+            <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation" onsubmit="return fn()" novalidate>
             
             <div class="col-md-12">
               <h6></h6>
@@ -97,41 +93,33 @@ $
             <div class="mb-3"></div> 
       
 
-              <label for="nombre" class="form-label">Nombre *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="nombre" required>
-              <div class="invalid-feedback">
-              Campo obligatorio
-              </div>
+              <label for="nombre" class="form-label">Nombre *</label> 
+              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="valid01" required>
+              <span class="text-danger" id="nombre"></span>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 has-feedback">
               <label for="ap" class="form-label">Apellido Paterno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="ap" required>
-              <div class="invalid-feedback">
-                Campo obligatorio
-              </div>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" required>
+              <span class="text-danger" id="ap"></span>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 has-feedback">
               <label for="am" class="form-label">Apellido Materno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="am" required>
-              <div class="invalid-feedback">
-              Campo obligatorio
-              </div>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" required>
+              <span class="text-danger" id="am"></span>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 has-feedback">
               <label for="email" class="form-label">Correo Electronico *</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="valid04" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
-                Campo obligatorio
+                  Rellene este campo
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 has-feedback">
               <label for="pass" class="form-label">Contraseña *</label>
-              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="pass" aria-describedby="passwordHelp" required>
-              <div class="invalid-feedback">
-              Campo obligatorio
-              </div>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid05" aria-describedby="passwordHelp" required>
+              <span class="text-danger" id="pass"></span>
               <br>
             </div>
             <div class="col-md-6">
@@ -162,27 +150,37 @@ $
     
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="validator.js"></script>
   </body>
   
   
  <!--QUITAR LOS COMENTARIOS EN INGLÉS-->  
-  <script>
+ <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-  'use strict'
+(function () {
+  //'use strict'
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
   // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
+  for(let form of forms) {
+    form.addEventListener(
+        'submit', 
+        function (event)  {
+      if (!form.checkValidity()
+      ||
+      !validateEmail() ||
+      !validateNombre() ||
+      !validatePass() ||
+      !validateAp() ||
+      !validateAm()) {
+        event.preventDefault();
+        event.stopPropagation();
       }
-
       form.classList.add('was-validated')
-    }, false)
-  })
-})()
+    }, 
+    false
+    );
+  }
+ })();
   </script>
 </html>

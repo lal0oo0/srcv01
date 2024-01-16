@@ -1,101 +1,52 @@
-$('#registrationForm').bootstrapValidator({
+function fn(){
+  var valid=true;
+  
+  var nombre=document.getElementById('valid01').value;
+  var ap=document.getElementById('valid02').value;
+  var am=document.getElementById('valid03').value;
+  var email=document.getElementById('valid04').value;
+  var pass=document.getElementById('valid05').value;
 
-    feedbackIcons: {
+  if (nombre=='') {
+    valid=false;
+    var com=document.getElementById('nombre')
+    com.innerHTML=" Rellene este campo"
+  }
+  else{
+    document.getElementById('nombre').innerHTML='';
+  }
 
-        valid: 'glyphicon glyphicon-ok',
+  if (ap=='') {
+    valid=false;
+    var com=document.getElementById('ap')
+    com.innerHTML=" Rellene este campo"
+  }
+  else{
+    document.getElementById('ap').innerHTML='';
+  }
 
-        invalid: 'glyphicon glyphicon-remove',
+  if (am=='') {
+    valid=false;
+    var com=document.getElementById('am')
+    com.innerHTML=" Rellene este campo"
+  }
+  else{
+    document.getElementById('am').innerHTML='';
+  }
 
-        validating: 'glyphicon glyphicon-refresh'
+  if (pass=='') {
+    valid=false;
+    var com=document.getElementById('pass')
+    com.innerHTML=" Rellene este campo"
+  }
+  else if (pass.length<6 ) {
+    valid=false;
+    var com=document.getElementById('pass')
+    com.innerHTML=" Debe de contener por lo menos 6 caracteres"
+  }
+  else{
+    document.getElementById('pass').innerHTML='';
+  }
 
-    },
-
-    fields: {
-
-        nombre: {
-
-            validators: {
-
-                notEmpty: {
-
-                    message: 'El nombre es requerido'
-
-                }
-
-            }
-
-        },
-
-        ap: {
-
-            validators: {
-
-                notEmpty: {
-
-                    message: 'El apellido es requerido'
-
-                }
-
-            }
-
-        },
-
-        am: {
-
-            validators: {
-
-                notEmpty: {
-
-                    message: 'El apellido es requerido'
-
-                }
-
-            }
-
-        },
-
-        email: {
-
-            validators: {
-
-                notEmpty: {
-
-                    message: 'El correo es requerido y no puede ser vacio'
-
-                },
-
-                emailAddress: {
-
-                    message: 'El correo electronico no es valido'
-
-                }
-
-            }
-
-        },
-
-        pass: {
-
-            validators: {
-
-                notEmpty: {
-
-                    message: 'El password es requerido y no puede ser vacio'
-
-                },
-
-                stringLength: {
-
-                    min: 8,
-
-                    message: 'El password debe contener al menos 8 caracteres'
-
-                }
-
-            }
-
-        },
-
-    }
-
-});
+  return valid;
+}
