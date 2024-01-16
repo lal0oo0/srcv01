@@ -102,44 +102,25 @@
 <script src="../js/bootstrap.bundle.min.js"></script>
   </body>
   <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
   'use strict'
 
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
+  var forms = document.querySelectorAll('.needs-validation')
 
   // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
 
-      form.classList.add('was-validated')
-    }, false)
-  })
+        form.classList.add('was-validated')
+      }, false)
+    })
 })()
-
-const form = document.getElementById('formulario');
-const forms = document.querySelectorAll('.needs-validation')
-
-const expresiones = {
-  correoelectronico: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-  contrasena: /^.{5,8}$/, 
-}
-
-const validarFormulario = event => {
-  switch (e.target.name){
-    case: "correoelectronico":
-      if (expresiones.correoelectronico.test(e.target.value)) {
-        
-      } else {
-        document.getElementById('exampleInputEmail1').classList.add('was-validated')
-      }
-  }
-}
-
   </script>
 </html>

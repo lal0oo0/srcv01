@@ -152,7 +152,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <div class="row">
                   <div class="col">
                     <label for="he" class="form-label">Hora de entrada *</label>
-                    <input type="time" class="form-control" id="he" name="he" value="<?= $hora_actual ?>" required>
+                    <input type="time" class="form-control" id="he" name="he" value="<?= $hora_actual ?>" disabled required>
                     <!--<div class="invalid-feedback">
                  Verifique los datos
                 </div>-->
@@ -160,7 +160,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
                   <div class="col">
                     <label for="fecha" class="form-label">Fecha *</label>
-                    <input type="date" class="form-control" id="fecha" name="fecha" disable="" value="<?= $fecha_actual ?>" required>
+                    <input type="date" class="form-control" id="fecha" name="fecha" disabled value="<?= $fecha_actual ?>" required>
                     <!--<div class="invalid-feedback">
                  Verifique los datos
                 </div>-->
@@ -263,7 +263,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <table class="table table-bordered table-striped mb-0">
             <thead class="table-dark">
               <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Hora de entrada</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Nombre</th>
@@ -281,7 +280,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               while ($filas = mysqli_fetch_assoc($queryVisitas)) {
               ?>
                 <tr>
-                  <td><?php echo $filas['ID_VISITA']?></td>
                   <td><?php echo $filas['HORA_ENTRADA'] ?></td>
                   <td><?php echo $filas['FECHA'] ?></td>
                   <td><?php echo $filas['NOMBRE'] ?></td>
@@ -298,57 +296,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     </button>-->
 
                     
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>" onclick="Visita('<?php $filas['ID_VISITA'] ?>')" > <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal_<?php echo $filas['ID_VISITA'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Actualizar <?= $filas['NOMBRE'] ?></h5>
-                            <input id="Visita_<?php echo $filas['ID_VISITA'] ?>" name="Visita" value="" hidden>
-                            <input type="hidden" name="idVisita" id="idVisita" value="<?php echo $filas['ID_VISITA'] ?>">
-
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            
-
-                            <!--Formulario de edicion-->
-                            <form id="myForm2"  
-                            method="post" 
-                            onsubmit="return validar2(event);"
-                            action="../Controlador/controlador_editar_visitas.php"
-                            class="row g-3 needs-validation" novalidate>
-
-                            
-                <div class="mb-3"></div> <!-- Salto de línea -->
-                <input type="hidden" name="id" id="id" value="<?= $filas['ID_VISITA'] ?>">
-                <input type="" name="he" id="he" value="<?= $filas['HORA_ENTRADA']?>" >
-                <div class="row">
-                  <div class="col"></div>
-                  <div class="col-md-6">
-                    <label for="hs" class="form-label">Hora de Salida *</label>
-                    <input type="time" class="form-control" id="hs" name="hs" value="<?= $hora_actual ?>" required>
-                    <div class="invalid-feedback">
-                     Verifique los datos
-                    </div>
-                  </div>
-                  <div class="col"></div>
-                </div>
-                <!--Botones para cancelar o enviar fromulario del modal-->
-                <div class="modal-footer">
-                  <button type="button" onclick="limpiar2()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" name="Actualizar" id="Actualizar" class="btn btn-primary">Actualizar</button>
-                </div>
-                <br><br><br><br>
-              </form>
-
-
-
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
                     <!--Boton de eliminar-->
                     <a href="../Controlador/controlador_eliminar_visita.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
                     <!--<a href="#"><button type="button" class="btn btn-secondary btn-sm" style="background-color:	#8AB7B0;"><img src="../imagenes/borra.png" width="20px"></button></a>-->
@@ -370,6 +318,27 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <script src="../js/validar_formulario.js" ></script>
 
   <script>
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
 
     function Visita(idVisita){
     document.getElementById('Visita_' + idVisita).value = idVisita;
