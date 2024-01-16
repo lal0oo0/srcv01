@@ -67,6 +67,10 @@
     transform: translate(10%, 0%);
   }
 
+  .text-danger{
+    font-size: 17px;
+  }
+
 
 </style>
 <body>
@@ -95,17 +99,23 @@
 
               <label for="nombre" class="form-label">Nombre *</label> 
               <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="valid01" required>
-              <span class="text-danger" id="nombre"></span>
+              <div class="invalid-feedback">
+                  Rellene este campo
+                </div>
             </div>
             <div class="col-md-6 has-feedback">
               <label for="ap" class="form-label">Apellido Paterno *</label>
               <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" required>
-              <span class="text-danger" id="ap"></span>
+              <div class="invalid-feedback">
+                  Rellene este campo
+                </div>
             </div>
             <div class="col-md-6 has-feedback">
               <label for="am" class="form-label">Apellido Materno *</label>
               <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" required>
-              <span class="text-danger" id="am"></span>
+              <div class="invalid-feedback">
+                  Rellene este campo
+                </div>
             </div>
             <div class="col-md-6 has-feedback">
               <label for="email" class="form-label">Correo Electronico *</label>
@@ -118,21 +128,13 @@
             </div>
             <div class="col-md-6 has-feedback">
               <label for="pass" class="form-label">Contraseña *</label>
-              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid05" aria-describedby="passwordHelp" required>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid05" aria-describedby="passwordHelp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" required>
               <span class="text-danger" id="pass"></span>
               <br>
             </div>
-            <div class="col-md-6">
-            <select class="form-select" id="rol" name="rol" style="border: 2px solid #007AB6;" required>
-              <option selected disabled value="" >Seleccione cual es su Rol *</option>
-              <option value="1">Recepcion IT-Global</option>
-              <option value="2">Recepcion UrSpace</option>
-              <option value="3">Seguridad</option>
-            </select>
-             </div>
-             <div class="col-md-6">
+             <div class="col-md-12">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
-              <option selected disabled value="">Seleccione con la que mejor se identifique *</option>
+              <option selected value="">Seleccione con la que mejor se identifique *</option>
               <option value="1">Nombre del mejor amig@</option>
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
