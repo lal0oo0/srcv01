@@ -323,7 +323,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                             
                 <div class="mb-3"></div> <!-- Salto de línea -->
                 <input type="hidden" name="id" id="id" value="<?= $filas['ID_VISITA'] ?>">
-                <input type="hidden" name="he" id="he" value="<?= $filas['HORA_ENTRADA']?>" >
+                <input type="" name="he" id="he" value="<?= $filas['HORA_ENTRADA']?>" >
                 <div class="row">
                   <div class="col"></div>
                   <div class="col-md-6">
@@ -370,20 +370,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <script src="../js/validar_formulario.js" ></script>
 
   <script>
-  // Validación del formulario de edición
-function validar2() {
-  // Validación de horas de entrada y salida
-  var selectedTimeValue = document.getElementById('hs').value;
-  var currentTime = new Date();
-  var selectedTime = new Date('1970-01-01 ' + selectedTimeValue);
-
-  if (selectedTime !== 0 && selectedTime < currentTime) {
-    alert('Hora de salida no puede ser anterior a la hora de entrada');
-    return false;
-  }
-
-  return true;
-}
 
     function Visita(idVisita){
     document.getElementById('Visita_' + idVisita).value = idVisita;
