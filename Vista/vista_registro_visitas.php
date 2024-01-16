@@ -91,9 +91,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" href="http://localhost/srcv01/Vista/vista_historial_visitas.php">Historial de Visitas</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesion</a>
               </li>
             </ul>

@@ -168,10 +168,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <td><?php
           if($filas["ESTATUS"]==='0'){
           $filas["ESTATUS"]='Inactivo';
-        }elseif($filas['ESTATUS']==='1'){
+          }elseif($filas['ESTATUS']==='1'){
           $filas["ESTATUS"]='Activo';
-        }
-        echo$filas["ESTATUS"];
+         }
+         echo$filas["ESTATUS"];
           ?></td>
           <td>
             <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>"><i class="fa fa-check" aria-hidden="true"></i></a>

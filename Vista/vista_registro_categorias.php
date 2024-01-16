@@ -2,6 +2,9 @@
 session_start();
 ?>
 
+<?php
+$mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +12,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
     <title>Agregar Listas</title>
 </head>
 
@@ -81,14 +85,6 @@ session_start();
           <li class="nav-item">
             <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Cerrar Aplicación</a>
-          </li>
-        </ul>
-        <form class="d-flex mt-3" role="search">
-          <input class="form-control me-2" type="Buscar" placeholder="Buscar" aria-label="Buscar">
-          <button class="btn btn-success" type="submit">Buscar</button>
-        </form>
       </div>
     </div>
   </div>
@@ -112,7 +108,7 @@ session_start();
 <div class="container caja2">
   <div class="row">
     <div class="col-md-12">
-      <form action="../Controlador/controlador_registro_categoria.php" class="formulario" method="post">
+      <form action="../Controlador/controlador_registro_categoria.php" class="formulario needs-validation" method="post" novalidate>
         <div class="row g-3 align-items-center">
           <div class="col-md-2">
           <label for="Nombre" class="col-form-label">Nombre de la categoría:</label>
@@ -121,8 +117,8 @@ session_start();
           <input type="text" class="form-control" name="Nombre" placeholder="Ingresa el nombre de la categoría" aria-label="Nombre" aria-describedby="basic-addon1" required>
           </div>
           <div class="col-md-3">
-          <select class="form-select" name="Categoria" aria-label="Default select example">
-            <option selected>Selecciona la categoría</option>
+          <select class="form-select" name="Categoria" id="validationCustom04" required>
+            <option selected value="" >Selecciona la categoría</option>
             <option value="Empresa">Empresa</option>
             <option value="Asunto">Asunto</option>
           </select>
@@ -135,7 +131,17 @@ session_start();
     </div>
   </div>
 </div>
-<div class="mb-5"></div> <!--Salto de linea-->
+<div class="mb-4"></div> <!--Salto de linea-->
+
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10" id="mensaje">
+    <?php echo $mensaje; ?>
+  </div>
+  <div class="col md-1"></div>
+</div>
+<div class="mb-3"></div><!--Salto de linea-->
+
 <div class="container">
   <div class="row">
     <div class="col">
@@ -153,7 +159,7 @@ session_start();
           <?php
             require_once("../Modelo/conexion2.php");
             $conexion = conect();
-            $query = mysqli_query ($conexion, "select * from srcv_listas WHERE ESTATUS = 1");
+            $query = mysqli_query ($conexion, "select * from srcv_listas");
                   
             while($filas  = mysqli_fetch_assoc($query)){
           ?>
@@ -161,14 +167,18 @@ session_start();
             <td><?php echo$filas ["ID_LISTA"] ?></td>
             <td><?php echo$filas ["NOMBRE"] ?></td>
             <td><?php echo$filas ["CATEGORIA"] ?></td>
-            <td><?php echo$filas ["ESTATUS"] ?></td>
-            <td>
-              <!-- Boton de editar -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_LISTA'] ?>" onclick="Lista('<?php $filas['ID_LISTA'] ?>')" >
-                    <img src="../imagenes/actualizar.png" width="20px">
-                    </button>
-                    <a href="#"><button type="button" class="btn btn-secondary btn-sm" style="background-color:	#8AB7B0;"><img src="../imagenes/borra.png" width="20px"></button></a>
-            </td>
+            <td><?php
+            if($filas["ESTATUS"]==='0'){
+            $filas["ESTATUS"]='Inactivo';
+            }elseif($filas['ESTATUS']==='1'){
+            $filas["ESTATUS"]='Activo';
+            }
+            echo$filas["ESTATUS"];
+            ?></td>
+           <td>
+            <a href="../Controlador/controlador_activar_categorias.php?id=<?=$filas['ID_LISTA']?>"><i class="fa fa-check" aria-hidden="true"></i></a>
+            <a href="../Controlador/controlador_desactivar_categorias.php?id=<?=$filas['ID_LISTA']?>"><i class="fa fa-times" aria-hidden="true"></i></a>
+          </td>
           </tr>
           <?php
           };
@@ -186,6 +196,29 @@ session_start();
 
 
 <script>
+
+//VALIDACIONES
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+//ALERTAS
 // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
 $(document).ready(function() {
     // Captura el evento de envío del formulario con la clase 'formulario'
