@@ -1,9 +1,16 @@
 <?php
+session_start();
+$usermodi = $_SESSION['correo'];
+
 /*Codigo de conexion a la base de datos*/
 include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
 
+
+// Obtén la fecha y hora actual
+date_default_timezone_set('America/Mexico_City');
+$fechamodificacion = date('Y-m-d H:i:s');
 /*Para capturar los campos*/
 $variable = $_POST['id'];
 $variable1 = $_POST['Fechainicio'];
@@ -17,7 +24,7 @@ $variableSuma= $variable6+$variable8;
 $variable7 = intval($variable5)-intval($variableSuma);
 
 
-    $consulta="UPDATE srcv_reservaciones SET FECHA_ENTRADA='$variable1', FECHA_SALIDA='$variable2', HORA_ENTRADA='$variable3', HORA_SALIDA='$variable4', ENGANCHE='$variableSuma', LIQUIDACION='$variable7' WHERE ID_RESERVACION='$variable'";
+    $consulta="UPDATE srcv_reservaciones SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', FECHA_ENTRADA='$variable1', FECHA_SALIDA='$variable2', HORA_ENTRADA='$variable3', HORA_SALIDA='$variable4', ENGANCHE='$variableSuma', LIQUIDACION='$variable7' WHERE ID_RESERVACION='$variable'";
     $sql=mysqli_query($conexion, $consulta);
   
 
@@ -34,7 +41,7 @@ $variable7 = intval($variable5)-intval($variableSuma);
     
     mysqli_close($conexion);
     
-    header("location: ../Vista/vista_historial_reservaciones.php?mensaje=" . urlencode($mensaje));
+    header("location: ../Vista/vista_reservaciones_urspace.php?mensaje=" . urlencode($mensaje));
     
     
     ?>

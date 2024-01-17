@@ -137,12 +137,15 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
       </div>
     </div>
   </div>
-  <div class="mb-4"></div> <!--Salto de linea-->
-      <!-- ALERTA -->
-      <div id="mensaje">
-        <?php echo $mensaje; ?>
-      </div>
-      <div class="mb-3"></div>
+<div class="mb-4"></div> <!--Salto de linea-->
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10" id="mensaje">
+     <?php echo $mensaje; ?>
+    </div>
+    <div class="col md-1"></div>
+  </div>
+<div class="mb-3"></div><!--Salto de linea-->
   <div class="container">
     <div class="row">
       <div class="col">
@@ -214,7 +217,7 @@ $(document).ready(function() {
                     // Muestra una alerta de éxito con SweetAlert
                     swal({
                         title: 'Registro exitoso!',
-                        text: 'La sala ya se encuentra registrada exitosamente!',
+                        text: 'El espacio ya se encuentra registrado exitosamente!',
                         icon: 'success'
                     }).then(function() {
                         // Recarga la página después de cerrar la alerta (opcional)

@@ -6,23 +6,12 @@ $usuariom= $_SESSION['correo'];
 include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
+$id=$_GET['id'];
 
-/*Para capturar los campos*/
-$id = $_POST['id'];
-$nombre = $_POST['nombre'];
-$apellidop = $_POST['ap'];
-$apellidom = $_POST['am'];
-$hora_salida = $_POST['hs'];
-//$id_visita= '';
+date_default_timezone_set('America/Mexico_City');
+$hora_actual = date("H:i");
 
-/*Codigo para guardar un registro temporalmente en una variable php
-$visita = "INSERT INTO srcv_visitas(ID_VISITA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
-VALUES ('$id','$nombre','$apellidop','$apellidom','$usuariom','$usuariom','1')";
-Para ejecutar la consulta
-$ejecutar = mysqli_query($conexion, $visita); */
-
-
-  $consulta="UPDATE srcv_visitas SET HORA_SALIDA='$hora_salida',USUARIO_MODIFICACION='$usuariom'
+  $consulta="UPDATE srcv_visitas SET HORA_SALIDA='$hora_actual',USUARIO_MODIFICACION='$usuariom'
   WHERE ID_VISITA='$id'";
   $sql=mysqli_query($conexion, $consulta);
 

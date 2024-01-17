@@ -1,12 +1,21 @@
 <?php
+session_start();
+$usermodi= $_SESSION['correo'];
+
 /*Codigo de conexion a la base de datos*/
 include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
 
-    $id=$_GET["id"];
-    $sql = "UPDATE srcv_salas SET ESTATUS='1' where ID_SALA='$id'";
-    $resultado=mysqli_query($conexion,$sql);
+
+// Obtén la fecha y hora actual
+date_default_timezone_set('America/Mexico_City');
+$fechamodificacion = date('Y-m-d H:i:s');
+$id=$_GET["id"];
+
+
+  $sql = "UPDATE srcv_salas SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', ESTATUS='1' where ID_SALA='$id'";
+  $resultado=mysqli_query($conexion,$sql);
 
 /*cambiar alertas*/
     if ($resultado) {
@@ -21,6 +30,6 @@ $conexion = conect();
     }
 mysqli_close($conexion);
 
-header("location: ../Vista/vista_registro_salas.php?mensaje=" . urlencode($mensaje));
+header("location: ../Vista/vista_registro_espacios.php?mensaje=" . urlencode($mensaje));
 
 ?>
