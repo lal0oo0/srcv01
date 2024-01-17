@@ -82,7 +82,7 @@
             </div>
             
             
-            <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation" novalidate>
+            <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation" onsubmit="return fn()" novalidate>
             
             <div class="col-md-12">
               <h6></h6>
@@ -125,20 +125,10 @@
             </div>
             <div class="col-md-6">
               <label for="pass" class="form-label">Contraseña *</label>
-              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="pass" aria-describedby="passwordHelp" required>
-              <div class="invalid-feedback">
-              Campo obligatorio
-              </div>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="pass" aria-describedby="passwordHelp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" required>
+              <span class="text-danger" id="pass"></span>
               <br>
             </div>
-            <div class="col-md-6">
-            <select class="form-select" id="rol" name="rol" style="border: 2px solid #007AB6;" required>
-              <option selected value="" >Seleccione cual es su Rol *</option>
-              <option value="1">Recepcion IT-Global</option>
-              <option value="2">Recepcion UrSpace</option>
-              <option value="3">Seguridad</option>
-            </select>
-             </div>
              <div class="col-md-6">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
               <option selected value="">Seleccione con la que mejor se identifique *</option>
@@ -157,6 +147,7 @@
       </div>
     </div>
     
+    <script src="../js/validator.js"></script>
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
   </body>

@@ -98,21 +98,21 @@
       
 
               <label for="nombre" class="form-label">Nombre *</label> 
-              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="valid01" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" required>
               <div class="invalid-feedback">
                   Rellene este campo
                 </div>
             </div>
             <div class="col-md-6 has-feedback">
               <label for="ap" class="form-label">Apellido Paterno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap required>
               <div class="invalid-feedback">
                   Rellene este campo
                 </div>
             </div>
             <div class="col-md-6 has-feedback">
               <label for="am" class="form-label">Apellido Materno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" required>
               <div class="invalid-feedback">
                   Rellene este campo
                 </div>
@@ -120,7 +120,7 @@
             <div class="col-md-6 has-feedback">
               <label for="email" class="form-label">Correo Electronico *</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="valid04" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
                   Rellene este campo
                 </div>
@@ -128,7 +128,7 @@
             </div>
             <div class="col-md-6 has-feedback">
               <label for="pass" class="form-label">Contraseña *</label>
-              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid05" aria-describedby="passwordHelp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" required>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid01" aria-describedby="passwordHelp" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" required>
               <span class="text-danger" id="pass"></span>
               <br>
             </div>
