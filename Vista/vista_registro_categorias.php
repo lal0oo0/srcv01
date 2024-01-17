@@ -86,7 +86,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <a class="nav-link active" href="vista_registro_categorias.php">Categorías</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
+            <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
           </li>
       </div>
     </div>
@@ -152,7 +152,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
         <table class="table table-bordered table-striped mb-0">
           <thead class="table-dark">
             <tr>
-              <th scope="col">ID</th>
               <th scope="col">Nombre</th>
               <th scope="col">Categoría</th>
               <th scope="col">Estatus</th>
@@ -167,7 +166,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             while($filas  = mysqli_fetch_assoc($query)){
           ?>
           <tr>
-            <td><?php echo$filas ["ID_LISTA"] ?></td>
             <td><?php echo$filas ["NOMBRE"] ?></td>
             <td><?php echo$filas ["CATEGORIA"] ?></td>
             <td><?php
@@ -196,7 +194,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
-
 
 <script>
 
@@ -228,7 +225,7 @@ $(document).ready(function() {
     $(".formulario").submit(function(e) {
         // Previene el comportamiento predeterminado del formulario
         e.preventDefault();
-        
+
         // Realiza una solicitud Ajax al servidor
         $.ajax({
             // Especifica el método de la solicitud (POST en este caso)
