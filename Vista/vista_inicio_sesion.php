@@ -80,8 +80,8 @@
             </div>
             <div class="col-12">
               <label for="validationCustom03" class="form-label">Contraseña *</label>
-              <input type="password" class="form-control" style="border: 2px solid #007AB6" name="contrasena" id="exampleInputPassword1" id="validationCustom05" aria-describedby="passwordHelp" required>
-              <div class="invalid-feedback">
+              <input type="password" class="form-control" style="border: 2px solid #007AB6" name="contrasena" id="valid04" pattern="(?=^.{8,15}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" aria-describedby="passwordHelp" required>
+              <div class="invalid-feedback" id="pass">
               Campo obligatorio
               </div>
             </div>

@@ -127,10 +127,6 @@
               <label for="pass" class="form-label">Contraseña </label>
               <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid04" aria-describedby="passwordHelp" pattern="(?=^.{8,15}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
               <div class="invalid-feedback " id="pass">
-                <span class="" onclick="Vista_form();">
-                <i class="bi bi-eye" id="ver"></i>
-                <i class="bi bi-eye-slash" id="ocultar" style="display: none;"></i>
-                </span>
               *Campo obligatorio
               </div>
               <br>
