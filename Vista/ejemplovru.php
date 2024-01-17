@@ -100,21 +100,21 @@
               <label for="nombre" class="form-label">Nombre *</label> 
               <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" required>
               <div class="invalid-feedback">
-                  Campo Obligatorio
+                  *Campo Obligatorio
                 </div>
             </div>
             <div class="col-md-6 has-feedback">
               <label for="ap" class="form-label">Apellido Paterno *</label>
               <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap required>
               <div class="invalid-feedback">
-                  Campo Obligatorio
+                  *Campo Obligatorio
                 </div>
             </div>
             <div class="col-md-6 has-feedback">
               <label for="am" class="form-label">Apellido Materno *</label>
               <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" required>
               <div class="invalid-feedback">
-                  Campo Obligatorio
+                  *Campo Obligatorio
                 </div>
             </div>
             <div class="col-md-6 has-feedback">
@@ -122,7 +122,7 @@
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
-                Campo Obligatorio
+                *Campo Obligatorio
                 </div>
               </div>
             </div>
@@ -130,7 +130,7 @@
               <label for="pass" class="form-label">Contraseña *</label>
               <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid01" aria-describedby="passwordHelp" pattern="(?=^.{8,15}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
               <div class="invalid-feedback " id="pass">
-              Campo obligatorio
+              *Campo obligatorio
               </div>
               <br>
             </div>

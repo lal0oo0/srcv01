@@ -131,14 +131,6 @@
               </div>
               <br>
             </div>
-            <div class="col-md-6">
-            <select class="form-select" id="rol" name="rol" style="border: 2px solid #007AB6;" required>
-              <option selected value="" >Seleccione cual es su Rol *</option>
-              <option value="1">Recepcion IT-Global</option>
-              <option value="2">Recepcion UrSpace</option>
-              <option value="3">Seguridad</option>
-            </select>
-             </div>
              <div class="col-md-6">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
               <option selected value="">Seleccione con la que mejor se identifique *</option>
