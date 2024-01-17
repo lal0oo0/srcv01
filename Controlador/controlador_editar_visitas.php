@@ -1,18 +1,19 @@
 <?php
-
 session_start();
-$usuariom= $_SESSION['correo'];
+$usermodi= $_SESSION['correo'];
+
 /*Codigo de conexion a la base de datos*/
 include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
-$id=$_GET['id'];
 
+// Obtén la fecha y hora actual
 date_default_timezone_set('America/Mexico_City');
+$fechamodificacion = date('Y-m-d H:i:s');
+$id=$_GET['id'];
 $hora_actual = date("H:i");
 
-  $consulta="UPDATE srcv_visitas SET HORA_SALIDA='$hora_actual',USUARIO_MODIFICACION='$usuariom'
-  WHERE ID_VISITA='$id'";
+  $consulta="UPDATE srcv_visitas SET HORA_SALIDA='$hora_actual', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA='$id'";
   $sql=mysqli_query($conexion, $consulta);
 
 

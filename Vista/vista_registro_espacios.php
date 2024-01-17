@@ -121,7 +121,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <div class="container caja2">
     <div class="row">
       <div class="col-md-12">
-        <form action="../Controlador/controlador_registro_salas.php" class="formulario" method="post">
+        <form action="../Controlador/controlador_registro_espacios.php" class="formulario" method="post">
           <div class="row g-3 align-items-center">
             <div class="col-md-2">
             <label for="Nombre" class="col-form-label">Nombre del espacio:</label>
