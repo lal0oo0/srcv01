@@ -80,7 +80,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <header>
     <nav class="navbar navbar-dark  fixed-top navbar-custom">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Registro de Visitas</a>
+        <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV SEGURIDAD</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -94,10 +94,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesion</a>
               </li>
             </ul>
-            <form class="d-flex mt-3" role="search">
-              <input class="form-control me-2" type="Buscar" placeholder="Buscar" aria-label="Buscar">
-              <button class="btn btn-success" type="submit">Buscar</button>
-            </form>
           </div>
         </div>
       </div>
@@ -124,10 +120,11 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
       </button>
 
       <!-- ALERTA -->
+      <div class="mb-4"></div><!--Salto de linea-->
       <div id="mensaje">
         <?php echo $mensaje; ?>
       </div>
-      <div class="mb-3"></div>
+      <div class="mb-3"></div><!--Salto de linea-->
 
       <!-- Modal -->
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

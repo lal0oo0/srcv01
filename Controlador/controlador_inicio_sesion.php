@@ -59,7 +59,7 @@ if($urspace->num_rows==1){
 
     $_SESSION["correo"] = $usuario["CORREO_ELECTRONICO"];
     $_SESSION["rol"] = "recepcion";
-    header("Location: ../Vista/vista_registro_visitas.php");
+    header("Location: ../Vista/vista_historial_visitas.php");
     exit();
 
 } else if($seguridad->num_rows==1){

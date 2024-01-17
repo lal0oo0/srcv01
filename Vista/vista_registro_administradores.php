@@ -54,27 +54,21 @@ session_start();
     </button>
     <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title Titulo" id="offcanvasDarkNavbarLabel">Menu</h5>
+        <h5 class="offcanvas-title Titulo" id="offcanvasDarkNavbarLabel">Menú</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" href="vista_registro_categorias.php">Categorias</a>
+            <a class="nav-link active" href="vista_registro_administradores.php">Administradores</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesion</a>
+            <a class="nav-link" href="vista_registro_categorias.php">Categorías</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Cerrar Aplicacion</a>
+            <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php">Cerrar sesión</a>
           </li>
         </ul>
-        </ul>
-        </ul>
-        <form class="d-flex mt-3" role="search">
-          <input class="form-control me-2" type="Buscar" placeholder="Buscar" aria-label="Buscar">
-          <button class="btn btn-success" type="submit">Buscar</button>
-        </form>
       </div>
     </div>
   </div>
@@ -85,13 +79,16 @@ session_start();
 <br>
 <br>
 <br>
-<h3 class="text-center">HISTORIAL ADMINISTRADORES</h3> 
-<div class="mb-3"></div> <!--Salto de linea-->
-            <!-- ALERTA -->
-            <div id="mensaje">
-             <?php echo $mensaje; ?>
-            </div>
-            <div class="mb-3"></div> 
+<h3 class="text-center">ADMINISTRADORES</h3> 
+<div class="mb-4"></div> <!--Salto de linea-->
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10" id="mensaje">
+    <?php echo $mensaje; ?>
+  </div>
+  <div class="col md-1"></div>
+</div>
+<div class="mb-3"></div><!--Salto de linea-->
 
 <div class="container">
   <div class="row">
@@ -208,7 +205,6 @@ session_start();
   <table class="table table-bordered table-striped mb-0">
     <thead class="table-dark">
       <tr>
-        <th scope="col">ID</th>
         <th scope="col">Nombre</th>
         <th scope="col">Apellido Paterno</th>
         <th scope="col">Apellido Materno</th>
@@ -225,7 +221,6 @@ session_start();
             while($filas  = mysqli_fetch_assoc($query)){
         ?>
         <tr>
-            <td><?php echo$filas ["ID_ADMINISTRADOR"] ?></td>
             <td><?php echo$filas ["NOMBRE"] ?></td>
             <td><?php echo$filas ["APELLIDO_PATERNO"] ?></td>
             <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
@@ -240,7 +235,6 @@ session_start();
           echo$filas["ESTATUS"];
             ?></td>
             <td>
-            <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
             <a href="../Controlador/controlador_eliminar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
             <a href="../Controlador/controlador_activar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>"><i class="fa fa-check" aria-hidden="true"></i></a>
             </td>

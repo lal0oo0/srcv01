@@ -69,7 +69,7 @@ $row = $resultado->fetch_assoc();
  <header>
   <nav class="navbar navbar-dark  fixed-top navbar-custom" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Historial de Visitas</a>
+    <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV RECEPCIÓN</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -80,22 +80,9 @@ $row = $resultado->fetch_assoc();
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" href="http://localhost/srcv01/Vista/vista_registro_visitas.php">Registro de Visitas</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesion</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Cerrar Aplicacion</a>
-          </li>
         </ul>
-        </ul>
-        </ul>
-
-        <form class="d-flex mt-3" role="search">
-          <input class="form-control me-2" type="Buscar" placeholder="Buscar" aria-label="Buscar">
-          <button class="btn btn-success" type="submit">Buscar</button>
-        </form>
       </div>
     </div>
   </div>

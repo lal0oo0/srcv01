@@ -80,7 +80,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" href="vista_registro_administradores.php">Historial Administradores</a>
+            <a class="nav-link" href="vista_registro_administradores.php">Administradores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="vista_registro_categorias.php">Categorías</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
