@@ -131,7 +131,7 @@
               </div>
               <br>
             </div>
-             <div class="col-md-6">
+             <div class="col-md-12">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
               <option selected value="">Seleccione con la que mejor se identifique *</option>
               <option value="1">Nombre del mejor amig@</option>
