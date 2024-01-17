@@ -67,9 +67,6 @@
     transform: translate(10%, 0%);
   }
 
-  .text-danger{
-    font-size: 17px;
-  }
 
 
 </style>
@@ -97,28 +94,28 @@
             <div class="mb-3"></div> 
       
 
-              <label for="nombre" class="form-label">Nombre *</label> 
-              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" required>
-              <div class="invalid-feedback">
+              <label for="nombre" class="form-label">Nombre </label> 
+              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="valid01" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
+              <div class="invalid-feedback" id="nombre">
                   *Campo Obligatorio
                 </div>
             </div>
             <div class="col-md-6 has-feedback">
-              <label for="ap" class="form-label">Apellido Paterno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap required>
-              <div class="invalid-feedback">
+              <label for="ap" class="form-label">Apellido Paterno </label>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" pattern="(?=.*[a-z])(?=.*[A-Z]).{4,16}" required>
+              <div class="invalid-feedback" id="ap">
                   *Campo Obligatorio
                 </div>
             </div>
             <div class="col-md-6 has-feedback">
-              <label for="am" class="form-label">Apellido Materno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" required>
-              <div class="invalid-feedback">
+              <label for="am" class="form-label">Apellido Materno </label>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" pattern="(?=.*[a-z])(?=.*[A-Z]).{4,16}" required>
+              <div class="invalid-feedback" id="am">
                   *Campo Obligatorio
                 </div>
             </div>
             <div class="col-md-6 has-feedback">
-              <label for="email" class="form-label">Correo Electronico *</label>
+              <label for="email" class="form-label">Correo Electronico </label>
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
@@ -127,21 +124,28 @@
               </div>
             </div>
             <div class="col-md-6 has-feedback">
-              <label for="pass" class="form-label">Contraseña *</label>
-              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid01" aria-describedby="passwordHelp" pattern="(?=^.{8,15}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+              <label for="pass" class="form-label">Contraseña </label>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid04" aria-describedby="passwordHelp" pattern="(?=^.{8,15}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
               <div class="invalid-feedback " id="pass">
+                <span class="" onclick="Vista_form();">
+                <i class="bi bi-eye" id="ver"></i>
+                <i class="bi bi-eye-slash" id="ocultar" style="display: none;"></i>
+                </span>
               *Campo obligatorio
               </div>
               <br>
             </div>
              <div class="col-md-12">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
-              <option selected value="">Seleccione con la que mejor se identifique *</option>
+              <option selected value="">Seleccione con la que mejor se identifique </option>
               <option value="1">Nombre del mejor amig@</option>
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
               </select>
-             <input type="text" class="form-control form-control-sm" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
+             <input type="text" class="form-control form-control-sm" style="border: 2px solid #007AB6;" name="respuesta" required>
+             <div class="invalid-feedback " id="respuesta">
+              *Campo obligatorio
+              </div>
              </div>
             <div class="col-12">
               <input type="submit" value="Registrarse" class="btn btn-primary" href= "vista_inicio_sesion.php" name="Registrar"></button>

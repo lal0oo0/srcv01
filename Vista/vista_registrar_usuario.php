@@ -95,22 +95,22 @@
       
 
               <label for="nombre" class="form-label">Nombre *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="nombre" required>
-              <div class="invalid-feedback">
+              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="valid01" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
+              <div class="invalid-feedback" id="nombre">
               Campo obligatorio
               </div>
             </div>
             <div class="col-md-6">
               <label for="ap" class="form-label">Apellido Paterno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="ap" required>
-              <div class="invalid-feedback">
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" pattern="(?=.*[a-z])(?=.*[A-Z]).{4,30}" required>
+              <div class="invalid-feedback" id="ap">
                 Campo obligatorio
               </div>
             </div>
             <div class="col-md-6">
               <label for="am" class="form-label">Apellido Materno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="am" required>
-              <div class="invalid-feedback">
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" pattern="(?=.*[a-z])(?=.*[A-Z]).{4,30}" required>
+              <div class="invalid-feedback" id="am">
               Campo obligatorio
               </div>
             </div>
@@ -125,7 +125,7 @@
             </div>
             <div class="col-md-6">
               <label for="pass" class="form-label">Contraseña *</label>
-              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid01" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid04" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
               <div class="invalid-feedback " id="pass">
               Campo obligatorio
               </div>
