@@ -1,6 +1,6 @@
 <?php
 session_start();
-$usuariom= $_SESSION['correo'];
+$useralta= $_SESSION['correo'];
 
 /*Codigo de conexion a la base de datos*/
 include '../Modelo/conexion2.php';
@@ -41,13 +41,13 @@ $respuesta = $_POST['respuesta'];
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
 $usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, ROL, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
-VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$rol','$pregunta','$respuesta','$usuariom','$usuariom','1')";
+VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$rol','$pregunta','$respuesta','$useralta','$useralta','1')";
 
 /*Evitar que el registro se repita*/ 
 $norepetir = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$correo'");
 if(mysqli_num_rows($norepetir) > 0){
   $mensaje= '<div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Error!</strong> El registro ya existe, intente nuevamente
+  <strong>Error!</strong> El usuario ya existe, intente nuevamente.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>';
 exit(); 
@@ -60,12 +60,12 @@ $ejecutar = mysqli_query($conexion, $usuario);
 if ($ejecutar) {
     // Éxito: alerta de Bootstrap éxito
     $mensaje= '<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Exito!</strong> El registro se ha guardado correctamente
+    <strong>Exito!</strong> El usuario se ha registrado correctamente.
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>';
 } else {
     // Error: alerta de Bootstrap error con detalles
-    $mensaje= '<div class="alert alert-danger" role="alert">Error en la consulta: ' . mysqli_error($conexion) . '</div>';
+    $mensaje= '<div class="alert alert-danger" role="alert">Error al registrar al usuario.' . mysqli_error($conexion) . '</div>';
 }
 
 mysqli_close($conexion);

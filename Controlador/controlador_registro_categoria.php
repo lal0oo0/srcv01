@@ -1,4 +1,7 @@
 <?php
+session_start();
+$useralta= $_SESSION['correo'];
+
 /* Código de conexión a la base de datos */
 include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
@@ -16,12 +19,12 @@ $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_listas WHERE NOMBRE 
     }
 
     if ($Categoria === "Empresa") {
-        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA) 
-        VALUES ('$nombre', 'Empresa')";
+        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, USUARIO_ALTA, USUARIO_MODIFICACION) 
+        VALUES ('$nombre', 'Empresa', '$useralta', '$useralta')";
     
     } elseif ($Categoria === "Asunto") {
-        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA) 
-        VALUES ('$nombre', 'Asunto')";
+        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, USUARIO_ALTA, USUARIO_MODIFICACION) 
+        VALUES ('$nombre', 'Asunto', '$useralta', '$useralta', '$useralta')";
     } else {
         echo "Categoría no válida";
         exit();
