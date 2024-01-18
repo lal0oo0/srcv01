@@ -12,6 +12,10 @@ $sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORRE
 $resultado = $conexion->query($sql);
 $row = $resultado->fetch_assoc();
 ?>
+<?php
+$mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +23,7 @@ $row = $resultado->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
     
     <title>Historial de visitas</title>
 </head>
@@ -69,7 +74,7 @@ $row = $resultado->fetch_assoc();
  <header>
   <nav class="navbar navbar-dark  fixed-top navbar-custom" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV RECEPCIÓN</a>
+    <a class="navbar-brand" href="#"><img src="../imagenes/Logo-Corporativo-png-oscuro.png" width="60px"> SRCV RECEPCIÓN</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -91,6 +96,12 @@ $row = $resultado->fetch_assoc();
 <br><br><br><br><br>
 <h3 class="text-center">HISTORIAL DE VISITAS</h3> 
 <div class="mb-5"></div> <!--Salto de linea-->
+      <!-- ALERTA -->
+      <div class="mb-4"></div><!--Salto de linea-->
+      <div id="mensaje">
+        <?php echo $mensaje; ?>
+      </div>
+      <div class="mb-3"></div><!--Salto de linea-->
 <div class="container">
   <div class="row">
     <div class="col-*-*">
@@ -124,8 +135,7 @@ $row = $resultado->fetch_assoc();
                     <td><?php echo $filas['ASUNTO'] ?></td>
                     <td><?php echo $filas['HORA_SALIDA'] ?></td>
                     <td>
-                        <a href="#"><img src="../imagenes/actualizar.png" width="20px"></a>
-                        <a href="#"><img src="../imagenes/borra.png" width="20px"></a>
+                    <a href="../Controlador/controlador_salida_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
                     </td>
       </tr>
       <?php
