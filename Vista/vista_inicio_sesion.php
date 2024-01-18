@@ -66,7 +66,7 @@
           <div class="card-body">
             <br>
             <div class="col-12 user-img">
-            <img src="../imagenes/unnamed.jpg" alt="" class="logo">
+            <img src="../imagenes/logocorporativo.png" alt="" class="logo">
             </div>
             <form action="../Controlador/controlador_inicio_sesion.php"  method="POST" class="row g-3 needs-validation" class="formulario" novalidate>
             <div class="col-12">
