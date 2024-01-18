@@ -130,7 +130,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             while ($filas = mysqli_fetch_assoc($query)) {
             ?>
       <tr>
-      <td><?php echo $filas['HORA_ENTRADA'] ?></td>
+      <td><?php echo $filas['ENTRADA_RECEPCION'] ?></td>
                     <td><?php echo $filas['FECHA'] ?></td>
                     <td><?php echo $filas['NOMBRE'] ?></td>
                     <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
@@ -139,8 +139,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <td><?php echo $filas['ASUNTO'] ?></td>
                     <td><?php echo $filas['SALIDA_RECEPCION'] ?></td>
                     <td>
-                    <a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i></a> |
-                    <a href="../Controlador/controlador_salida_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    <a href="../Controlador/controlador_entrada_recepcion.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a> |
+                    <a href="../Controlador/controlador_salida_recepcion.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     </td>
       </tr>
       <?php

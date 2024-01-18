@@ -119,9 +119,9 @@ $row = $resultado->fetch_assoc();
                 <th scope="col">Entrada Seguridad</th>
                 <th scope="col">Entrada Recepción</th>
                 <th scope="col">Entrada UrSpace</th>
-                <th scope="col">Salida Seguridad</th>
-                <th scope="col">Salida Recepción</th>
                 <th scope="col">Salida UrSpace</th>
+                <th scope="col">Salida Recepción</th>
+                <th scope="col">Salida Seguridad</th>
             </tr>
             </thead>
             <tbody>
@@ -138,9 +138,9 @@ $row = $resultado->fetch_assoc();
                 <td><?php echo $filas['ENTRADA_SEGURIDAD'] ?></td>
                 <td><?php echo $filas['ENTRADA_RECEPCION'] ?></td>
                 <td><?php echo $filas['ENTRADA_URSPACE'] ?></td>
-                <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
-                <td><?php echo $filas['SALIDA_RECEPCION'] ?></td>
                 <td><?php echo $filas['SALIDA_URSPACE'] ?></td>
+                <td><?php echo $filas['SALIDA_RECEPCION'] ?></td>
+                <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
             </tr>
             <?php
                 }
