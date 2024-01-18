@@ -96,12 +96,16 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <br><br><br><br><br>
 <h3 class="text-center">HISTORIAL DE VISITAS</h3> 
 <div class="mb-5"></div> <!--Salto de linea-->
-      <!-- ALERTA -->
-      <div class="mb-4"></div><!--Salto de linea-->
-      <div id="mensaje">
-        <?php echo $mensaje; ?>
-      </div>
-      <div class="mb-3"></div><!--Salto de linea-->
+<!-- ALERTA -->
+<div class="mb-4"></div> <!--Salto de linea-->
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10" id="mensaje">
+    <?php echo $mensaje; ?>
+  </div>
+  <div class="col md-1"></div>
+</div>
+<div class="mb-3"></div><!--Salto de linea-->
 <div class="container">
   <div class="row">
     <div class="col-*-*">

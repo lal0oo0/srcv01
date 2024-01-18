@@ -86,6 +86,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <a class="nav-link active" href="vista_registro_categorias.php">Categorías</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="vista_historial_visitas_administrador.php">Historial visitas</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
           </li>
       </div>
@@ -93,11 +96,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   </div>
 </nav>
 </header>
-<br>
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br><br>
 <h3 class="text-center">LISTA DE CATEGORÍAS</h3>
 <div class="mb-5"></div> <!--Salto de linea-->
 <div class="container caja">

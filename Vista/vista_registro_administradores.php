@@ -66,6 +66,9 @@ session_start();
             <a class="nav-link" href="vista_registro_categorias.php">Categorías</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="vista_historial_visitas_administrador.php">Historial visitas</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php">Cerrar sesión</a>
           </li>
         </ul>
