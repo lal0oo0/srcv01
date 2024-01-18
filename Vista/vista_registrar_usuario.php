@@ -82,7 +82,7 @@
             </div>
             
             
-            <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation" onsubmit="return fn()" novalidate>
+            <form action="../Controlador/controlador_registrar_usu.php" method="POST" class="row g-3 needs-validation"  novalidate>
             
             <div class="col-md-12">
               <h6></h6>
@@ -141,7 +141,7 @@
              <input type="text" class="form-control form-control-sm" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
              </div>
             <div class="col-12">
-              <input type="submit" value="Registrarse" class="btn btn-primary" href= "vista_inicio_sesion.php" name="Registrar"></button>
+            <a href="vista_inicio_sesion.php"><input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></a>
             </div>
             </form>
           </div>
@@ -156,12 +156,14 @@
   
   
  <!--QUITAR LOS COMENTARIOS EN INGLÉS-->  
-  <script>
+ <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
   'use strict'
+
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
+
   // Loop over them and prevent submission
   Array.from(forms).forEach(form => {
     form.addEventListener('submit', event => {
@@ -173,6 +175,71 @@
       form.classList.add('was-validated')
     }, false)
   })
+  var valid=true;
+  var nombre=document.getElementById('valid01').value;
+  var ap=document.getElementById('valid02').value;
+  var am=document.getElementById('valid03').value;
+  var pass=document.getElementById('valid04').value;
+
+  if (nombre=='') {
+    valid=false;
+    var com=document.getElementById('nombre')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else if (nombre.length>3 || nombre.length<30) {
+    valid=false;
+    var com=document.getElementById('nombre')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else{
+    document.getElementById('nombre').innerHTML='';
+  }
+
+  if (ap=='') {
+    valid=false;
+    var com=document.getElementById('ap')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else if (ap.length>3 || ap.length<16) {
+    valid=false;
+    var com=document.getElementById('ap')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else{
+    document.getElementById('ap').innerHTML='';
+  }
+
+  if (am=='') {
+    valid=false;
+    var com=document.getElementById('am')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else if (am.length>3 || am.length<16) {
+    valid=false;
+    var com=document.getElementById('am')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else{
+    document.getElementById('am').innerHTML='';
+  }
+
+
+  if (pass=='') {
+    valid=false;
+    var com=document.getElementById('pass')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else if (pass.length>8 || pass.length<16) {
+    valid=false;
+    var com=document.getElementById('pass')
+    com.innerHTML=" *Debe de contener de 8-16 caracteres, por lo menos una mayuscula, un numero, sin espacios"
+  }
+  else{
+    document.getElementById('pass').innerHTML='';
+  }
+  
+
+  return valid;
 })()
   </script>
 </html>

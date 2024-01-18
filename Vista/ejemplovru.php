@@ -82,7 +82,7 @@
             </div>
             
             
-            <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation" onsubmit="return fn()" novalidate>
+            <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation"  novalidate>
             
             <div class="col-md-12">
               <h6></h6>
@@ -144,7 +144,7 @@
               </div>
              </div>
             <div class="col-12">
-              <input type="submit" value="Registrarse" class="btn btn-primary" href= "vista_inicio_sesion.php" name="Registrar"></button>
+            <a href="vista_inicio_sesion.php"><input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></a>
             </div>
             </form>
           </div>
@@ -154,7 +154,7 @@
     
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/validator.js"></script>
+    
   </body>
   
   
@@ -178,6 +178,69 @@
       form.classList.add('was-validated')
     }, false)
   })
+  var valid=true;
+  var nombre=document.getElementById('valid01').value;
+  var ap=document.getElementById('valid02').value;
+  var am=document.getElementById('valid03').value;
+  var pass=document.getElementById('valid04').value;
+
+  if (nombre=='') {
+    valid=false;
+    var com=document.getElementById('nombre')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else if (nombre.length>3 || nombre.length<30) {
+    valid=false;
+    var com=document.getElementById('nombre')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else{
+    document.getElementById('nombre').innerHTML='';
+  }
+
+  if (ap=='') {
+    valid=false;
+    var com=document.getElementById('ap')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else if (ap.length>3 || ap.length<16) {
+    valid=false;
+    var com=document.getElementById('ap')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else{
+    document.getElementById('ap').innerHTML='';
+  }
+
+  if (am=='') {
+    valid=false;
+    var com=document.getElementById('am')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else if (am.length>3 || am.length<16) {
+    valid=false;
+    var com=document.getElementById('am')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else{
+    document.getElementById('am').innerHTML='';
+  }
+
+
+  if (pass=='') {
+    valid=false;
+    var com=document.getElementById('pass')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else if (pass.length>8 || pass.length<16) {
+    valid=false;
+    var com=document.getElementById('pass')
+    com.innerHTML=" *Debe de contener de 8-16 caracteres, por lo menos una mayuscula, un numero, sin espacios"
+  }
+  else{
+    document.getElementById('pass').innerHTML='';
+  }
+  return valid;
 })()
   </script>
 </html>
