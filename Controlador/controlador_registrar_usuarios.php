@@ -50,6 +50,7 @@ if(mysqli_num_rows($norepetir) > 0){
   <strong>Error!</strong> El usuario ya existe, intente nuevamente.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>';
+header("location: ../Vista/vista_registro_administradores.php?mensaje=" . urlencode($mensaje));
 exit(); 
 }
 
