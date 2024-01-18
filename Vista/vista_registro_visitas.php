@@ -70,9 +70,11 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
 <body>
 <?php
+  date_default_timezone_set('America/Mexico_City');
+  $hoy=date("Y-m-d");
   require_once("../Modelo/conexion2.php");
   $conexion = conect();
-  $queryVisitas = mysqli_query($conexion, "select * from srcv_visitas where ESTATUS='1'");
+  $queryVisitas = mysqli_query($conexion, "select * from srcv_visitas where ESTATUS='1' and FECHA='$hoy'");
   $queryempresa = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='empresa'");
   $queryasunto = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='asunto'");
   ?>
@@ -80,7 +82,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <header>
     <nav class="navbar navbar-dark  fixed-top navbar-custom">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV SEGURIDAD</a>
+        <a class="navbar-brand" href="#"><img src="../imagenes/Logo-Corporativo-png-oscuro.png" width="60px"> SRCV SEGURIDAD</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -148,8 +150,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
                 <div class="row">
                   <div class="col">
-                    <label for="he" class="form-label">Hora de entrada *</label>
-                    <input type="time" class="form-control" id="he" name="he" value="<?= $hora_actual ?>" disabled required>
+                    <label for="he" class="form-label">Hora de entrada </label>
+                    <input type="time" disabled class="form-control" value="<?=$hora_actual?>" >
+                    <input type="time" hidden class="form-control" id="he" name="he" value="<?= $hora_actual ?>" required>
                     <!--<div class="invalid-feedback">
                  Verifique los datos
                 </div>-->
@@ -157,7 +160,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
                   <div class="col">
                     <label for="fecha" class="form-label">Fecha *</label>
-                    <input type="date" class="form-control" id="fecha" name="fecha" disabled value="<?= $fecha_actual ?>" required>
+                    <input type="date" disabled class="form-control" value="<?=$fecha_actual?>" >
+                    <input type="date" hidden class="form-control" id="fecha" name="fecha" value="<?= $fecha_actual ?>" required>
                     <!--<div class="invalid-feedback">
                  Verifique los datos
                 </div>-->
@@ -287,16 +291,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <td><?php echo $filas['HORA_SALIDA'] ?></td>
                   <td>
 
-                    <!-- Boton de editar -->
-                    <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php //echo $filas['ID_VISITA'] ?>" onclick="Visita('<?// $filas['ID_VISITA'] ?>')" >
-                    <img src="../imagenes/actualizar.png" width="20px">
-                    </button>-->
-
-                    
                     <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
                     <!--Boton de eliminar-->
                     <a href="../Controlador/controlador_eliminar_visita.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
-                    <!--<a href="#"><button type="button" class="btn btn-secondary btn-sm" style="background-color:	#8AB7B0;"><img src="../imagenes/borra.png" width="20px"></button></a>-->
 
                   </td>
                 </tr>

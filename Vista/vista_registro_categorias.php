@@ -68,7 +68,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <header>
 <nav class="navbar navbar-dark  fixed-top navbar-custom" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="../imagenes/logo_it.png" width="60px"> SRCV Registros</a>
+    <a class="navbar-brand" href="#"><img src="../imagenes/Logo-Corporativo-png-oscuro.png" width="60px"> SRCV Registros</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
