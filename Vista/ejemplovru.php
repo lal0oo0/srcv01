@@ -15,7 +15,7 @@
 <?php
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
-    $categorias = mysqli_query ($conexion, "select * from srcv_administradores");
+    $query = mysqli_query ($conexion, "select * from srcv_administradores");
   ?>
 <style>
 
@@ -131,14 +131,6 @@
               </div>
               <br>
             </div>
-            <div class="col-md-6">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
-    </div>
-  </div>
              <div class="col-md-12">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
               <option selected value="">Seleccione con la que mejor se identifique </option>
