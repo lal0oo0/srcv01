@@ -281,17 +281,17 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               while ($filas = mysqli_fetch_assoc($queryVisitas)) {
               ?>
                 <tr>
-                  <td><?php echo $filas['HORA_ENTRADA'] ?></td>
+                  <td><?php echo $filas['ENTRADA_SEGURIDAD'] ?></td>
                   <td><?php echo $filas['FECHA'] ?></td>
                   <td><?php echo $filas['NOMBRE'] ?></td>
                   <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
                   <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
                   <td><?php echo $filas['EMPRESA'] ?></td>
                   <td><?php echo $filas['ASUNTO'] ?></td>
-                  <td><?php echo $filas['HORA_SALIDA'] ?></td>
+                  <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
                   <td>
 
-                    <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> </a>
+                    <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     <!--Boton de eliminar-->
                     <a href="../Controlador/controlador_eliminar_visita.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
 

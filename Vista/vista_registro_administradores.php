@@ -66,6 +66,9 @@ session_start();
             <a class="nav-link" href="vista_registro_categorias.php">Categorías</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="vista_historial_visitas_administrador.php">Historial de Visitas</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php">Cerrar sesión</a>
           </li>
         </ul>
@@ -84,7 +87,7 @@ session_start();
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-10" id="mensaje">
-    <?php echo $mensaje; ?>
+    <?php echo $mensaje;?>
   </div>
   <div class="col md-1"></div>
 </div>
@@ -118,12 +121,6 @@ session_start();
             
             <div class="col-md-12">
               <h6></h6>
-
-            <!-- ALERTA 
-            <div id="mensaje">
-             <?php echo $mensaje; ?>
-            </div>
-            <div class="mb-3"></div> -->
       
 
               <label for="nombre" class="form-label">Nombre *</label>
