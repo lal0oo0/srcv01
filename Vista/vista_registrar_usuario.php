@@ -1,7 +1,5 @@
-
 <?php
   $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
-  $mensaje2 = isset($_GET['mensaje2']) ? urldecode($_GET["mensaje2"]) : "";
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +14,7 @@
 <?php
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
-    $categorias = mysqli_query ($conexion, "select * from srcv_administradores");
+    $sql = mysqli_query ($conexion, "select * from srcv_administradores");
   ?>
 <style>
 
@@ -82,7 +80,7 @@
             </div>
             
             
-            <form action="../Controlador/controlador_registrar_usu.php" method="POST" class="row g-3 needs-validation"  novalidate>
+            <form action="../Controlador/controlador_registrar_usu.php" method="POST" class="row g-3 needs-validation" novalidate>
             
             <div class="col-md-12">
               <h6></h6>
@@ -102,14 +100,14 @@
             </div>
             <div class="col-md-6">
               <label for="ap" class="form-label">Apellido Paterno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" pattern="(?=.*[a-z])(?=.*[A-Z]).{4,30}" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
               <div class="invalid-feedback" id="ap">
                 Campo obligatorio
               </div>
             </div>
             <div class="col-md-6">
               <label for="am" class="form-label">Apellido Materno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" pattern="(?=.*[a-z])(?=.*[A-Z]).{4,30}" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
               <div class="invalid-feedback" id="am">
               Campo obligatorio
               </div>

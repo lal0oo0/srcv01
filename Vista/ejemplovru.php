@@ -15,7 +15,7 @@
 <?php
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
-    $query = mysqli_query ($conexion, "select * from srcv_administradores");
+    $categorias = mysqli_query ($conexion, "select * from srcv_administradores");
   ?>
 <style>
 
@@ -68,7 +68,6 @@
   }
 
 
-
 </style>
 <body>
     <div class="container text-center">
@@ -82,7 +81,7 @@
             </div>
             
             
-            <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation"  novalidate>
+            <form action="../Controlador/controlador_registrar_usu.php" method="POST" class="row g-3 needs-validation"  id="formulario"  novalidate>
             
             <div class="col-md-12">
               <h6></h6>
@@ -94,57 +93,54 @@
             <div class="mb-3"></div> 
       
 
-              <label for="nombre" class="form-label">Nombre </label> 
+              <label for="nombre" class="form-label">Nombre *</label>
               <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="valid01" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
               <div class="invalid-feedback" id="nombre">
-                  *Campo Obligatorio
-                </div>
+              Campo obligatorio
+              </div>
             </div>
-            <div class="col-md-6 has-feedback">
-              <label for="ap" class="form-label">Apellido Paterno </label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" pattern="(?=.*[a-z])(?=.*[A-Z]).{4,16}" required>
+            <div class="col-md-6">
+              <label for="ap" class="form-label">Apellido Paterno *</label>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" pattern="(?=.*[a-z])(?=.*[A-Z]).{4,30}" required>
               <div class="invalid-feedback" id="ap">
-                  *Campo Obligatorio
-                </div>
+                Campo obligatorio
+              </div>
             </div>
-            <div class="col-md-6 has-feedback">
-              <label for="am" class="form-label">Apellido Materno </label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" pattern="(?=.*[a-z])(?=.*[A-Z]).{4,16}" required>
+            <div class="col-md-6">
+              <label for="am" class="form-label">Apellido Materno *</label>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" pattern="(?=.*[a-z])(?=.*[A-Z]).{4,30}" required>
               <div class="invalid-feedback" id="am">
-                  *Campo Obligatorio
-                </div>
+              Campo obligatorio
+              </div>
             </div>
-            <div class="col-md-6 has-feedback">
-              <label for="email" class="form-label">Correo Electronico </label>
+            <div class="col-md-6">
+              <label for="email" class="form-label">Correo Electronico *</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
-                *Campo Obligatorio
+                Campo obligatorio
                 </div>
               </div>
             </div>
-            <div class="col-md-6 has-feedback">
-              <label for="pass" class="form-label">Contraseña </label>
-              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid04" aria-describedby="passwordHelp" pattern="(?=^.{8,15}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+            <div class="col-md-6">
+              <label for="pass" class="form-label">Contraseña *</label>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid04" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" title="Una contraseña válida debe estar compuesta por letras y/o números y tener una longitud entre 6 y 15 caracteres"required>
               <div class="invalid-feedback " id="pass">
-              *Campo obligatorio
+              Campo obligatorio
               </div>
               <br>
             </div>
              <div class="col-md-12">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
-              <option selected value="">Seleccione con la que mejor se identifique </option>
+              <option selected value="">Seleccione con la que mejor se identifique *</option>
               <option value="1">Nombre del mejor amig@</option>
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
               </select>
-             <input type="text" class="form-control form-control-sm" style="border: 2px solid #007AB6;" name="respuesta" required>
-             <div class="invalid-feedback " id="respuesta">
-              *Campo obligatorio
-              </div>
+             <input type="text" class="form-control form-control-sm" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
              </div>
             <div class="col-12">
-            <a href="vista_inicio_sesion.php"><input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></a>
+            <on click="vista_inicio_sesion.php"><input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar">
             </div>
             </form>
           </div>
@@ -152,9 +148,9 @@
       </div>
     </div>
     
+    <script src="../js/validator.js"></script>
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
-    
   </body>
   
   
@@ -240,6 +236,8 @@
   else{
     document.getElementById('pass').innerHTML='';
   }
+  
+
   return valid;
 })()
   </script>

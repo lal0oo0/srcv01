@@ -37,8 +37,8 @@ $respuesta = $_POST['respuesta'];
 
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, ROL, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
-VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$administrador','$pregunta','$respuesta','$useralta','$useralta','1')";
+$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, ESTATUS) 
+VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$pregunta','$respuesta','1')";
 
 /*Evitar que el registro se repita*/ 
 $norepetir = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$correo'");
@@ -67,7 +67,7 @@ if ($ejecutar) {
 
 mysqli_close($conexion);
 
-header("location: ../Vista/vista_registro_administradores.php?mensaje=" . urlencode($mensaje));
+header("location: ../Vista/vista_registrar_usuario.php?mensaje=" . urlencode($mensaje));
 
 
 ?>
