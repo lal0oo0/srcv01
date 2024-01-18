@@ -18,7 +18,7 @@ $asunto = $_POST['asunto'];
 
 //y$variable11= $_POST['salaSeleccionada'];
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$visita = "INSERT INTO srcv_visitas(HORA_ENTRADA, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
+$visita = "INSERT INTO srcv_visitas(ENTRADA_SEGURIDAD, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
 VALUES ('$he', '$fecha','$nombre','$apellidop','$apellidom','$empresa','$asunto','$usuariom','$usuariom','1')";
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $visita); 

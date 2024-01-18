@@ -13,7 +13,7 @@ $fechamodificacion = date('Y-m-d H:i:s');
 $id=$_GET['id'];
 $hora_actual = date("H:i");
 
-  $consulta="UPDATE srcv_visitas SET HORA_SALIDA='$hora_actual', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA='$id'";
+  $consulta="UPDATE srcv_visitas SET SALIDA_RECEPCION='$hora_actual', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA='$id'";
   $sql=mysqli_query($conexion, $consulta);
 
 
