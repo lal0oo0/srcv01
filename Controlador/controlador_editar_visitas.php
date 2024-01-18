@@ -21,12 +21,12 @@ $hora_actual = date("H:i");
 if ($sql) {
     // Éxito: alerta de Bootstrap éxito
     $mensaje = '<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Exito!</strong> El registro se ha actualizado correctamente
+    <strong>Exito!</strong> La salida ha sido confirmada correctamente.
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>';
 } else {
     // Error: alerta de Bootstrap error con detalles
-    $mensaje = '<div class="alert alert-danger" role="alert">Error en la consulta: ' . mysqli_error($conexion) . '</div>';
+    $mensaje = '<div class="alert alert-danger" role="alert">Error al confirmar la salida.' . mysqli_error($conexion) . '</div>';
 }
 
 mysqli_close($conexion);
