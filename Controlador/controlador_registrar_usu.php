@@ -37,8 +37,8 @@ $respuesta = $_POST['respuesta'];
 
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, ESTATUS) 
-VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$pregunta','$respuesta','1')";
+$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA,ROL, ESTATUS) 
+VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$pregunta','$respuesta', 'Administrador', '1')";
 
 /*Evitar que el registro se repita*/ 
 $norepetir = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$correo'");
@@ -47,6 +47,7 @@ if(mysqli_num_rows($norepetir) > 0){
   <strong>Error!</strong> El usuario ya existe, intente nuevamente.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>';
+header("location: ../Vista/vista_registrar_usuario.php?mensaje=" . urlencode($mensaje));
 exit(); 
 }
 
