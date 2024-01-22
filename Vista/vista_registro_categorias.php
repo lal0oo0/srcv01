@@ -1,5 +1,11 @@
 <?php
+require_once("../Modelo/conexion2.php");
+$conexion = conect();
 session_start();
+$correo = $_SESSION["correo"];
+$sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ";
+$resultado = $conexion->query($sql);
+$row = $resultado->fetch_assoc();
 ?>
 
 <?php
@@ -74,7 +80,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     </button>
     <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title Titulo" id="offcanvasDarkNavbarLabel">Menú</h5>
+        <h3 class="offcanvas-title Titulo" id="offcanvasDarkNavbarLabel">Bienvenid@ <?php echo utf8_decode($row['NOMBRE']); ?> </h3>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
