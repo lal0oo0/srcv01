@@ -85,12 +85,13 @@ if($urspace->num_rows==1){
 } 
 
 else {
-    $error = 'yes';
-    echo $error;
-    exit();
+    // Error: alerta de Bootstrap
+    $mensaje = '<div class="alert alert-danger">Contraseña y/o correo electrónico incorrectos.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' . mysqli_error($conexion) . '</div>';
 }
 
+mysqli_close($conexion);
 
+header("location: ../Vista/vista_inicio_sesion.php?mensaje=" . urlencode($mensaje));
 
-$conexion->close();
 ?>

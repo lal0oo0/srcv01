@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,8 +8,11 @@
 <?php
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
-    $categorias = mysqli_query ($conexion, "select * from srcv_administradores");
-  ?>
+    $query = mysqli_query ($conexion, "select * from srcv_administradores");
+?>
+<?php
+$mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
+?>
 <style>
 
   body{
@@ -68,7 +70,16 @@
             <div class="col-12 user-img">
             <img src="../imagenes/logocorporativo.png" alt="" class="logo">
             </div>
-            <form action="../Controlador/controlador_inicio_sesion.php"  method="POST" class="row g-3 needs-validation" class="formulario" novalidate>
+            <div class="mb-2"></div><!--Salto de linea-->
+            <h3 class="title">BIENVENIDO</h3>
+            <!-- ALERTA -->
+            <div class="mb-4"></div><!--Salto de linea-->
+            <div id="mensaje">
+              <?php echo $mensaje; ?>
+            </div>
+            <div class="mb-3"></div><!--Salto de linea-->
+            <div class="mb-4"></div><!--Salto de linea-->
+            <form action="../Controlador/controlador_inicio_sesion.php"  method="post" class="row g-3 needs-validation" class="formulario" novalidate>
             <div class="col-12">
               <label for="validationexampleInputEmail1" class="form-label">Correo Electronico *</label>
               <div class="input-group has-validation">
@@ -81,13 +92,13 @@
             <div class="col-12">
               <label for="validationCustom03" class="form-label">Contraseña *</label>
               <input type="password" class="form-control" style="border: 2px solid #007AB6" name="contrasena" id="exampleInputPassword1"  id="validationCustom05" aria-describedby="passwordHelp" required>
-              <div class="invalid-feedback" id="pass">
+              <div class="invalid-feedback">
               Campo obligatorio
               </div>
             </div>
-            <br><br><br>
+            <div class="mb-3"></div><!--Salto de linea-->
             <div class="col-12">
-            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+              <button type="submit" class="btn btn-primary">Iniciar sesión</button>
             </div>
           </form>
           </div>
@@ -99,28 +110,29 @@
     </div>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/jquery-3.1.1.min.js"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
-  </body>
-  <script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+<script>
+// Script para validaciones
+(() => {
   'use strict'
 
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
+  const forms = document.querySelectorAll('.needs-validation')
 
   // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
 
-        form.classList.add('was-validated')
-      }, false)
-    })
+      form.classList.add('was-validated')
+    }, false)
+  })
 })()
-  </script>
+</script>
+
 </html>
