@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (empty($_SESSION["correo"])){
+  header("location: vista_inicio_sesion.php");
+}
 ?>
 
 <?php

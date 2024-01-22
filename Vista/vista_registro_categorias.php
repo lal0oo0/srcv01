@@ -2,6 +2,9 @@
 require_once("../Modelo/conexion2.php");
 $conexion = conect();
 session_start();
+if (empty($_SESSION["correo"])){
+  header("location: vista_inicio_sesion.php");
+}
 $correo = $_SESSION["correo"];
 $sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ";
 $resultado = $conexion->query($sql);
