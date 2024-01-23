@@ -85,8 +85,25 @@
               </div>
             </div>
             <br>
-            <div class="modal-dialog modal-dialog-centered">
-                
+            <div class="col-md-12">
+            <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
+              <option selected value="">Seleccione con la que mejor se identifique *</option>
+              <option value="1">Nombre del mejor amig@</option>
+              <option value="2">Nombre de la mascota</option>
+              <option value="3">Pelicula Favorita</option>
+              </select>
+             <input type="text" class="form-control form-control-sm" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
+             <div class="invalid-feedback " id="respuesta">
+              Campo obligatorio
+              </div>
+             </div>
+             <div class="col-md-12">
+              <label for="pass" class="form-label">Confirmar nueva contraseña</label>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="pass" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+              <div class="invalid-feedback " id="pass">
+              Campo obligatorio
+              </div>
+              <br>
             </div>
             <div class="col-12">
               <button class="btn btn-primary" type="submit" value="enviar" name="enviar">Enviar</button>
@@ -120,5 +137,29 @@
     }, false)
   })
 })()
+  </script>
+  <script>
+var input = document.getElementById('pass');
+
+document.getElementById('email').addEventListener('click', function(e) {
+  console.log('Vamos a habilitar el input text');
+  input.disabled = false;
+});
+
+document.getElementById('pregunta').addEventListener('click', function(e) {
+  console.log('Vamos a habilitar el input text');
+  input.disabled = false;
+});
+
+document.getElementById('respuesta').addEventListener('click', function(e) {
+  console.log('Vamos a habilitar el input text');
+  input.disabled = false;
+});
+
+// evento para el input radio del "no"
+document.getElementById('pass').addEventListener('click', function(e) {
+  console.log('Vamos a deshabilitar el input text');
+  input.disabled = true;
+});
   </script>
 </html>
