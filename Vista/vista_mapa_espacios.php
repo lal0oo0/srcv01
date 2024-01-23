@@ -262,12 +262,14 @@ $row = $resultado->fetch_assoc();
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<!--script src="../js/validar_horas.js"></script-->
 
 <script>
   function setSelectedRoom(idSala) {
     // Asigna el ID de la sala al campo oculto en el formulario
     document.getElementById('salaSeleccionada_' + idSala).value = idSala;
   }
+
 
 // Script para validaciones
 (() => {

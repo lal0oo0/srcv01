@@ -78,8 +78,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   require_once("../Modelo/conexion2.php");
   $conexion = conect();
   $queryVisitas = mysqli_query($conexion, "select * from srcv_visitas where ESTATUS='1' and FECHA='$hoy'");
-  $queryempresa = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='empresa'");
-  $queryasunto = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='asunto'");
+  $queryempresa = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='empresa' and ESTATUS='1'");
+  $queryasunto = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='asunto' and ESTATUS='1'");
   ?>
   <!--aqui va la navbar-->
   <header>
@@ -246,7 +246,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   </div>
 
                 </div>
-                <!--Botones para cancelar o enviar fromulario del modal-->
+                <!--Botones para cancelar o enviar formulario del modal-->
                 <div class="modal-footer">
                   <button type="button" onclick="limpiar()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                   <button type="submit" class="btn btn-primary" onclick="validar()" >Confirmar</button>
