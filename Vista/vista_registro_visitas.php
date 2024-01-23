@@ -246,7 +246,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   </div>
 
                 </div>
-                <!--Botones para cancelar o enviar fromulario del modal-->
+                <!--Botones para cancelar o enviar formulario del modal-->
                 <div class="modal-footer">
                   <button type="button" onclick="limpiar()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                   <button type="submit" class="btn btn-primary" onclick="validar()" >Confirmar</button>
