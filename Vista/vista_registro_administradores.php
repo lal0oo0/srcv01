@@ -138,21 +138,21 @@ $row = $resultado->fetch_assoc();
       
 
               <label for="nombre" class="form-label">Nombre *</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="nombre" required>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="valid01" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
               <div class="invalid-feedback">
               Ingrese informacion valida.
               </div>
             </div>
             <div class="col-md-6">
               <label for="ap" class="form-label">Apellido Paterno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="ap" required>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="valid02" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
               <div class="invalid-feedback">
               Ingrese informacion valida.
               </div>
             </div>
             <div class="col-md-6">
               <label for="am" class="form-label">Apellido Materno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="am" required>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="valid03" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
               <div class="invalid-feedback">
               Ingrese informacion valida.
               </div>
@@ -168,7 +168,7 @@ $row = $resultado->fetch_assoc();
             </div>
             <div class="col-md-6">
               <label for="pass" class="form-label">Contraseña *</label>
-              <input type="password" class="form-control" style="border: 2px solid #1E90FF;" name="pass" id="pass" aria-describedby="passwordHelp" required autocomplete="current-password">
+              <input type="password" class="form-control" style="border: 2px solid #1E90FF;" name="pass" id="valid04" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required autocomplete="current-password">
               <div class="invalid-feedback">
                 Su contraseña debe de tener entre 8 y 16 caracteres, contener letras y numeros, y no debe contener espacios.
               </div>
@@ -192,7 +192,7 @@ $row = $resultado->fetch_assoc();
              <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="respuesta" name="respuesta" required>
              </div>
             <div class="col-12">
-              <input type="submit" value="Registrarse" class="btn btn-primary" onclick="contra(document.myForm.pass)" name="Registrar"></button>
+              <input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
             </div>
             </form>
@@ -263,7 +263,7 @@ $row = $resultado->fetch_assoc();
 
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
-<!--script src="..js/validar_contrasena.js"></script-->
+<script src="..js/validator.js"></script>
 <script>
 
   //Limpiar fromulario
@@ -273,49 +273,89 @@ $row = $resultado->fetch_assoc();
       formulario.reset();
     }
 
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
+    (() => {
   'use strict'
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
 
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
+  const forms = document.querySelectorAll('.needs-validation')
 
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
 
-function validateForm() {
-  // Obtener el valor del campo de contraseña
-  var password = document.getElementById("pass").value;
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
 
-  // Patrón de validación (puedes ajustarlo según tus criterios)
-  var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
+      form.classList.add('was-validated')
+    }, false)
+  })
+  var valid=true;
+  var nombre=document.getElementById('valid01').value;
+  var ap=document.getElementById('valid02').value;
+  var am=document.getElementById('valid03').value;
+  var pass=document.getElementById('valid04').value;
 
-  // Verificar si la contraseña cumple con el patrón
-  if (!passwordPattern.test(password)) {
-    // Mostrar mensaje de error
-    alert("La contraseña debe contener al menos 8 caracteres, incluyendo al menos un número, una letra minúscula y una letra mayúscula.");
-    // Evitar que se envíe el formulario
-    return false;
+  if (nombre=='') {
+    valid=false;
+    var com=document.getElementById('nombre')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else if (nombre.length>3 || nombre.length<30) {
+    valid=false;
+    var com=document.getElementById('nombre')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else{
+    document.getElementById('nombre').innerHTML='';
   }
 
-  // Limpiar el mensaje de error si la contraseña es válida
-  document.getElementById("passwordError").innerHTML = "";
+  if (ap=='') {
+    valid=false;
+    var com=document.getElementById('ap')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else if (ap.length>3 || ap.length<16) {
+    valid=false;
+    var com=document.getElementById('ap')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else{
+    document.getElementById('ap').innerHTML='';
+  }
 
-  // Permitir el envío del formulario
-  return true;
-}
+  if (am=='') {
+    valid=false;
+    var com=document.getElementById('am')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else if (am.length>3 || am.length<16) {
+    valid=false;
+    var com=document.getElementById('am')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else{
+    document.getElementById('am').innerHTML='';
+  }
 
+
+  if (pass=='') {
+    valid=false;
+    var com=document.getElementById('pass')
+    com.innerHTML=" *Campo obligatorio"
+  }
+  else if (pass.length>8 || pass.length<16) {
+    valid=false;
+    var com=document.getElementById('pass')
+    com.innerHTML=" *Debe de contener de 8-16 caracteres, por lo menos una mayuscula, un numero, sin espacios"
+  }
+  else{
+    document.getElementById('pass').innerHTML='';
+  }
+  
+
+  return valid;
+})()
 </script>
 </body>
 </html>
