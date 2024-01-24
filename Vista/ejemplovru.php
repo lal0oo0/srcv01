@@ -140,7 +140,7 @@
              <input type="text" class="form-control form-control-sm" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
              </div>
             <div class="col-12">
-            <button><input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar" onclick="window.location.href=' ../Vista/vista_inicio_sesion.php'">Registrar</button>
+            <input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar" onclick="window.location.href=' ../Vista/vista_inicio_sesion.php'">
             </div>
             </form>
           </div>
