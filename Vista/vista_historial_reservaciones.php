@@ -129,9 +129,9 @@ $row = $resultado->fetch_assoc();
               <td><?php echo$filas ["FECHA_SALIDA"] ?></td>
               <td><?php echo$filas ["HORA_ENTRADA"] ?></td>
               <td><?php echo$filas ["HORA_SALIDA"] ?></td>
-              <td><?php echo$filas ["TOTAL"] ?></td>
-              <td><?php echo$filas ["ENGANCHE"] ?></td>
-              <td><?php echo$filas ["LIQUIDACION"] ?></td>
+              <td>$<?php echo$filas ["TOTAL"] ?></td>
+              <td>$<?php echo$filas ["ENGANCHE"] ?></td>
+              <td>$<?php echo$filas ["LIQUIDACION"] ?></td>
           </tr>
           <?php
           };
