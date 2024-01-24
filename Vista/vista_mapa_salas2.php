@@ -2,6 +2,9 @@
 session_start();
 $ROL=$_SESSION['rol'];
 $CORREO=$_SESSION['correo'];
+if (empty($_SESSION["correo"])){
+  header("location: vista_inicio_sesion.php");
+}
 ?>
 
 <?php
@@ -84,16 +87,16 @@ $row = $resultado->fetch_assoc();
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="vista_mapa_salas.php">Mapa</a>
+              <a class="nav-link active" aria-current="page" href="vista_mapa_espacios.php">Mapa</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Reservaciones</a>
+              <a class="nav-link" aria-current="page" href="vista_reservaciones_urspace.php">Reservaciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="vista_registro_salas.php">Registro de espacios</a>
+              <a class="nav-link" aria-current="page" href="vista_registro_espacios.php">Registro de espacios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="vista_reservaciones_canceladas.php">Historial de reservaciones</a>
+              <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
@@ -137,7 +140,7 @@ $row = $resultado->fetch_assoc();
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" method="post" novalidate>
+              <form action="../Controlador/controlador_registro_reservacion2.php" class="formulario row g-3 needs-validation" method="post" novalidate>
                 <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
                 <div class="col">
                 <input type="text" class="form-control" name="Nombre" placeholder="Nombre *" aria-label="Nombre" aria-describedby="basic-addon1" required>
@@ -174,14 +177,15 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="Fecha inicio">Fecha de inicio *</label>
-                    <input type="date" class="form-control" id="Fechainicio" name="Fechainicio" placeholder="Fecha de inicio " aria-label="Fecha  de inicio" aria-describedby="basic-addon1" value="<?=$fecha_actual?>" required>
+                    <input type="date" class="form-control" id="Fechainicio" name="Fechainicio" placeholder="Fecha de inicio " aria-label="Fecha  de inicio" aria-describedby="basic-addon1" required>
+                    <!--input type="date" class="form-control" id="Fechainicio" name="Fechainicio" placeholder="Fecha de inicio " aria-label="Fecha  de inicio" aria-describedby="basic-addon1" min="<?//=$fecha_actual?>" value="<?//=$fecha_actual?>" required-->
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="Fecha finalizacion">Fecha de finalizacion *</label>
-                    <input type="date" class="form-control" id="Fechafinalizacion" name="Fechafinalizacion" placeholder="Fecha de finalizacion " aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" required>
+                    <input type="date" class="form-control" id="Fechafinalizacion" name="Fechafinalizacion" placeholder="Fecha de finalizacion " aria-label="Fecha de finalizacion" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>
@@ -260,16 +264,35 @@ $row = $resultado->fetch_assoc();
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 
-<script>
+
+<!--script>
   function setSelectedRoom(idSala) {
     // Asigna el ID de la sala al campo oculto en el formulario
     document.getElementById('salaSeleccionada_' + idSala).value = idSala;
   }
 
-// Script para validaciones
 
+/* Script para validaciones
+(() => {
+  'use strict'
 
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
 
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()*/
+
+/*
 //ALERTAS//
 // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
 $(document).ready(function() {
@@ -308,10 +331,10 @@ $(document).ready(function() {
             }
         });
     });
-});
+});*/
 
 
-</script>
-
+</script-->
+<script src="../js/validar_horas.js"></script>
 </body>
 </html>

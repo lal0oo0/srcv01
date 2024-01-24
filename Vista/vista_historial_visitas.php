@@ -108,8 +108,22 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   </div>
   <div class="col md-1"></div>
 </div>
+
 <div class="mb-3"></div><!--Salto de linea-->
 <div class="container">
+
+<form class="form-inline">
+    <div class="row">
+      <div class="col-md-9"></div>
+      <div class="col-md-2">
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+      </div>
+      <div class="col-md-1">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+      </div>
+    </div>
+</form>
+  <div class="mb-3"></div><!--Salto de linea-->
   <div class="row">
     <div class="col-*-*">
     <div class="table-responsive my-custom-scrollbar">
