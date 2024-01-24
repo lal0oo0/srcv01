@@ -143,7 +143,8 @@ $row = $resultado->fetch_assoc();
               <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" method="post" novalidate>
                 <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
                 <div class="col">
-                <input type="text" class="form-control" name="Nombre" placeholder="Nombre *" aria-label="Nombre" aria-describedby="basic-addon1" required>
+                <label for="se">Nombre *</label>
+                <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
                 <div class="invalid-feedback">
                   Verifique los datos
                 </div>
@@ -152,13 +153,15 @@ $row = $resultado->fetch_assoc();
 
                 <div class="row">
                   <div class="col">
-                    <input type="text" class="form-control" name="Apellidopaterno" placeholder="Apellido paterno *" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
+                    <label for="se">Apellido paterno *</label>
+                    <input type="text" class="form-control" name="Apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
-                    <input type="text" class="form-control" name="Apellidomaterno" placeholder="Apellido materno *" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
+                    <label for="se">Apellido materno *</label>
+                    <input type="text" class="form-control" name="Apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -167,7 +170,8 @@ $row = $resultado->fetch_assoc();
                 <div class="mb-2"></div> <!--Salto de linea-->
 
                 <div class="col">
-                <input type="email" class="form-control" name="Correo" placeholder="Correo electronico *" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
+                <label for="se">Correo electrónico *</label>
+                <input type="email" class="form-control" name="Correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
                 <div class="invalid-feedback">
                   Verifique los datos
                 </div>
@@ -177,14 +181,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="Fecha inicio">Fecha de inicio *</label>
-                    <input type="date" class="form-control" id="Fechainicio" name="Fechainicio" placeholder="Fecha de inicio " aria-label="Fecha  de inicio" aria-describedby="basic-addon1" min="<?=$fecha_actual?>" value="<?=$fecha_actual?>" required>
+                    <input type="date" class="form-control" id="Fechainicio" name="Fechainicio" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1" min="<?=$fecha_actual?>" value="<?=$fecha_actual?>" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="Fecha finalizacion">Fecha de finalizacion *</label>
-                    <input type="date" class="form-control" id="Fechafinalizacion" name="Fechafinalizacion" placeholder="Fecha de finalizacion " aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" min="<?=$fecha_actual?>" required>
+                    <input type="date" class="form-control" id="Fechafinalizacion" name="Fechafinalizacion" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" min="<?=$fecha_actual?>" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>
@@ -213,27 +217,29 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col-md-3"></div>
                   <div class="col-md-6">
-                  <label for="personas">Numero de personas:</label>
+                  <label for="personas">Numero de personas</label>
                   <input type="number" class="form-control" name="Personas" aria-label="personas" aria-describedby="basic-addon1">
                   </div>
                   <div class="col-md-3"></div>
                 </div>
 
                 <div class="col">
-                  <label for="se">Servicios extra:</label>
-                  <input type="text" class="form-control" name="Servicios" placeholder="" aria-label="servicios" aria-describedby="basic-addon1">
+                  <label for="se">Servicios extra</label>
+                  <input type="text" class="form-control" name="Servicios" value="N/A" aria-label="servicios" aria-describedby="basic-addon1">
                 </div>
                 <div class="mb-4"></div> <!--Salto de linea-->
 
                 <div class="row">
                   <div class="col">
-                    <input type="number" class="form-control" name="Total" placeholder="Total *" aria-label="Total" aria-describedby="basic-addon1" required>
+                    <label for="se">Total *</label>
+                    <input type="number" class="form-control" name="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" id="monto" oninput="formatoMoneda(this)" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
-                    <input type="number" class="form-control" name="Enganche" placeholder="Enganche *" aria-label="Enganche" aria-describedby="basic-addon1" required>
+                    <label for="se">Enganche *</label>
+                    <input type="number" class="form-control" name="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -262,7 +268,7 @@ $row = $resultado->fetch_assoc();
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
-<!--script src="../js/validar_horas.js"></script-->
+<!--script src="../js/moneda.js"></script-->
 
 <script>
   function setSelectedRoom(idSala) {

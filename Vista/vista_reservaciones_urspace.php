@@ -146,9 +146,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               <td><?php echo$filas ["FECHA_SALIDA"] ?></td>
               <td><?php echo$filas ["HORA_ENTRADA"] ?></td>
               <td><?php echo$filas ["HORA_SALIDA"] ?></td>
-              <td><?php echo$filas ["TOTAL"] ?></td>
-              <td><?php echo$filas ["ENGANCHE"] ?></td>
-              <td><?php echo$filas ["LIQUIDACION"] ?></td>
+              <td>$<?php echo$filas ["TOTAL"] ?></td>
+              <td>$<?php echo$filas ["ENGANCHE"] ?></td>
+              <td>$<?php echo$filas ["LIQUIDACION"] ?></td>
               <td>
                 
 
@@ -231,7 +231,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     </div>
                   </div>
                   <!--Boton para eliminar-->
-                  <a href="../Controlador/controlador_eliminar_reservacion.php?id=<?=$filas ['ID_RESERVACION']?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                  <a href="../Controlador/controlador_eliminar_reservacion.php?id=<?=$filas ['ID_RESERVACION']?>"><i class="fa fa-times" aria-hidden="true"></i></a>
                   <a href="../Controlador/controlador_uso_reservacion.php?id=<?=$filas['ID_RESERVACION']?>"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
                 
               </td>
