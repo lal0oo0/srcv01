@@ -65,18 +65,3 @@ function fn(){
 
   return valid;
 }
-
-function Vista_form(){
-  let pass = document.getElementById('pass');
-  let ver = document.getElementById('ver');
-  let ocultar = document.getElementById('ocultar');
-  if (pass.type === 'password') {
-    pass.type = 'text';
-    ver.style.display = 'none';
-    ocultar.style.display = 'block';
-  } else {
-    pass.type = 'password';
-    ver.style.display = 'block';
-    ocultar.style.display = 'none';
-  }
-}

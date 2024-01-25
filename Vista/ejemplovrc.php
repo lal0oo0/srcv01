@@ -71,7 +71,7 @@
           <div class="card-body">
             <br>
             <div class="col-12 user-img">
-            <img src="../imagenes/unnamed.jpg" alt="" class="logo">
+            <img src="../imagenes/logocorporativo.png" alt="" class="logo">
             </div>
             <form action="controlador_recuperar_contrasena.php" action="POST" class="row g-3 needs-validation" novalidate>
             <div class="col-12">
@@ -80,7 +80,7 @@
               <div class="input-group has-validation">
               <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
-                Verifique si sus datos son correctos
+                *Campo obligatorio
                 </div>
               </div>
             </div>
@@ -92,21 +92,20 @@
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
               </select>
-             <input type="text" class="form-control form-control-sm" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
+             <input type="text" class="form-control" style="border: 2px solid #007AB6;"  id="respues" name="respues" required>
              <div class="invalid-feedback " id="respuesta">
-              Campo obligatorio
+              *Campo obligatorio
               </div>
              </div>
              <div class="col-md-12">
-              <label for="pass" class="form-label">Confirmar nueva contraseña</label>
-              <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="pass" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-              <div class="invalid-feedback " id="pass">
-              Campo obligatorio
+              <label for="passwo" id="passwo" class="form-label">Confirmar nueva contraseña</label>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+              <div class="invalid-feedback " id="passwo1">
+              *Campo obligatorio
               </div>
-              <br>
             </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" value="enviar" name="enviar">Enviar</button>
+              <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="showHiddenInput()">Enviar</button>
             </div>
           </form>
           </div>
@@ -139,27 +138,42 @@
 })()
   </script>
   <script>
-var input = document.getElementById('pass');
 
-document.getElementById('email').addEventListener('click', function(e) {
-  console.log('Vamos a habilitar el input text');
-  input.disabled = false;
-});
+      document.getElementById('pregunta').style.display='none';
+      document.getElementById('respues').style.display='none';
+      document.getElementById('passwo').style.display='none';
+      document.getElementById('passwo1').style.display='none';
 
-document.getElementById('pregunta').addEventListener('click', function(e) {
-  console.log('Vamos a habilitar el input text');
-  input.disabled = false;
-});
+    function showHiddenInput(){
+    document.getElementById('pregunta').style.display='block';
+    document.getElementById('respues').style.display='block';
+    document.getElementById('passwo').style.display='block';
+    document.getElementById('passwo1').style.display='block';
 
-document.getElementById('respuesta').addEventListener('click', function(e) {
-  console.log('Vamos a habilitar el input text');
-  input.disabled = false;
-});
+    if (email.validity.valid) {
+      pregunta.style.display='block';
+    } else {
+      pregunta.style.display='none';
+    }
 
-// evento para el input radio del "no"
-document.getElementById('pass').addEventListener('click', function(e) {
-  console.log('Vamos a deshabilitar el input text');
-  input.disabled = true;
-});
+    if (email.validity.valid) {
+      respues.style.display='block';
+    } else {
+      respues.style.display='none';
+    }
+
+    if (email.validity.valid) {
+      passwo.style.display='block';
+    } else {
+      passwo.style.display='none';
+    }
+
+    if (email.validity.valid) {
+      passwo1.style.display='block';
+    } else {
+      passwo1.style.display='none';
+    }
+    
+  } 
   </script>
 </html>
