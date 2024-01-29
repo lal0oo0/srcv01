@@ -15,7 +15,7 @@ $fechamodificacion = date('Y-m-d H:i:s');
 $id = $_GET['id'];
 
 
-  $borrar="UPDATE srcv_reservaciones SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', USO='1' WHERE ID_RESERVACION='$id'";
+  $borrar="UPDATE srcv_reservaciones SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', USO='1' WHERE ID_RESERVACION='$id' AND LIQUIDACION='0'";
   $sql=mysqli_query($conexion, $borrar);
 
 

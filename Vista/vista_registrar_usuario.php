@@ -80,7 +80,7 @@
             </div>
             
             
-            <form action="../Controlador/controlador_registrar_usu.php" method="POST" class="row g-3 needs-validation" novalidate>
+            <form action="../Controlador/controlador_registrar_usu.php" method="POST" class="formulario row g-3 needs-validation" novalidate>
             
             <div class="col-md-12">
               <h6></h6>
@@ -147,6 +147,7 @@
       </div>
     </div>
     
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/validator.js"></script>
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
@@ -240,4 +241,46 @@
   return valid;
 })()
   </script>
+
+<!--Alertas de sweetalert y para redirigir a el login-->
+<script>
+  // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
+$(document).ready(function() {
+    // Captura el evento de envío del formulario con la clase 'formulario'
+    $(".formulario").submit(function(e) {
+        // Previene el comportamiento predeterminado del formulario
+        e.preventDefault();
+        
+        // Realiza una solicitud Ajax al servidor
+        $.ajax({
+            // Especifica el método de la solicitud (POST en este caso)
+            type: "POST",
+            // Obtiene la URL del atributo 'action' del formulario
+            url: $(this).attr('action'),
+            // Serializa los datos del formulario para enviarlos al servidor
+            data: $(this).serialize(),
+            // Especifica que se espera recibir datos en formato JSON
+            dataType: "json",
+            // Función que se ejecuta cuando la solicitud Ajax tiene éxito
+            success: function(response) {
+                // Verifica si la operación en el servidor fue exitosa
+                if (response.success) {
+                    // Muestra una alerta de éxito con SweetAlert
+                    swal({
+                        title: 'Registro exitoso!',
+                        text: 'El administrador ya se encuentra registrado exitosamente!',
+                        icon: 'success'
+                    }).then(function() {
+                        // Redirige a otra interfaz después de cerrar la alerta (opcional)
+                        window.location.href = "../Vista/vista_inicio_sesion.php";
+                    });
+                } else {
+                    // Muestra una alerta de error con SweetAlert
+                    swal('Error', response.error, 'error');
+                }
+            }
+        });
+    });
+});
+</script>
 </html>

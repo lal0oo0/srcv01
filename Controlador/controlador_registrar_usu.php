@@ -35,7 +35,6 @@ $contrasenia = $_POST['pass'];
 $pregunta = $_POST['pregunta'];
 $respuesta = $_POST['respuesta'];
 
-
 /*Codigo para guardar un registro temporalmente en una variable php*/
 $usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA,ROL, ESTATUS) 
 VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$pregunta','$respuesta', 'Administrador', '1')";
@@ -43,12 +42,8 @@ VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$pregunta','$respues
 /*Evitar que el registro se repita*/ 
 $norepetir = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$correo'");
 if(mysqli_num_rows($norepetir) > 0){
-  $mensaje= '<div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Error!</strong> El usuario ya existe, intente nuevamente.
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>';
-header("location: ../Vista/vista_registrar_usuario.php?mensaje=" . urlencode($mensaje));
-exit(); 
+    echo json_encode(array('success' => false, 'error' => 'El usuario ya existe, intente nuevamente.'));
+    exit();
 }
 
 /*Para ejecutar la consulta*/
@@ -56,19 +51,13 @@ $ejecutar = mysqli_query($conexion, $usuario);
 
 
 if ($ejecutar) {
-    // Éxito: alerta de Bootstrap éxito
-    $mensaje= '<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Exito!</strong> El usuario se ha registrado correctamente.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>';
+  echo json_encode(array('success' => true));
 } else {
-    // Error: alerta de Bootstrap error con detalles
-    $mensaje= '<div class="alert alert-danger" role="alert">Error al registrar al usuario.' . mysqli_error($conexion) . '</div>';
+  echo json_encode(array('success' => false, 'error' => mysqli_error($conexion)));
 }
 
+
+/*Para cerrar conexion*/
 mysqli_close($conexion);
-
-header("location: ../Vista/vista_registrar_usuario.php?mensaje=" . urlencode($mensaje));
-
 
 ?>
