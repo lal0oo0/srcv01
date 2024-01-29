@@ -116,17 +116,12 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <div class="container">
 
 <!--Bucador-->
-<form class="form-inline">
     <div class="row">
       <div class="col-md-9"></div>
-      <div class="col-md-2">
-      <input class="form-control mr-sm-2" type="search" id="buscador" name="buscador" placeholder="Buscar" aria-label="Search">
-      </div>
-      <div class="col-md-1">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+      <div class="col-md-3">
+      <input class="form-control mr-sm-2" type="search" id="buscador" name="buscador" placeholder="Buscar" aria-label="Search" style="border: 1px solid rgba(0, 0, 0, 0.7);">
       </div>
     </div>
-</form>
 
   <div class="mb-3"></div><!--Salto de linea-->
   <div class="row">
