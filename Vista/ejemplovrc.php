@@ -92,20 +92,20 @@
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
               </select>
-             <input type="text" class="form-control" style="border: 2px solid #007AB6;"  id="respues" name="respues" required>
-             <div class="invalid-feedback " id="respuesta">
+             <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respues" name="respues" required>
+             <div class="invalid-feedback " id="valid01">
               *Campo obligatorio
               </div>
              </div>
              <div class="col-md-12">
               <label for="passwo" id="passwo" class="form-label">Confirmar nueva contraseña</label>
               <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-              <div class="invalid-feedback " id="passwo1">
+              <div class="invalid-feedback " id="valid02">
               *Campo obligatorio
               </div>
             </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="showHiddenInput()">Enviar</button>
+              <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="showHiddenInput()" onclick="hideFieldsAndValidations()">Enviar</button>
             </div>
           </form>
           </div>
@@ -138,42 +138,37 @@
 })()
   </script>
   <script>
+    const email = document.getElementById('email');
+    const pregunta = document.getElementById('pregunta');
+    const respues = document.getElementById('respues');
+    const passwo = document.getElementById('passwo');
+    const passwo1 = document.getElementById('passwo1');
+    const valid01 = document.getElementById('valid01');
+    const valid02 = document.getElementById('valid02');
 
-      document.getElementById('pregunta').style.display='none';
-      document.getElementById('respues').style.display='none';
-      document.getElementById('passwo').style.display='none';
-      document.getElementById('passwo1').style.display='none';
+    pregunta.style.display = 'none';
+    respues.style.display = 'none';
+    passwo.style.display = 'none';
+    passwo1.style.display = 'none';
+    valid01.style.display = 'none';
+    valid02.style.display = 'none';
 
-    function showHiddenInput(){
-    document.getElementById('pregunta').style.display='block';
-    document.getElementById('respues').style.display='block';
-    document.getElementById('passwo').style.display='block';
-    document.getElementById('passwo1').style.display='block';
-
-    if (email.validity.valid) {
-      pregunta.style.display='block';
-    } else {
-      pregunta.style.display='none';
+    function showHiddenInput() {
+        if (email.value !== '') {
+            pregunta.style.display = 'block';
+            respues.style.display = 'block';
+            passwo.style.display = 'block';
+            passwo1.style.display = 'block';
+            valid01.style.display = 'block';
+            valid02.style.display = 'block';
+        } else {
+            pregunta.style.display = 'none';
+            respues.style.display = 'none';
+            passwo.style.display = 'none';
+            passwo1.style.display = 'none';
+            valid01.style.display = 'none';
+            valid02.style.display = 'none';
+        }
     }
-
-    if (email.validity.valid) {
-      respues.style.display='block';
-    } else {
-      respues.style.display='none';
-    }
-
-    if (email.validity.valid) {
-      passwo.style.display='block';
-    } else {
-      passwo.style.display='none';
-    }
-
-    if (email.validity.valid) {
-      passwo1.style.display='block';
-    } else {
-      passwo1.style.display='none';
-    }
-    
-  } 
-  </script>
+</script>
 </html>
