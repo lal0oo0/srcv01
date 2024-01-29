@@ -62,6 +62,7 @@
     background-color: red;
   }
 
+
 </style>
 <body>
     <div class="container text-center">
@@ -71,7 +72,7 @@
           <div class="card-body">
             <br>
             <div class="col-12 user-img">
-            <img src="../imagenes/unnamed.jpg" alt="" class="logo">
+            <img src="../imagenes/logocorporativo.png" alt="" class="logo">
             </div>
             <form action="controlador_recuperar_contrasena.php" action="POST" class="row g-3 needs-validation" novalidate>
             <div class="col-12">
@@ -79,14 +80,27 @@
               <label for="validationexampleInputEmail1" class="form-label">Ingrese su correo electronico</label>
               <div class="input-group has-validation">
               <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
-                <div class="invalid-feedback">
-                Verifique si sus datos son correctos
+              <div class="invalid-feedback">
+                *Campo obligatorio
                 </div>
               </div>
             </div>
             <br>
+            <div class="col-md-12">
+            <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
+              <option selected value="">Seleccione con la que mejor se identifique *</option>
+              <option value="1">Nombre del mejor amig@</option>
+              <option value="2">Nombre de la mascota</option>
+              <option value="3">Pelicula Favorita</option>
+              </select>
+             <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respues" name="respues" required>
+             </div>
+             <div class="col-md-12">
+              <label for="passwo" id="passwo" class="form-label">Confirmar nueva contraseña</label>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+            </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" value="enviar" name="enviar">Enviar</button>
+              <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="showHiddenInput()">Validar email</button>
             </div>
           </form>
           </div>
@@ -117,5 +131,47 @@
     }, false)
   })
 })()
+  </script>
+  <script>
+    const email = document.getElementById('email');
+    const pregunta = document.getElementById('pregunta');
+    const respues = document.getElementById('respues');
+    const passwo = document.getElementById('passwo');
+    const passwo1 = document.getElementById('passwo1');
+  
+    pregunta.style.display = 'none';
+    respues.style.display = 'none';
+    passwo.style.display = 'none';
+    passwo1.style.display = 'none';
+    
+    function showHiddenInput() {
+        if (email.value !== '') {
+            pregunta.style.display = 'block';
+            respues.style.display = 'block';
+            passwo.style.display = 'block';
+            passwo1.style.display = 'block';
+            email.disabled = true; 
+        } else {
+            pregunta.style.display = 'none';
+            respues.style.display = 'none';
+            passwo.style.display = 'none';
+            passwo1.style.display = 'none';
+        }
+    }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var boton = document.getElementById("enviar");
+      var emailInput = document.getElementById("email");
+
+      boton.addEventListener("click", function() {
+        if (boton.textContent == "Validar email") {
+          if (emailInput.value !== "") {
+            boton.textContent = "Confirmar contraseña";
+          } 
+        } 
+      });
+    });
   </script>
 </html>

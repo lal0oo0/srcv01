@@ -65,6 +65,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   .tit-color{
     color: white;
   }
+  .filtro{
+    display: none;
+  }
 </style>
 
 <body>
@@ -112,17 +115,14 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <div class="mb-3"></div><!--Salto de linea-->
 <div class="container">
 
-<form class="form-inline">
+<!--Bucador-->
     <div class="row">
       <div class="col-md-9"></div>
-      <div class="col-md-2">
-      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-      </div>
-      <div class="col-md-1">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+      <div class="col-md-3">
+      <input class="form-control mr-sm-2" type="search" id="buscador" name="buscador" placeholder="Buscar" aria-label="Search" style="border: 1px solid rgba(0, 0, 0, 0.7);">
       </div>
     </div>
-</form>
+
   <div class="mb-3"></div><!--Salto de linea-->
   <div class="row">
     <div class="col-*-*">
@@ -146,8 +146,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     <?php
             while ($filas = mysqli_fetch_assoc($query)) {
             ?>
-      <tr>
-      <td><?php echo $filas['ENTRADA_SEGURIDAD'] ?></td>
+      <tr class="datos">
+                    <td><?php echo $filas['ENTRADA_SEGURIDAD'] ?></td>
                     <td><?php echo $filas['FECHA'] ?></td>
                     <td><?php echo $filas['NOMBRE'] ?></td>
                     <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
@@ -175,6 +175,11 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">  
+
+          <?php
+          $numero = mysqli_num_rows($query);
+          ?>
+          <h5>Resultados (<?php echo $numero ?>)</h5>
         </div>
         <div class="col-md-3">
         <div class="d-grid gap-2">
@@ -185,5 +190,16 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 </div>
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener('keyup', e =>{
+    if(e.target.matches('#buscador')){
+      document.querySelectorAll('.datos').forEach(dato =>{
+        dato.textContent.toLowerCase().includes(e.target.value)
+        ? dato.classList.remove('filtro')
+        : dato.classList.add('filtro')
+      }) 
+    }
+  })
+</script>
 </body>
 </html>
