@@ -62,6 +62,7 @@
     background-color: red;
   }
 
+
 </style>
 <body>
     <div class="container text-center">
@@ -79,7 +80,7 @@
               <label for="validationexampleInputEmail1" class="form-label">Ingrese su correo electronico</label>
               <div class="input-group has-validation">
               <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
-                <div class="invalid-feedback">
+              <div class="invalid-feedback">
                 *Campo obligatorio
                 </div>
               </div>
@@ -93,19 +94,13 @@
               <option value="3">Pelicula Favorita</option>
               </select>
              <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respues" name="respues" required>
-             <div class="invalid-feedback " id="valid01">
-              *Campo obligatorio
-              </div>
              </div>
              <div class="col-md-12">
               <label for="passwo" id="passwo" class="form-label">Confirmar nueva contraseña</label>
               <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-              <div class="invalid-feedback " id="valid02">
-              *Campo obligatorio
-              </div>
             </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="showHiddenInput()" onclick="hideFieldsAndValidations()">Enviar</button>
+              <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="showHiddenInput()">Validar email</button>
             </div>
           </form>
           </div>
@@ -143,32 +138,40 @@
     const respues = document.getElementById('respues');
     const passwo = document.getElementById('passwo');
     const passwo1 = document.getElementById('passwo1');
-    const valid01 = document.getElementById('valid01');
-    const valid02 = document.getElementById('valid02');
-
+  
     pregunta.style.display = 'none';
     respues.style.display = 'none';
     passwo.style.display = 'none';
     passwo1.style.display = 'none';
-    valid01.style.display = 'none';
-    valid02.style.display = 'none';
-
+    
     function showHiddenInput() {
         if (email.value !== '') {
             pregunta.style.display = 'block';
             respues.style.display = 'block';
             passwo.style.display = 'block';
             passwo1.style.display = 'block';
-            valid01.style.display = 'block';
-            valid02.style.display = 'block';
+            email.disabled = true; 
         } else {
             pregunta.style.display = 'none';
             respues.style.display = 'none';
             passwo.style.display = 'none';
             passwo1.style.display = 'none';
-            valid01.style.display = 'none';
-            valid02.style.display = 'none';
         }
     }
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var boton = document.getElementById("enviar");
+      var emailInput = document.getElementById("email");
+
+      boton.addEventListener("click", function() {
+        if (boton.textContent == "Validar email") {
+          if (emailInput.value !== "") {
+            boton.textContent = "Confirmar contraseña";
+          } 
+        } 
+      });
+    });
+  </script>
 </html>
