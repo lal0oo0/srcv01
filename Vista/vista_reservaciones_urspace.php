@@ -58,6 +58,11 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   .tit-color{
     color:white;
   }
+
+  .filtro{
+    display: none;
+  }
+
 </style>
 
 <header>
@@ -109,6 +114,16 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <div class="mb-3"></div><!--Salto de linea-->
 
 <div class="container">
+
+  <!--Bucador-->
+  <div class="row">
+    <div class="col-md-9"></div>
+    <div class="col-md-3">
+      <input class="form-control mr-sm-2" type="search" id="buscador" name="buscador" placeholder="Buscar" aria-label="Search" style="border: 1px solid rgba(0, 0, 0, 0.7);">
+    </div>
+  </div>
+  <div class="mb-3"></div><!--Salto de linea-->
+
   <div class="row">
     <div class="col">
       <div class="table-responsive my-custom-scrollbar">
@@ -136,7 +151,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               $query = mysqli_query ($conexion, "SELECT * FROM srcv_reservaciones WHERE ESTATUS='1' AND USO='0'");
               while($filas  = mysqli_fetch_assoc($query)){
           ?>
-          <tr>
+          <tr class="datos">
               <td><?php echo$filas ["NOMBRE_CLIENTE"] ?></td>
               <td><?php echo$filas ["APELLIDO_PATERNO"] ?></td>
               <td><?php echo$filas ["APELLIDO_MATERNO"] ?></td>
@@ -259,15 +274,23 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script src="../js/validaciones_reservaciones.js"></script>
 
 <script>
-
-function Reservacion(idreservacion){
+  function Reservacion(idreservacion){
     document.getElementById('Reservacion_' + idreservacion).value = idreservacion;
     <?php $id_reservacion ?>=idreservacion;
     }
-
-
-
 </script>
-
+<script>
+  //Script de buscador
+  document.addEventListener('keyup', e =>{
+    if(e.target.matches('#buscador')){
+      document.querySelectorAll('.datos').forEach(dato =>{
+        dato.textContent.toLowerCase().includes(e.target.value)
+        ? dato.classList.remove('filtro')
+        : dato.classList.add('filtro')
+      }) 
+    }
+  })
+  //fin del script de buscardor
+</script>
 </body>
 </html>

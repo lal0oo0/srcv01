@@ -51,6 +51,10 @@ $row = $resultado->fetch_assoc();
     color:white;
   }
 
+  .filtro{
+    display: none;
+  }
+
 </style>
 
 <header>
@@ -93,6 +97,16 @@ $row = $resultado->fetch_assoc();
 <div class="mb-5"></div>
 
 <div class="container">
+
+  <!--Bucador-->
+  <div class="row">
+    <div class="col-md-9"></div>
+    <div class="col-md-3">
+      <input class="form-control mr-sm-2" type="search" id="buscador" name="buscador" placeholder="Buscar" aria-label="Search" style="border: 1px solid rgba(0, 0, 0, 0.7);">
+    </div>
+  </div>
+  <div class="mb-3"></div><!--Salto de linea-->
+
   <div class="row">
     <div class="col">
       <div class="table-responsive my-custom-scrollbar">
@@ -119,7 +133,7 @@ $row = $resultado->fetch_assoc();
               $query = mysqli_query ($conexion, "select * from srcv_reservaciones");
               while($filas  = mysqli_fetch_assoc($query)){
           ?>
-          <tr>
+          <tr class="datos">
               <td><?php echo$filas ["NOMBRE_CLIENTE"] ?></td>
               <td><?php echo$filas ["APELLIDO_PATERNO"] ?></td>
               <td><?php echo$filas ["APELLIDO_MATERNO"] ?></td>
@@ -153,6 +167,18 @@ $row = $resultado->fetch_assoc();
 
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
-
+<script>
+  //Script de buscador
+  document.addEventListener('keyup', e =>{
+    if(e.target.matches('#buscador')){
+      document.querySelectorAll('.datos').forEach(dato =>{
+        dato.textContent.toLowerCase().includes(e.target.value)
+        ? dato.classList.remove('filtro')
+        : dato.classList.add('filtro')
+      }) 
+    }
+  })
+  //fin del script de buscardor
+</script>
 </body>
 </html>
