@@ -69,6 +69,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   .tit-color {
     color: white;
   }
+  #botones{
+    display: none;
+  }
 </style>
 
 <body>
@@ -284,7 +287,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               while ($filas = mysqli_fetch_assoc($queryVisitas)) {
               ?>
                 <tr>
-                  <td><?php echo $filas['ENTRADA_SEGURIDAD'] ?></td>
+                  <td><div id="botones"><a href="../Controlador/controlador_entrada_seguridad.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a></div><?php echo $filas['ENTRADA_SEGURIDAD'] ?><input type="hidden" id="entrada" value="<?=$filas['ENTRADA_SEGURIDAD']?>"></td>
                   <td><?php echo $filas['FECHA'] ?></td>
                   <td><?php echo $filas['NOMBRE'] ?></td>
                   <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
@@ -341,6 +344,11 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     document.getElementById('Visita_' + idVisita).value = idVisita;
     }
 
+    var ent = document.getElementById(entrada);
+  
+    if(ent === '0'){
+      document.getElementById('botones').style.display = 'block';
+    }
     
 
   </script>

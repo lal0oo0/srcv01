@@ -68,6 +68,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   .filtro{
     display: none;
   }
+  .botones{
+    display: none;
+  }
 </style>
 
 <body>
