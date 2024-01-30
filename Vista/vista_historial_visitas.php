@@ -191,6 +191,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script>
+  //Script de buscador
   document.addEventListener('keyup', e =>{
     if(e.target.matches('#buscador')){
       document.querySelectorAll('.datos').forEach(dato =>{
@@ -200,6 +201,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
       }) 
     }
   })
+  //fin del script de buscardor
 </script>
 </body>
 </html>
