@@ -99,7 +99,7 @@ $row = $resultado->fetch_assoc();
               <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
+              <a class="sesion nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesión</a>
             </li>
           </ul>
         </div>
@@ -265,10 +265,9 @@ $row = $resultado->fetch_assoc();
   </div>
 </div>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
-<!--script src="../js/moneda.js"></script-->
 
 <script>
   function setSelectedRoom(idSala) {
@@ -338,7 +337,40 @@ $(document).ready(function() {
     });
 });
 
+</script>
 
+
+<!--script para mostrar alerta de confirmación antes de cerrar sesión-->
+<script>
+  function cerrarsesion(event) {
+    // Previene el comportamiento predeterminado del enlace
+    event.preventDefault();
+
+    // Muestra la alerta de SweetAlert
+    swal("¿Estás seguro de que deseas cerrar sesión?", {
+      buttons: ["Cancelar", "Aceptar"],
+    }).then(function (confirmed) {
+      // confirmed será true si se hace clic en "Aceptar", false si se hace clic en "Cancelar"
+      if (confirmed) {
+        // Realiza una solicitud Ajax al servidor para cerrar sesión
+        $.ajax({
+          type: "POST",
+          url: "../Controlador/controlador_cerrar_sesion.php",
+          //data: { key1: 'value1', key2: 'value2' },
+          dataType: "json",
+          success: function(response) {
+            if (response.success) {
+                // Redirige a otra interfaz después de cerrar la alerta (opcional)*/
+                window.location.href = "../Vista/vista_inicio_sesion.php";
+            } else {
+              // Muestra una alerta de error con SweetAlert
+              swal('Error', response.error, 'error');
+            }
+          }
+        });
+      }
+    });
+  }
 </script>
 
 </body>

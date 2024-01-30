@@ -1,5 +1,7 @@
 <?php
 session_start();
 session_destroy();
-header('Location:../Vista/vista_inicio_sesion.php');
+// Devuelve una respuesta JSON indicando que el cierre de sesión fue exitoso
+$response = array('success' => true);
+echo json_encode($response);
 ?>
