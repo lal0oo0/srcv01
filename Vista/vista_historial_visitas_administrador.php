@@ -65,6 +65,10 @@ $row = $resultado->fetch_assoc();
   .titulo{
     color: white;
   }
+
+  .filtro{
+    display: none;
+  }
 </style>
 
 <body>
@@ -98,7 +102,7 @@ $row = $resultado->fetch_assoc();
             <a class="nav-link active" href="vista_historial_visitas_administrador.php">Historial visitas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
+            <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesión</a>
           </li>
       </div>
     </div>
@@ -110,6 +114,16 @@ $row = $resultado->fetch_assoc();
 <div class="mb-5"></div> <!--Salto de linea-->
 
 <div class="container">
+
+  <!--Bucador-->
+  <div class="row">
+    <div class="col-md-9"></div>
+    <div class="col-md-3">
+      <input class="form-control mr-sm-2" type="search" id="buscador" name="buscador" placeholder="Buscar" aria-label="Search" style="border: 1px solid rgba(0, 0, 0, 0.7);">
+    </div>
+  </div>
+  <div class="mb-3"></div><!--Salto de linea-->
+
   <div class="row">
     <div class="col-*-*">
       <div class="table-responsive my-custom-scrollbar">
@@ -135,7 +149,7 @@ $row = $resultado->fetch_assoc();
             <?php
                 while ($filas = mysqli_fetch_assoc($query)) {
             ?>
-            <tr>
+            <tr class="datos">
                 <td><?php echo $filas['NOMBRE'] ?></td>
                 <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
                 <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
@@ -159,7 +173,55 @@ $row = $resultado->fetch_assoc();
   </div>
 </div>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
+
+<script>
+  //Script de buscador
+  document.addEventListener('keyup', e =>{
+    if(e.target.matches('#buscador')){
+      document.querySelectorAll('.datos').forEach(dato =>{
+        dato.textContent.toLowerCase().includes(e.target.value)
+        ? dato.classList.remove('filtro')
+        : dato.classList.add('filtro')
+      }) 
+    }
+  })
+  //fin del script de buscardor
+</script>
+
+<!--script para mostrar alerta de confirmación antes de cerrar sesión-->
+<script>
+  function cerrarsesion(event) {
+    // Previene el comportamiento predeterminado del enlace
+    event.preventDefault();
+
+    // Muestra la alerta de SweetAlert
+    swal("¿Estás seguro de que deseas cerrar sesión?", {
+      buttons: ["Cancelar", "Aceptar"],
+    }).then(function (confirmed) {
+      // confirmed será true si se hace clic en "Aceptar", false si se hace clic en "Cancelar"
+      if (confirmed) {
+        // Realiza una solicitud Ajax al servidor para cerrar sesión
+        $.ajax({
+          type: "POST",
+          url: "../Controlador/controlador_cerrar_sesion.php",
+          //data: { key1: 'value1', key2: 'value2' },
+          dataType: "json",
+          success: function(response) {
+            if (response.success) {
+                // Redirige a otra interfaz después de cerrar la alerta (opcional)*/
+                window.location.href = "../Vista/vista_inicio_sesion.php";
+            } else {
+              // Muestra una alerta de error con SweetAlert
+              swal('Error', response.error, 'error');
+            }
+          }
+        });
+      }
+    });
+  }
+</script>
 </body>
 </html>
