@@ -178,11 +178,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">  
-
-          <?php
-          $numero = mysqli_num_rows($query);
-          ?>
-          <h5>Resultados (<?php echo $numero ?>)</h5>
         </div>
         <div class="col-md-3">
         <div class="d-grid gap-2">
