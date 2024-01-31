@@ -1,11 +1,11 @@
 <?php
 
-/*Codigo de conexion a la base de datos*/
+//Codigo de conexion a la base de datos
 include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
 
-/*Para capturar los campos*/
+//Para capturar los campos
 $nombre = $_POST['nombre'];
 $ap = $_POST['ap'];
 $am = $_POST['am'];
@@ -35,29 +35,41 @@ $contrasenia = $_POST['pass'];
 $pregunta = $_POST['pregunta'];
 $respuesta = $_POST['respuesta'];
 
-/*Codigo para guardar un registro temporalmente en una variable php*/
+//Codigo para guardar un registro temporalmente en una variable php
 $usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA,ROL, ESTATUS) 
 VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$pregunta','$respuesta', 'Administrador', '1')";
 
-/*Evitar que el registro se repita*/ 
+//Evitar que el registro se repita 
 $norepetir = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$correo'");
 if(mysqli_num_rows($norepetir) > 0){
-    echo json_encode(array('success' => false, 'error' => 'El usuario ya existe, intente nuevamente.'));
-    exit();
+  $mensaje= '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Error!</strong> El usuario ya existe, intente nuevamente.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+header("location: ../Vista/vista_registrar_usuario.php?mensaje=" . urlencode($mensaje));
+exit(); 
 }
 
-/*Para ejecutar la consulta*/
+//Para ejecutar la consulta
 $ejecutar = mysqli_query($conexion, $usuario); 
 
 
 if ($ejecutar) {
-  echo json_encode(array('success' => true));
+    // Éxito: alerta de Bootstrap éxito
+    $mensaje= '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Exito!</strong> El usuario se ha registrado correctamente.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
+  header("Location: ../Vista/vista_inicio_sesion.php");
+  exit();
 } else {
-  echo json_encode(array('success' => false, 'error' => mysqli_error($conexion)));
+    // Error: alerta de Bootstrap error con detalles
+    $mensaje= '<div class="alert alert-danger" role="alert">Error al registrar al usuario.' . mysqli_error($conexion) . '</div>';
 }
 
-
-/*Para cerrar conexion*/
 mysqli_close($conexion);
+
+header("location: ../Vista/vista_registrar_usuario.php?mensaje=" . urlencode($mensaje));
+
 
 ?>

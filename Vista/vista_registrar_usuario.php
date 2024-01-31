@@ -90,43 +90,33 @@
              <?php echo $mensaje; ?>
             </div>
             <div class="mb-3"></div> 
-      
-
               <label for="nombre" class="form-label">Nombre *</label>
               <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="valid01" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
-              <div class="invalid-feedback" id="nombre">
-              Campo obligatorio
-              </div>
+              <div class="invalid-feedback" id="nombre"></div>
             </div>
             <div class="col-md-6">
               <label for="ap" class="form-label">Apellido Paterno *</label>
               <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
-              <div class="invalid-feedback" id="ap">
-                Campo obligatorio
-              </div>
+              <div class="invalid-feedback" id="ap"></div>
             </div>
             <div class="col-md-6">
               <label for="am" class="form-label">Apellido Materno *</label>
               <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
-              <div class="invalid-feedback" id="am">
-              Campo obligatorio
-              </div>
+              <div class="invalid-feedback" id="am"></div>
             </div>
             <div class="col-md-6">
               <label for="email" class="form-label">Correo Electronico *</label>
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
-                Campo obligatorio
+                  Campo obligatorio*
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <label for="pass" class="form-label">Contraseña *</label>
               <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid04" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-              <div class="invalid-feedback " id="pass">
-              Campo obligatorio
-              </div>
+              <div class="invalid-feedback " id="pass"></div>
               <br>
             </div>
              <div class="col-md-12">
@@ -156,13 +146,11 @@
   
  <!--QUITAR LOS COMENTARIOS EN INGLÉS-->  
  <script>
-
+//bootstrap
 (() => {
   'use strict'
 
-
   const forms = document.querySelectorAll('.needs-validation')
-
 
   Array.from(forms).forEach(form => {
     form.addEventListener('submit', event => {
@@ -174,6 +162,8 @@
       form.classList.add('was-validated')
     }, false)
   })
+
+//Validaciones para el formulario
   var valid=true;
   var nombre=document.getElementById('valid01').value;
   var ap=document.getElementById('valid02').value;
@@ -199,7 +189,7 @@
     var com=document.getElementById('ap')
     com.innerHTML=" *Campo obligatorio"
   }
-  else if (ap.length>3 || ap.length<16) {
+  else if (ap.length>3 || ap.length<30) {
     valid=false;
     var com=document.getElementById('ap')
     com.innerHTML=" *Campo obligatorio"
@@ -213,7 +203,7 @@
     var com=document.getElementById('am')
     com.innerHTML=" *Campo obligatorio"
   }
-  else if (am.length>3 || am.length<16) {
+  else if (am.length>3 || am.length<30) {
     valid=false;
     var com=document.getElementById('am')
     com.innerHTML=" *Campo obligatorio"
@@ -242,7 +232,7 @@
 })()
   </script>
 
-<!--Alertas de sweetalert y para redirigir a el login-->
+<!--Alertas de sweetalert y para redirigir a el login
 <script>
   // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
 $(document).ready(function() {
@@ -282,5 +272,5 @@ $(document).ready(function() {
         });
     });
 });
-</script>
+</script>-->
 </html>
