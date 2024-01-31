@@ -1,63 +1,37 @@
 <?php
-session_start();
+/* Incluir el código de conexión a la base de datos */
+require_once '../Modelo/conexion2.php';
 
-/*Codigo de conexion a la base de datos*/
-include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
-$logitudPass = 8;
-$miPassword  = substr( md5(microtime()), 4, $logitudPass);
-$clave       = $miPassword;
 
+// Inicializar la variable de mensaje
+$mensaje = '';
 
-$correoelectronico = $_POST['correoelectronico'];
-$con = $_POST["contrasena"];
+// Verificar si se ha enviado el formulario
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtener el correo electrónico del formulario
+    $correo = $_POST["email"];
 
-    $clave = "55Eu47x";
+    // Verificar si el correo electrónico tiene un formato válido
+    if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+        $mensaje = '<div class="alert alert-danger" role="alert">El correo electrónico no tiene un formato válido.</div>';
+    } else {
+        // Consulta SQL para verificar si el correo electrónico ya existe en la base de datos
+        $sql = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO=?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("s", $correo);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    function des_encrypt($string, $key)
-    {
-        $result = '';
-        for ($i = 0; $i < strlen($string); $i++) {
-            $char = substr($string, $i, 1);
-            $keychar = substr($key, ($i % strlen($key)) - 1, 1);
-            $char = chr(ord($char) + ord($keychar));
-            $result .= $char;
+        // Verificar si se encontraron resultados
+        if ($result->num_rows > 0) {
+            // El correo electrónico está registrado
+            $mensaje = '<div class="alert alert-success" role="alert">El correo electrónico está registrado.</div>';
+        } else {
+            // El correo electrónico no está registrado
+            $mensaje = '<div class="alert alert-danger" role="alert">El correo electrónico no está registrado.</div>';
         }
-        return base64_encode($result);
     }
-
-    $contraDesencrip = des_encrypt($con, $clave);
-
-
-$consulta           = ("SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO ='".$correoelectronico."'");
-$queryconsulta      = mysqli_query($con, $consulta);
-$cantidadConsulta   = mysqli_num_rows($queryconsulta);
-$dataConsulta       = mysqli_fetch_array($queryconsulta);
-
-if($cantidadConsulta ==0){ 
-    header("Location:index.php?errorEmail=1");
-    exit();
-}else{
-$updateClave    = ("UPDATE srcv_administradores SET contrasena='$clave' WHERE CORREO_ELECTRONICO ='".$correoelectronico."' ");
-$queryResult    = mysqli_query($con,$updateClave); 
-
-$destinatario = $correoelectronico; 
-$asunto       = "Recuperando Clave - WebDeveloper";
 }
-
-if ($ejecutar) {
-    // Éxito: alerta de Bootstrap éxito
-    $mensaje= '<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Exito!</strong> El registro se ha guardado correctamente
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>';
-} else {
-    // Error: alerta de Bootstrap error con detalles
-    $mensaje= '<div class="alert alert-danger" role="alert">Error en la consulta: ' . mysqli_error($conexion) . '</div>';
-}
-
-mysqli_close($conexion);
-
-header("location: ../Vista/vista_recuperar_contrasena.php?mensaje=" . urlencode($mensaje));
 ?>

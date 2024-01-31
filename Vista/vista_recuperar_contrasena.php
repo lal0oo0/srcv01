@@ -74,9 +74,10 @@
             <div class="col-12 user-img">
             <img src="../imagenes/logocorporativo.png" alt="" class="logo">
             </div>
-            <form action="controlador_recuperar_contrasena.php" action="POST" class="row g-3 needs-validation" novalidate>
+            <form action="../Controlador/controlador_recuperar_contrasena.php" action="POST" class="row g-3 needs-validation" novalidate>
             <div class="col-12">
               <h3>Recuperar contraseña</h3>
+              <?php echo $mensaje; ?>
               <label for="validationexampleInputEmail1" class="form-label">Ingrese su correo electronico</label>
               <div class="input-group has-validation">
               <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
@@ -96,11 +97,11 @@
              <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respues" name="respues" required>
              </div>
              <div class="col-md-12">
-              <label for="passwo" id="passwo" class="form-label">Confirmar nueva contraseña</label>
+              <label for="passwo" id="passwo" class="form-label">Agregar nueva contraseña</label>
               <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
             </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="showHiddenInput()">Validar email</button>
+              <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="showHiddenInput()">Siguiente</button>
             </div>
           </form>
           </div>
@@ -166,9 +167,9 @@
       var emailInput = document.getElementById("email");
 
       boton.addEventListener("click", function() {
-        if (boton.textContent == "Validar email") {
+        if (boton.textContent == "Siguiente") {
           if (emailInput.value !== "") {
-            boton.textContent = "Confirmar contraseña";
+            boton.textContent = "Enviar";
           } 
         } 
       });
