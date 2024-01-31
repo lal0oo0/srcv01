@@ -76,7 +76,7 @@
           <div class="card-body">
             <br>
             <div class="col-12 user-img">
-            <img src="../imagenes/unnamed.jpg" alt="" class="logo">
+            <img src="../imagenes/logocorporativo.png" alt="" class="logo">
             </div>
             
             
