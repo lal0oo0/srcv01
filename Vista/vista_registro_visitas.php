@@ -287,7 +287,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               while ($filas = mysqli_fetch_assoc($queryVisitas)) {
               ?>
                 <tr>
-                  <td><div id="botones"><a href="../Controlador/controlador_entrada_seguridad.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a></div><?php echo $filas['ENTRADA_SEGURIDAD'] ?><input type="hidden" id="entrada" value="<?=$filas['ENTRADA_SEGURIDAD']?>"></td>
+                  <td><div id="botones" name="botones"><a href="../Controlador/controlador_entrada_seguridad.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a></div><?php echo $filas['ENTRADA_SEGURIDAD'] ?><input type="" id="entrada" value="<?=$filas['ENTRADA_SEGURIDAD']?>"></td>
                   <td><?php echo $filas['FECHA'] ?></td>
                   <td><?php echo $filas['NOMBRE'] ?></td>
                   <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
@@ -296,7 +296,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <td><?php echo $filas['ASUNTO'] ?></td>
                   <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
                   <td>
-
+                    <?php
+                    
+                    ?>
                     <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     <!--Boton de eliminar-->
                     <a href="../Controlador/controlador_eliminar_visita.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
@@ -345,9 +347,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     document.getElementById('Visita_' + idVisita).value = idVisita;
     }
 
-    var ent = document.getElementById(entrada);
+    var ent = document.getElementById('entrada');
   
-    if(ent === '0'){
+    if(ent.value.trim() === ''){
       document.getElementById('botones').style.display = 'block';
     }
 
