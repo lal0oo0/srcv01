@@ -155,7 +155,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               <td><?php echo$filas ["NOMBRE_CLIENTE"] ?></td>
               <td><?php echo$filas ["APELLIDO_PATERNO"] ?></td>
               <td><?php echo$filas ["APELLIDO_MATERNO"] ?></td>
-              <td><?php echo$filas ["ID_SALA"] ?></td>
+              <td><?php echo$filas ["NOMBRE_ESPACIO"] ?></td>
               <td><?php echo$filas ["CORREO_ELECTRONICO"] ?></td>
               <td><?php echo$filas ["FECHA_ENTRADA"] ?></td>
               <td><?php echo$filas ["FECHA_SALIDA"] ?></td>
