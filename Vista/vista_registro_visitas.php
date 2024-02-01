@@ -296,9 +296,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <td><?php echo $filas['ASUNTO'] ?></td>
                   <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
                   <td>
-                    <?php
-                    
-                    ?>
+
                     <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     <!--Boton de eliminar-->
                     <a href="../Controlador/controlador_eliminar_visita.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
@@ -347,11 +345,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     document.getElementById('Visita_' + idVisita).value = idVisita;
     }
 
-    var ent = document.getElementById('entrada');
-  
-    if(ent.value.trim() === ''){
-      document.getElementById('botones').style.display = 'block';
-    }
 
 </script>
 
