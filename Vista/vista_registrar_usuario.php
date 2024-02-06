@@ -169,92 +169,95 @@
 <!--Alertas de sweetalert y para redirigir a el login-->
 <script>
   // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
-  $(document).ready(function() {
+$(document).ready(function() {
     // Captura el evento de envío del formulario con la clase 'formulario'
     $(".formulario").submit(function(e) {
-      // Previene el comportamiento predeterminado del formulario
-      e.preventDefault();
+        // Previene el comportamiento predeterminado del formulario
+        e.preventDefault();
 
-      // Validaciones para el formulario
-      var valid = true;
-      var nombre = document.getElementById('valid01').value;
-      var ap = document.getElementById('valid02').value;
-      var am = document.getElementById('valid03').value;
-      var pass = document.getElementById('valid04').value;
+        // Validaciones para el formulario
+        var valid = true;
+        var nombre = document.getElementById('valid01').value;
+        var ap = document.getElementById('valid02').value;
+        var am = document.getElementById('valid03').value;
+        var pass = document.getElementById('valid04').value;
+        var pregunta = document.getElementById('pregunta').value;
+        var respuesta = document.getElementById('respuesta').value;
 
-      if (nombre == '' || ap == '' || am == '' || pass == '') {
-        valid = false;
-        swal('Error', 'Todos los campos son obligatorios', 'error');
-      }
-
-      if (nombre.length < 3 || nombre.length > 30) {
-        valid = false;
-        var com = document.getElementById('nombre');
-        com.innerHTML = "*El nombre debe tener entre 3 y 30 caracteres";
-      } else {
-        document.getElementById('nombre').innerHTML = '';
-      }
-
-      if (ap.length < 3 || ap.length > 30) {
-        valid = false;
-        var com = document.getElementById('ap');
-        com.innerHTML = "*El apellido paterno debe tener entre 3 y 30 caracteres";
-      } else {
-        document.getElementById('ap').innerHTML = '';
-      }
-
-      if (am.length < 3 || am.length > 30) {
-        valid = false;
-        var com = document.getElementById('am');
-        com.innerHTML = "*El apellido materno debe tener entre 3 y 30 caracteres";
-      } else {
-        document.getElementById('am').innerHTML = '';
-      }
-
-      if (pass.length < 8 || pass.length > 16) {
-        valid = false;
-        var com = document.getElementById('pass');
-        com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
-      } else {
-        document.getElementById('pass').innerHTML = '';
-      }
-
-      // Si alguna validación falla, no se envía el formulario
-      if (!valid) {
-        return;
-      }
-
-      // Realiza una solicitud Ajax al servidor
-      $.ajax({
-        // Especifica el método de la solicitud (POST en este caso)
-        type: "POST",
-        // Obtiene la URL del atributo 'action' del formulario
-        url: $(this).attr('action'),
-        // Serializa los datos del formulario para enviarlos al servidor
-        data: $(this).serialize(),
-        // Especifica que se espera recibir datos en formato JSON
-        dataType: "json",
-        // Función que se ejecuta cuando la solicitud Ajax tiene éxito
-        success: function(response) {
-          // Verifica si la operación en el servidor fue exitosa
-          if (response.success) {
-            // Muestra una alerta de éxito con SweetAlert
-            swal({
-              title: 'Registro exitoso!',
-              text: 'El administrador ya se encuentra registrado exitosamente!',
-              icon: 'success'
-            }).then(function() {
-              // Redirige a otra interfaz después de cerrar la alerta (opcional)
-              window.location.href = "../Vista/vista_inicio_sesion.php";
-            });
-          } else {
-            // Muestra una alerta de error con SweetAlert
-            swal('Error', response.error, 'error');
-          }
+        if (nombre == '' || ap == '' || am == '' || pass == '' || pregunta == '' || respuesta == '') {
+            valid = false;
+            swal('Error', 'Todos los campos son obligatorios', 'error');
         }
-      });
+
+        if (nombre.length < 3 || nombre.length > 30) {
+            valid = false;
+            var com = document.getElementById('nombre');
+            com.innerHTML = "*El nombre debe tener entre 3 y 30 caracteres";
+        } else {
+            document.getElementById('nombre').innerHTML = '';
+        }
+
+        if (ap.length < 3 || ap.length > 30) {
+            valid = false;
+            var com = document.getElementById('ap');
+            com.innerHTML = "*El apellido paterno debe tener entre 3 y 30 caracteres";
+        } else {
+            document.getElementById('ap').innerHTML = '';
+        }
+
+        if (am.length < 3 || am.length > 30) {
+            valid = false;
+            var com = document.getElementById('am');
+            com.innerHTML = "*El apellido materno debe tener entre 3 y 30 caracteres";
+        } else {
+            document.getElementById('am').innerHTML = '';
+        }
+
+        if (pass.length < 8 || pass.length > 16) {
+            valid = false;
+            var com = document.getElementById('pass');
+            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
+        } else {
+            document.getElementById('pass').innerHTML = '';
+        }
+
+        // Si alguna validación falla, no se envía el formulario
+        if (!valid) {
+            return;
+        }
+
+        // Realiza una solicitud Ajax al servidor
+        $.ajax({
+            // Especifica el método de la solicitud (POST en este caso)
+            type: "POST",
+            // Obtiene la URL del atributo 'action' del formulario
+            url: $(this).attr('action'),
+            // Serializa los datos del formulario para enviarlos al servidor
+            data: $(this).serialize(),
+            // Especifica que se espera recibir datos en formato JSON
+            dataType: "json",
+            // Función que se ejecuta cuando la solicitud Ajax tiene éxito
+            success: function(response) {
+                // Verifica si la operación en el servidor fue exitosa
+                if (response.success) {
+                    // Muestra una alerta de éxito con SweetAlert
+                    swal({
+                        title: 'Registro exitoso!',
+                        text: 'El administrador ya se encuentra registrado exitosamente!',
+                        icon: 'success'
+                    }).then(function() {
+                        // Redirige a otra interfaz después de cerrar la alerta (opcional)
+                        window.location.href = "../Vista/vista_inicio_sesion.php";
+                    });
+                } else {
+                    // Muestra una alerta de error con SweetAlert
+                    swal('Error', response.error, 'error');
+                }
+            }
+        });
     });
-  });
+});
+
 </script>
 
 </html>
