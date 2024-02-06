@@ -1,37 +1,40 @@
 <?php
-/* Incluir el código de conexión a la base de datos */
 require_once '../Modelo/conexion2.php';
-
-/* Obtener la conexión a la base de datos */
 $conexion = conect();
 
-// Inicializar la variable de mensaje
 $mensaje = '';
+$correo_encontrado = false;
+$correo_mostrado = true;
 
-// Verificar si se ha enviado el formulario
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener el correo electrónico del formulario
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
     $correo = $_POST["email"];
 
-    // Verificar si el correo electrónico tiene un formato válido
+    // Validar el formato del correo electrónico
     if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        $mensaje = '<div class="alert alert-danger" role="alert">El correo electrónico no tiene un formato válido.</div>';
+        
     } else {
-        // Consulta SQL para verificar si el correo electrónico ya existe en la base de datos
+        // Consultar la base de datos para verificar si el correo electrónico está registrado
         $sql = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO=?";
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("s", $correo);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // Verificar si se encontraron resultados
+        // Comprobar si se encontró el correo electrónico en la base de datos
         if ($result->num_rows > 0) {
-            // El correo electrónico está registrado
-            $mensaje = '<div class="alert alert-success" role="alert">El correo electrónico está registrado.</div>';
+            $correo_encontrado = true;
+            $mensaje = '<div class="alert alert-success alert-dismissible fade show" role="alert">El correo electrónico está registrado.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+            $_SESSION['correo_mostrado'] = false;
         } else {
-            // El correo electrónico no está registrado
-            $mensaje = '<div class="alert alert-danger" role="alert">El correo electrónico no está registrado.</div>';
+            $correo_mostrado = false;
+            $mensaje = '<div class="alert alert-danger alert-dismissible fade show" role="alert">El correo electrónico no está registrado.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+            $_SESSION['correo_encontrado'] = true;
         }
     }
 }
 ?>
+
