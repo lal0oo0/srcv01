@@ -32,7 +32,7 @@ if ($fila['LIQUIDACION'] != 0) {
                 </div>';
 } else {
     // Actualizar la reservación si LIQUIDACION es igual a cero
-    $borrar = "UPDATE srcv_reservaciones SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', USO='1' WHERE ID_RESERVACION='$id' AND LIQUIDACION='0'";
+    $borrar = "UPDATE srcv_reservaciones SET CONFIRMAR_SALIDA='$horactual', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', USO='1' WHERE ID_RESERVACION='$id' AND LIQUIDACION='0'";
     $sql = mysqli_query($conexion, $borrar);
 
     if ($sql) {

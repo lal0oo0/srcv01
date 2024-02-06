@@ -232,7 +232,7 @@
 })()
   </script>
 
-<!--Alertas de sweetalert y para redirigir a el login
+<!--Alertas de sweetalert y para redirigir a el login-->
 <script>
   // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
 $(document).ready(function() {
@@ -272,5 +272,5 @@ $(document).ready(function() {
         });
     });
 });
-</script>-->
+</script>
 </html>
