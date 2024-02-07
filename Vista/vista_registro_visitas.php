@@ -74,7 +74,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   }
 </style>
 
-<body onload="validarCampo()">
+<body>
 <?php
   date_default_timezone_set('America/Mexico_City');
   $hoy=date("Y-m-d");
@@ -287,7 +287,14 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               while ($filas = mysqli_fetch_assoc($queryVisitas)) {
               ?>
                 <tr>
-                  <td><div id="botones" name="botones"><a href="../Controlador/controlador_entrada_seguridad.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a></div><?php echo $filas['ENTRADA_SEGURIDAD'] ?><input type="" id="entrada" oninput="validarCampo()" value="<?=$filas['ENTRADA_SEGURIDAD']?>"></td>
+                  <td>
+                    <?php if(empty($filas['ENTRADA_SEGURIDAD'])){ ?>
+                  <a href="../Controlador/controlador_entrada_seguridad.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                  <?php
+                }else{
+                   echo $filas['ENTRADA_SEGURIDAD'];
+                   }?>
+                  </td>
                   <td><?php echo $filas['FECHA'] ?></td>
                   <td><?php echo $filas['NOMBRE'] ?></td>
                   <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
@@ -296,8 +303,13 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <td><?php echo $filas['ASUNTO'] ?></td>
                   <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
                   <td>
-
+                    <?php
+                    if(empty($filas['SALIDA_SEGURIDAD'])){
+                    ?>
                     <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    <?php
+                    }else{echo "";}
+                    ?>
                     <!--Boton de eliminar-->
                     <a href="../Controlador/controlador_eliminar_visita.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
 
@@ -345,19 +357,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     document.getElementById('Visita_' + idVisita).value = idVisita;
     }
 
-    function validarCampo(){
-      var entrada = document.getElementById('entrada').value;
-      if (entrada.trim() === '') {
-        document.getElementById('botones').style.display = 'block';
-      }else if(entrada.length < 0){
-        document.getElementById('botones').style.display = 'block';
-        console.log(entrada);
-      }
-      if(entrada.length > 0){
-        console.log(entrada);
-        document.getElementById('botones').style.display = 'none';
-      }
-    }
 
 </script>
 
