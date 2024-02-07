@@ -159,8 +159,20 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <td><?php echo $filas['ASUNTO'] ?></td>
                     <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
                     <td>
+                    <?php
+                    if(empty($filas['ENTRADA_RECEPCION'])){
+                    ?>
                     <a href="../Controlador/controlador_entrada_recepcion.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a> |
+                    <?php
+                    }else{echo "";}
+                    ?>
+                    <?php
+                    if(empty($filas['SALIDA_RECEPCION'])){
+                    ?>
                     <a href="../Controlador/controlador_salida_recepcion.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    <?php
+                    }else{echo "";}
+                    ?>
                     </td>
       </tr>
       <?php
