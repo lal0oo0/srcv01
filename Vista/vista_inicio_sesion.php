@@ -81,7 +81,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <div class="mb-4"></div><!--Salto de linea-->
             <form action="../Controlador/controlador_inicio_sesion.php"  method="post" class="row g-3 needs-validation" class="formulario" novalidate>
             <div class="col-12">
-              <label for="validationexampleInputEmail1" class="form-label">Correo Electronico *</label>
+              <label for="validationexampleInputEmail1" class="form-label">Correo Electrónico *</label>
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #007AB6" name="correoelectronico" id="exampleInputEmail1" id="validationCustom04" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">

@@ -105,7 +105,7 @@
               <div class="invalid-feedback" id="am"></div>
             </div>
             <div class="col-md-6">
-              <label for="email" class="form-label">Correo Electronico *</label>
+              <label for="email" class="form-label">Correo Electrónico *</label>
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
@@ -121,7 +121,7 @@
             </div>
              <div class="col-md-12">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
-              <option selected value="">Seleccione con la que mejor se identifique *</option>
+              <option selected value="">Seleccione una pregunta*</option>
               <option value="1">Nombre del mejor amig@</option>
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
@@ -192,7 +192,7 @@ $(document).ready(function() {
         if (nombre.length < 3 || nombre.length > 30) {
             valid = false;
             var com = document.getElementById('nombre');
-            com.innerHTML = "*El nombre debe tener entre 3 y 30 caracteres";
+            com.innerHTML = "*Campo obligatorio";
         } else {
             document.getElementById('nombre').innerHTML = '';
         }
@@ -200,7 +200,7 @@ $(document).ready(function() {
         if (ap.length < 3 || ap.length > 30) {
             valid = false;
             var com = document.getElementById('ap');
-            com.innerHTML = "*El apellido paterno debe tener entre 3 y 30 caracteres";
+            com.innerHTML = "*Campo obligatorio";
         } else {
             document.getElementById('ap').innerHTML = '';
         }
@@ -208,7 +208,7 @@ $(document).ready(function() {
         if (am.length < 3 || am.length > 30) {
             valid = false;
             var com = document.getElementById('am');
-            com.innerHTML = "*El apellido materno debe tener entre 3 y 30 caracteres";
+            com.innerHTML = "*Campo obligatorio";
         } else {
             document.getElementById('am').innerHTML = '';
         }
