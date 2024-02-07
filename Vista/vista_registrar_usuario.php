@@ -105,7 +105,7 @@
               <div class="invalid-feedback" id="am"></div>
             </div>
             <div class="col-md-6">
-              <label for="email" class="form-label">Correo Electronico *</label>
+              <label for="email" class="form-label">Correo Electrónico *</label>
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
                 <div class="invalid-feedback">
@@ -121,7 +121,7 @@
             </div>
              <div class="col-md-12">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
-              <option selected value="">Seleccione con la que mejor se identifique *</option>
+              <option selected value="">Seleccione una pregunta*</option>
               <option value="1">Nombre del mejor amig@</option>
               <option value="2">Nombre de la mascota</option>
               <option value="3">Pelicula Favorita</option>
@@ -162,77 +162,11 @@
       form.classList.add('was-validated')
     }, false)
   })
-
-//Validaciones para el formulario
-  var valid=true;
-  var nombre=document.getElementById('valid01').value;
-  var ap=document.getElementById('valid02').value;
-  var am=document.getElementById('valid03').value;
-  var pass=document.getElementById('valid04').value;
-
-  if (nombre=='') {
-    valid=false;
-    var com=document.getElementById('nombre')
-    com.innerHTML=" *Campo obligatorio"
-  }
-  else if (nombre.length>3 || nombre.length<30) {
-    valid=false;
-    var com=document.getElementById('nombre')
-    com.innerHTML=" *Campo obligatorio"
-  }
-  else{
-    document.getElementById('nombre').innerHTML='';
-  }
-
-  if (ap=='') {
-    valid=false;
-    var com=document.getElementById('ap')
-    com.innerHTML=" *Campo obligatorio"
-  }
-  else if (ap.length>3 || ap.length<30) {
-    valid=false;
-    var com=document.getElementById('ap')
-    com.innerHTML=" *Campo obligatorio"
-  }
-  else{
-    document.getElementById('ap').innerHTML='';
-  }
-
-  if (am=='') {
-    valid=false;
-    var com=document.getElementById('am')
-    com.innerHTML=" *Campo obligatorio"
-  }
-  else if (am.length>3 || am.length<30) {
-    valid=false;
-    var com=document.getElementById('am')
-    com.innerHTML=" *Campo obligatorio"
-  }
-  else{
-    document.getElementById('am').innerHTML='';
-  }
-
-
-  if (pass=='') {
-    valid=false;
-    var com=document.getElementById('pass')
-    com.innerHTML=" *Campo obligatorio"
-  }
-  else if (pass.length>8 || pass.length<16) {
-    valid=false;
-    var com=document.getElementById('pass')
-    com.innerHTML=" *Debe de contener de 8-16 caracteres, por lo menos una mayuscula, un numero, sin espacios"
-  }
-  else{
-    document.getElementById('pass').innerHTML='';
-  }
-  
-
   return valid;
 })()
   </script>
 
-<!--Alertas de sweetalert y para redirigir a el login
+<!--Alertas de sweetalert y para redirigir a el login-->
 <script>
   // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
 $(document).ready(function() {
@@ -240,7 +174,58 @@ $(document).ready(function() {
     $(".formulario").submit(function(e) {
         // Previene el comportamiento predeterminado del formulario
         e.preventDefault();
-        
+
+        // Validaciones para el formulario
+        var valid = true;
+        var nombre = document.getElementById('valid01').value;
+        var ap = document.getElementById('valid02').value;
+        var am = document.getElementById('valid03').value;
+        var pass = document.getElementById('valid04').value;
+        var pregunta = document.getElementById('pregunta').value;
+        var respuesta = document.getElementById('respuesta').value;
+
+        if (nombre == '' || ap == '' || am == '' || pass == '' || pregunta == '' || respuesta == '') {
+            valid = false;
+            swal('Error', 'Todos los campos son obligatorios', 'error');
+        }
+
+        if (nombre.length < 3 || nombre.length > 30) {
+            valid = false;
+            var com = document.getElementById('nombre');
+            com.innerHTML = "*Campo obligatorio";
+        } else {
+            document.getElementById('nombre').innerHTML = '';
+        }
+
+        if (ap.length < 3 || ap.length > 30) {
+            valid = false;
+            var com = document.getElementById('ap');
+            com.innerHTML = "*Campo obligatorio";
+        } else {
+            document.getElementById('ap').innerHTML = '';
+        }
+
+        if (am.length < 3 || am.length > 30) {
+            valid = false;
+            var com = document.getElementById('am');
+            com.innerHTML = "*Campo obligatorio";
+        } else {
+            document.getElementById('am').innerHTML = '';
+        }
+
+        if (pass.length < 8 || pass.length > 16) {
+            valid = false;
+            var com = document.getElementById('pass');
+            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
+        } else {
+            document.getElementById('pass').innerHTML = '';
+        }
+
+        // Si alguna validación falla, no se envía el formulario
+        if (!valid) {
+            return;
+        }
+
         // Realiza una solicitud Ajax al servidor
         $.ajax({
             // Especifica el método de la solicitud (POST en este caso)
@@ -272,5 +257,7 @@ $(document).ready(function() {
         });
     });
 });
-</script>-->
+
+</script>
+
 </html>
