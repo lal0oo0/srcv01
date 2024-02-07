@@ -228,7 +228,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                             <div class="col">
                               <input type="hidden" name="enganche" value="<?= $filas['ENGANCHE'] ?>">
                               <label for="Abono">Abono *</label>
-                              <input type="number" class="form-control" name="Abono" placeholder="Abono" aria-label="Abono" aria-describedby="basic-addon1" required>
+                              <input type="number" class="form-control" name="Abono" placeholder="Abono" aria-label="Abono" aria-describedby="basic-addon1" value=0 required>
                               <div class="invalid-feedback">
                                 Verifique los datos
                               </div>

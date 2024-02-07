@@ -14,7 +14,7 @@ $nombre = $_POST['Nombre'];
 // Verificar si NOMBRE ya existe
 $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_salas WHERE NOMBRE = '$nombre' ");
     if (mysqli_num_rows($verificacion) > 0) {
-        echo json_encode(array('success' => false, 'error' => 'El nombre de la sala que ingreso ya existe.'));
+        echo json_encode(array('success' => false, 'error' => 'El nombre del espacio que ingreso ya existe.'));
         exit();
     }
 
