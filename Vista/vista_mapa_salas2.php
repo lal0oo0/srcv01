@@ -99,7 +99,7 @@ $row = $resultado->fetch_assoc();
               <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php">Cerrar Sesión</a>
+              <a class="sesion nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesión</a>
             </li>
           </ul>
         </div>
@@ -134,16 +134,15 @@ $row = $resultado->fetch_assoc();
                 <?php echo $filas['NOMBRE'] ?></h1>
                 <input id="salaSeleccionada_<?php echo $filas['ID_SALA'] ?>" name="salaSeleccionada" value="" hidden>
                 
-                <!--Aquí se guarda el ID de la sala -->
-                <input type="hidden" name="idSala" id="idSala" value="">
-
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form action="../Controlador/controlador_registro_reservacion2.php" class="formulario row g-3 needs-validation" method="post" novalidate>
                 <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
+                <input type="hidden" name="nombre" id="nombre" value="<?= $filas['NOMBRE'] ?>">
                 <div class="col">
-                <input type="text" class="form-control" name="Nombre" placeholder="Nombre *" aria-label="Nombre" aria-describedby="basic-addon1" required>
+                <label for="se">Nombre *</label>
+                <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
                 <div class="invalid-feedback">
                   Verifique los datos
                 </div>
@@ -152,13 +151,15 @@ $row = $resultado->fetch_assoc();
 
                 <div class="row">
                   <div class="col">
-                    <input type="text" class="form-control" name="Apellidopaterno" placeholder="Apellido paterno *" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
+                    <label for="se">Apellido paterno *</label>
+                    <input type="text" class="form-control" name="Apellidopaterno" id="Apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
-                    <input type="text" class="form-control" name="Apellidomaterno" placeholder="Apellido materno *" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
+                    <label for="se">Apellido materno *</label>
+                    <input type="text" class="form-control" name="Apellidomaterno" id="Apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -167,7 +168,8 @@ $row = $resultado->fetch_assoc();
                 <div class="mb-2"></div> <!--Salto de linea-->
 
                 <div class="col">
-                <input type="email" class="form-control" name="Correo" placeholder="Correo electronico *" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
+                <label for="se">Correo electrónico *</label>
+                <input type="email" class="form-control" name="Correo" id="Correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
                 <div class="invalid-feedback">
                   Verifique los datos
                 </div>
@@ -177,15 +179,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="Fecha inicio">Fecha de inicio *</label>
-                    <input type="date" class="form-control" id="Fechainicio" name="Fechainicio" placeholder="Fecha de inicio " aria-label="Fecha  de inicio" aria-describedby="basic-addon1" required>
-                    <!--input type="date" class="form-control" id="Fechainicio" name="Fechainicio" placeholder="Fecha de inicio " aria-label="Fecha  de inicio" aria-describedby="basic-addon1" min="<?//=$fecha_actual?>" value="<?//=$fecha_actual?>" required-->
+                    <input type="date" class="form-control" id="Fechainicio" name="Fechainicio" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1" min="<?=$fecha_actual?>" value="<?=$fecha_actual?>" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="Fecha finalizacion">Fecha de finalizacion *</label>
-                    <input type="date" class="form-control" id="Fechafinalizacion" name="Fechafinalizacion" placeholder="Fecha de finalizacion " aria-label="Fecha de finalizacion" aria-describedby="basic-addon1" required>
+                    <input type="date" class="form-control" id="Fechafinalizacion" name="Fechafinalizacion" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" min="<?=$fecha_actual?>" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>
@@ -196,14 +197,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="Hora inicio">Hora de inicio *</label>
-                    <input type="time" class="form-control" name="Horainicio" placeholder="Hora de inicio " aria-label="Hora de inicio" aria-describedby="basic-addon1" value="<?=$hora_actual?>" required>
+                    <input type="time" class="form-control" name="Horainicio" id="Horainicio" placeholder="Hora de inicio " aria-label="Hora de inicio" aria-describedby="basic-addon1" value="<?=$hora_actual?>" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="Hora finalizacion">Hora de finalización *</label>
-                    <input type="time" class="form-control" name="Horafinalizacion" placeholder="Hora de finalizacion " aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
+                    <input type="time" class="form-control" name="Horafinalizacion" id="Horafinalizacion" placeholder="Hora de finalizacion " aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>   
@@ -214,27 +215,29 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col-md-3"></div>
                   <div class="col-md-6">
-                  <label for="personas">Numero de personas:</label>
-                  <input type="number" class="form-control" name="Personas" aria-label="personas" aria-describedby="basic-addon1">
+                  <label for="personas">Numero de personas</label>
+                  <input type="number" class="form-control" name="Personas" id="Personas" aria-label="personas" aria-describedby="basic-addon1">
                   </div>
                   <div class="col-md-3"></div>
                 </div>
 
                 <div class="col">
-                  <label for="se">Servicios extra:</label>
-                  <input type="text" class="form-control" name="Servicios" placeholder="" aria-label="servicios" aria-describedby="basic-addon1">
+                  <label for="se">Servicios extra</label>
+                  <input type="text" class="form-control" name="Servicios" id="Servicios" value="N/A" aria-label="servicios" aria-describedby="basic-addon1">
                 </div>
                 <div class="mb-4"></div> <!--Salto de linea-->
 
                 <div class="row">
                   <div class="col">
-                    <input type="number" class="form-control" name="Total" placeholder="Total *" aria-label="Total" aria-describedby="basic-addon1" required>
+                    <label for="se">Total *</label>
+                    <input type="number" class="form-control" name="Total" id="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" id="monto" oninput="formatoMoneda(this)" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
-                    <input type="number" class="form-control" name="Enganche" placeholder="Enganche *" aria-label="Enganche" aria-describedby="basic-addon1" required>
+                    <label for="se">Enganche *</label>
+                    <input type="number" class="form-control" name="Enganche" id="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -260,39 +263,20 @@ $row = $resultado->fetch_assoc();
   </div>
 </div>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 
-
-<!--script>
+<script>
   function setSelectedRoom(idSala) {
     // Asigna el ID de la sala al campo oculto en el formulario
     document.getElementById('salaSeleccionada_' + idSala).value = idSala;
   }
 
 
-/* Script para validaciones
-(() => {
-  'use strict'
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
 
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
 
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()*/
-
-/*
 //ALERTAS//
 // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
 $(document).ready(function() {
@@ -301,6 +285,61 @@ $(document).ready(function() {
         // Previene el comportamiento predeterminado del formulario
         e.preventDefault();
         
+                // Validaciones para el formulario
+                var valid = true;
+        var nombre = document.getElementById('Nombre').value;
+        var ap = document.getElementById('Apellidopaterno').value;
+        var am = document.getElementById('Apellidomaterno').value;
+        var correo = document.getElementById('Correo').value;
+        var fi = document.getElementById('Fechainicio').value;
+        var ff = document.getElementById('Fechafinalizacion').value;
+        var hi = document.getElementById('Horainicio').value;
+        var hf = document.getElementById('Horafinalizacion').value;
+        var total = document.getElementById('Total').value;
+        var enganche = document.getElementById('Enganche').value;
+
+        if (nombre == '' || ap == '' || am == '' || correo == '' || fi == '' || ff == '' || hi == '' || hf == '' || total == '' || enganche == '' ) {
+            valid = false;
+            swal('Error', 'Todos los campos son obligatorios', 'error');
+        }
+
+        if (nombre.length < 3 || nombre.length > 30) {
+            valid = false;
+            var com = document.getElementById('nombre');
+            com.innerHTML = "*Campo obligatorio";
+        } else {
+            document.getElementById('nombre').innerHTML = '';
+        }
+
+        if (ap.length < 3 || ap.length > 30) {
+            valid = false;
+            var com = document.getElementById('ap');
+            com.innerHTML = "*Campo obligatorio";
+        } else {
+            document.getElementById('ap').innerHTML = '';
+        }
+
+        if (am.length < 3 || am.length > 30) {
+            valid = false;
+            var com = document.getElementById('am');
+            com.innerHTML = "*Campo obligatorio";
+        } else {
+            document.getElementById('am').innerHTML = '';
+        }
+
+        if (pass.length < 8 || pass.length > 16) {
+            valid = false;
+            var com = document.getElementById('pass');
+            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
+        } else {
+            document.getElementById('pass').innerHTML = '';
+        }
+
+        // Si alguna validación falla, no se envía el formulario
+        if (!valid) {
+            return;
+        }
+
         // Realiza una solicitud Ajax al servidor
         $.ajax({
             // Especifica el método de la solicitud (POST en este caso)
@@ -331,10 +370,43 @@ $(document).ready(function() {
             }
         });
     });
-});*/
+});
+
+</script>
 
 
-</script-->
-<script src="../js/validar_horas.js"></script>
+<!--script para mostrar alerta de confirmación antes de cerrar sesión-->
+<script>
+  function cerrarsesion(event) {
+    // Previene el comportamiento predeterminado del enlace
+    event.preventDefault();
+
+    // Muestra la alerta de SweetAlert
+    swal("¿Estás seguro de que deseas cerrar sesión?", {
+      buttons: ["Cancelar", "Aceptar"],
+    }).then(function (confirmed) {
+      // confirmed será true si se hace clic en "Aceptar", false si se hace clic en "Cancelar"
+      if (confirmed) {
+        // Realiza una solicitud Ajax al servidor para cerrar sesión
+        $.ajax({
+          type: "POST",
+          url: "../Controlador/controlador_cerrar_sesion.php",
+          //data: { key1: 'value1', key2: 'value2' },
+          dataType: "json",
+          success: function(response) {
+            if (response.success) {
+                // Redirige a otra interfaz después de cerrar la alerta (opcional)*/
+                window.location.href = "../Vista/vista_inicio_sesion.php";
+            } else {
+              // Muestra una alerta de error con SweetAlert
+              swal('Error', response.error, 'error');
+            }
+          }
+        });
+      }
+    });
+  }
+</script>
+
 </body>
 </html>

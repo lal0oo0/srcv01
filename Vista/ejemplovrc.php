@@ -107,6 +107,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
 #respues:invalid {
   background-image: none;
 }
+
+.border-0 {
+    border: none;
+}
+
     </style>
 </head>
 <body>
@@ -119,13 +124,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
                     <div class="col-12 user-img">
                         <img src="../imagenes/logocorporativo.png" alt="" class="logo">
                     </div>
-                    <form action="../Vista/vista_inicio_sesion.php" method="POST" class="row g-3 needs-validation" novalidate>
+                    <form action="" method="POST" id="recuperar-form" class="row g-3 needs-validation" novalidate>
                         <div class="col-12">
                             <h3>Recuperar contraseña</h3>
                             <?php echo $mensaje; ?>
-                            <label for="validationexampleInputEmail1" class="form-label">Ingrese su correo electrónico</label>
+                            <label for="validationexampleInputEmail1" class="form-label <?php if ($correo_encontrado) echo 'd-none'; ?>">Ingrese su correo electrónico</label>
                             <div class="input-group has-validation">
-                                <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required <?php if (!$correo_mostrado) echo 'disabled'; ?> value="<?php echo htmlspecialchars($correo); ?>">
+                            <input type="email" style="border: 2px solid #007AB6;" class="form-control <?php if ($correo_encontrado) echo 'border-0'; ?>" name="email" id="email" aria-describedby="emailHelp" required <?php if (!$correo_mostrado) echo 'disabled'; ?> value="<?php echo htmlspecialchars($correo); ?>">
                                 <div class="invalid-feedback">
                                     *Campo obligatorio
                                 </div>
@@ -158,7 +163,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
     <script src="jquery/jquery-3.2.1.slim.min.js"></script>
     <script src="../js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="../js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (() => {
@@ -192,6 +196,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
                 boton.textContent = "Enviar";
             } 
         });
+        setTimeout(function() {
+            var alertas = document.querySelectorAll('.alert');
+            alertas.forEach(function(alerta) {
+                alerta.style.display = 'none';
+            });
+        }, 6000);
     });
 </script>
 </body>
