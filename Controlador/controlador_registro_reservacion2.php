@@ -21,13 +21,14 @@ $servicios = $_POST['Servicios'];
 $total = $_POST['Total'];
 $enganche = $_POST['Enganche'];
 $liquidacion = $total-$enganche;
-
 $idsala = $_POST['id_sala'];
+$espacio = $_POST['nombre'];
 
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$consulta = "INSERT INTO srcv_reservaciones (ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE, LIQUIDACION, USO, ESTATUS, USUARIO_ALTA, USUARIO_MODIFICACION) 
-VALUES ('$idsala', '$nombre', '$apellidop', '$apellidom', '$correo', '$fechaini', '$fechafin', '$horaini', '$horafin', '$personas', '$servicios', '$total', '$enganche', '$liquidacion', '0', '1', '$useralta', '$useralta')";
+$consulta = "INSERT INTO srcv_reservaciones (ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, CORREO_ELECTRONICO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE, LIQUIDACION, USO, ESTATUS, USUARIO_ALTA, USUARIO_MODIFICACION) 
+VALUES ('$idsala', '$nombre', '$apellidop', '$apellidom', '$espacio', '$correo', '$fechaini', '$fechafin', '$horaini', '$horafin', '$personas', '$servicios', '$total', '$enganche', '$liquidacion', '0', '1', '$useralta', '$useralta')";
+
 //Esta consulta es una prueba para guardar tambien el registro en la tabla de visitas
 $consulta2= "INSERT INTO srcv_visitas (HORA_ENTRADA, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS)
 VALUES ('$horaini','$fechaini','$nombre','$apellidop','$apellidom','UrSpace','Reservacion','$useralta','$useralta','1')";
@@ -35,11 +36,9 @@ VALUES ('$horaini','$fechaini','$nombre','$apellidop','$apellidom','UrSpace','Re
 $ejecutar = mysqli_query($conexion, $consulta); 
 $ejecutar2= mysqli_query($conexion, $consulta2);
 if ($ejecutar) {
-   echo "bien";
-	//echo json_encode(array('success' => true));
+	echo json_encode(array('success' => true));
 } else {
-    echo "mal";
-	//echo json_encode(array('success' => false, 'error' => mysqli_error($conexion)));
+	echo json_encode(array('success' => false, 'error' => mysqli_error($conexion)));
 }
 
 /*Para cerrar conexion*/
