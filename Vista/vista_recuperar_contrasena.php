@@ -19,16 +19,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
         $stmt->execute();
         $result = $stmt->get_result();
 
+        // Comprobar si se encontró el correo electrónico en la base de datos
         if ($result->num_rows > 0) {
             $correo_encontrado = true;
-            $mensaje = '<div class="alert alert-success alert-dismissible fade show" role="alert">El correo electrónico está registrado.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+            $mensaje = '<div class="alert alert-success" role="alert">El correo electrónico está registrado.</div>';
             $_SESSION['correo_encontrado'] = true;
-            $correo_mostrado = false; 
+            $correo_mostrado = false; // Deshabilitar el campo de entrada de correo electrónico
         } else {
-            $mensaje = '<div class="alert alert-danger alert-dismissible fade show" role="alert">El correo electrónico no está registrado.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
-            $_SESSION['correo_mostrado'] = true; 
+            $mensaje = '<div class="alert alert-danger" role="alert">El correo electrónico no está registrado.</div>';
+            $_SESSION['correo_mostrado'] = true; // Mantener el campo de entrada de correo electrónico habilitado
         }
     }
 }
@@ -145,9 +144,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
                             </select>
                             <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respues" name="respues" required>
                         </div>
-                        <div class="col-md-12">
-                            <label for="passwo" id="passwo" class="form-label">Agregar nueva contraseña</label>
+                        <div class="col-md-6">
+                            <label for="passwo" id="passwo1" class="form-label">Agregar nueva contraseña</label>
                             <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="passwo" id="confirmPasswo" class="form-label">Confirmar contraseña</label>
+                            <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                            <div class="invalid-feedback">
+                             Las contraseñas no coinciden.
+                            </div>
                         </div>
                         <?php $correo_encontrado = true; ?>
                         <?php endif; ?>
