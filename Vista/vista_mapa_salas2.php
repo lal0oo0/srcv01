@@ -313,26 +313,74 @@ $(document).ready(function() {
 
         if (ap.length < 3 || ap.length > 30) {
             valid = false;
-            var com = document.getElementById('ap');
+            var com = document.getElementById('Apellidopaterno');
             com.innerHTML = "*Campo obligatorio";
         } else {
-            document.getElementById('ap').innerHTML = '';
+            document.getElementById('Apellidopaterno').innerHTML = '';
         }
 
         if (am.length < 3 || am.length > 30) {
             valid = false;
-            var com = document.getElementById('am');
+            var com = document.getElementById('Apellidomaterno');
             com.innerHTML = "*Campo obligatorio";
         } else {
-            document.getElementById('am').innerHTML = '';
+            document.getElementById('Apellidomaterno').innerHTML = '';
         }
 
-        if (pass.length < 8 || pass.length > 16) {
+        if (correo.length < 3 || correo.length > 30) {
             valid = false;
-            var com = document.getElementById('pass');
+            var com = document.getElementById('Correo');
             com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
         } else {
-            document.getElementById('pass').innerHTML = '';
+            document.getElementById('Correo').innerHTML = '';
+        }
+
+        if (fi.length < 0 || fi.length > 30) {
+            valid = false;
+            var com = document.getElementById('Fechainicio');
+            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
+        } else {
+            document.getElementById('Fechainicio').innerHTML = '';
+        }
+
+        if (ff.length < 8 || ff.length > 16) {
+            valid = false;
+            var com = document.getElementById('Fechafinalizacion');
+            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
+        } else {
+            document.getElementById('Fechafinalizacion').innerHTML = '';
+        }
+
+        if (hi.length < 8 || hi.length > 16) {
+            valid = false;
+            var com = document.getElementById('Horainicio');
+            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
+        } else {
+            document.getElementById('Horainicio').innerHTML = '';
+        }
+
+        if (hf.length < 8 || hf.length > 16) {
+            valid = false;
+            var com = document.getElementById('Horafinalizacion');
+            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
+        } else {
+            document.getElementById('Horafinalizacion').innerHTML = '';
+        }
+
+        if (total.length < 8 || total.length > 16) {
+            valid = false;
+            var com = document.getElementById('Total');
+            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
+        } else {
+            document.getElementById('Total').innerHTML = '';
+        }
+
+        if (enganche.length < 8 || enganche.length > 16) {
+            valid = false;
+            var com = document.getElementById('Enganche');
+            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
+        } else {
+            document.getElementById('Enganche').innerHTML = '';
         }
 
         // Si alguna validación falla, no se envía el formulario
