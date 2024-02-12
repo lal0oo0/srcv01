@@ -72,6 +72,11 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   #botones{
     display: none;
   }
+
+  .filtro{
+    display: none;
+  }
+  
 </style>
 
 <body>
@@ -113,7 +118,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <br>
   <div class="mb-4"></div> <!--Salto de linea-->
   <h3 class="text-center">REGISTRO DE VISITAS</h3>
-  <br>
+  <br><br>
   <?php
   date_default_timezone_set('America/Mexico_City');
   $fecha_actual = date("Y-m-d");
@@ -121,12 +126,18 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   ?>
 
   <div class="container">
-    <div class="row-md-8">
+    <div class="row">
+      <div class="col-md-9">
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary" style="background-color: #008B8B" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Nuevo Registro
       </button>
-
+      </div>
+    <!--Bucador-->
+        <div class="col-md-3">
+          <input class="form-control mr-sm-2" type="search" id="buscador" name="buscador" placeholder="Buscar" aria-label="Search" style="border: 1px solid rgba(0, 0, 0, 0.7);">
+        </div>
+      <div class="mb-3"></div><!--Salto de linea-->
       <!-- ALERTA -->
       <div class="mb-4"></div><!--Salto de linea-->
       <div id="mensaje">
@@ -286,7 +297,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               <?php
               while ($filas = mysqli_fetch_assoc($queryVisitas)) {
               ?>
-                <tr>
+                <tr class="datos">
                   <td>
                     <?php if(empty($filas['ENTRADA_SEGURIDAD'])){ ?>
                   <a href="../Controlador/controlador_entrada_seguridad.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
@@ -332,7 +343,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
   <script>
 
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
+ //Script para validaciones
 (function () {
   'use strict'
 
@@ -357,6 +368,34 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     document.getElementById('Visita_' + idVisita).value = idVisita;
     }
 
+
+//Script de buscador
+document.addEventListener('keyup', e =>{
+    if(e.target.matches('#buscador')){
+      document.querySelectorAll('.datos').forEach(dato =>{
+        dato.textContent.toLowerCase().includes(e.target.value)
+        ? dato.classList.remove('filtro')
+        : dato.classList.add('filtro')
+      }) 
+    }
+  })
+  //fin del script de buscardor
+
+
+//Script para mostrar alertas por determinado tiempo 
+  document.addEventListener("DOMContentLoaded", function() {
+        // Selecciona el elemento de alerta
+        var alerta = document.querySelector('.alert');
+
+        // Verifica si se encontró el elemento de alerta
+        if(alerta) {
+            // Temporizador para eliminar la alerta después de 5 segundos (5000 milisegundos)
+            setTimeout(function() {
+                alerta.remove(); // Elimina la alerta del DOM
+            }, 5000);
+        }
+    });
+//Fin del  scripyt
 
 </script>
 

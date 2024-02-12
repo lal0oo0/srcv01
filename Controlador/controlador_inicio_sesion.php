@@ -86,8 +86,7 @@ if($urspace->num_rows==1){
 
 else {
     // Error: alerta de Bootstrap
-    $mensaje = '<div class="alert alert-danger">Contraseña y/o correo electrónico incorrectos.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' . mysqli_error($conexion) . '</div>';
+    $mensaje = '<div class="alert alert-danger">Contraseña y/o correo electrónico incorrectos.' . mysqli_error($conexion) . '</div>';
 }
 
 mysqli_close($conexion);
