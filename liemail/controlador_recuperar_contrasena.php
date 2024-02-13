@@ -4,7 +4,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
 require_once '../Modelo/conexion2.php';
-
 require 'vendor/autoload.php';
 
 $conexion = conect();
@@ -67,28 +66,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
                 $update_stmt->execute();
                 
                 // Envío de correo electrónico
-                $mail = new PHPMailer();
-                $mail->isSMTP();
-                $mail->Host = 'tu.servidor_smtp.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'tu_correo@example.com';
-                $mail->Password = 'tu_contraseña';
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
-                $mail->setFrom('tu_correo@example.com', 'Nombre del Remitente');
-                $mail->addAddress($correo);
-                $mail->isHTML(true);
-                $mail->Subject = 'Actualización de Contraseña';
-                $mail->Body = 'Tu contraseña ha sido actualizada correctamente.';
-                
-                if($mail->send()) {
+                $mail = new PHPMailer(true);
+
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = $correo;
+                    $mail->Password = 'tu_contraseña';
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
+                    $mail->setFrom('tu_correo@gmail.com', 'Nombre del Remitente');
+                    $mail->addAddress($correo);
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Actualización de Contraseña';
+                    $mail->Body = 'Tu contraseña ha sido actualizada correctamente.';
+                    
+                    $mail->send();
+                    
                     $mensaje = '<div class="alert alert-success" role="alert">La contraseña se ha actualizado correctamente y se ha enviado un correo electrónico de confirmación.</div>';
-                } else {
+                    
+                    header("Location: ../Vista/vista_inicio_sesion.php");
+                    exit();
+                } catch (Exception $e) {
                     $mensaje = '<div class="alert alert-danger" role="alert">Hubo un problema al enviar el correo electrónico. Por favor, inténtalo de nuevo más tarde.</div>';
                 }
-                
-                header("Location: ../Vista/vista_inicio_sesion.php");
-                exit();
             } else {
                 $mensaje = '<div class="alert alert-danger" role="alert">Las contraseñas no coinciden.</div>';
             }

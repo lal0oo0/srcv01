@@ -1,6 +1,6 @@
 <?php
 require_once '../Modelo/conexion2.php';
-require_once '../Controlador/controlador_recuperar_contrasena.php';
+require_once '../liemail/controlador_recuperar_contrasena.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
