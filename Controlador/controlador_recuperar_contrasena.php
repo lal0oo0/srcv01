@@ -1,5 +1,9 @@
 <?php
 require_once '../Modelo/conexion2.php';
+require_once 'liemail/Exception.php';
+require_once 'liemail/PHPMailer.php';
+require_once 'liemail/SMTP.php';
+
 $conexion = conect();
 $correo = '';
 $mensaje = '';
@@ -53,29 +57,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
             // Verificar que las contraseñas coincidan
             if ($passwo1 === $confirmPasswo) {
                 // Actualizar la contraseña en la base de datos
-                $hashed_password = password_hash($passwo1, PASSWORD_DEFAULT); // Se recomienda usar password_hash() para almacenar contraseñas de forma segura
+                $hashed_password = password_hash($passwo1, PASSWORD_DEFAULT); 
                 $update_sql = "UPDATE srcv_administradores SET CONTRASENA = ? WHERE CORREO_ELECTRONICO = ?";
                 $update_stmt = $conexion->prepare($update_sql);
                 $update_stmt->bind_param("ss", $hashed_password, $correo);
                 $update_stmt->execute();
-
-                $to_email = $correo;
-                $subject = "Recuperación de contraseña";
-                $message = "Tu contraseña ha sido restablecida con éxito.";
-                $headers = "From : tuemail@example.com\r\n";
-                $headers .= "Reply-To: tuemail@example.com\r\n";
-                $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-
-                // Envío del correo electrónico
-                if (mail($to_email, $subject, $message, $headers)) {
-                    echo "Correo electrónico enviado con éxito a $to_email.";
+                
+                // Envío de correo electrónico
+                $mail = new PHPMailer();
+                $mail->isSMTP();
+                $mail->Host = 'tu.servidor_smtp.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'tu_correo@example.com';
+                $mail->Password = 'tu_contraseña';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+                $mail->setFrom('tu_correo@example.com', 'Nombre del Remitente');
+                $mail->addAddress($correo);
+                $mail->isHTML(true);
+                $mail->Subject = 'Actualización de Contraseña';
+                $mail->Body = 'Tu contraseña ha sido actualizada correctamente.';
+                
+                if($mail->send()) {
+                    $mensaje = '<div class="alert alert-success" role="alert">La contraseña se ha actualizado correctamente y se ha enviado un correo electrónico de confirmación.</div>';
                 } else {
-                 echo "Error al enviar el correo electrónico.";
-                 }
+                    $mensaje = '<div class="alert alert-danger" role="alert">Hubo un problema al enviar el correo electrónico. Por favor, inténtalo de nuevo más tarde.</div>';
+                }
+                
                 header("Location: ../Vista/vista_inicio_sesion.php");
                 exit();
-                // Mostrar un mensaje de éxito
-                $mensaje = '<div class="alert alert-success" role="alert">La contraseña se ha actualizado correctamente.</div>';
             } else {
                 $mensaje = '<div class="alert alert-danger" role="alert">Las contraseñas no coinciden.</div>';
             }

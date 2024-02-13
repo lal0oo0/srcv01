@@ -127,7 +127,7 @@ require_once '../Controlador/controlador_recuperar_contrasena.php';
                         <?php $correo_encontrado = true; ?>
                         <?php endif; ?>
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="showHiddenInput()">Siguiente</button>
+                            <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="showHiddenInput()" onclick="return verificarContraseñas()">Siguiente</button>
                         </div>
                     </form>
                 </div>
@@ -177,23 +177,19 @@ require_once '../Controlador/controlador_recuperar_contrasena.php';
             });
         }, 5000);
     });
-    ocument.addEventListener("DOMContentLoaded", function() {
-            var form = document.getElementById("recuperar-form");
-            form.addEventListener("submit", function(event) {
-                var passwo1 = document.getElementById("passwo1").value;
-                var confirmPasswo = document.getElementById("confirmPasswo").value;
-                var mensajeError = document.querySelector('.invalid-feedback');
+    function verificarContraseñas() {
+        const passwo1 = document.getElementById('passwo1').value;
+        const confirmPasswo = document.getElementById('confirmPasswo').value;
+        var mensajeError = document.querySelector('.invalid-feedback');
 
-                if (passwo1 !== confirmPasswo) {
-                    event.preventDefault(); // Evitar que el formulario se envíe
-                    mensajeError.style.display = 'block';
-                    confirmPasswo.setCustomValidity("Las contraseñas no coinciden");
-                } else {
-                    mensajeError.style.display = 'none';
-                    confirmPasswo.setCustomValidity('');
-                }
-            });
-        });
+        if (passwo1 !== confirmPasswo) {
+            mensajeError.style.display = 'block';
+            return false; // Las contraseñas no coinciden
+        } else {
+            mensajeError.style.display = 'none';
+            return true; // Las contraseñas coinciden
+        }
+    }
 </script>
 </body>
 </html>
