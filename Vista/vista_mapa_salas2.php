@@ -292,7 +292,10 @@ $(document).ready(function() {
         var am = document.getElementById('Apellidomaterno').value;
         var correo = document.getElementById('Correo').value;
         var fi = document.getElementById('Fechainicio').value;
+        var fechai = new Date(fi);
         var ff = document.getElementById('Fechafinalizacion').value;
+        var fechaf = new Date(ff);
+        var fechaBase = new Date("2000-01-01");
         var hi = document.getElementById('Horainicio').value;
         var hf = document.getElementById('Horafinalizacion').value;
         var total = document.getElementById('monto').value;
@@ -348,10 +351,12 @@ $(document).ready(function() {
             var com = document.getElementById('Fechafinalizacion');
             com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
         } else {
-            document.getElementById('Fechafinalizacion').innerHTML = '';
-        }
+          if(fechai > fechaf){
+            var com = document.getElementById('Fechafinalizacion');
+            com.innerHTML = "*La fecha de finalizacion no puede ser menor a la de inicio"
+          }else if(fechai == fechaf){
 
-        if (hi.length < 0 || hi.length > 30) {
+            if (hi.length < 0 || hi.length > 30) {
             valid = false;
             var com = document.getElementById('Horainicio');
             com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
@@ -364,7 +369,16 @@ $(document).ready(function() {
             var com = document.getElementById('Horafinalizacion');
             com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
         } else {
+          if(){
+
+          }
             document.getElementById('Horafinalizacion').innerHTML = '';
+        }
+
+          }
+          else{
+            document.getElementById('Fechafinalizacion').innerHTML = '';
+          }
         }
 
         if (total.length < 0 || total.length > 30) {
