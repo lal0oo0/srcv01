@@ -1,8 +1,11 @@
 <?php
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+
 require_once '../Modelo/conexion2.php';
-require_once 'liemail/Exception.php';
-require_once 'liemail/PHPMailer.php';
-require_once 'liemail/SMTP.php';
+
+require 'vendor/autoload.php';
 
 $conexion = conect();
 $correo = '';
