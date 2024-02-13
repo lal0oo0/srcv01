@@ -230,7 +230,7 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Total *</label>
-                    <input type="number" class="form-control" name="Total" id="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" id="monto" oninput="formatoMoneda(this)" required>
+                    <input type="number" class="form-control" name="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" id="monto" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -292,10 +292,13 @@ $(document).ready(function() {
         var am = document.getElementById('Apellidomaterno').value;
         var correo = document.getElementById('Correo').value;
         var fi = document.getElementById('Fechainicio').value;
+        var fechai = new Date(fi);
         var ff = document.getElementById('Fechafinalizacion').value;
+        var fechaf = new Date(ff);
+        var fechaBase = new Date("2000-01-01");
         var hi = document.getElementById('Horainicio').value;
         var hf = document.getElementById('Horafinalizacion').value;
-        var total = document.getElementById('Total').value;
+        var total = document.getElementById('monto').value;
         var enganche = document.getElementById('Enganche').value;
 
         if (nombre == '' || ap == '' || am == '' || correo == '' || fi == '' || ff == '' || hi == '' || hf == '' || total == '' || enganche == '' ) {
@@ -305,10 +308,10 @@ $(document).ready(function() {
 
         if (nombre.length < 3 || nombre.length > 30) {
             valid = false;
-            var com = document.getElementById('nombre');
+            var com = document.getElementById('Nombre');
             com.innerHTML = "*Campo obligatorio";
         } else {
-            document.getElementById('nombre').innerHTML = '';
+            document.getElementById('Nombre').innerHTML = '';
         }
 
         if (ap.length < 3 || ap.length > 30) {
@@ -343,15 +346,17 @@ $(document).ready(function() {
             document.getElementById('Fechainicio').innerHTML = '';
         }
 
-        if (ff.length < 8 || ff.length > 16) {
+        if (ff.length < 0 || ff.length > 30) {
             valid = false;
             var com = document.getElementById('Fechafinalizacion');
             com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
         } else {
-            document.getElementById('Fechafinalizacion').innerHTML = '';
-        }
+          if(fechai > fechaf){
+            var com = document.getElementById('Fechafinalizacion');
+            com.innerHTML = "*La fecha de finalizacion no puede ser menor a la de inicio"
+          }else if(fechai == fechaf){
 
-        if (hi.length < 8 || hi.length > 16) {
+            if (hi.length < 0 || hi.length > 30) {
             valid = false;
             var com = document.getElementById('Horainicio');
             com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
@@ -359,23 +364,32 @@ $(document).ready(function() {
             document.getElementById('Horainicio').innerHTML = '';
         }
 
-        if (hf.length < 8 || hf.length > 16) {
+        if (hf.length < 0 || hf.length > 30) {
             valid = false;
             var com = document.getElementById('Horafinalizacion');
             com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
         } else {
+          if(){
+
+          }
             document.getElementById('Horafinalizacion').innerHTML = '';
         }
 
-        if (total.length < 8 || total.length > 16) {
-            valid = false;
-            var com = document.getElementById('Total');
-            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
-        } else {
-            document.getElementById('Total').innerHTML = '';
+          }
+          else{
+            document.getElementById('Fechafinalizacion').innerHTML = '';
+          }
         }
 
-        if (enganche.length < 8 || enganche.length > 16) {
+        if (total.length < 0 || total.length > 30) {
+            valid = false;
+            var com = document.getElementById('monto');
+            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
+        } else {
+            document.getElementById('monto').innerHTML = '';
+        }
+
+        if (enganche.length < 0 || enganche.length > 30) {
             valid = false;
             var com = document.getElementById('Enganche');
             com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
