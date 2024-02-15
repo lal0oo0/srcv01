@@ -16,8 +16,8 @@ $respuesta_correcta = '';
 
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
-    $correo = $_POST["email"];
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
+    $correo = $_POST["correo"];
 
     if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
     } else {
@@ -67,14 +67,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
                 
                 // Envío de correo electrónico
                 $mail = new PHPMailer(true);
-
+                $queryCorreo = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO ='$correo' AND CONTRASENA LIMIT 1";
+                $resulCorreo = $conexion->query($queryCorreo);
+                
                 try {
                     $mail->isSMTP();
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
                     $mail->Username = $correo;
                     $mail->Password = 'tu_contraseña';
-                    $mail->SMTPSecure = 'tls';
+                    $mail->SMTPSecure = 'TLS';
                     $mail->Port = 587;
                     $mail->setFrom('tu_correo@gmail.com', 'Nombre del Remitente');
                     $mail->addAddress($correo);
@@ -92,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
                     $mensaje = '<div class="alert alert-danger" role="alert">Hubo un problema al enviar el correo electrónico. Por favor, inténtalo de nuevo más tarde.</div>';
                 }
             } else {
-                $mensaje = '<div class="alert alert-danger" role="alert">Las contraseñas no coinciden.</div>';
+                $mensaje = '';
             }
         }
     } else {

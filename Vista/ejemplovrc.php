@@ -97,7 +97,7 @@ require_once '../liemail/controlador_recuperar_contrasena.php';
                             <?php echo $mensaje; ?>
                             <label for="validationexampleInputEmail1" class="form-label <?php if ($correo_encontrado) echo 'd-none'; ?>">Ingrese su correo electrónico</label>
                             <div class="input-group has-validation">
-                            <input type="email" style="border: 2px solid #007AB6;" class="form-control <?php if ($correo_encontrado) echo 'border-0'; ?>" name="email" id="email" aria-describedby="emailHelp" required <?php if (!$correo_mostrado) echo 'disabled'; ?> value="<?php echo htmlspecialchars($correo); ?>">
+                            <input type="email" style="border: 2px solid #007AB6;" class="form-control <?php if ($correo_encontrado) echo 'border-0'; ?>" name="correo" id="correo" aria-describedby="emailHelp" required <?php if (!$correo_mostrado) echo 'disabled'; ?> value="<?php echo htmlspecialchars($correo); ?>">
                                 <div class="invalid-feedback">
                                     *Campo obligatorio
                                 </div>
@@ -114,20 +114,20 @@ require_once '../liemail/controlador_recuperar_contrasena.php';
                             <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="passwo" id="passwo1" class="form-label">Agregar nueva contraseña</label>
-                            <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                             <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
+                             <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="passwo" id="confirmPasswo" class="form-label">Confirmar contraseña</label>
+                            <label for="confirmPasswo" class="form-label">Confirmar contraseña</label>
                             <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-                            <div class="invalid-feedback" style="color: red; display: none;">
+                            <div class="invalid-feedback" id="passwordMismatch" style="color: red; display: none;">
                              Las contraseñas no coinciden.
-                            </div>
+                             </div>
                         </div>
                         <?php $correo_encontrado = true; ?>
                         <?php endif; ?>
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="showHiddenInput()" onclick="return verificarContraseñas()">Siguiente</button>
+                            <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="verificarContraseñas()">Siguiente</button>
                         </div>
                     </form>
                 </div>
@@ -178,18 +178,19 @@ require_once '../liemail/controlador_recuperar_contrasena.php';
         }, 5000);
     });
     function verificarContraseñas() {
-        const passwo1 = document.getElementById('passwo1').value;
-        const confirmPasswo = document.getElementById('confirmPasswo').value;
-        var mensajeError = document.querySelector('.invalid-feedback');
+            const passwo1 = document.getElementById('passwo1').value;
+            const confirmPasswo = document.getElementById('confirmPasswo').value;
+            var mensajeError = document.getElementById('passwordMismatch');
 
-        if (passwo1 !== confirmPasswo) {
-            mensajeError.style.display = 'block';
-            return false; // Las contraseñas no coinciden
-        } else {
-            mensajeError.style.display = 'none';
-            return true; // Las contraseñas coinciden
+            if (passwo1 !== confirmPasswo) {
+                mensajeError.style.display = 'block';
+                event.preventDefault(); // Detener el envío del formulario
+                return false; // Las contraseñas no coinciden
+            } else {
+                mensajeError.style.display = 'none';
+                return true; // Las contraseñas coinciden
+            }
         }
-    }
 </script>
 </body>
 </html>
