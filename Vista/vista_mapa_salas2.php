@@ -297,7 +297,9 @@ $(document).ready(function() {
         var fechaf = new Date(ff);
         var fechaBase = new Date("2000-01-01");
         var hi = document.getElementById('Horainicio').value;
+        var horai = new Date(fechaBase.toDateString() + " " + hi);
         var hf = document.getElementById('Horafinalizacion').value;
+        var horaf = new Date(fechaBase.toDateString() + " " + hf);
         var total = document.getElementById('monto').value;
         var enganche = document.getElementById('Enganche').value;
 
@@ -351,10 +353,10 @@ $(document).ready(function() {
             var com = document.getElementById('Fechafinalizacion');
             com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
         } else {
-          if(fechai > fechaf){
+          if(fechai.getTime() > fechaf.getTime()){
             var com = document.getElementById('Fechafinalizacion');
             com.innerHTML = "*La fecha de finalizacion no puede ser menor a la de inicio"
-          }else if(fechai == fechaf){
+          }else if(fechai.getTime() == fechaf.getTime()){
 
             if (hi.length < 0 || hi.length > 30) {
             valid = false;
@@ -369,14 +371,20 @@ $(document).ready(function() {
             var com = document.getElementById('Horafinalizacion');
             com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
         } else {
-          if(){
-
-          }
+          if(horai.getTime()==horaf.getTime()){
+            valid = false;
+            var com = document.getElementById('Horafinalizacion');
+            com.innerHTML= "la hora de finalizacion no puede serigual a la de inicio";
+          } else if(horai.getTime()>horaf.getTime()){
+            valid = false;
+            var com = document.getElementById('Horafinalizacion');
+            com.innerHTML= "La hora de finalizacion no puede ser menor a la de inicio";
+          } else{
             document.getElementById('Horafinalizacion').innerHTML = '';
+          }
         }
 
-          }
-          else{
+          } else{
             document.getElementById('Fechafinalizacion').innerHTML = '';
           }
         }
