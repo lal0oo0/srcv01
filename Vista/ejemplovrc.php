@@ -134,9 +134,9 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
             </div>
         </div>
     </div>
-    <script src="jquery/jquery-3.2.1.slim.min.js"></script>
-    <script src="../js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="../js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (() => {
@@ -161,7 +161,7 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         var boton = document.getElementById("enviar");
-        var emailInput = document.getElementById("email");
+        var emailInput = document.getElementById("correo");
         <?php if ($correo_encontrado): ?>
             boton.textContent = "Enviar";
         <?php endif; ?>
