@@ -128,9 +128,16 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <div class="col-md-2">
             <label for="Nombre" class="col-form-label">Nombre del espacio:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
             <input type="text" class="form-control" name="Nombre" placeholder="Ingresa el nombre del espacio" aria-label="Nombre" aria-describedby="basic-addon1" required>
             </div>
+            <div class="col-md-1">
+            <label for="Ubicacion" class="col-form-label">Ubicación:</label>
+            </div>
+            <div class="col-md-3">
+            <input type="text" class="form-control" name="Ubicacion" placeholder="Ingresa la ubicación" aria-label="Ubicacion" aria-describedby="basic-addon1" required>
+            </div>
+            <div class="col-md-1"></div>
             <div class="col-md-1">
             <button type="submit" class="btn btn-danger">AGREGAR</button>
             </div>
@@ -156,6 +163,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
         <thead class="table-dark">
           <tr>
             <th scope="col">Nombre del espacio</th>
+            <th scope="col">Ubicación</th>
             <th scope="col">Estatus</th>
             <th scope="col">Acciones</th>
           </tr>
@@ -168,12 +176,13 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
         ?>
         <tr>
           <td><?php echo$filas ["NOMBRE"] ?></td>
+          <td><?php echo$filas ["UBICACION"] ?></td>
           <td><?php
           if($filas["ESTATUS"]==='0'){
           $filas["ESTATUS"]='Inactivo';
           }elseif($filas['ESTATUS']==='1'){
           $filas["ESTATUS"]='Activo';
-         }
+          }
          echo$filas["ESTATUS"];
           ?></td>
           <td>

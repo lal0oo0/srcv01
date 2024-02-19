@@ -123,7 +123,7 @@
             <div class="col-md-6">
               <label for="pass" class="form-label">Confirmar contraseña *</label>
               <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass_confirmar" id="pass_confirmar" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-              <div class="invalid-feedback " id="pass"></div>
+              <div class="invalid-feedback " id="pass_confirmar"></div>
               <br>
             </div>
              <div class="col-md-12">
@@ -166,8 +166,6 @@
     });
     </script>
 
-  </body>
-  
   
  <!--QUITAR LOS COMENTARIOS EN INGLÉS-->  
  <script>
@@ -208,8 +206,9 @@ $(document).ready(function() {
         var pass = document.getElementById('valid04').value;
         var pregunta = document.getElementById('pregunta').value;
         var respuesta = document.getElementById('respuesta').value;
+        var confirmarpass = document.getElementById('pass_confirmar').value;
 
-        if (nombre == '' || ap == '' || am == '' || pass == '' || pregunta == '' || respuesta == '') {
+        if (nombre == '' || ap == '' || am == '' || pass == '' || pregunta == '' || respuesta == '' || confirmarpass == '') {
             valid = false;
             swal('Error', 'Todos los campos son obligatorios', 'error');
         }
@@ -282,7 +281,19 @@ $(document).ready(function() {
         });
     });
 });
-
 </script>
-
+<script>
+document.getElementById('pass_confirmar').addEventListener('input', function() {
+    var pass = document.getElementById('valid04').value;
+    var passConfirmar = this.value;
+    if (pass !== passConfirmar) {
+        this.setCustomValidity('Las contraseñas no coinciden');
+        document.getElementById('pass_confirmar').classList.add('is-invalid');
+    } else {
+        this.setCustomValidity('');
+        document.getElementById('pass_confirmar').classList.remove('is-invalid');
+    }
+});
+</script>
+</body>
 </html>
