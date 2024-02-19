@@ -13,10 +13,20 @@ $fechamodificacion = date('Y-m-d H:i:s');
 $id=$_GET['id'];
 $hora_actual = date("H:i");
 
+$verificaentrada = "SELECT ENTRADA_SEGURIDAD FROM srcv_visitas WHERE ID_VISITA ='$id'";
+$res = mysqli_query($conexion, $verificaentrada);
+$fila = mysqli_fetch_assoc($res);
+
+if(empty($fila['ENTRADA_SEGURIDAD'])){
+  //Mensaje
+  $mensaje = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Error!</strong> La hora de salida no se puede confirmar hasta que se confirme la hora de entrada.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+} else {
+  //ejecuta actualizacion
   $consulta="UPDATE srcv_visitas SET SALIDA_SEGURIDAD='$hora_actual', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA='$id'";
-  $sql=mysqli_query($conexion, $consulta);
-
-
+  $sql=mysqli_query($conexion, $consulta); 
 
 if ($sql) {
     // Éxito: alerta de Bootstrap éxito
@@ -27,6 +37,7 @@ if ($sql) {
 } else {
     // Error: alerta de Bootstrap error con detalles
     $mensaje = '<div class="alert alert-danger" role="alert">Error al confirmar la salida.' . mysqli_error($conexion) . '</div>';
+}
 }
 
 mysqli_close($conexion);

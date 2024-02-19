@@ -164,14 +164,22 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     ?>
                     <a href="../Controlador/controlador_entrada_recepcion.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a> |
                     <?php
-                    }else{echo "";}
+                    }else{
+                    ?>
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                    <?php
+                    }
                     ?>
                     <?php
                     if(empty($filas['SALIDA_RECEPCION'])){
                     ?>
                     <a href="../Controlador/controlador_salida_recepcion.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     <?php
-                    }else{echo "";}
+                    }else{
+                    ?>
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    <?php
+                    }
                     ?>
                     </td>
       </tr>
