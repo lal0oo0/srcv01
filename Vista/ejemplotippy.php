@@ -122,8 +122,8 @@
             </div>
             <div class="col-md-6">
               <label for="pass" class="form-label">Confirmar contraseña *</label>
-              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass_confirmar" id="pass_confirmar" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-              <div class="invalid-feedback " id="pass_confirmar"></div>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass_confirmar" id="pass_confirmar" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+              <div class="invalid-feedback " id="confirmar"></div>
               <br>
             </div>
              <div class="col-md-12">
@@ -199,16 +199,34 @@ $(document).ready(function() {
         e.preventDefault();
 
         // Validaciones para el formulario
+
         var valid = true;
+
+        document.getElementById('pass_confirmar').addEventListener('input', function() {
+        var pass = document.getElementById('valid04').value;
+        var passConfirmar = this.value;
+
+        if (pass !== passConfirmar) {
+                valid=false;
+                var com = document.getElementById('confirmar');
+                com.innerHTML = "*Las contraseñas no coinciden";
+                this.setCustomValidity('Las contraseñas no coinciden');
+                document.getElementById('pass_confirmar').classList.add('is-invalid');
+                //swal('Error', 'Las contraseñas no coinciden', 'error');
+            } else {
+                this.setCustomValidity('');
+                document.getElementById('pass_confirmar').classList.remove('is-invalid');
+            }
+        });
+
         var nombre = document.getElementById('valid01').value;
         var ap = document.getElementById('valid02').value;
         var am = document.getElementById('valid03').value;
         var pass = document.getElementById('valid04').value;
         var pregunta = document.getElementById('pregunta').value;
         var respuesta = document.getElementById('respuesta').value;
-        var confirmarpass = document.getElementById('pass_confirmar').value;
 
-        if (nombre == '' || ap == '' || am == '' || pass == '' || pregunta == '' || respuesta == '' || confirmarpass == '') {
+        if (nombre == '' || ap == '' || am == '' || pass == '' || pregunta == '' || respuesta == '' || passConfirmar == '') {
             valid = false;
             swal('Error', 'Todos los campos son obligatorios', 'error');
         }
@@ -240,11 +258,11 @@ $(document).ready(function() {
         if (pass.length < 8 || pass.length > 16) {
             valid = false;
             var com = document.getElementById('pass');
-            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
+            com.innerHTML = "*Ingrese una contraseña válida";
         } else {
             document.getElementById('pass').innerHTML = '';
         }
-
+        
         // Si alguna validación falla, no se envía el formulario
         if (!valid) {
             return;
@@ -283,17 +301,8 @@ $(document).ready(function() {
 });
 </script>
 <script>
-document.getElementById('pass_confirmar').addEventListener('input', function() {
-    var pass = document.getElementById('valid04').value;
-    var passConfirmar = this.value;
-    if (pass !== passConfirmar) {
-        this.setCustomValidity('Las contraseñas no coinciden');
-        document.getElementById('pass_confirmar').classList.add('is-invalid');
-    } else {
-        this.setCustomValidity('');
-        document.getElementById('pass_confirmar').classList.remove('is-invalid');
-    }
-});
+
+   
 </script>
 </body>
 </html>
