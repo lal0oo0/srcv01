@@ -58,6 +58,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
         // Verificar si se ingresó una contraseña y coinciden
         if (isset($_POST['passwo1']) && isset($_POST['confirmPasswo']) && $_POST['passwo1'] === $_POST['confirmPasswo']) {
             $passwo1 = $_POST['passwo1'];
+            //Encriptar la contraseña
+            $clave = "55Eu47x";
+            
+            $contraEncrip = encrypt($passwo1, $clave); // Llamada a la función de encriptación
+            // Fin del método de encriptar
+            
+            // Hashing de la contraseña (opcional)
             $hashed_password = password_hash($passwo1, PASSWORD_DEFAULT);
         } else {
             $mensaje = '<div class="alert alert-danger" role="alert">La contraseña no se pudo actualizar correctamente.</div>';
@@ -104,11 +111,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
                     $mail->Subject = 'Actualización de Contraseña';
                     $body = "
                     <!DOCTYPE html>
-                    <head>
-                    <title>Recuperacion de contraseña</title>
+                     <html lang='en'>
+                     <head>
+                       <meta charset='UTF-8'>
+                       <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                       <title>Plantilla de Correo Electrónico</title>
+                       <link rel='stylesheet' href='../css/bootstrap.min.css'>
                     <style>
 
-                    </html>
+                    body {
+                      font-family: Arial, sans-serif;
+                      margin: 0;
+                      padding: 0;
+                    }
+
+                    .container {
+                      width: 100%;
+                      max-width: 600px;
+                      margin: 0 auto;
+                      padding: 20px;
+                    }
+
+                    .header {
+                      text-align: center;
+                      padding-bottom: 20px;
+                    }
+                    .header img {
+                      max-width: 100%;
+                      height: auto;
+                    }
+
+                    .content {
+                      padding: 20px;
+                      background-color: #f4f4f4;
+                    }
+
+                    .footer {
+                      text-align: center;
+                      padding-top: 20px;
+                    }
+                     </style>
+                </head>
+                <body>
+                     <div class='container'>
+                         <!-- Encabezado -->
+                         <div class='header'>
+                     <h1>Bienvenido</h1>
+                     </div>
+        
+                         <!-- Contenido -->
+                         <div class='content'>
+                             <p>Hola [Nombre],</p>
+                             <p>Se ha dectectado que usted cambio la contraseña.</p>
+                             <p>Se ha confirmado que se cambio correctamente.</p>
+                             <p>Atentamente,<br>iT-Global</p>
+                         </div>
+        
+                         <!-- Pie de página -->
+                         <div class='footer'>
+                         </div>
+                     </div>
+                </body>
+                     </html>
                     ";
                     $mail->Body = $body;
                 
