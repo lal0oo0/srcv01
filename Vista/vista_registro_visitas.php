@@ -383,7 +383,7 @@ document.addEventListener('keyup', e =>{
       }) 
     }
   })
-  //fin del script de buscardor
+  //fin del script de buscador
 
 
 //Script para mostrar alertas por determinado tiempo 
