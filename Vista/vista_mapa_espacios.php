@@ -71,6 +71,19 @@ $row = $resultado->fetch_assoc();
     justify-content: space-around;
     align-items: center;
   }
+
+  .botonocupado {
+    background-color: #ED250A;
+    box-sizing: border-box;
+    width: 140px;
+    height: 140px;
+    margin: 50px;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 </style>
 
 <header>
@@ -120,7 +133,11 @@ $row = $resultado->fetch_assoc();
     <?php
     while ($filas = mysqli_fetch_assoc($query)) {
     ?>
-     
+     <?php
+     $ID = $filas['ID_SALA'];
+     $ocupado="SELECT ID_SALA FROM srcv_reservaciones WHERE ID_SALA='$ID' AND RESERVADA='0'";
+     if(($filas['RESERVADA'])==0){
+     ?>
       <!-- Button trigger modal -->
       <button type="button" class="boton btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_<?php echo $filas['ID_SALA'] ?>" onclick="setSelectedRoom('<?php echo $filas['ID_SALA'] ?>')">
        <?php echo $filas['NOMBRE'] ?>
@@ -230,7 +247,7 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Total *</label>
-                    <input type="number" class="form-control" name="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" id="monto" oninput="formatoMoneda(this)" required>
+                    <input type="number" class="form-control" name="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" id="monto" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -256,7 +273,15 @@ $row = $resultado->fetch_assoc();
         </div>
       </div>
         
-      
+      <?php
+      }else{
+      ?>
+      <button type="button" class="botonocupado btn btn-danger">
+        <?php echo $filas['NOMBRE'] ?>
+      </button>
+      <?php
+      }
+      ?>
     <?php
     }
     ?>
