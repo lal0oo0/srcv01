@@ -48,6 +48,9 @@
     <div class='container'>
         <div class='header'>
     <h1>Bienvenido</h1>
+    <p><span style="font-size: 18px;">
+    <a class="btn btn-primary" href="http://'.$link.'/srcv01/Vista/ejemplovrc.php" style="display: inline-block; padding: 10px 20px; background-color: #007AB6; color: #ffffff; text-decoration: none; border-radius: 4px;">
+    Ingresa aquí</a></p>'
     </div>
         
         <!-- Contenido -->
@@ -64,4 +67,4 @@
     </div>
                 </body>
     </html>
-                    ";
+                    ';
