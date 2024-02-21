@@ -8,21 +8,10 @@
                     <style>
 
                     body {
+                      background: #007AB6;
                       font-family: Arial, sans-serif;
                       margin: 0;
                       padding: 0;
-                    }
-
-                    .logo{
-                        width: 110px;
-                        height: 110px;
-                        border-radius: 50%;
-                        border: 2.5px solid #007AB6;
-                        position: absolute;
-                        top: 100px;
-                        left: calc(50% - 50px);
-                        margin-top: -50px;
-                        margin-bottom: 35px;
                     }
 
                     .container {
@@ -33,7 +22,7 @@
                     }
 
                     .header {
-                      background-color: #3498db; 
+                      background: white;
                       padding: 20px; 
                       color: black; 
                       text-align: center; 
@@ -46,7 +35,7 @@
 
                     .content {
                       padding: 20px;
-                      background-color: #f4f4f4;
+                      background-color: white;
                     }
 
                     .footer {
@@ -57,7 +46,6 @@
                 </head>
                 <body>
     <div class='container'>
-    <img src="../imagenes/logocorporativo.png" alt="" class="logo">
         <div class='header'>
     <h1>Bienvenido</h1>
     </div>

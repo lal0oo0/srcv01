@@ -15,6 +15,22 @@ $respuesta_correcta = '';
 
 session_start();
 
+// Definición de la función encrypt()
+function encrypt($data, $key) {
+    // Algoritmo de encriptación (AES-256 en este caso)
+    $method = 'aes-256-cbc';
+    
+    // Generar un vector de inicialización aleatorio
+    $ivLength = openssl_cipher_iv_length($method);
+    $iv = openssl_random_pseudo_bytes($ivLength);
+    
+    // Encriptar los datos utilizando la clave y el vector de inicialización
+    $encrypted = openssl_encrypt($data, $method, $key, 0, $iv);
+    
+    // Retornar el resultado en formato base64 para su fácil almacenamiento
+    return base64_encode($encrypted . '::' . $iv);
+}
+
 // Verificar si se envió un formulario con el correo electrónico
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
     $correo = $_POST["correo"];
@@ -58,14 +74,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
         // Verificar si se ingresó una contraseña y coinciden
         if (isset($_POST['passwo1']) && isset($_POST['confirmPasswo']) && $_POST['passwo1'] === $_POST['confirmPasswo']) {
             $passwo1 = $_POST['passwo1'];
-            //Encriptar la contraseña
-            $clave = "55Eu47x";
-            
-            $contraEncrip = encrypt($passwo1, $clave); // Llamada a la función de encriptación
-            // Fin del método de encriptar
-            
-            // Hashing de la contraseña (opcional)
-            $hashed_password = password_hash($passwo1, PASSWORD_DEFAULT);
+            $clave = "55Eu47x"; // Clave para la encriptación
+            $hashed_password = encrypt($passwo1, $clave);
         } else {
             $mensaje = '<div class="alert alert-danger" role="alert">La contraseña no se pudo actualizar correctamente.</div>';
         }
@@ -111,15 +121,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
                     $mail->Subject = 'Actualización de Contraseña';
                     $body = "
                     <!DOCTYPE html>
-                     <html lang='en'>
-                     <head>
-                       <meta charset='UTF-8'>
-                       <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                       <title>Plantilla de Correo Electrónico</title>
-                       <link rel='stylesheet' href='../css/bootstrap.min.css'>
+    <html lang='en'>
+     <head>
+     <meta charset='UTF-8'>
+     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+     <title>Plantilla de Correo Electrónico</title>
+     <link rel='stylesheet' href='../css/bootstrap.min.css'>
                     <style>
 
                     body {
+                      background: #007AB6;
                       font-family: Arial, sans-serif;
                       margin: 0;
                       padding: 0;
@@ -133,9 +144,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
                     }
 
                     .header {
-                      text-align: center;
-                      padding-bottom: 20px;
+                      background: white;
+                      padding: 20px; 
+                      color: black; 
+                      text-align: center; 
                     }
+
                     .header img {
                       max-width: 100%;
                       height: auto;
@@ -143,36 +157,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
 
                     .content {
                       padding: 20px;
-                      background-color: #f4f4f4;
+                      background-color: white;
                     }
 
                     .footer {
                       text-align: center;
                       padding-top: 20px;
                     }
-                     </style>
+    </style>
                 </head>
                 <body>
-                     <div class='container'>
-                         <!-- Encabezado -->
-                         <div class='header'>
-                     <h1>Bienvenido</h1>
-                     </div>
+    <div class='container'>
+        <div class='header'>
+    <h1>Bienvenido</h1>
+    </div>
         
-                         <!-- Contenido -->
-                         <div class='content'>
-                             <p>Hola [Nombre],</p>
-                             <p>Se ha dectectado que usted cambio la contraseña.</p>
-                             <p>Se ha confirmado que se cambio correctamente.</p>
-                             <p>Atentamente,<br>iT-Global</p>
-                         </div>
+        <!-- Contenido -->
+        <div class='content'>
+            <p>Hola [Nombre],</p>
+            <p>Se ha detectado que usted cambio la contraseña.</p>
+            <p>Se ha confirmado que se cambio correctamente.</p>
+            <p>Atentamente,<br>iT-Global</p>
+        </div>
         
-                         <!-- Pie de página -->
-                         <div class='footer'>
-                         </div>
-                     </div>
+        <!-- Pie de página -->
+        <div class='footer'>
+        </div>
+    </div>
                 </body>
-                     </html>
+    </html>
                     ";
                     $mail->Body = $body;
                 
