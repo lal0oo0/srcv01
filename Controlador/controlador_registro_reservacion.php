@@ -32,9 +32,13 @@ VALUES ('$idsala', '$nombre', '$apellidop', '$apellidom', '$espacio', '$correo',
 //Esta consulta es una prueba para guardar tambien el registro en la tabla de visitas
 $consulta2= "INSERT INTO srcv_visitas (HORA_ENTRADA, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS)
 VALUES ('$horaini','$fechaini','$nombre','$apellidop','$apellidom','UrSpace','Reservacion','$useralta','$useralta','1')";
+
+$ocupado = "UPDATE srcv_salas SET RESERVADA= '1', USUARIO_MODIFICACION='$useralta' WHERE ID_SALA='$idsala'";
+
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $consulta); 
 $ejecutar2= mysqli_query($conexion, $consulta2);
+$ejecutarocupado = mysqli_query($conexion, $ocupado);
 if ($ejecutar) {
 	echo json_encode(array('success' => true));
 } else {
