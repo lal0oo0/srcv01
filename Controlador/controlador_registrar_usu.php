@@ -36,21 +36,6 @@ $pregunta = $_POST['pregunta'];
 $respuesta = $_POST['respuesta'];
 
 
-/*$sql = "SELECT COUNT(*) as total FROM `srcv_administradores` WHERE ROL = 'Administrador'";
-$resultado = mysqli_query($conexion, $sql);
-$row = mysqli_fetch_assoc($resultado);
-$total = $row['total'];
-
-if ($total == "0") {
-  header('Location: ../Vista/ejemplotippy.php')
-  exit();
-
-} elseif ($total == "1") {
-  header('Location: ../Vista/vista_inicio_sesion.php');
-  exit();
-}*/
-
-
 //Codigo para guardar un registro temporalmente en una variable php
 $usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA,ROL, ESTATUS) 
 VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$pregunta','$respuesta', 'Administrador', '1')";
