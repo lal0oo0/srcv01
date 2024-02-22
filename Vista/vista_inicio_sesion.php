@@ -1,4 +1,23 @@
+<?php
+//Codigo de conexion a la base de datos
+require_once("../Modelo/conexion2.php");
+/* Obtener la conexión a la base de datos */
+$conexion = conect();
 
+
+$sql = "SELECT COUNT(*) as total FROM srcv_administradores WHERE ROL = 'Administrador'";
+$resultado = mysqli_query($conexion, $sql);
+$row = mysqli_fetch_assoc($resultado);
+$total = $row['total'];
+
+if ($total == 0) {
+  header('Location: ../Vista/ejemplotippy.php');
+  exit();
+
+} else{
+  
+}
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
