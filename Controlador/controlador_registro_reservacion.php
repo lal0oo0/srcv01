@@ -12,6 +12,7 @@ $nombre = $_POST['Nombre'];
 $apellidop = $_POST['Apellidopaterno'];
 $apellidom = $_POST['Apellidomaterno'];
 $correo = $_POST['Correo'];
+$telefono = $_POST['Telefono'];
 $fechaini = $_POST['Fechainicio'];
 $fechafin = $_POST['Fechafinalizacion'];
 $horaini = $_POST['Horainicio'];
@@ -26,8 +27,8 @@ $espacio = $_POST['nombre'];
 
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$consulta = "INSERT INTO srcv_reservaciones (ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, CORREO_ELECTRONICO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE, LIQUIDACION, USO, ESTATUS, USUARIO_ALTA, USUARIO_MODIFICACION) 
-VALUES ('$idsala', '$nombre', '$apellidop', '$apellidom', '$espacio', '$correo', '$fechaini', '$fechafin', '$horaini', '$horafin', '$personas', '$servicios', '$total', '$enganche', '$liquidacion', '0', '1', '$useralta', '$useralta')";
+$consulta = "INSERT INTO srcv_reservaciones (ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, CORREO_ELECTRONICO, TELEFONO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE, LIQUIDACION, USO, ESTATUS, USUARIO_ALTA, USUARIO_MODIFICACION) 
+VALUES ('$idsala', '$nombre', '$apellidop', '$apellidom', '$espacio', '$correo', '$telefono', '$fechaini', '$fechafin', '$horaini', '$horafin', '$personas', '$servicios', '$total', '$enganche', '$liquidacion', '0', '1', '$useralta', '$useralta')";
 
 //Esta consulta es una prueba para guardar tambien el registro en la tabla de visitas
 $consulta2= "INSERT INTO srcv_visitas (HORA_ENTRADA, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS)

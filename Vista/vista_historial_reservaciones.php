@@ -118,10 +118,13 @@ $row = $resultado->fetch_assoc();
               <th scope="col">Apellido Materno</th>
               <th scope="col">Espacio</th>
               <th scope="col">Correo electrónico</th>
+              <th scope="col">Teléfono</th>
               <th scope="col">Fecha de entrada</th>
               <th scope="col">Fecha de salida</th>
               <th scope="col">Hora de entrada</th>
               <th scope="col">Hora de salida</th>
+              <th scope="col">Número de personas</th>
+              <th scope="col">Servicios extra</th>
               <th scope="col">Total</th>
               <th scope="col">Enganche</th>
               <th scope="col">Liquidación</th>
@@ -139,10 +142,13 @@ $row = $resultado->fetch_assoc();
               <td><?php echo$filas ["APELLIDO_MATERNO"] ?></td>
               <td><?php echo$filas ["NOMBRE_ESPACIO"] ?></td>
               <td><?php echo$filas ["CORREO_ELECTRONICO"] ?></td>
+              <td><?php echo$filas ["TELEFONO"] ?></td>
               <td><?php echo$filas ["FECHA_ENTRADA"] ?></td>
               <td><?php echo$filas ["FECHA_SALIDA"] ?></td>
               <td><?php echo$filas ["HORA_ENTRADA"] ?></td>
               <td><?php echo$filas ["HORA_SALIDA"] ?></td>
+              <td><?php echo$filas ["NUMERO_PERSONAS"] ?></td>
+              <td><?php echo$filas ["SERVICIOS_EXTRA"] ?></td>
               <td>$<?php echo$filas ["TOTAL"] ?></td>
               <td>$<?php echo$filas ["ENGANCHE"] ?></td>
               <td>$<?php echo$filas ["LIQUIDACION"] ?></td>
