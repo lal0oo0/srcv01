@@ -68,7 +68,12 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     height: 90px;
   }
 </style>
-
+<body>
+<?php
+  require_once("../Modelo/conexion2.php");
+  $conexion = conect();
+  $piso = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Piso' and ESTATUS='1'");
+  ?>
 <header>
 <nav class="navbar navbar-dark  fixed-top navbar-custom">
   <div class="container-fluid">
@@ -132,10 +137,25 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <input type="text" class="form-control" name="Nombre" placeholder="Ingresa el nombre del espacio" aria-label="Nombre" aria-describedby="basic-addon1" required>
             </div>
             <div class="col-md-1">
-            <label for="Ubicacion" class="col-form-label">Ubicación:</label>
+              <label for="Ubicacion" class="col-form-label">Ubicación:</label>
             </div>
             <div class="col-md-3">
-            <input type="text" class="form-control" name="Ubicacion" placeholder="Ingresa la ubicación" aria-label="Ubicacion" aria-describedby="basic-addon1" required>
+            <select class="form-select mr-sm-2" id="ubicacion" name="ubicacion" required>
+                      <div class="invalid-feedback">
+                        Verifique los datos
+                      </div>
+                      <option selected value="">Selecciona</option>
+                      <!--Se muestran las opciones de "Pisos" registradas en la tabla listas-->
+                      <?php
+                      while ($filas = mysqli_fetch_assoc($piso)) {
+                      ?>
+                        <option value="<?php echo $filas['NOMBRE']; ?>">
+                          <?php echo $filas['NOMBRE']; ?>
+                        </option>
+                      <?php
+                      }
+                      ?>
+                    </select>
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-1">

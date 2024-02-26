@@ -9,7 +9,7 @@ $conexion = conect();
 
 /*Para capturar los campos*/
 $nombre = $_POST['Nombre'];
-$ubicacion = $_POST['Ubicacion'];
+$ubicacion = $_POST['ubicacion'];
 
 // Verificar si NOMBRE ya existe
 $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_salas WHERE NOMBRE = '$nombre' AND UBICACION = '$ubicacion' ");
