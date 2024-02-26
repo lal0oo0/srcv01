@@ -149,7 +149,7 @@ $row = $resultado->fetch_assoc();
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                <?php echo $filas['NOMBRE'] ?></h1>
+                <?php echo $filas['NOMBRE']; echo " | "; echo $filas['UBICACION'];?></h1>
                 <input id="salaSeleccionada_<?php echo $filas['ID_SALA'] ?>" name="salaSeleccionada" value="" hidden>
                 
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
