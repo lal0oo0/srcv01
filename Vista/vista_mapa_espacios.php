@@ -185,12 +185,18 @@ $row = $resultado->fetch_assoc();
                 </div>
                 <div class="mb-2"></div> <!--Salto de linea-->
 
-                <div class="col">
-                <label for="se">Correo electrónico *</label>
-                <input type="email" class="form-control" name="Correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
-                <div class="invalid-feedback">
-                  Verifique los datos
-                </div>
+                <div class="row">
+                  <div class="col">
+                    <label for="se">Correo electrónico *</label>
+                    <input type="email" class="form-control" name="Correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
+                    <div class="invalid-feedback">
+                      Verifique los datos
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" class="form-control" id="telefono" name="Telefono" placeholder="Teléfono" aria-describedby="basic-addon1">
+                  </div>
                 </div>
                 <div class="mb-2"></div> <!--Salto de linea-->
 
@@ -234,7 +240,7 @@ $row = $resultado->fetch_assoc();
                   <div class="col-md-3"></div>
                   <div class="col-md-6">
                   <label for="personas">Numero de personas</label>
-                  <input type="number" class="form-control" name="Personas" aria-label="personas" aria-describedby="basic-addon1">
+                  <input type="number" class="form-control" name="Personas" value="1" aria-label="personas" aria-describedby="basic-addon1">
                   </div>
                   <div class="col-md-3"></div>
                 </div>
