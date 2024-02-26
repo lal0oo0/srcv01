@@ -25,6 +25,10 @@ $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_listas WHERE NOMBRE 
     } elseif ($categoria === "Asunto") {
         $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, USUARIO_ALTA, USUARIO_MODIFICACION) 
         VALUES ('$nombre', 'Asunto', '1', '$useralta', '$useralta')";
+
+    } elseif ($categoria === "Piso") {
+        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, USUARIO_ALTA, USUARIO_MODIFICACION) 
+        VALUES ('$nombre', 'Piso', '1', '$useralta', '$useralta')";
     }
 
     $ejecutar = mysqli_query($conexion, $consulta);
