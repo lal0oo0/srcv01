@@ -135,8 +135,9 @@ $row = $resultado->fetch_assoc();
     ?>
      <?php
      $ID = $filas['ID_SALA'];
-     $ocupado="SELECT ID_SALA FROM srcv_reservaciones WHERE ID_SALA='$ID' AND RESERVADA='0'";
-     if(($filas['RESERVADA'])==0){
+     $ocupado= mysqli_query($conexion, "SELECT * FROM srcv_reservaciones WHERE ID_SALA='$ID'");
+     $ocu = mysqli_fetch_assoc($ocupado);
+     if(($filas['RESERVADA'])==0 || ($ocu['FECHA_ENTRADA']) != $fecha_actual && ($ocu['HORA_ENTRADA']) != $hora_actual){
      ?>
       <!-- Button trigger modal -->
       <button type="button" class="boton btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_<?php echo $filas['ID_SALA'] ?>" onclick="setSelectedRoom('<?php echo $filas['ID_SALA'] ?>')">
@@ -148,7 +149,7 @@ $row = $resultado->fetch_assoc();
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                <?php echo $filas['NOMBRE'] ?></h1>
+                <?php echo $filas['NOMBRE']; echo " | "; echo $filas['UBICACION'];?></h1>
                 <input id="salaSeleccionada_<?php echo $filas['ID_SALA'] ?>" name="salaSeleccionada" value="" hidden>
                 
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -184,12 +185,18 @@ $row = $resultado->fetch_assoc();
                 </div>
                 <div class="mb-2"></div> <!--Salto de linea-->
 
-                <div class="col">
-                <label for="se">Correo electrónico *</label>
-                <input type="email" class="form-control" name="Correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
-                <div class="invalid-feedback">
-                  Verifique los datos
-                </div>
+                <div class="row">
+                  <div class="col">
+                    <label for="se">Correo electrónico *</label>
+                    <input type="email" class="form-control" name="Correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
+                    <div class="invalid-feedback">
+                      Verifique los datos
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" class="form-control" id="telefono" name="Telefono" placeholder="Teléfono" aria-describedby="basic-addon1">
+                  </div>
                 </div>
                 <div class="mb-2"></div> <!--Salto de linea-->
 
@@ -233,7 +240,7 @@ $row = $resultado->fetch_assoc();
                   <div class="col-md-3"></div>
                   <div class="col-md-6">
                   <label for="personas">Numero de personas</label>
-                  <input type="number" class="form-control" name="Personas" aria-label="personas" aria-describedby="basic-addon1">
+                  <input type="number" class="form-control" name="Personas" value="1" aria-label="personas" aria-describedby="basic-addon1">
                   </div>
                   <div class="col-md-3"></div>
                 </div>
@@ -274,7 +281,7 @@ $row = $resultado->fetch_assoc();
       </div>
         
       <?php
-      }else{
+      }elseif (($filas['RESERVADA'])==1 && ($ocu['FECHA_ENTRADA'])== $fecha_actual && ($ocu['HORA_ENTRADA'])==$hora_actual){
       ?>
       <button type="button" class="botonocupado btn btn-danger">
         <?php echo $filas['NOMBRE'] ?>
