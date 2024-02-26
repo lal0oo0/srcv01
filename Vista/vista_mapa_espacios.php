@@ -135,8 +135,9 @@ $row = $resultado->fetch_assoc();
     ?>
      <?php
      $ID = $filas['ID_SALA'];
-     $ocupado="SELECT ID_SALA FROM srcv_reservaciones WHERE ID_SALA='$ID' AND RESERVADA='0'";
-     if(($filas['RESERVADA'])==0){
+     $ocupado= mysqli_query($conexion, "SELECT * FROM srcv_reservaciones WHERE ID_SALA='$ID'");
+     $ocu = mysqli_fetch_assoc($ocupado);
+     if(($filas['RESERVADA'])==0 || ($ocu['FECHA_ENTRADA']) != $fecha_actual && ($ocu['HORA_ENTRADA']) != $hora_actual){
      ?>
       <!-- Button trigger modal -->
       <button type="button" class="boton btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_<?php echo $filas['ID_SALA'] ?>" onclick="setSelectedRoom('<?php echo $filas['ID_SALA'] ?>')">
@@ -274,7 +275,7 @@ $row = $resultado->fetch_assoc();
       </div>
         
       <?php
-      }else{
+      }elseif (($filas['RESERVADA'])==1 && ($ocu['FECHA_ENTRADA'])== $fecha_actual && ($ocu['HORA_ENTRADA'])==$hora_actual){
       ?>
       <button type="button" class="botonocupado btn btn-danger">
         <?php echo $filas['NOMBRE'] ?>
