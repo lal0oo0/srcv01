@@ -134,6 +134,7 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
@@ -191,6 +192,33 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
                 return true; // Las contraseñas coinciden
             }
         }
+    $.ajax({
+    type: "POST",
+    url: "PHPMailer/controlador_recuperar_contrasena.php",
+    data: { correo: correo, respuesta: respuesta, passwo1: passwo1, confirmPasswo: confirmPasswo },
+    dataType: "json",
+    success: function(response) {
+        if (response.success) {
+            // El correo se envió con éxito, muestra la SweetAlert de éxito
+            swal({
+                title: "Correo enviado",
+                text: "La contraseña se ha actualizado correctamente y se ha enviado un correo electrónico de confirmación.",
+                icon: "success",
+                button: "OK",
+            }).then(() => {
+                // Redirige a otra página después de cerrar la alerta
+                window.location.href = "../Vista/vista_inicio_sesion.php";
+            });
+        } else {
+            // Error al enviar el correo electrónico, muestra la SweetAlert de error
+            swal("Error", "Error al enviar el correo electrónico.", "error");
+        }
+    },
+    error: function() {
+        // Error en la solicitud AJAX, muestra la SweetAlert de error
+        swal("Error", "Error en la solicitud AJAX.", "error");
+    }
+});
 </script>
 </body>
 </html>

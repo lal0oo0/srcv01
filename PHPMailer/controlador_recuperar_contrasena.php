@@ -114,14 +114,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
                 // Establecer el asunto y el cuerpo del mensaje
                 $mail->isHTML(true);
                 $mail->Subject = 'Actualización de Contraseña';
-                $body .= '<p>
-                  <span style="font-size: 18px;">
-                  <a class="btn btn-primary" href="http://'.$link.'/srcv01/Vista/ejemplovrc.php" style="display: inline-block; padding: 10px 20px; background-color: #007AB6; color: #ffffff; text-decoration: none; border-radius: 4px;">
-                   Ingresa aquí
-                  </a>
-                </p>';
+                $nueva_contrasena = $_POST['passwo1'];
+
+// Concatenar la nueva contraseña con el cuerpo del mensaje
+$body = '<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Actualización de Contraseña</title>
+    </head>
+    <body>
+    <div style="width: 100%; max-width: 500px; margin: 0 auto; padding: 20px;">
+    <div style="padding: 20px; text-align: center; background: #007AB6;max-width: 100%;height: auto; align: center;">
+    <h1 style="color: white;">iT-Global</h1>
+    </div>
+            <p style="font-size: 16px; color: black;">Hola Administrador,</p>
+            <p style="font-size: 16px; color: black;">Se ha actualizado correctamente la contraseña, la nueva contraseña es:</p>
+            <p style="font-size: 17px; text-align: center;"><b>' . $nueva_contrasena . '</b></p>
+            <p style="font-size: 16px; color: black;">Por favor, guarda esta información en un lugar seguro.</p>
+            <p style="font-size: 16px; color: black;">Ingrese al boton para que inicie sesion</p>
+            <p><span style="font-size: 16px;">
+            <a class="btn btn-primary" href="http://'.$link.'/srcv01/Vista/vista_inicio_sesion.php" style="display: inline-block; padding: 10px 20px; background-color: #007AB6; color: #ffffff; text-decoration: none; border-radius: 4px;">
+            Inicie sesion</a></p>
+            <p style="font-size: 16px; color: black;">Atentamente,<br>iT-Global</p>
+        </div>
+        </div>
+              </body>
+              </html>';
                 $mail->Body = $body;
-            
                 // Enviar el correo electrónico
                 if ($mail->send()) {
                     $mensaje = '<div class="alert alert-success" role="alert">La contraseña se ha actualizado correctamente y se ha enviado un correo electrónico de confirmación.</div>';
@@ -133,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
                     $mensaje = '<div class="alert alert-danger" role="alert">Error al enviar el correo electrónico.</div>';
                 }
             } else {
-                $mensaje = '<div class="alert alert-danger" role="alert">La contraseña no se pudo actualizar correctamente.</div>';
+                $mensaje = '<div class="alert alert-danger" role="alert">No se puede ingresar la misma contraseña, ingrese otra nueva.</div>';
             }
         }
     } else {
