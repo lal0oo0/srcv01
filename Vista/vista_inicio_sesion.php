@@ -11,7 +11,7 @@ $row = mysqli_fetch_assoc($resultado);
 $total = $row['total'];
 
 if ($total == 0) {
-  header('Location: ../Vista/ejemplotippy.php');
+  header('Location: ../Vista/vista_primer_administrador.php');
   exit();
 
 } else{

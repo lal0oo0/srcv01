@@ -262,6 +262,25 @@ $(document).ready(function() {
         });
     });
 });
+
+
+
+//Script para poner por tiempos las alertas de bootstrap
+
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function() {
+        // Selecciona el elemento de alerta
+        var alerta = document.querySelector('.alert');
+
+        // Verifica si se encontró el elemento de alerta
+        if(alerta) {
+            // Temporizador para eliminar la alerta después de 4 segundos (4000 milisegundos)
+            setTimeout(function() {
+                alerta.remove(); // Elimina la alerta del DOM
+            }, 4000);
+        }
+    });
+
 </script>
 
 

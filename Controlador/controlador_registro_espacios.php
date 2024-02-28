@@ -11,10 +11,10 @@ $conexion = conect();
 $nombre = $_POST['Nombre'];
 $ubicacion = $_POST['ubicacion'];
 
-// Verificar si NOMBRE ya existe
+// Verificar si NOMBRE ya existe en esa UBICACIÓn
 $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_salas WHERE NOMBRE = '$nombre' AND UBICACION = '$ubicacion' ");
     if (mysqli_num_rows($verificacion) > 0) {
-        echo json_encode(array('success' => false, 'error' => 'El nombre del espacio que ingreso ya existe en esa ubicación.'));
+        echo json_encode(array('success' => false, 'error' => 'El nombre del espacio que ingresó ya existe en esa ubicación.'));
         exit();
     }
 
