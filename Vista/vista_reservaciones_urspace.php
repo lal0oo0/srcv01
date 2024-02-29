@@ -254,7 +254,57 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <!--Boton para eliminar-->
                   <a href="../Controlador/controlador_eliminar_reservacion.php?id=<?=$filas ['ID_RESERVACION']?>"><i class="fa fa-times" aria-hidden="true"></i></a>
                   <a href="../Controlador/controlador_uso_reservacion.php?id=<?=$filas['ID_RESERVACION']?>"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
-                
+
+
+                  <?php
+                  // Se obtiene el id para poder hacer la consulta 
+                  $id_reservacion = $filas['ID_RESERVACION'];
+
+                  // Realizar consulta para obtener la información de la entrada
+                  $query_entrada = "SELECT ENTRADA_URSPACE FROM srcv_visitas WHERE ID_VISITA = $id_reservacion";
+                  $resultado_entrada = mysqli_query($conexion, $query_entrada);
+
+                  if ($resultado_entrada) {
+                      $fila_entrada = mysqli_fetch_assoc($resultado_entrada);
+                      
+                      // Verificar si la entrada está confirmada
+                      if (!empty($fila_entrada['ENTRADA_URSPACE'])) {
+                          // Si la entrada está confirmada solo se muestra el icono 
+                          //echo '<i class="fa fa-sign-in" aria-hidden="true"></i>';
+                      } else {
+                          // Si la entrada no está confirmada se habilita el enlace para confirmar la entrada 
+                          echo '<a href="../Controlador/controlador_entrada_urspace.php?id=' . $id_reservacion . '"><i class="fa fa-sign-in" aria-hidden="true"></i></a>';
+                      }
+                  } else {
+                      echo 'Error al confirmar la salida.';
+                  }
+                  ?>
+
+                  <?php
+                  // Se obtiene el id para poder hacer la consulta
+                  $id_reservacion = $filas['ID_RESERVACION'];
+
+                  // Realizar consulta para obtener la información de la salida
+                  $query_salida = "SELECT SALIDA_URSPACE FROM srcv_visitas WHERE ID_VISITA = $id_reservacion";
+                  $resultado_salida = mysqli_query($conexion, $query_salida);
+
+                  if ($resultado_salida) {
+                      $fila_salida = mysqli_fetch_assoc($resultado_salida);
+                      
+                      // Verificar si la salida está confirmada
+                      if (!empty($fila_salida['SALIDA_URSPACE'])) {
+                          // Si la salida está confirmada solo se muestra el icono 
+                          //echo '<i class="fa fa-sign-out" aria-hidden="true"></i>';
+                      } else {
+                          // Si la salida no está confirmada se habilita el enlace para confirmar la salida 
+                          echo '<a href="../Controlador/controlador_salida_urspace.php?id=' . $id_reservacion . '"><i class="fa fa-sign-out" aria-hidden="true"></i></a>';
+                      }
+                  } else {
+                      echo 'Error al confirmar la salida.';
+                  }
+                  ?>
+
+
               </td>
           </tr>
           <?php
