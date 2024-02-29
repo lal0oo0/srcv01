@@ -131,13 +131,28 @@ $row = $resultado->fetch_assoc();
 <div class="outer-container text-center">
   <div class="inner-container">
     <?php
+    ///////este es el ciclo que muestra las salas
     while ($filas = mysqli_fetch_assoc($query)) {
     ?>
      <?php
+     ////Recupera el id de la sala
      $ID = $filas['ID_SALA'];
+     ////esta consulta nos va a permitir buscar si
+     ////uno de los espacios tiene una reservacion
      $ocupado= mysqli_query($conexion, "SELECT * FROM srcv_reservaciones WHERE ID_SALA='$ID'");
-     $ocu = mysqli_fetch_assoc($ocupado);
-     if(($filas['RESERVADA'])==0 || ($ocu['FECHA_ENTRADA']) != $fecha_actual && ($ocu['HORA_ENTRADA']) != $hora_actual){
+     $ocu = mysqli_fetch_assoc($ocupado);?>
+     <?php
+     //Que la hora actual este entre la hora de entrada y la de salida
+     if (($filas['RESERVADA'])==1 && ($ocu['FECHA_ENTRADA']) <= $fecha_actual && ($ocu['FECHA_SALIDA'])>= $fecha_actual && ($ocu['HORA_ENTRADA'])<=$hora_actual && ($ocu['HORA_SALIDA'])>=$hora_actual){
+      ?>
+      <button type="button" class="botonocupado btn btn-danger">
+        <?php echo $filas['NOMBRE'] ?>
+      </button>
+      <?php
+      }
+     ////muestra en color verde las salas que no contengan
+     ////una reservacion para la fecha y hora actual
+     elseif(($filas['RESERVADA'])==0 ||($filas['RESERVADA'])==1 && ($ocu['FECHA_ENTRADA'])>$fecha_actual){
      ?>
       <!-- Button trigger modal -->
       <button type="button" class="boton btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_<?php echo $filas['ID_SALA'] ?>" onclick="setSelectedRoom('<?php echo $filas['ID_SALA'] ?>')">
@@ -281,16 +296,13 @@ $row = $resultado->fetch_assoc();
       </div>
         
       <?php
-      }elseif (($filas['RESERVADA'])==1 && ($ocu['FECHA_ENTRADA'])== $fecha_actual && ($ocu['HORA_ENTRADA'])==$hora_actual){
-      ?>
-      <button type="button" class="botonocupado btn btn-danger">
-        <?php echo $filas['NOMBRE'] ?>
-      </button>
-      <?php
-      }
+      ////a partir de aqui se imprimen en color rojo los espacios
+      ////que contengan una reservacion para la fecha y hora actual
+      }//else
       ?>
     <?php
     }
+    ///////aqui finaliza el ciclo que muestra los espacios
     ?>
   </div>
 </div>
