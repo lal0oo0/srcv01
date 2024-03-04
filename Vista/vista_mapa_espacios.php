@@ -297,7 +297,7 @@ $row = $resultado->fetch_assoc();
         
       <?php
       ////a partir de aqui se imprimen en color rojo los espacios
-      ////que contengan una reservacion para la fecha y hora actual
+      ////que contengan una reservacion para la fecha y hora actual YA NOOO
       }//else
       ?>
     <?php
