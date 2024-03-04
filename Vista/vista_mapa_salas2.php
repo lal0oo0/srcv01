@@ -71,6 +71,19 @@ $row = $resultado->fetch_assoc();
     justify-content: space-around;
     align-items: center;
   }
+
+  .botonocupado {
+    background-color: #ED250A;
+    box-sizing: border-box;
+    width: 140px;
+    height: 140px;
+    margin: 50px;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 </style>
 
 <header>
@@ -118,9 +131,36 @@ $row = $resultado->fetch_assoc();
 <div class="outer-container text-center">
   <div class="inner-container">
     <?php
+    ///////este es el ciclo que muestra las salas
     while ($filas = mysqli_fetch_assoc($query)) {
     ?>
-     
+     <?php
+     ////Recupera el id de la sala
+     $ID = $filas['ID_SALA'];
+     ////esta consulta nos va a permitir buscar si
+     ////uno de los espacios tiene una reservacion
+     $ocupado=  "SELECT r.* FROM srcv_reservaciones r
+     INNER JOIN srcv_salas e ON r.ID_SALA = e.ID_SALA
+     WHERE e.ID_SALA = $ID
+     AND r.FECHA_ENTRADA = '$fecha_actual'
+     AND r.HORA_ENTRADA <= '$hora_actual'
+     AND r.HORA_SALIDA >= '$hora_actual'";
+     $ocu = $conexion->query($ocupado);
+     if($ocu){
+      $num_reserva=$ocu->num_rows;}?>
+     <?php
+     //Que la hora actual este entre la hora de entrada y la de salida
+     if (mysqli_num_rows($ocupado)>1 && ($ocu['FECHA_ENTRADA']) <= $fecha_actual && ($ocu['FECHA_SALIDA'])>= $fecha_actual && ($ocu['HORA_ENTRADA'])<=$hora_actual && ($ocu['HORA_SALIDA'])>=$hora_actual){
+      ?>
+      <button type="button" class="botonocupado btn btn-danger">
+        <?php echo $filas['NOMBRE'] ?>
+      </button>
+      <?php
+      }
+     ////muestra en color verde las salas que no contengan
+     ////una reservacion para la fecha y hora actual
+     elseif(mysqli_num_rows($ocupado)==0 ||mysqli_num_rows($ocupado)>1 && ($ocu['FECHA_ENTRADA'])>$fecha_actual){
+     ?>
       <!-- Button trigger modal -->
       <button type="button" class="boton btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_<?php echo $filas['ID_SALA'] ?>" onclick="setSelectedRoom('<?php echo $filas['ID_SALA'] ?>')">
        <?php echo $filas['NOMBRE'] ?>
@@ -131,18 +171,18 @@ $row = $resultado->fetch_assoc();
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                <?php echo $filas['NOMBRE'] ?></h1>
+                <?php echo $filas['NOMBRE']; echo " | "; echo $filas['UBICACION'];?></h1>
                 <input id="salaSeleccionada_<?php echo $filas['ID_SALA'] ?>" name="salaSeleccionada" value="" hidden>
                 
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="../Controlador/controlador_registro_reservacion2.php" class="formulario row g-3 needs-validation" method="post" novalidate>
+              <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" method="post" novalidate>
                 <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
                 <input type="hidden" name="nombre" id="nombre" value="<?= $filas['NOMBRE'] ?>">
                 <div class="col">
                 <label for="se">Nombre *</label>
-                <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
+                <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
                 <div class="invalid-feedback">
                   Verifique los datos
                 </div>
@@ -152,14 +192,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Apellido paterno *</label>
-                    <input type="text" class="form-control" name="Apellidopaterno" id="Apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
+                    <input type="text" class="form-control" name="Apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Apellido materno *</label>
-                    <input type="text" class="form-control" name="Apellidomaterno" id="Apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
+                    <input type="text" class="form-control" name="Apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -167,12 +207,18 @@ $row = $resultado->fetch_assoc();
                 </div>
                 <div class="mb-2"></div> <!--Salto de linea-->
 
-                <div class="col">
-                <label for="se">Correo electrónico *</label>
-                <input type="email" class="form-control" name="Correo" id="Correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
-                <div class="invalid-feedback">
-                  Verifique los datos
-                </div>
+                <div class="row">
+                  <div class="col">
+                    <label for="se">Correo electrónico *</label>
+                    <input type="email" class="form-control" name="Correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
+                    <div class="invalid-feedback">
+                      Verifique los datos
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" class="form-control" id="telefono" name="Telefono" placeholder="Teléfono" aria-describedby="basic-addon1">
+                  </div>
                 </div>
                 <div class="mb-2"></div> <!--Salto de linea-->
 
@@ -197,14 +243,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="Hora inicio">Hora de inicio *</label>
-                    <input type="time" class="form-control" name="Horainicio" id="Horainicio" placeholder="Hora de inicio " aria-label="Hora de inicio" aria-describedby="basic-addon1" value="<?=$hora_actual?>" required>
+                    <input type="time" class="form-control" name="Horainicio" placeholder="Hora de inicio " aria-label="Hora de inicio" aria-describedby="basic-addon1" value="<?=$hora_actual?>" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="Hora finalizacion">Hora de finalización *</label>
-                    <input type="time" class="form-control" name="Horafinalizacion" id="Horafinalizacion" placeholder="Hora de finalizacion " aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
+                    <input type="time" class="form-control" name="Horafinalizacion" placeholder="Hora de finalizacion " aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>   
@@ -216,14 +262,14 @@ $row = $resultado->fetch_assoc();
                   <div class="col-md-3"></div>
                   <div class="col-md-6">
                   <label for="personas">Numero de personas</label>
-                  <input type="number" class="form-control" name="Personas" id="Personas" aria-label="personas" aria-describedby="basic-addon1">
+                  <input type="number" class="form-control" name="Personas" value="1" aria-label="personas" aria-describedby="basic-addon1">
                   </div>
                   <div class="col-md-3"></div>
                 </div>
 
                 <div class="col">
                   <label for="se">Servicios extra</label>
-                  <input type="text" class="form-control" name="Servicios" id="Servicios" value="N/A" aria-label="servicios" aria-describedby="basic-addon1">
+                  <input type="text" class="form-control" name="Servicios" value="N/A" aria-label="servicios" aria-describedby="basic-addon1">
                 </div>
                 <div class="mb-4"></div> <!--Salto de linea-->
 
@@ -237,7 +283,7 @@ $row = $resultado->fetch_assoc();
                   </div>
                   <div class="col">
                     <label for="se">Enganche *</label>
-                    <input type="number" class="form-control" name="Enganche" id="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
+                    <input type="number" class="form-control" name="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -256,9 +302,14 @@ $row = $resultado->fetch_assoc();
         </div>
       </div>
         
-      
+      <?php
+      ////a partir de aqui se imprimen en color rojo los espacios
+      ////que contengan una reservacion para la fecha y hora actual YA NOOO
+      }//else
+      ?>
     <?php
     }
+    ///////aqui finaliza el ciclo que muestra los espacios
     ?>
   </div>
 </div>
@@ -274,7 +325,25 @@ $row = $resultado->fetch_assoc();
   }
 
 
+// Script para validaciones
+(() => {
+  'use strict'
 
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
 
 
 //ALERTAS//
@@ -285,131 +354,6 @@ $(document).ready(function() {
         // Previene el comportamiento predeterminado del formulario
         e.preventDefault();
         
-                // Validaciones para el formulario
-                var valid = true;
-        var nombre = document.getElementById('Nombre').value;
-        var ap = document.getElementById('Apellidopaterno').value;
-        var am = document.getElementById('Apellidomaterno').value;
-        var correo = document.getElementById('Correo').value;
-        var fi = document.getElementById('Fechainicio').value;
-        var fechai = new Date(fi);
-        var ff = document.getElementById('Fechafinalizacion').value;
-        var fechaf = new Date(ff);
-        var fechaBase = new Date("2000-01-01");
-        var hi = document.getElementById('Horainicio').value;
-        var horai = new Date(fechaBase.toDateString() + " " + hi);
-        var hf = document.getElementById('Horafinalizacion').value;
-        var horaf = new Date(fechaBase.toDateString() + " " + hf);
-        var total = document.getElementById('monto').value;
-        var enganche = document.getElementById('Enganche').value;
-
-        if (nombre == '' || ap == '' || am == '' || correo == '' || fi == '' || ff == '' || hi == '' || hf == '' || total == '' || enganche == '' ) {
-            valid = false;
-            swal('Error', 'Todos los campos son obligatorios', 'error');
-        }
-
-        if (nombre.length < 3 || nombre.length > 30) {
-            valid = false;
-            var com = document.getElementById('Nombre');
-            com.innerHTML = "*Campo obligatorio";
-        } else {
-            document.getElementById('Nombre').innerHTML = '';
-        }
-
-        if (ap.length < 3 || ap.length > 30) {
-            valid = false;
-            var com = document.getElementById('Apellidopaterno');
-            com.innerHTML = "*Campo obligatorio";
-        } else {
-            document.getElementById('Apellidopaterno').innerHTML = '';
-        }
-
-        if (am.length < 3 || am.length > 30) {
-            valid = false;
-            var com = document.getElementById('Apellidomaterno');
-            com.innerHTML = "*Campo obligatorio";
-        } else {
-            document.getElementById('Apellidomaterno').innerHTML = '';
-        }
-
-        if (correo.length < 3 || correo.length > 30) {
-            valid = false;
-            var com = document.getElementById('Correo');
-            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
-        } else {
-            document.getElementById('Correo').innerHTML = '';
-        }
-
-        if (fi.length < 0 || fi.length > 30) {
-            valid = false;
-            var com = document.getElementById('Fechainicio');
-            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
-        } else {
-            document.getElementById('Fechainicio').innerHTML = '';
-        }
-
-        if (ff.length < 0 || ff.length > 30) {
-            valid = false;
-            var com = document.getElementById('Fechafinalizacion');
-            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
-        } else {
-          if(fechai.getTime() > fechaf.getTime()){
-            var com = document.getElementById('Fechafinalizacion');
-            com.innerHTML = "*La fecha de finalizacion no puede ser menor a la de inicio"
-          }else if(fechai.getTime() == fechaf.getTime()){
-
-            if (hi.length < 0 || hi.length > 30) {
-            valid = false;
-            var com = document.getElementById('Horainicio');
-            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
-        } else {
-            document.getElementById('Horainicio').innerHTML = '';
-        }
-
-        if (hf.length < 0 || hf.length > 30) {
-            valid = false;
-            var com = document.getElementById('Horafinalizacion');
-            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
-        } else {
-          if(horai.getTime()==horaf.getTime()){
-            valid = false;
-            var com = document.getElementById('Horafinalizacion');
-            com.innerHTML= "la hora de finalizacion no puede serigual a la de inicio";
-          } else if(horai.getTime()>horaf.getTime()){
-            valid = false;
-            var com = document.getElementById('Horafinalizacion');
-            com.innerHTML= "La hora de finalizacion no puede ser menor a la de inicio";
-          } else{
-            document.getElementById('Horafinalizacion').innerHTML = '';
-          }
-        }
-
-          } else{
-            document.getElementById('Fechafinalizacion').innerHTML = '';
-          }
-        }
-
-        if (total.length < 0 || total.length > 30) {
-            valid = false;
-            var com = document.getElementById('monto');
-            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
-        } else {
-            document.getElementById('monto').innerHTML = '';
-        }
-
-        if (enganche.length < 0 || enganche.length > 30) {
-            valid = false;
-            var com = document.getElementById('Enganche');
-            com.innerHTML = "*La contraseña debe tener entre 8 y 16 caracteres";
-        } else {
-            document.getElementById('Enganche').innerHTML = '';
-        }
-
-        // Si alguna validación falla, no se envía el formulario
-        if (!valid) {
-            return;
-        }
-
         // Realiza una solicitud Ajax al servidor
         $.ajax({
             // Especifica el método de la solicitud (POST en este caso)
