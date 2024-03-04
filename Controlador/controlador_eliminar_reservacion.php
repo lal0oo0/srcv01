@@ -15,10 +15,15 @@ $id=$_GET["id"];
 ////////////  AQUI ESTAS CONSULTAS ERAN PARA RECUPERAR EL ID DE UNA SALA DE UNA RESERVACION
  // $sala="SELECT ID_SALA FROM srcv_reservaciones WHERE ID_RESERVACION='$id'";
   //$idsala=mysqli_query($conexion, $sala);
-  $sql = "UPDATE srcv_reservaciones SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', ESTATUS='0' where ID_RESERVACION='$id'";
+  $sql = "UPDATE srcv_reservaciones SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', ESTATUS='0' WHERE ID_RESERVACION='$id'";
   //$desocupar = "UPDATE srcv_salas SET RESERVADA='0', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_SALA='$idsala'";
   //$desocupada = mysqli_query($conexion,$desocupar);
   $resultado=mysqli_query($conexion,$sql);
+
+//Consulta para eliminar la reservacion de la tabla de visitas si la reservación se canceló
+  $sql_visitas = "DELETE FROM srcv_visitas WHERE ID_VISITA='$id'";
+  $resultado_visitas=mysqli_query($conexion,$sql_visitas);
+
 
 /*cambiar alertas*/
     if ($resultado) {
