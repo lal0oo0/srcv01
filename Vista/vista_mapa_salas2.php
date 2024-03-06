@@ -145,9 +145,10 @@ $row = $resultado->fetch_assoc();
      AND r.FECHA_ENTRADA = '$fecha_actual'
      AND r.HORA_ENTRADA <= '$hora_actual'
      AND r.HORA_SALIDA >= '$hora_actual'";
-     $ocu = $conexion->query($ocupado);
+     $ocu = mysqli_query($conexion, $ocupado);
      if($ocu){
-      $num_reserva=$ocu->num_rows;}?>
+      $num_reserva=$ocu->num_rows;
+      echo $num_reserva;?>
      <?php
      //Que la hora actual este entre la hora de entrada y la de salida
      if (mysqli_num_rows($ocupado)>1 && ($ocu['FECHA_ENTRADA']) <= $fecha_actual && ($ocu['FECHA_SALIDA'])>= $fecha_actual && ($ocu['HORA_ENTRADA'])<=$hora_actual && ($ocu['HORA_SALIDA'])>=$hora_actual){
@@ -160,7 +161,7 @@ $row = $resultado->fetch_assoc();
      ////muestra en color verde las salas que no contengan
      ////una reservacion para la fecha y hora actual
      elseif(mysqli_num_rows($ocupado)==0 ||mysqli_num_rows($ocupado)>1 && ($ocu['FECHA_ENTRADA'])>$fecha_actual){
-     ?>
+     ?>    
       <!-- Button trigger modal -->
       <button type="button" class="boton btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_<?php echo $filas['ID_SALA'] ?>" onclick="setSelectedRoom('<?php echo $filas['ID_SALA'] ?>')">
        <?php echo $filas['NOMBRE'] ?>
@@ -171,7 +172,7 @@ $row = $resultado->fetch_assoc();
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                <?php echo $filas['NOMBRE']; echo " | "; echo $filas['UBICACION'];?></h1>
+                <?php echo $filas['NOMBRE']; echo " | "; echo $filas['UBICACION'];   echo $hora_actual;?></h1>
                 <input id="salaSeleccionada_<?php echo $filas['ID_SALA'] ?>" name="salaSeleccionada" value="" hidden>
                 
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -308,8 +309,12 @@ $row = $resultado->fetch_assoc();
       }//else
       ?>
     <?php
+    } else {
+      // Manejar el error en caso de que la consulta no sea exitosa
+    echo "Error en la consulta: " . $conexion->error;
     }
     ///////aqui finaliza el ciclo que muestra los espacios
+  }
     ?>
   </div>
 </div>
