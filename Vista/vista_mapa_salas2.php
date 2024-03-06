@@ -133,25 +133,25 @@ $row = $resultado->fetch_assoc();
     <?php
     ///////este es el ciclo que muestra las salas
     while ($filas = mysqli_fetch_assoc($query)) {
-    ?>
-     <?php
      ////Recupera el id de la sala
      $ID = $filas['ID_SALA'];
      ////esta consulta nos va a permitir buscar si
      ////uno de los espacios tiene una reservacion
-     $ocupado=  "SELECT r.* FROM srcv_reservaciones r
-     INNER JOIN srcv_salas e ON r.ID_SALA = e.ID_SALA
+     ////en la fecha y hora actuales
+     $ocupado=  "SELECT r.* 
+     FROM srcv_reservaciones r,
+     srcv_salas e 
      WHERE e.ID_SALA = $ID
+     AND e.ID_SALA = r.ID_SALA
      AND r.FECHA_ENTRADA = '$fecha_actual'
      AND r.HORA_ENTRADA <= '$hora_actual'
      AND r.HORA_SALIDA >= '$hora_actual'";
      $ocu = mysqli_query($conexion, $ocupado);
+     ///si se ejecuta la consulta imprime las salas
      if($ocu){
-      $num_reserva=$ocu->num_rows;
-      echo $num_reserva;?>
-     <?php
-     //Que la hora actual este entre la hora de entrada y la de salida
-     if (mysqli_num_rows($ocupado)>1 && ($ocu['FECHA_ENTRADA']) <= $fecha_actual && ($ocu['FECHA_SALIDA'])>= $fecha_actual && ($ocu['HORA_ENTRADA'])<=$hora_actual && ($ocu['HORA_SALIDA'])>=$hora_actual){
+      $num_reserva=$ocu->num_rows;//cantidad de reservaciones
+     //Si encuentra una reservacion en el espacio, este se imprime en rojo
+     if ($num_reserva>0){
       ?>
       <button type="button" class="botonocupado btn btn-danger">
         <?php echo $filas['NOMBRE'] ?>
@@ -160,7 +160,7 @@ $row = $resultado->fetch_assoc();
       }
      ////muestra en color verde las salas que no contengan
      ////una reservacion para la fecha y hora actual
-     elseif(mysqli_num_rows($ocupado)==0 ||mysqli_num_rows($ocupado)>1 && ($ocu['FECHA_ENTRADA'])>$fecha_actual){
+     else{
      ?>    
       <!-- Button trigger modal -->
       <button type="button" class="boton btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_<?php echo $filas['ID_SALA'] ?>" onclick="setSelectedRoom('<?php echo $filas['ID_SALA'] ?>')">
@@ -172,7 +172,7 @@ $row = $resultado->fetch_assoc();
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                <?php echo $filas['NOMBRE']; echo " | "; echo $filas['UBICACION'];   echo $hora_actual;?></h1>
+                <?php echo $filas['NOMBRE']; echo " | "; echo $filas['UBICACION'];?></h1>
                 <input id="salaSeleccionada_<?php echo $filas['ID_SALA'] ?>" name="salaSeleccionada" value="" hidden>
                 
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -304,17 +304,14 @@ $row = $resultado->fetch_assoc();
       </div>
         
       <?php
-      ////a partir de aqui se imprimen en color rojo los espacios
-      ////que contengan una reservacion para la fecha y hora actual YA NOOO
-      }//else
+      }//hasta aqui imprime en verde
       ?>
     <?php
     } else {
       // Manejar el error en caso de que la consulta no sea exitosa
     echo "Error en la consulta: " . $conexion->error;
     }
-    ///////aqui finaliza el ciclo que muestra los espacios
-  }
+  } //aqui finaliza el ciclo que muestra los espacios
     ?>
   </div>
 </div>
