@@ -333,7 +333,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script>
   function Reservacion(idreservacion){
     document.getElementById('Reservacion_' + idreservacion).value = idreservacion;
-    <?php $id_reservacion ?>=idreservacion;
+
     }
 </script>
 <script>
