@@ -127,7 +127,7 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
                         <?php $correo_encontrado = true; ?>
                         <?php endif; ?>
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit" id="enviar" name="enviar">Siguiente</button>
+                            <button class="btn btn-primary" type="submit" id="enviar" onclick="verificarContrasenas()" name="enviar">Siguiente</button>
                         </div>
                     </form>
                 </div>
