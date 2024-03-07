@@ -16,9 +16,6 @@ $id = $_GET['id'];
 $horactual = date("H:i");
 
 
-/*$horasalida = "UPDATE srcv_visitas SET SALIDA_URSPACE='$horactual' WHERE ID_VISITA='$id'";
-$res = mysqli_query($conexion, $horasalida);*/
-
 //Consulta para eliminar la reservacion de la tabla de visitas si ya se uso 
 $sql_visitas = "DELETE FROM srcv_visitas WHERE ID_VISITA='$id'";
 $resultado_visitas=mysqli_query($conexion,$sql_visitas);

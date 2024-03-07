@@ -145,7 +145,8 @@ $row = $resultado->fetch_assoc();
      AND e.ID_SALA = r.ID_SALA
      AND r.FECHA_ENTRADA = '$fecha_actual'
      AND r.HORA_ENTRADA <= '$hora_actual'
-     AND r.HORA_SALIDA >= '$hora_actual'";
+     AND r.HORA_SALIDA >= '$hora_actual'
+     AND r.ESTATUS = 1";
      $ocu = mysqli_query($conexion, $ocupado);
      ///si se ejecuta la consulta imprime las salas
      if($ocu){
@@ -305,8 +306,6 @@ $row = $resultado->fetch_assoc();
         
       <?php
       }//hasta aqui imprime en verde
-      ?>
-    <?php
     } else {
       // Manejar el error en caso de que la consulta no sea exitosa
     echo "Error en la consulta: " . $conexion->error;
