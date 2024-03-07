@@ -127,7 +127,7 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
                         <?php $correo_encontrado = true; ?>
                         <?php endif; ?>
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit" id="enviar" name="enviar">Siguiente</button>
+                            <button class="btn btn-primary" type="submit" id="enviar" onclick="verificarContrasenas()" name="enviar">Siguiente</button>
                         </div>
                     </form>
                 </div>
@@ -191,41 +191,6 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
                 return true; // Las contraseñas coinciden
             }
         }
-        $(document).ready(function() {
-    $('.formulario3').submit(function(event) {
-        event.preventDefault(); // Evitar el envío normal del formulario
-
-        // Realizar la solicitud AJAX
-        $.ajax({
-            type: 'POST',
-            url: '../PHPMailer/controlador_recuperar_contrasena.php',
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function(response) {
-                if (response.success) {
-                    // Mostrar una SweetAlert de éxito
-                    swal({
-                        icon: "success",
-                        title: "Contraseña actualizada",
-                        text: "La contraseña se ha actualizado correctamente y se ha enviado un correo electrónico de confirmación.",
-                        confirmButtonText: "Aceptar"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "../Vista/vista_inicio_sesion.php";
-                        }
-                    });
-                } else {
-                    // Mostrar una SweetAlert de error
-                    swal('Error', response.message, 'error');
-                }
-            },
-            error: function(xhr, status, error) {
-                // Mostrar una SweetAlert de error genérico
-                swal('Error', 'Hubo un error al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.', 'error');
-            }
-        });
-    });
-});
 </script>
 </body>
 </html>
