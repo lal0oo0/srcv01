@@ -91,7 +91,7 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
                     <div class="col-12 user-img">
                         <img src="../imagenes/logocorporativo.png" alt="" class="logo">
                     </div>
-                    <form action="" method="POST" id="recuperar-form" class="row g-3 needs-validation" novalidate>
+                    <form action="" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
                         <div class="col-12">
                             <h3>Recuperar contraseña</h3>
                             <?php echo $mensaje; ?>
@@ -127,17 +127,16 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
                         <?php $correo_encontrado = true; ?>
                         <?php endif; ?>
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit" id="enviar" name="enviar" onclick="verificarContraseñas()">Siguiente</button>
+                            <button class="btn btn-primary" type="submit" id="enviar" name="enviar">Siguiente</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         // Ejemplo de JavaScript inicial para deshabilitar el envío de formularios si hay campos no válidos
         (() => {
@@ -178,7 +177,7 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
             });
         }, 5000);
     });
-    function verificarContraseñas() {
+    function verificarContrasenas() {
             const passwo1 = document.getElementById('passwo1').value;
             const confirmPasswo = document.getElementById('confirmPasswo').value;
             var mensajeError = document.getElementById('passwordMismatch');
@@ -192,32 +191,40 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
                 return true; // Las contraseñas coinciden
             }
         }
-    $.ajax({
-    type: "POST",
-    url: "PHPMailer/controlador_recuperar_contrasena.php",
-    data: { correo: correo, respuesta: respuesta, passwo1: passwo1, confirmPasswo: confirmPasswo },
-    dataType: "json",
-    success: function(response) {
-        if (response.success) {
-            // El correo se envió con éxito, muestra la SweetAlert de éxito
-            swal({
-                title: "Correo enviado",
-                text: "La contraseña se ha actualizado correctamente y se ha enviado un correo electrónico de confirmación.",
-                icon: "success",
-                button: "OK",
-            }).then(() => {
-                // Redirige a otra página después de cerrar la alerta
-                window.location.href = "../Vista/vista_inicio_sesion.php";
-            });
-        } else {
-            // Error al enviar el correo electrónico, muestra la SweetAlert de error
-            swal("Error", "Error al enviar el correo electrónico.", "error");
-        }
-    },
-    error: function() {
-        // Error en la solicitud AJAX, muestra la SweetAlert de error
-        swal("Error", "Error en la solicitud AJAX.", "error");
-    }
+        $(document).ready(function() {
+    $('.formulario3').submit(function(event) {
+        event.preventDefault(); // Evitar el envío normal del formulario
+
+        // Realizar la solicitud AJAX
+        $.ajax({
+            type: 'POST',
+            url: '../PHPMailer/controlador_recuperar_contrasena.php',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    // Mostrar una SweetAlert de éxito
+                    swal({
+                        icon: "success",
+                        title: "Contraseña actualizada",
+                        text: "La contraseña se ha actualizado correctamente y se ha enviado un correo electrónico de confirmación.",
+                        confirmButtonText: "Aceptar"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "../Vista/vista_inicio_sesion.php";
+                        }
+                    });
+                } else {
+                    // Mostrar una SweetAlert de error
+                    swal('Error', response.message, 'error');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Mostrar una SweetAlert de error genérico
+                swal('Error', 'Hubo un error al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.', 'error');
+            }
+        });
+    });
 });
 </script>
 </body>

@@ -14,6 +14,7 @@ $correo_encontrado = false;
 $correo_mostrado = true;
 $pregunta = ''; 
 $respuesta_correcta = '';
+$nombre_usuario = '';
 
 session_start();
 
@@ -23,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
 
     // Validar el formato del correo electrónico
     if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        $sql = "SELECT CORREO_ELECTRONICO, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA FROM srcv_administradores WHERE CORREO_ELECTRONICO=? LIMIT 1";
+        $sql = "SELECT CORREO_ELECTRONICO, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO=? LIMIT 1";
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("s", $correo);
         $stmt->execute();
@@ -39,10 +40,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
             $_SESSION['correo'] = $correo; 
             $_SESSION['pregunta'] = $row['PREGUNTA_SEGURIDAD'];
             $_SESSION['respuesta'] = $row['RESPUESTA_PREGUNTA'];
+            $_SESSION['nombre_usuario'] = $row['NOMBRE'];
             $correo_mostrado = false;
+
         } else {
             $mensaje = '<div class="alert alert-danger" role="alert">El correo electrónico no está registrado.</div>';
             $_SESSION['correo_mostrado'] = true;
+            
         }
     } else {
         $mensaje = '<div class="alert alert-danger" role="alert">El formato del correo electrónico no es válido.</div>';
@@ -60,21 +64,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
         // Verificar si se ingresó una contraseña y coinciden
         if (isset($_POST['passwo1']) && isset($_POST['confirmPasswo']) && $_POST['passwo1'] === $_POST['confirmPasswo']) {
             $passwo1 = $_POST['passwo1'];
-            // Metodo para encriptar la contrasenia
+
             $clave = "55Eu47x";
 
             function encrypt($string, $key)
-        {
-            $result = '';
-             for ($i = 0; $i < strlen($string); $i++) {
-            $char = substr($string, $i, 1);
-            $keychar = substr($key, ($i % strlen($key)) - 1, 1);
-            $char = chr(ord($char) + ord($keychar));
-            $result .= $char;
+            {
+                $result = '';
+                for ($i = 0; $i < strlen($string); $i++) {
+                    $char = substr($string, $i, 1);
+                    $keychar = substr($key, ($i % strlen($key)) - 1, 1);
+                    $char = chr(ord($char) + ord($keychar));
+                    $result .= $char;
+                }
+                return base64_encode($result);
             }
-            return base64_encode($result);
-        }
-            //Encriptacion de la contrasenia:
+
             $hashed_password = encrypt($passwo1, $clave);
             //Fin del metodo de encriptar
             
@@ -116,34 +120,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
                 $mail->Subject = 'Actualización de Contraseña';
                 $nueva_contrasena = $_POST['passwo1'];
 
-// Concatenar la nueva contraseña con el cuerpo del mensaje
-$body = '<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Actualización de Contraseña</title>
-    </head>
-    <body>
-    <div style="width: 100%; max-width: 500px; margin: 0 auto; padding: 20px;">
-    <div style="padding: 20px; text-align: center; background: #007AB6;max-width: 100%;height: auto; align: center;">
-    <h1 style="color: white;">iT-Global</h1>
-    </div>
-            <p style="font-size: 16px; color: black;">Hola Administrador,</p>
-            <p style="font-size: 16px; color: black;">Se ha actualizado correctamente la contraseña, la nueva contraseña es:</p>
-            <p style="font-size: 17px; text-align: center;"><b>' . $nueva_contrasena . '</b></p>
-            <p style="font-size: 16px; color: black;">Por favor, guarda esta información en un lugar seguro.</p>
-            <p style="font-size: 16px; color: black;">Ingrese al boton para que inicie sesion</p>
-            <p><span style="font-size: 16px;">
-            <a class="btn btn-primary" href="http://'.$link.'/srcv01/Vista/vista_inicio_sesion.php" style="display: inline-block; padding: 10px 20px; background-color: #007AB6; color: #ffffff; text-decoration: none; border-radius: 4px;">
-            Inicie sesion</a></p>
-            <p style="font-size: 16px; color: black;">Atentamente,<br>iT-Global</p>
-        </div>
-        </div>
-              </body>
-              </html>';
+                $body = '<html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Actualización de Contraseña</title>
+                    </head>
+                    <body>
+                    <div style="width: 100%; max-width: 500px; margin: 0 auto; padding: 20px;">
+                    <div style="padding: 20px; text-align: center; background: #007AB6;max-width: 100%;height: auto; align: center;">
+                    <h1 style="color: white;">iT-Global</h1>
+                    </div>
+                            <p style="font-size: 16px; color: black;">Hola ' . $_SESSION['nombre_usuario'] . ',</p>
+                            <p style="font-size: 16px; color: black;">Se ha actualizado correctamente la contraseña, la nueva contraseña es:</p>
+                            <p style="font-size: 17px; text-align: center;"><b>' . $nueva_contrasena . '</b></p>
+                            <p style="font-size: 16px; color: black;">Por favor, guarda esta información en un lugar seguro.</p>
+                            <p style="font-size: 16px; color: black;">Ingrese al boton para que inicie sesion</p>
+                            <p><span style="font-size: 16px;">
+                            <a class="btn btn-primary" href="http://'.$link.'/srcv01/Vista/vista_inicio_sesion.php" style="display: inline-block; padding: 10px 20px; background-color: #007AB6; color: #ffffff; text-decoration: none; border-radius: 4px;">
+                            Inicie sesion</a></p>
+                            <p style="font-size: 16px; color: black;">Atentamente,<br>iT-Global</p>
+                        </div>
+                        </div>
+                              </body>
+                              </html>';
                 $mail->Body = $body;
-                // Enviar el correo electrónico
+
                 if ($mail->send()) {
+                    $_SESSION['contrasena_actualizada'] = true;
                     $mensaje = '<div class="alert alert-success" role="alert">La contraseña se ha actualizado correctamente y se ha enviado un correo electrónico de confirmación.</div>';
                     
                     // Redirigir al usuario al inicio de sesión
