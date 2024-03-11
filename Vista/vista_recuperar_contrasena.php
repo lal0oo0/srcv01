@@ -1,6 +1,11 @@
 <?php
 require_once '../Modelo/conexion2.php';
 require_once '../PHPMailer/controlador_recuperar_contrasena.php';
+if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa']) {
+    $mensaje_enviado = true;
+} else {
+    $mensaje_enviado = false;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -82,6 +87,9 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
     </style>
 </head>
 <body>
+<?php if ($mensaje_enviado): ?>
+    <!-- Aquí puedes agregar cualquier código adicional que desees mostrar después de enviar el correo y actualizar la contraseña -->
+<?php endif; ?>
     <div class="container text-center">
         <br><br><br>
         <div class="row justify-content-center">
@@ -127,7 +135,7 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
                         <?php $correo_encontrado = true; ?>
                         <?php endif; ?>
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit" id="enviar" onclick="verificarContrasenas()" name="enviar">Siguiente</button>
+                            <button class="btn btn-primary" type="submit" id="enviar" onclick="mostrarSweetAlert()" name="enviar">Siguiente</button>
                         </div>
                     </form>
                 </div>
@@ -191,6 +199,20 @@ require_once '../PHPMailer/controlador_recuperar_contrasena.php';
                 return true; // Las contraseñas coinciden
             }
         }
+        function mostrarSweetAlert() {
+        swal({
+            title: "Enviando correo y actualizando contraseña",
+            text: "Espere unos momentos...",
+            icon: "info",
+            buttons: false, // No mostrar botones
+            closeOnClickOutside: false, // No cerrar al hacer clic fuera del modal
+            closeOnEsc: false // No cerrar al presionar la tecla Esc
+        });
+
+        setTimeout(function () {
+            window.location.href = "../Vista/vista_inicio_sesion.php";
+        }, 5000);
+    }
 </script>
 </body>
 </html>
