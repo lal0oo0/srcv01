@@ -6,6 +6,10 @@ include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
 
+date_default_timezone_set('America/Mexico_City');
+// Generar un identificador único basado en la fecha y hora actual
+$id_unico = (new DateTime())->format('YmdHis');
+
 /*Para capturar los campos*/
 $he = $_POST['he'];
 $fecha = $_POST['fecha'];
@@ -18,8 +22,8 @@ $asunto = $_POST['asunto'];
 
 //y$variable11= $_POST['salaSeleccionada'];
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$visita = "INSERT INTO srcv_visitas(ENTRADA_SEGURIDAD, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
-VALUES ('$he', '$fecha','$nombre','$apellidop','$apellidom','$empresa','$asunto','$usuariom','$usuariom','1')";
+$visita = "INSERT INTO srcv_visitas(ID_VISITA, ENTRADA_SEGURIDAD, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
+VALUES ('$id_unico', '$he', '$fecha','$nombre','$apellidop','$apellidom','$empresa','$asunto','$usuariom','$usuariom','1')";
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $visita); 
 

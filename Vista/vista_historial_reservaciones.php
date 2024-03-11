@@ -167,7 +167,7 @@ $row = $resultado->fetch_assoc();
   <div class="col-md-10">
   </div>
   <div class="col-md-2">
-  <a class="btn btn-dark" class="tit-color" style="background-color:#008000" href="../PhpSpreadsheet/reporte.php"><img src="../imagenes/excel.png" width="40px">Informe</a>
+  <a class="btn btn-dark" class="tit-color" style="background-color:#008000" href="../PhpSpreadsheet/reporte_urspace.php"><img src="../imagenes/excel.png" width="40px">Informe</a>
 </div>
 </div>
 

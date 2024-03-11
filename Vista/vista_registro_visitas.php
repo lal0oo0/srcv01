@@ -27,7 +27,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
 
-  <title>Registar</title>
+  <title>Registrar</title>
 </head>
 <style>
   .navbar {
