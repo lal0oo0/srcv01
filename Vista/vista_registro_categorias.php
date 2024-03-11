@@ -98,6 +98,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <a class="nav-link" href="vista_historial_visitas_administrador.php">Historial visitas</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="vista_historial_reservaciones_admin.php">Historial reservaciones</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesión</a>
           </li>
       </div>
@@ -226,6 +229,27 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     }, false)
   })
 })()
+//Fin del script
+
+
+
+//Script para poner por tiempos las alertas de bootstrap
+  // Espera a que el DOM esté completamente cargado
+  document.addEventListener("DOMContentLoaded", function() {
+    // Selecciona el elemento de alerta
+    var alerta = document.querySelector('.alert');
+
+    // Verifica si se encontró el elemento de alerta
+    if(alerta) {
+        // Temporizador para eliminar la alerta después de 4 segundos (4000 milisegundos)
+        setTimeout(function() {
+            alerta.remove(); // Elimina la alerta del DOM
+        }, 4000);
+    }
+  });
+//Fin del script
+
+
 
 //ALERTAS
 // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script

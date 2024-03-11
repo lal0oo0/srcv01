@@ -147,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
                 $mail->Body = $body;
 
                 if ($mail->send()) {
-                    $_SESSION['contrasena_actualizada'] = true;
+                    $_SESSION['recuperacion_exitosa'] = true;
                     $mensaje = '<div class="alert alert-success" role="alert">La contraseña se ha actualizado correctamente y se ha enviado un correo electrónico de confirmación.</div>';
                     
                     // Redirigir al usuario al inicio de sesión

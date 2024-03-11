@@ -83,6 +83,9 @@ $row = $resultado->fetch_assoc();
             <a class="nav-link" href="vista_historial_visitas_administrador.php">Historial de Visitas</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="vista_historial_reservaciones_admin.php">Historial reservaciones</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar sesión</a>
           </li>
         </ul>
@@ -357,6 +360,8 @@ $row = $resultado->fetch_assoc();
 
   return valid;
 })()
+//Fin del script
+
 </script>
 
 
@@ -391,6 +396,25 @@ $row = $resultado->fetch_assoc();
       }
     });
   }
+//Fin del script
+
+
+
+//Script para poner por tiempos las alertas de bootstrap
+  // Espera a que el DOM esté completamente cargado
+  document.addEventListener("DOMContentLoaded", function() {
+    // Selecciona el elemento de alerta
+    var alerta = document.querySelector('.alert');
+
+    // Verifica si se encontró el elemento de alerta
+    if(alerta) {
+        // Temporizador para eliminar la alerta después de 4 segundos (4000 milisegundos)
+        setTimeout(function() {
+            alerta.remove(); // Elimina la alerta del DOM
+        }, 4000);
+    }
+  });
+//Fin del script
 </script>
 </body>
 </html>

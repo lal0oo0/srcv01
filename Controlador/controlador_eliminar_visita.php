@@ -1,18 +1,21 @@
 <?php
-
 session_start();
-$usuariom= $_SESSION['correo'];
+$usermodi= $_SESSION['correo'];
+
 /*Codigo de conexion a la base de datos*/
 include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
 
-/*Para capturar los campos*/
-$id = $_GET['id'];
+
+// Obtén la fecha y hora actual
+date_default_timezone_set('America/Mexico_City');
+$fechamodificacion = date('Y-m-d H:i:s');
+$id=$_GET["id"];
 
 
-  $borrar="DELETE FROM srcv_visitas WHERE ID_VISITA='$id'";
-  $sql=mysqli_query($conexion, $borrar);
+$borrar="UPDATE srcv_visitas SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', ESTATUS='0' WHERE ID_VISITA='$id'";
+$sql=mysqli_query($conexion, $borrar);
 
 
 

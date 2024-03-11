@@ -152,9 +152,9 @@ if ($total > 0) {
       </div>
     </div>
     
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="https://unpkg.com/tippy.js@6"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script><!--enlace para el tooltip-->
+    <script src="https://unpkg.com/tippy.js@6"></script><!--enlace para agregar el tooltip-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--enlace para alertas de sweetalert-->
     <script src="../js/validator.js"></script>
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
@@ -311,7 +311,7 @@ $(document).ready(function() {
         e.preventDefault();
 
         var valid = true;
-
+//parte del codigo para confirmar la contraseña
         var pass = document.getElementById('valid04').value;
         var passConfirmar = document.getElementById('pass_confirmar').value;
 

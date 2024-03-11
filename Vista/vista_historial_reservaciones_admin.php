@@ -11,15 +11,6 @@ $resultado = $conexion->query($sql);
 $row = $resultado->fetch_assoc();
 ?>
 
-<?php
-require_once("../Modelo/conexion2.php");
-$conexion = conect();
-$correo = $_SESSION["correo"];
-$sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ";
-$resultado = $conexion->query($sql);
-$row = $resultado->fetch_assoc();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,12 +18,11 @@ $row = $resultado->fetch_assoc();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
-    
-    <title>Historial de visistas administrador</title>
+    <title>Reservaciones</title>
 </head>
-<style>
 
-   .navbar-custom {
+<style>
+  .navbar-custom {
     background-color: #64BAFF; /* Darle color al NAV, del color que se necesite */
     font-size: 18px; /* Hacer las letras más grandes */
   }
@@ -47,37 +37,26 @@ $row = $resultado->fetch_assoc();
     text-align: center;
   }
 
-  thead{/*EStilos para la cabecera fija de la tabla*/
-    position: sticky;
-    top:0;
-    background-color: #F32B2B;
-  }
-
   .my-custom-scrollbar {
   position: relative;
-  height: 400px;
+  height: 350px;
   overflow: auto;
   }
+
   .table-wrapper-scroll-y {
   display: block;
   }
 
   .titulo{
-    color: white;
+    color:white;
   }
 
   .filtro{
     display: none;
   }
+
 </style>
 
-<body>
-<?php
-    require_once("../Modelo/conexion2.php");
-    $conexion = conect();
-    $query = mysqli_query ($conexion, "select * from srcv_visitas");
-?>
- 
 <header>
 <nav class="navbar navbar-dark  fixed-top navbar-custom" >
   <div class="container-fluid">
@@ -99,10 +78,10 @@ $row = $resultado->fetch_assoc();
             <a class="nav-link" href="vista_registro_categorias.php">Categorías</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="vista_historial_visitas_administrador.php">Historial visitas</a>
+            <a class="nav-link" href="vista_historial_visitas_administrador.php">Historial visitas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="vista_historial_reservaciones_admin.php">Historial reservaciones</a>
+            <a class="nav-link active" href="vista_historial_reservaciones_admin.php">Historial reservaciones</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesión</a>
@@ -112,9 +91,10 @@ $row = $resultado->fetch_assoc();
   </div>
 </nav>
 </header>
-<br><br><br><br><br>
-<h3 class="text-center">HISTORIAL DE VISITAS</h3> 
+<br><br><br>
 <div class="mb-5"></div> <!--Salto de linea-->
+<h3 class="text-center">HISTORIAL DE RESERVACIONES URSPACE</h3>
+<div class="mb-5"></div>
 
 <div class="container">
 
@@ -128,63 +108,70 @@ $row = $resultado->fetch_assoc();
   <div class="mb-3"></div><!--Salto de linea-->
 
   <div class="row">
-    <div class="col-*-*">
+    <div class="col">
       <div class="table-responsive my-custom-scrollbar">
-        <!-- Estos son datos de ejemplo -->
         <table class="table table-bordered table-striped mb-0">
-            <thead class="table-dark">
+          <thead class="table-dark">
             <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido Paterno</th>
-                <th scope="col">Apellido Materno</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Empresa</th>
-                <th scope="col">Asunto</th>
-                <th scope="col">Entrada Seguridad</th>
-                <th scope="col">Entrada Recepción</th>
-                <th scope="col">Entrada UrSpace</th>
-                <th scope="col">Salida UrSpace</th>
-                <th scope="col">Salida Recepción</th>
-                <th scope="col">Salida Seguridad</th>
+              <th scope="col">Nombre del cliente</th>
+              <th scope="col">Apellido paterno</th>
+              <th scope="col">Apellido Materno</th>
+              <th scope="col">Espacio</th>
+              <th scope="col">Correo electrónico</th>
+              <th scope="col">Teléfono</th>
+              <th scope="col">Fecha de entrada</th>
+              <th scope="col">Fecha de salida</th>
+              <th scope="col">Hora de entrada</th>
+              <th scope="col">Hora de salida</th>
+              <th scope="col">Número de personas</th>
+              <th scope="col">Servicios extra</th>
+              <th scope="col">Total</th>
+              <th scope="col">Enganche</th>
+              <th scope="col">Liquidación</th>
             </tr>
-            </thead>
-            <tbody>
-            <?php
-                while ($filas = mysqli_fetch_assoc($query)) {
-            ?>
-            <tr class="datos">
-                <td><?php echo $filas['NOMBRE'] ?></td>
-                <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
-                <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
-                <td><?php echo $filas['FECHA'] ?></td>
-                <td><?php echo $filas['EMPRESA'] ?></td>
-                <td><?php echo $filas['ASUNTO'] ?></td>
-                <td><?php echo $filas['ENTRADA_SEGURIDAD'] ?></td>
-                <td><?php echo $filas['ENTRADA_RECEPCION'] ?></td>
-                <td><?php echo $filas['ENTRADA_URSPACE'] ?></td>
-                <td><?php echo $filas['SALIDA_URSPACE'] ?></td>
-                <td><?php echo $filas['SALIDA_RECEPCION'] ?></td>
-                <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
-            </tr>
-            <?php
-                }
-            ?>
-            </tbody>
+          </thead>
+          <?php
+              require_once("../Modelo/conexion2.php");
+              $conexion = conect();
+              $query = mysqli_query ($conexion, "select * from srcv_reservaciones");
+              while($filas  = mysqli_fetch_assoc($query)){
+          ?>
+          <tr class="datos">
+              <td><?php echo$filas ["NOMBRE_CLIENTE"] ?></td>
+              <td><?php echo$filas ["APELLIDO_PATERNO"] ?></td>
+              <td><?php echo$filas ["APELLIDO_MATERNO"] ?></td>
+              <td><?php echo$filas ["NOMBRE_ESPACIO"] ?></td>
+              <td><?php echo$filas ["CORREO_ELECTRONICO"] ?></td>
+              <td><?php echo$filas ["TELEFONO"] ?></td>
+              <td><?php echo$filas ["FECHA_ENTRADA"] ?></td>
+              <td><?php echo$filas ["FECHA_SALIDA"] ?></td>
+              <td><?php echo$filas ["HORA_ENTRADA"] ?></td>
+              <td><?php echo$filas ["HORA_SALIDA"] ?></td>
+              <td><?php echo$filas ["NUMERO_PERSONAS"] ?></td>
+              <td><?php echo$filas ["SERVICIOS_EXTRA"] ?></td>
+              <td>$<?php echo$filas ["TOTAL"] ?></td>
+              <td>$<?php echo$filas ["ENGANCHE"] ?></td>
+              <td>$<?php echo$filas ["LIQUIDACION"] ?></td>
+          </tr>
+          <?php
+          };
+          ?>
         </table>
       </div>
-    </div> 
+    </div>
   </div>
 </div>
+
 <div class="mb-3"></div> 
 <div class="row">
-  <div class="col-md-10"></div>
-  <div class="col-md-2">
-    <a class="btn btn-dark" class="tit-color" style="background-color:#008000" href="../PhpSpreadsheet/reporte_administracion.php"><img src="../imagenes/excel.png" width="40px">Informe</a>
+  <div class="col-md-10">
   </div>
+  <div class="col-md-2">
+  <a class="btn btn-dark" class="tit-color" style="background-color:#008000" href="../PhpSpreadsheet/reporte_urspace.php"><img src="../imagenes/excel.png" width="40px">Informe</a>
 </div>
-<div class="mb-3"></div> 
+</div>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
 
@@ -201,6 +188,7 @@ $row = $resultado->fetch_assoc();
   })
   //fin del script de buscardor
 </script>
+
 
 <!--script para mostrar alerta de confirmación antes de cerrar sesión-->
 <script>
