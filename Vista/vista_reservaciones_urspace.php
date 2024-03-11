@@ -186,7 +186,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="mb-3"></div> <!--Salto de linea-->
-
+                        <!--posponer reservaciones-->
                         <div class="modal-body">
                           <form action="../Controlador/controlador_posponer_reservacion.php" class="formulario row g-3 needs-validation" method="post" novalidate>
                             <div class="mb-3"></div> <!-- Salto de línea -->
@@ -253,12 +253,22 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   </div>
                   <!--Boton para eliminar-->
                   <a href="../Controlador/controlador_eliminar_reservacion.php?id=<?=$filas ['ID_RESERVACION']?>"><i class="fa fa-times" aria-hidden="true"></i></a>
-                  <a href="../Controlador/controlador_uso_reservacion.php?id=<?=$filas['ID_RESERVACION']?>"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
-
-
                   <?php
-                  // Se obtiene el id para poder hacer la consulta 
+                  // Se obtiene el id para realizar las consultas
                   $id_reservacion = $filas['ID_RESERVACION'];
+
+                  $salidavisita = "SELECT SALIDA_URSPACE FROM srcv_visitas WHERE ID_VISITA = $id_reservacion";
+                  $visitasale = mysqli_query($conexion, $salidavisita);
+                  $fila_salida = mysqli_fetch_assoc($visitasale);
+
+                  $salida = $filas['HORA_SALIDA'];
+                  date_default_timezone_set('America/Mexico_City');
+                  $hora_actual = date("H:i:s");
+                  if($hora_actual>$salida && !empty($fila_salida['SALIDA_URSPACE'])){ ?>
+                  <a href="../Controlador/controlador_uso_reservacion.php?id=<?=$filas['ID_RESERVACION']?>"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                  <?php }?>
+                  <br>
+                  <?php
 
                   // Realizar consulta para obtener la información de la entrada
                   $query_entrada = "SELECT ENTRADA_URSPACE FROM srcv_visitas WHERE ID_VISITA = $id_reservacion";
