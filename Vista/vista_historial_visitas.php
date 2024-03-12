@@ -78,6 +78,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
     $query = mysqli_query ($conexion, "select * from srcv_visitas");
+    $empresa = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Empresa' and ESTATUS='1'");
+    $asunto = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Asunto' and ESTATUS='1'");
+    $piso = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Piso' and ESTATUS='1'");
   ?>
  
  <header>
@@ -141,24 +144,119 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
         <th scope="col">Apellido Materno</th>
         <th scope="col">Empresa</th>
         <th scope="col">Asunto</th>
+        <th scope="col">Piso</th>
         <th scope="col">Hora de salida</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody>
     <?php
-            while ($filas = mysqli_fetch_assoc($query)) {
-            ?>
+      while ($filas = mysqli_fetch_assoc($query)) {
+      ?>
       <tr class="datos">
-                    <td><?php echo $filas['ENTRADA_SEGURIDAD'] ?></td>
-                    <td><?php echo $filas['FECHA'] ?></td>
-                    <td><?php echo $filas['NOMBRE'] ?></td>
-                    <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
-                    <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
-                    <td><?php echo $filas['EMPRESA'] ?></td>
-                    <td><?php echo $filas['ASUNTO'] ?></td>
-                    <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
-                    <td>
+          <td><?php echo $filas['ENTRADA_SEGURIDAD'] ?></td>
+          <td><?php echo $filas['FECHA'] ?></td>
+          <td><?php echo $filas['NOMBRE'] ?></td>
+          <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
+          <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
+          <td><?php echo $filas['EMPRESA'] ?></td>
+          <td><?php echo $filas['ASUNTO'] ?></td>
+          <td><?php echo $filas['PISO'] ?></td>
+          <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
+          <td>
+                  <!-- Modificar reservaciones -->
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
+                  <!-- Modal para modificar reservaciones-->
+                  <div class="modal fade" id="exampleModal_<?php echo $filas['ID_VISITA'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar visita de <?= $filas['NOMBRE'] ?></h1>
+                          <input id="visita_<?php echo $filas['ID_VISITA'] ?>" name="visita" value="" type="hidden">
+                          <input type="hidden" name="idvisita" id="idvisita" value="<?php echo $filas['ID_VISITA'] ?>">
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="mb-3"></div> <!--Salto de linea-->
+                        <!--posponer reservaciones-->
+                        <div class="modal-body">
+                          <form action="../Controlador/controlador_modificar_visita.php" class="formulario row g-3 needs-validation" method="post" novalidate>
+                              <input type="hidden" name="idvisita" value="<?= $filas['ID_VISITA'] ?>">
+                              <div class="row">
+                                <div class="col">
+                                  <div class="mb-3"></div> <!-- Salto de línea -->
+                                  <label class="form-label" for="empresa">Empresa *</label><br>
+                                  <select class="form-select mr-sm-2" id="empresa" name="empresa" required>
+                                    <div class="invalid-feedback">
+                                      Verifique los datos
+                                    </div>
+                                    <option selected value=""><?=$filas['EMPRESA']?></option>
+                                    <?php
+                                    while ($filas = mysqli_fetch_assoc($empresa)) {
+                                    ?>
+                                      <option value="<?php echo $filas['NOMBRE']; ?>">
+                                        <?php echo $filas['NOMBRE']; ?>
+                                      </option>
+                                    <?php
+                                    }
+                                    ?>
+                                  </select>
+                                </div>
+                                
+                                <div class="col">
+                                  <div class="mb-3"></div> <!-- Salto de línea -->
+                                  <label class="form-label" for="asunto">Asunto *</label><br>
+                                  <select class="form-select mr-sm-2" id="asunto" name="asunto" required>
+                                    <div class="invalid-feedback">
+                                      Verifique los datos
+                                    </div>
+                                    <option selected value=""><?=$fila['ASUNTO']?></option>
+                                    <?php
+                                    while ($fila = mysqli_fetch_assoc($asunto)) {
+                                    ?>
+                                      <option value="<?php echo $fila['NOMBRE']; ?>">
+                                        <?php echo $fila['NOMBRE']; ?>
+                                      </option>
+                                      <?php
+                                        }
+                                      ?>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="mb-3"></div> <!-- Salto de línea -->
+                              <div class="row">
+                              <label class="form-label" for="asunto">Piso *</label><br>
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                  <select class="form-select mr-sm-2" id="ubicacion" name="ubicacion" required>
+                                      <div class="invalid-feedback">
+                                        Verifique los datos
+                                      </div>
+                                      <option selected value="">Selecciona</option>
+                                      <?php
+                                        while ($filas = mysqli_fetch_assoc($piso)) {
+                                      ?>
+                                      <option value="<?php echo $filas['NOMBRE']; ?>">
+                                        <?php echo $filas['NOMBRE']; ?>
+                                      </option>
+                                      <?php
+                                        }
+                                      ?>
+                                  </select>
+                                </div>
+                                <div class="col-md-3"></div>
+                              </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-primary">Confirmar</button>
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
                     <?php
                     if(empty($filas['ENTRADA_RECEPCION'])){
                     ?>
@@ -184,8 +282,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     </td>
       </tr>
       <?php
-            }
-            ?>
+        }
+      ?>
     </tbody>
   </table>
 
@@ -211,6 +309,28 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script>
+  //SCRIPT PARA VALIDACIONES
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+
   //Script de buscador
   document.addEventListener('keyup', e =>{
     if(e.target.matches('#buscador')){
@@ -222,6 +342,24 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     }
   })
   //fin del script de buscardor
+
+
+  //Script para poner por tiempos las alertas de bootstrap
+
+  // Espera a que el DOM esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function() {
+        // Selecciona el elemento de alerta
+        var alerta = document.querySelector('.alert');
+
+        // Verifica si se encontró el elemento de alerta
+        if(alerta) {
+            // Temporizador para eliminar la alerta después de 4 segundos (4000 milisegundos)
+            setTimeout(function() {
+                alerta.remove(); // Elimina la alerta del DOM
+            }, 4000);
+        }
+    });
+  //Fin del script
 </script>
 
 
