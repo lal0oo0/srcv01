@@ -83,9 +83,6 @@ $row = $resultado->fetch_assoc();
             <a class="nav-link" href="vista_historial_visitas_administrador.php">Historial de Visitas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="vista_historial_reservaciones_admin.php">Historial reservaciones</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar sesión</a>
           </li>
         </ul>
@@ -160,7 +157,7 @@ $row = $resultado->fetch_assoc();
               Ingrese informacion valida.
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
               <label for="email" class="form-label">Correo Electronico *</label>
               <div class="input-group has-validation">
                 <input type="email" class="form-control" style="border: 2px solid #1E90FF;" name="email" id="email" aria-describedby="emailHelp" required autocomplete="username">
@@ -175,25 +172,34 @@ $row = $resultado->fetch_assoc();
               <div class="invalid-feedback">
                 Su contraseña debe de tener entre 8 y 16 caracteres, contener letras y numeros, y no debe contener espacios.
               </div>
-              <br>
+              </div>
+              <div class="col-md-6">
+              <label for="pass" class="form-label">Confirmar contraseña *</label>
+              <input type="password" class="form-control" style="border: 2px solid #1E90FF;" name="pass_confirmar" id="pass_confirmar" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required autocomplete="current-password">
+              <div class="invalid-feedback " id="confirmar"></div>
             </div>
+            </div>
+            <br>
+            <div class="row">
             <div class="col-md-6">
-            <select class="form-select" id="rol" name="rol" style="border: 2px solid #1E90FF;" required>
-              <option selected value="" >Seleccione cual es su Rol *</option>
-              <option value="1">Recepcion IT-Global</option>
-              <option value="2">Recepcion UrSpace</option>
-              <option value="3">Seguridad</option>
+                <select class="form-select" id="rol" name="rol" style="border: 2px solid #1E90FF;" required>
+                <option selected value="">Seleccione cual es su Rol *</option>
+                <option value="1">Recepcion IT-Global</option>
+                <option value="2">Recepcion UrSpace</option>
+                <option value="3">Seguridad</option>
             </select>
-             </div>
-             <div class="col-md-6">
+            </div>
+            <div class="col-md-6 text-md-end">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #1E90FF;" required>
-              <option selected value="">Seleccione con la que mejor se identifique *</option>
-              <option value="1">Nombre del mejor amigo</option>
-              <option value="2">Nombre de la mascota</option>
-              <option value="3">Pelicula Favorita</option>
-              </select>
-             <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="respuesta" name="respuesta" required>
-             </div>
+                <option selected value="">Seleccione con la que mejor se identifique *</option>
+                <option value="1">Nombre del mejor amigo</option>
+                <option value="2">Nombre de la mascota</option>
+                <option value="3">Pelicula Favorita</option>
+            </select>
+                <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="respuesta" name="respuesta" required>
+            </div>
+            </div>
+            <br>
             <div class="col-12">
               <input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
@@ -360,8 +366,6 @@ $row = $resultado->fetch_assoc();
 
   return valid;
 })()
-//Fin del script
-
 </script>
 
 
@@ -396,25 +400,6 @@ $row = $resultado->fetch_assoc();
       }
     });
   }
-//Fin del script
-
-
-
-//Script para poner por tiempos las alertas de bootstrap
-  // Espera a que el DOM esté completamente cargado
-  document.addEventListener("DOMContentLoaded", function() {
-    // Selecciona el elemento de alerta
-    var alerta = document.querySelector('.alert');
-
-    // Verifica si se encontró el elemento de alerta
-    if(alerta) {
-        // Temporizador para eliminar la alerta después de 4 segundos (4000 milisegundos)
-        setTimeout(function() {
-            alerta.remove(); // Elimina la alerta del DOM
-        }, 4000);
-    }
-  });
-//Fin del script
 </script>
 </body>
 </html>
