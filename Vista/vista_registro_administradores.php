@@ -177,7 +177,6 @@ $row = $resultado->fetch_assoc();
               <label for="pass" class="form-label">Confirmar contraseña *</label>
               <input type="password" class="form-control" style="border: 2px solid #1E90FF;" name="pass_confirmar" id="pass_confirmar" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required autocomplete="current-password">
               <div class="invalid-feedback " id="confirmar"></div>
-              Verificar si las contraseñas coinciden
             </div>
             </div>
             <br>
