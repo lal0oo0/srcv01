@@ -185,16 +185,16 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                                 <div class="col">
                                   <div class="mb-3"></div> <!-- Salto de línea -->
                                   <label class="form-label" for="empresa">Empresa *</label><br>
-                                  <select class="form-select mr-sm-2" id="empresa" name="empresa" required>
+                                  <select class="form-select mr-sm-2" id="empresa" name="empresa">
                                     <div class="invalid-feedback">
                                       Verifique los datos
                                     </div>
                                     <option selected value=""><?=$filas['EMPRESA']?></option>
                                     <?php
-                                    while ($filas = mysqli_fetch_assoc($empresa)) {
+                                    while ($fila_empresa = mysqli_fetch_assoc($empresa)) {
                                     ?>
-                                      <option value="<?php echo $filas['NOMBRE']; ?>">
-                                        <?php echo $filas['NOMBRE']; ?>
+                                      <option value="<?php echo $fila_empresa['NOMBRE']; ?>">
+                                        <?php echo $fila_empresa['NOMBRE']; ?>
                                       </option>
                                     <?php
                                     }
@@ -205,16 +205,16 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                                 <div class="col">
                                   <div class="mb-3"></div> <!-- Salto de línea -->
                                   <label class="form-label" for="asunto">Asunto *</label><br>
-                                  <select class="form-select mr-sm-2" id="asunto" name="asunto" required>
+                                  <select class="form-select mr-sm-2" id="asunto" name="asunto">
                                     <div class="invalid-feedback">
                                       Verifique los datos
                                     </div>
-                                    <option selected value=""><?=$fila['ASUNTO']?></option>
+                                    <option selected value=""><?=$filas['ASUNTO']?></option>
                                     <?php
-                                    while ($fila = mysqli_fetch_assoc($asunto)) {
+                                    while ($fila_asunto = mysqli_fetch_assoc($asunto)) {
                                     ?>
-                                      <option value="<?php echo $fila['NOMBRE']; ?>">
-                                        <?php echo $fila['NOMBRE']; ?>
+                                      <option value="<?php echo $fila_asunto['NOMBRE']; ?>">
+                                        <?php echo $fila_asunto['NOMBRE']; ?>
                                       </option>
                                       <?php
                                         }
@@ -233,10 +233,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                                       </div>
                                       <option selected value="">Selecciona</option>
                                       <?php
-                                        while ($filas = mysqli_fetch_assoc($piso)) {
+                                        while ($fila_piso = mysqli_fetch_assoc($piso)) {
                                       ?>
-                                      <option value="<?php echo $filas['NOMBRE']; ?>">
-                                        <?php echo $filas['NOMBRE']; ?>
+                                      <option value="<?php echo $fila_piso['NOMBRE']; ?>">
+                                        <?php echo $fila_piso['NOMBRE']; ?>
                                       </option>
                                       <?php
                                         }

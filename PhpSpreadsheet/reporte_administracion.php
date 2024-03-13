@@ -12,7 +12,12 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;// Para centrar el texto de las cel
 use PhpOffice\PhpSpreadsheet\Style\Border;//Para los bordes de las celdas
 
 
-$sql = "SELECT NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA, EMPRESA, ASUNTO, ENTRADA_SEGURIDAD, ENTRADA_RECEPCION, ENTRADA_URSPACE, SALIDA_URSPACE, SALIDA_RECEPCION, SALIDA_SEGURIDAD  FROM srcv_visitas";
+// Obtener las fechas enviadas por el formulario
+$fecha_inicio = $_POST['fecha_inicio'];
+$fecha_fin = $_POST['fecha_fin'];
+
+
+$sql = "SELECT NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA, EMPRESA, ASUNTO, ENTRADA_SEGURIDAD, ENTRADA_RECEPCION, ENTRADA_URSPACE, SALIDA_URSPACE, SALIDA_RECEPCION, SALIDA_SEGURIDAD  FROM srcv_visitas  WHERE FECHA BETWEEN '$fecha_inicio' AND '$fecha_fin'";
 $resultado = mysqli_query($conexion, $sql);
 
 $excel = new Spreadsheet();
