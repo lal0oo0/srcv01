@@ -174,7 +174,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 
 
                   <!-- Modificar reservaciones -->
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_RESERVACION'] ?>" onclick="Reservacion('<?php $filas['ID_RESERVACION'] ?>')"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_RESERVACION'] ?>" onclick="Reservacion('<?php $filas['ID_RESERVACION'] ?>')" class="link-danger"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
                   <!-- Modal para modificar reservaciones-->
                   <div class="modal fade" id="exampleModal_<?php echo $filas['ID_RESERVACION'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -252,7 +252,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     </div>
                   </div>
                   <!--Boton para eliminar-->
-                  <a href="../Controlador/controlador_eliminar_reservacion.php?id=<?=$filas ['ID_RESERVACION']?>"><i class="fa fa-times" aria-hidden="true"></i></a>
+                  <a href="../Controlador/controlador_eliminar_reservacion.php?id=<?=$filas ['ID_RESERVACION']?>" class="link-danger"><i class="fa fa-times" aria-hidden="true"></i></a>
                   <?php
                   // Se obtiene el id para realizar las consultas
                   $id_reservacion = $filas['ID_RESERVACION'];
@@ -266,7 +266,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   date_default_timezone_set('America/Mexico_City');
                   $hora_actual = date("H:i:s");
                   if(!empty($fila_salida['SALIDA_URSPACE'])){ ?>
-                  <a href="../Controlador/controlador_uso_reservacion.php?id=<?=$filas['ID_RESERVACION']?>"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                  <a href="../Controlador/controlador_uso_reservacion.php?id=<?=$filas['ID_RESERVACION']?>"class="link-danger"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
                   <?php }?>
                   <br>
                   <?php
@@ -284,7 +284,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                           //echo '<i class="fa fa-sign-in" aria-hidden="true"></i>';
                       } else {
                           // Si la entrada no está confirmada se habilita el enlace para confirmar la entrada 
-                          echo '<a href="../Controlador/controlador_entrada_urspace.php?id=' . $id_reservacion . '"><i class="fa fa-sign-in" aria-hidden="true"></i></a>';
+                          echo '<a href="../Controlador/controlador_entrada_urspace.php?id=' . $id_reservacion . '" class="link-danger"><i class="fa fa-sign-in" aria-hidden="true"></i></a>';
                       }
                   } else {
                       echo 'Error al confirmar la salida.';
@@ -310,7 +310,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                          // echo '<i class="fa fa-sign-out" aria-hidden="true"></i>';
                       } else {
                           // Si la salida no está confirmada se habilita el enlace para confirmar la salida 
-                          echo '<a href="../Controlador/controlador_salida_urspace.php?id=' . $id_reservacion . '"><i class="fa fa-sign-out" aria-hidden="true"></i></a>';
+                          echo '<a href="../Controlador/controlador_salida_urspace.php?id=' . $id_reservacion . '" class="link-danger"><i class="fa fa-sign-out" aria-hidden="true"></i></a>';
                       }
                   } else {
                       echo 'Error al confirmar la salida.';

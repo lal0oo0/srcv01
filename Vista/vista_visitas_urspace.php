@@ -10,6 +10,9 @@ $sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORRE
 $resultado = $conexion->query($sql);
 $row = $resultado->fetch_assoc();
 ?>
+<?php
+$mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -106,6 +109,12 @@ $row = $resultado->fetch_assoc();
     </div>
   </div>
   <div class="mb-3"></div><!--Salto de linea-->
+      <!-- ALERTA -->
+      <div class="mb-4"></div><!--Salto de linea-->
+      <div id="mensaje">
+        <?php echo $mensaje; ?>
+      </div>
+      <div class="mb-3"></div><!--Salto de linea-->
 
   <div class="row">
     <div class="col">
@@ -120,6 +129,7 @@ $row = $resultado->fetch_assoc();
             <th scope="col">Apellido Materno</th>
             <th scope="col">Asunto</th>
             <th scope="col">Hora de salida</th>
+            <th scope="col">Acciones</th>
             </tr>
           </thead>
           <?php
@@ -129,13 +139,28 @@ $row = $resultado->fetch_assoc();
               while($filas  = mysqli_fetch_assoc($query)){
           ?>
           <tr class="datos">
-                    <td><?php echo $filas['ENTRADA_SEGURIDAD'] ?></td>
+                    <td>
+                        <?php if(empty($filas['ENTRADA_URSPACE'])){ ?>
+                        <a href="../Controlador/controlador_entrada_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                        <?php
+                        }else{
+                        echo $filas['ENTRADA_SEGURIDAD'];
+                        }?>
+                    </td>
                     <td><?php echo $filas['FECHA'] ?></td>
                     <td><?php echo $filas['NOMBRE'] ?></td>
                     <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
                     <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
                     <td><?php echo $filas['ASUNTO'] ?></td>
-                    <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
+                    <td>
+                        <?php if(empty($filas['SALIDA_URSPACE'])){ ?>
+                        <a href="../Controlador/controlador_salida_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                        <?php
+                        }else{
+                        echo $filas['ENTRADA_SEGURIDAD'];
+                        }?>
+                    </td>
+                    <td><!--creo que aqui va la salida de urspace --></td>
           </tr>
           <?php
           };
@@ -171,6 +196,21 @@ $row = $resultado->fetch_assoc();
     }
   })
   //fin del script de buscardor
+
+  //Script para mostrar alertas por determinado tiempo 
+  document.addEventListener("DOMContentLoaded", function() {
+        // Selecciona el elemento de alerta
+        var alerta = document.querySelector('.alert');
+
+        // Verifica si se encontró el elemento de alerta
+        if(alerta) {
+            // Temporizador para eliminar la alerta después de 5 segundos (5000 milisegundos)
+            setTimeout(function() {
+                alerta.remove(); // Elimina la alerta del DOM
+            }, 5000);
+        }
+    });
+//Fin del  script
 </script>
 
 
