@@ -206,8 +206,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
          echo$filas["ESTATUS"];
           ?></td>
           <td>
-            <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>"><i class="fa fa-check" aria-hidden="true"></i></a>
-            <a href="../Controlador/controlador_desactivar_espacio.php?id=<?=$filas['ID_SALA']?>"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>" class="link-danger"><i class="fa fa-check" aria-hidden="true"></i></a>
+            <a href="../Controlador/controlador_desactivar_espacio.php?id=<?=$filas['ID_SALA']?>" class="link-danger"><i class="fa fa-times" aria-hidden="true"></i></a>
           </td>
         </tr>
         <?php

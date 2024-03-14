@@ -223,8 +223,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                         Verifique los datos
                       </div>
                       <option selected value="">Elige</option>
-                      <!--Se muestran las opciones de EMPRESA 
-               previamente registradas en la tabla listas-->
+                      <!--Se muestran las opciones de EMPRESA previamente registradas en la tabla listas-->
                       <?php
                       while ($filas = mysqli_fetch_assoc($queryempresa)) {
                       ?>
@@ -245,8 +244,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                         Verifique los datos
                       </div>
                       <option selected value="">Elige</option>
-                      <!--Se muestran las opciones de ASUNTO
-               previamente registradas en la tabla listas-->
+                      <!--Se muestran las opciones de ASUNTO previamente registradas en la tabla listas-->
                       <?php
                       while ($filas = mysqli_fetch_assoc($queryasunto)) {
                       ?>
