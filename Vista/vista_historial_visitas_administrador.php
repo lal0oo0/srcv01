@@ -175,7 +175,7 @@ $row = $resultado->fetch_assoc();
     </div> 
   </div>
 </div>
-<div class="mb-3"></div> 
+<div class="mb-1"></div> 
 <div class="row">
   <div class="col-md-5"></div>
   <div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded">
@@ -189,12 +189,11 @@ $row = $resultado->fetch_assoc();
       <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
         <img src="../imagenes/excel.png" width="20px">Informe
       </button>
-        <!--<input type="submit" class="btn btn-dark" class="tit-color" style="background-color:#008000" value="Informe"><img src="../imagenes/excel.png" width="40px">-->
     </form>
   </div>
   <div class="col-md-1"></div>
 </div>
-<div class="mb-5"></div> 
+<div class="mb-2"></div> 
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->

@@ -161,15 +161,25 @@ $row = $resultado->fetch_assoc();
     </div>
   </div>
 </div>
-
 <div class="mb-3"></div> 
 <div class="row">
-  <div class="col-md-10">
+  <div class="col-md-5"></div>
+  <div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded">
+    <form action="../PhpSpreadsheet/reporte_urspace.php" method="post">
+      <label for="fecha_inicio">Fecha de inicio:</label>
+      <input type="date" id="fecha_inicio" name="fecha_inicio">
+
+      <label for="fecha_fin">Fecha de fin:</label>
+      <input type="date" id="fecha_fin" name="fecha_fin">
+      
+      <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
+        <img src="../imagenes/excel.png" width="20px">Informe
+      </button>
+    </form>
   </div>
-  <div class="col-md-2">
-  <a class="btn btn-dark" class="tit-color" style="background-color:#008000" href="../PhpSpreadsheet/reporte_urspace.php"><img src="../imagenes/excel.png" width="40px">Informe</a>
+  <div class="col-md-1"></div>
 </div>
-</div>
+<div class="mb-2"></div> 
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
