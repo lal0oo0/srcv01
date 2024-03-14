@@ -132,13 +132,13 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <th scope="col">Apellido Materno</th>
             <th scope="col">Asunto</th>
             <th scope="col">Hora de salida</th>
-            <th scope="col">Acciones</th>
+            <th scope="col">Motivo</th>
             </tr>
           </thead>
           <?php
               require_once("../Modelo/conexion2.php");
               $conexion = conect();
-              $query = mysqli_query ($conexion, "SELECT * FROM srcv_visitas WHERE EMPRESA='UrSpace' AND ASUNTO != 'Reservacion'");
+              $query = mysqli_query ($conexion, "SELECT * FROM srcv_visitas WHERE ASUNTO <> 'Reservacion' AND EMPRESA='UrSpace'");
               while($filas  = mysqli_fetch_assoc($query)){
           ?>
           <tr class="datos">
@@ -147,7 +147,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                         <a href="../Controlador/controlador_entrada_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                         <?php
                         }else{
-                        echo $filas['ENTRADA_SEGURIDAD'];
+                        echo $filas['ENTRADA_URSPACE'];
                         }?>
                     </td>
                     <td><?php echo $filas['FECHA'] ?></td>
@@ -160,10 +160,63 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                         <a href="../Controlador/controlador_salida_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                         <?php
                         }else{
-                        echo $filas['ENTRADA_SEGURIDAD'];
+                        echo $filas['SALIDA_URSPACE'];
                         }?>
                     </td>
-                    <td><!--creo que aqui va la salida de urspace --></td>
+                    <td>
+                      <?php
+                      if(empty($filas['MOTIVO'])){
+                        ?>
+                        
+                  <!-- Modificar reservaciones -->
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>" onclick="VISITA('<?php $filas['ID_VISITA'] ?>')" class="link-danger"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
+                  <!-- Modal para modificar reservaciones-->
+                  <div class="modal fade" id="exampleModal_<?php echo $filas['ID_VISITA'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Motivo de visita de <?= $filas['NOMBRE'] ?></h1>
+                          <input id="Visita_<?php echo $filas['ID_VISITA'] ?>" name="idvisita" value="" hidden>
+                            <input type="hidden" name="idvisita" id="idvisita" value="<?php echo $filas['ID_VISITA'] ?>">
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="mb-3"></div> <!--Salto de linea-->
+                        <!--posponer reservaciones-->
+                        <div class="modal-body">
+                          <form action="../Controlador/controlador_motivo.php" class="formulario row g-3 needs-validation" method="post" novalidate>
+                            <div class="mb-3"></div> <!-- Salto de línea -->
+                              <input type="hidden" name="id" value="<?= $filas['ID_VISITA'] ?>">
+
+                          <div class="row">
+                            <div class= "col"></div>
+                            <div class="col-8">
+
+                              <label for="Abono">Escriba el motivo de la visita o la persona con quien se dirige</label>
+                              <div class="mb-3"></div>
+                              <input type="text" class="form-control" name="motivo" placeholder="Motivo" aria-label="Motivo" aria-describedby="basic-addon1" required>
+                              <div class="invalid-feedback">
+                                Verifique los datos
+                              </div>
+                              <div class="col"></div>
+                            </div>
+                            <div class="col">
+                          </div>
+                            <div class="mb-5"></div> <!--Salto de linea-->
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-primary">Confirmar</button>
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <?php
+                      }else{
+                        echo $filas['MOTIVO'];
+                      }
+                      ?>
+                    </td>
           </tr>
           <?php
           };
@@ -180,6 +233,12 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
 
+<script>
+  function VISITA(idvisita){
+    document.getElementById('Visita_' + idvisita).value = idvisita;
+
+    }
+</script>
 <script>
   //Script de buscador
   document.addEventListener('keyup', e =>{
