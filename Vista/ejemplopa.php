@@ -131,7 +131,7 @@ if ($total > 0) {
             <div class="col-md-6">
               <label for="pass" class="form-label">Confirmar contraseña *</label>
               <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass_confirmar" id="pass_confirmar" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-              <div class="invalid-feedback " id="confirmar">*Campo obligatorio</div>
+              <div class="invalid-feedback " id="confirmar"></div>
               <br>
             </div>
              <div class="col-md-12">
