@@ -11,6 +11,14 @@ $conexion = conect();
 $correoelectronico = $_POST['correoelectronico'];
 $con = $_POST["contrasena"];
 
+// Validar el formato del correo electrónico
+if (!filter_var($correoelectronico, FILTER_VALIDATE_EMAIL)) {
+    // Correo electrónico no válido, mostrar mensaje de error y salir
+    $mensaje = '<div class="alert alert-danger">El formato del correo electrónico no es válido.</div>';
+    header("location: ../Vista/vista_inicio_sesion.php?mensaje=" . urlencode($mensaje));
+    exit();
+}
+
     // Metodo para des-encriptar la contrasenia
     $clave = "55Eu47x";
 
