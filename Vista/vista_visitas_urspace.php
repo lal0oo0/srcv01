@@ -21,7 +21,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
-    <title>Reservaciones</title>
+    <title>Visitas</title>
 </head>
 
 <style>
@@ -59,7 +59,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   }
 
 </style>
-
+<body>
 <header>
 <nav class="navbar navbar-dark  fixed-top navbar-custom">
   <div class="container-fluid">
@@ -83,7 +83,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <a class="nav-link" aria-current="page" aria-current="page" href="vista_registro_espacios.php">Registro de espacios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
+            <a class="nav-link" aria-current="page" href="vista_historial_reservaciones.php">Historial de reservaciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="vista_visitas_urspace.php">Visitas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesión</a>
