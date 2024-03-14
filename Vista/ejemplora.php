@@ -403,21 +403,6 @@ $row = $resultado->fetch_assoc();
       }
     });
   }
-  // Función para comparar las contraseñas y mostrar la validación
-  function validarContraseña() {
-    var pass1 = document.getElementById('valid04').value; // Contraseña
-    var pass2 = document.getElementById('pass_confirmar').value; // Confirmación de contraseña
-    var mensajeError = document.getElementById('confirmar'); // Div para mostrar el mensaje de error
-
-    if (pass1 === pass2) {
-      mensajeError.innerHTML = ''; // Borra el mensaje de error si las contraseñas coinciden
-    } else {
-      mensajeError.innerHTML = 'Las contraseñas no coinciden'; // Muestra el mensaje de error si las contraseñas no coinciden
-    }
-  }
-
-  // Asigna la función validarContraseña al evento oninput del campo de confirmación de contraseña
-  document.getElementById('pass_confirmar').addEventListener('input', validarContraseña);
 </script>
 </body>
 </html>

@@ -135,7 +135,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                         <?php $correo_encontrado = true; ?>
                         <?php endif; ?>
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit" id="enviar" name="enviar">Siguiente</button>
+                            <button class="btn btn-primary" type="submit" id="enviar" onclick="verificarContrasenas()" name="enviar">Siguiente</button>
                         </div>
                     </form>
                 </div>
@@ -185,33 +185,20 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
             });
         }, 5000);
     });
-    // Función para verificar la coincidencia de las contraseñas
     function verificarContrasenas() {
-        const passwo1 = document.getElementById('passwo1').value;
-        const confirmPasswo = document.getElementById('confirmPasswo').value;
-        var mensajeError = document.getElementById('passwordMismatch');
+            const passwo1 = document.getElementById('passwo1').value;
+            const confirmPasswo = document.getElementById('confirmPasswo').value;
+            var mensajeError = document.getElementById('passwordMismatch');
 
-        if (passwo1 !== confirmPasswo) {
-            mensajeError.style.display = 'block'; // Mostrar el mensaje de error
-            return false; // Las contraseñas no coinciden
-        } else {
-            mensajeError.style.display = 'none'; // Ocultar el mensaje de error
-            return true; // Las contraseñas coinciden
+            if (passwo1 !== confirmPasswo) {
+                mensajeError.style.display = 'block';
+                event.preventDefault(); // Detener el envío del formulario
+                return false; // Las contraseñas no coinciden
+            } else {
+                mensajeError.style.display = 'none';
+                return true; // Las contraseñas coinciden
+            }
         }
-    }
-
-    // Evento input en el campo de confirmación de contraseña
-    document.getElementById('confirmPasswo').addEventListener('input', function() {
-        verificarContrasenas();
-    });
-
-    // Evento clic en el botón de enviar
-    document.getElementById('enviar').addEventListener('click', function(event) {
-        // Verificar las contraseñas
-        if (!verificarContrasenas()) {
-            event.preventDefault(); // Prevenir el envío del formulario si las contraseñas no coinciden
-        }
-    });
         function mostrarSweetAlert() {
         swal({
             title: "Enviando correo y actualizando contraseña",
