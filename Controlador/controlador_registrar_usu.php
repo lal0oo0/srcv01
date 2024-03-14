@@ -35,14 +35,6 @@ $contrasenia = $_POST['pass'];
 $pregunta = $_POST['pregunta'];
 $respuesta = $_POST['respuesta'];
 
-// Expresión regular para validar el formato del correo electrónico
-$correo_valido = '/^\b[A-Za-z0-9._%+-]+@dominiopermitido\.com\b$/';
-
-// Verificar si el correo electrónico tiene el dominio permitido
-if (!preg_match($correo_valido, $correo)) {
-    echo json_encode(array('success' => false, 'error' => 'El correo electrónico no es válido.'));
-    exit();
-}
 
 //Codigo para guardar un registro temporalmente en una variable php
 $usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA,ROL, ESTATUS) 
