@@ -135,7 +135,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                         <?php $correo_encontrado = true; ?>
                         <?php endif; ?>
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit" id="enviar" onclick="mostrarSweetAlert()" name="enviar">Siguiente</button>
+                            <button class="btn btn-primary" type="submit" id="enviar" onclick="verificarContrasenas()" name="enviar">Siguiente</button>
                         </div>
                     </form>
                 </div>
