@@ -173,15 +173,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     </div>
   </div>
 </div>
-
 <div class="mb-3"></div> 
-<div class="row">
-  <div class="col-md-10">
-  </div>
-  <div class="col-md-2">
-  <a class="btn btn-dark" class="tit-color" style="background-color:#008000" href="../PhpSpreadsheet/reporte_urspace.php"><img src="../imagenes/excel.png" width="40px">Informe</a>
-</div>
-</div>
+
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
