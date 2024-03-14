@@ -83,6 +83,9 @@ $row = $resultado->fetch_assoc();
             <a class="nav-link" href="vista_historial_visitas_administrador.php">Historial de Visitas</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="vista_historial_reservaciones_admin.php">Historial reservaciones</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar sesión</a>
           </li>
         </ul>
