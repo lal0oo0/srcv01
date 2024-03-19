@@ -226,7 +226,25 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     </div>
   </div>
 </div>
-<div class="mb-3"></div> 
+<div class="mb-1"></div>
+<div class="row">
+  <div class="col-md-5"></div>
+  <div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded">
+    <form action="../PhpSpreadsheet/reporte_administracion.php" method="post">
+      <label for="fecha_inicio">Fecha de inicio:</label>
+      <input type="date" id="fecha_inicio" name="fecha_inicio">
+
+      <label for="fecha_fin">Fecha de fin:</label>
+      <input type="date" id="fecha_fin" name="fecha_fin">
+      
+      <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
+        <img src="../imagenes/excel.png" width="20px">Informe
+      </button>
+    </form>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<div class="mb-1"></div>  
 
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
