@@ -1,4 +1,7 @@
 <?php
+session_start();
+$ROL=$_SESSION['rol'];
+$CORREO=$_SESSION['correo'];
 
 require ("../PhpSpreadsheet/vendor/autoload.php");
 require_once("../Modelo/conexion2.php");
@@ -11,12 +14,28 @@ use PhpOffice\PhpSpreadsheet\Style\Color;// Para color de  letras de celdas.
 use PhpOffice\PhpSpreadsheet\Style\Alignment;// Para centrar el texto de las celdas
 use PhpOffice\PhpSpreadsheet\Style\Border;//Para los bordes de las celdas
 
+// Verificar si hay una sesión activa
+if (empty($_SESSION["correo"])){
+    header("location: vista_inicio_sesion.php");
+    exit; // Detener la ejecución del script después de redirigir
+  }
 
 // Obtener las fechas enviadas por el formulario
 $fecha_inicio = $_POST['fecha_inicio'];
 $fecha_fin = $_POST['fecha_fin'];
 
+//Consulta para verificar el rol
+$rol = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$CORREO' AND ROL='Administrador' AND ESTATUS='1'";
+$rol_admin = mysqli_query($conexion, $rol);
 
+$rol2 = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$CORREO' AND ROL='Recepcion' AND ESTATUS='1'";
+$rol_recepcion = mysqli_query($conexion, $rol2);
+
+$rol3 = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$CORREO' AND ROL='UrSpace' AND ESTATUS='1'";
+$rol_urspace = mysqli_query($conexion, $rol3);
+
+
+if($rol_admin->num_rows==1){
 $sql = "SELECT NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA, EMPRESA, ASUNTO, ENTRADA_SEGURIDAD, ENTRADA_RECEPCION, ENTRADA_URSPACE, SALIDA_URSPACE, SALIDA_RECEPCION, SALIDA_SEGURIDAD  FROM srcv_visitas  WHERE FECHA BETWEEN '$fecha_inicio' AND '$fecha_fin'";
 $resultado = mysqli_query($conexion, $sql);
 
@@ -180,15 +199,6 @@ $hojaActiva->setCellValue('L1', 'SALIDA SEGURIDAD');
 $hojaActiva->getStyle('L1')->getFont()->getColor()->setRGB('FFFFFF'); // Obtener el estilo de la celda y establecer el color del texto en RGB
 $hojaActiva->getStyle('L1')->getAlignment()->setWrapText(true);// Ajustar el texto si es necesario
 
-/*
-$hojaActiva->setCellValue('B1', 'APELLIDO PATERNO');
-$hojaActiva->setCellValue('C1', 'APELLIDO MATERNO');
-$hojaActiva->setCellValue('D1', 'NOMBRE ESPACIO');
-$hojaActiva->setCellValue('E1', 'TELEFONO');
-$hojaActiva->setCellValue('F1', 'FECHA ENTRADA');
-$hojaActiva->setCellValue('G1', 'NUMERO PERSONAS');
-$hojaActiva->setCellValue('H1', 'SERVICIOS EXTRA');
-$hojaActiva->setCellValue('I1', 'TOTAL');*/
 
 $fila = 2;
 
@@ -289,21 +299,14 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('L'.$fila)->getAlignment()->setWrapText(true);
 
 
-   /* $hojaActiva->setCellValue('A'.$fila, $rows['NOMBRE_CLIENTE']);
-    $hojaActiva->setCellValue('B'.$fila, $rows['APELLIDO_PATERNO']);
-    $hojaActiva->setCellValue('C'.$fila, $rows['APELLIDO_MATERNO']);
-    $hojaActiva->setCellValue('D'.$fila, $rows['NOMBRE_ESPACIO']);
-    $hojaActiva->setCellValue('E'.$fila, $rows['TELEFONO']);
-    $hojaActiva->setCellValue('F'.$fila, $rows['FECHA_ENTRADA']);
-    $hojaActiva->setCellValue('G'.$fila, $rows['NUMERO_PERSONAS']);
-    $hojaActiva->setCellValue('H'.$fila, $rows['SERVICIOS_EXTRA']);
-    $hojaActiva->setCellValue('I'.$fila, $rows['TOTAL']);*/
-
     $fila++;
 }
 
+}else ifif($rol_recepcion->num_rows==1){
+
+}
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="historial.xlsx"');
+header('Content-Disposition: attachment;filename="visitas.xlsx"');
 header('Cache-Control: max-age=0');
 
 $writer = IOFactory::createWriter($excel, 'Xlsx');
