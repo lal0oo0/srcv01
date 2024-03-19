@@ -337,6 +337,13 @@ $(document).ready(function() {
             document.getElementById('pass_confirmar').classList.remove('is-invalid');
         }
 
+        if (passConfirmar === '') {
+            var com = document.getElementById('confirmar');
+            com.innerHTML = "*Campo obligatorio";
+            document.getElementById('pass_confirmar').classList.add('is-invalid');
+            valid = false;
+        }
+
         var nombre = document.getElementById('valid01').value;
         var ap = document.getElementById('valid02').value;
         var am = document.getElementById('valid03').value;
