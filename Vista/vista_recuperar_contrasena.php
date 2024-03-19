@@ -84,6 +84,14 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
     border: none;
 }
 
+/* Elimina el icono de confirmación de la contraseña */
+#confirmPasswo:valid,
+    #confirmPasswo:invalid {
+        background-image: none;
+        /* Deja solo el borde */
+        border: 2px solid #007AB6;
+    }
+
     </style>
 </head>
 <body>
@@ -135,7 +143,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                         <?php $correo_encontrado = true; ?>
                         <?php endif; ?>
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit" id="enviar" onclick="verificarContrasenas()" name="enviar">Siguiente</button>
+                            <button class="btn btn-primary" type="submit" id="enviar" onclick="return validarCampos()" name="enviar">Siguiente</button>
                         </div>
                     </form>
                 </div>
@@ -185,21 +193,80 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
             });
         }, 5000);
     });
-    function verificarContrasenas() {
-            const passwo1 = document.getElementById('passwo1').value;
-            const confirmPasswo = document.getElementById('confirmPasswo').value;
-            var mensajeError = document.getElementById('passwordMismatch');
+</script>
+<script>
+    // Script de validación de contraseñas
+    document.getElementById('confirmPasswo').addEventListener('input', function() {
+        var passwo1 = document.getElementById('passwo1').value;
+        var confirmPasswo = this.value;
+        var mensajeError = document.getElementById('passwordMismatch');
 
-            if (passwo1 !== confirmPasswo) {
-                mensajeError.style.display = 'block';
-                event.preventDefault(); // Detener el envío del formulario
-                return false; // Las contraseñas no coinciden
-            } else {
-                mensajeError.style.display = 'none';
-                return true; // Las contraseñas coinciden
-            }
+        if (passwo1 !== confirmPasswo) {
+            mensajeError.style.display = 'block';
+            this.classList.add('is-invalid');
+        } else {
+            mensajeError.style.display = 'none';
+            this.classList.remove('is-invalid');
         }
-        function mostrarSweetAlert() {
+    });
+</script>
+<script>
+    // Función para validar campos y enviar formulario
+    function validarCampos() {
+        var formulario = document.getElementById("formulario3");
+
+        // Verificar si el formulario es válido según las validaciones de Bootstrap
+        if (!formulario.checkValidity()) {
+            // Si el formulario no es válido, mostrar las validaciones de Bootstrap
+            formulario.classList.add('was-validated');
+            return false;
+        }
+
+        var correo = document.getElementById("correo").value;
+        var pregunta = document.getElementById("pregunta").value;
+        var respuesta = document.getElementById("respuesta").value;
+        var passwo1 = document.getElementById("passwo1").value;
+        var confirmPasswo = document.getElementById("confirmPasswo").value;
+        var mensajeError = document.getElementById('passwordMismatch');
+
+        // Verificar si todos los campos requeridos están llenos
+        if (correo.trim() === "" || pregunta.trim() === "" || respuesta.trim() === "" || passwo1.trim() === "" || confirmPasswo.trim() === "") {
+            alert("Por favor, complete todos los campos.");
+            return false;
+        }
+
+        // Verificar si las contraseñas coinciden
+        if (passwo1 !== confirmPasswo) {
+            mensajeError.style.display = 'block';
+            document.getElementById('confirmPasswo').classList.add('is-invalid');
+            return false;
+        }
+
+        // Si todo está bien, mostrar la SweetAlert y quitar las validaciones de Bootstrap
+        mostrarSweetAlert();
+        formulario.classList.remove('was-validated'); // Quitar las validaciones de Bootstrap
+        return true;
+    }
+
+    // Script de validación de contraseñas
+    document.getElementById('confirmPasswo').addEventListener('input', function() {
+        var passwo1 = document.getElementById('passwo1').value;
+        var confirmPasswo = this.value;
+        var mensajeError = document.getElementById('passwordMismatch');
+        var confirmPasswoInput = document.getElementById('confirmPasswo');
+
+        if (passwo1 !== confirmPasswo) {
+            mensajeError.style.display = 'block';
+            confirmPasswoInput.classList.add('is-invalid');
+            confirmPasswoInput.setCustomValidity('Las contraseñas no coinciden'); // Marcar como inválido
+        } else {
+            mensajeError.style.display = 'none';
+            confirmPasswoInput.classList.remove('is-invalid');
+            confirmPasswoInput.setCustomValidity(''); // Restablecer la validez
+        }
+    });
+    // Función para mostrar SweetAlert y enviar formulario después de 5 segundos
+    function mostrarSweetAlert() {
         swal({
             title: "Enviando correo y actualizando contraseña",
             text: "Espere unos momentos...",
@@ -210,7 +277,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
         });
 
         setTimeout(function () {
-            window.location.href = "../Vista/vista_inicio_sesion.php";
+            document.getElementById("formulario3").submit(); // Envía el formulario
         }, 5000);
     }
 </script>
