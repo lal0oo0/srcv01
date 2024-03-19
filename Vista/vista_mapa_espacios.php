@@ -187,7 +187,7 @@ $row = $resultado->fetch_assoc();
                 <input type="hidden" name="nombre" id="nombre" value="<?= $filas['NOMBRE'] ?>">
                 <div class="col">
                 <label for="se">Nombre *</label>
-                <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
+                <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre" aria-label="nombre" aria-describedby="basic-addon1" required>
                 <div class="invalid-feedback">
                   Verifique los datos
                 </div>
@@ -197,14 +197,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Apellido paterno *</label>
-                    <input type="text" class="form-control" name="Apellidopaterno" id="Apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
+                    <input type="text" class="form-control" name="Apellidopaterno" id="apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Apellido materno *</label>
-                    <input type="text" class="form-control" name="Apellidomaterno" id="Apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
+                    <input type="text" class="form-control" name="Apellidomaterno" id="apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -215,7 +215,7 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Correo electrónico *</label>
-                    <input type="email" class="form-control" name="Correo" id="Correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
+                    <input type="email" class="form-control" name="Correo" id="correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -230,14 +230,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="Fecha inicio">Fecha de inicio *</label>
-                    <input type="date" class="form-control" id="Fechainicio" name="Fechainicio" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1" min="<?=$fecha_actual?>" value="<?=$fecha_actual?>" required>
+                    <input type="date" class="form-control" id="fechainicio" name="Fechainicio" placeholder="Fecha de inicio" aria-label="Fecha  de inicio" aria-describedby="basic-addon1" min="<?=$fecha_actual?>" value="<?=$fecha_actual?>" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="Fecha finalizacion">Fecha de finalizacion *</label>
-                    <input type="date" class="form-control" id="Fechafinalizacion" name="Fechafinalizacion" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" min="<?=$fecha_actual?>" required>
+                    <input type="date" class="form-control" id="fechafinalizacion" name="Fechafinalizacion" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" min="<?=$fecha_actual?>" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>
@@ -248,14 +248,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="Hora inicio">Hora de inicio *</label>
-                    <input type="time" class="form-control" name="Horainicio" id="Horainicio" placeholder="Hora de inicio " aria-label="Hora de inicio" aria-describedby="basic-addon1" value="<?=$hora_actual?>" required>
+                    <input type="time" class="form-control" name="Horainicio" id="horainicio" placeholder="Hora de inicio " aria-label="Hora de inicio" aria-describedby="basic-addon1" value="<?=$hora_actual?>" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="Hora finalizacion">Hora de finalización *</label>
-                    <input type="time" class="form-control" name="Horafinalizacion" id="Horafinalizacion" placeholder="Hora de finalizacion " aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
+                    <input type="time" class="form-control" name="Horafinalizacion" id="horafinalizacion" placeholder="Hora de finalizacion " aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>   
@@ -267,28 +267,28 @@ $row = $resultado->fetch_assoc();
                   <div class="col-md-3"></div>
                   <div class="col-md-6">
                   <label for="personas">Numero de personas</label>
-                  <input type="number" class="form-control" name="Personas" id="Personas" value="1" aria-label="personas" aria-describedby="basic-addon1">
+                  <input type="number" class="form-control" name="Personas" id="personas" value="1" aria-label="personas" aria-describedby="basic-addon1">
                   </div>
                   <div class="col-md-3"></div>
                 </div>
 
                 <div class="col">
                   <label for="se">Servicios extra</label>
-                  <input type="text" class="form-control" name="Servicios" id="Servicios" value="N/A" aria-label="servicios" aria-describedby="basic-addon1">
+                  <input type="text" class="form-control" name="Servicios" id="servicios" value="N/A" aria-label="servicios" aria-describedby="basic-addon1">
                 </div>
                 <div class="mb-4"></div> <!--Salto de linea-->
 
                 <div class="row">
                   <div class="col">
                     <label for="se">Total *</label>
-                    <input type="number" class="form-control" name="Total" id="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" id="monto" required>
+                    <input type="number" class="form-control" name="Total" id="total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" id="monto" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Enganche *</label>
-                    <input type="number" class="form-control" name="Enganche" id="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
+                    <input type="number" class="form-control" name="Enganche" id="enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -339,37 +339,46 @@ $(document).ready(function() {
         e.preventDefault();
         
         var valid = true;
-        var nombre = document.getElementById('Nombre').value;
-        var apellidopaterno = document.getElementById('Apellidopaterno').value;
-        var apellidomaterno = document.getElementById('Apellidomaterno').value;
-        var correo = document.getElementById('Correo').value;
-        var fechainicio = document.getElementById('Fechainicio').value;
-        var fechafinalizacion = document.getElementById('Fechafinalizacion').value;
-        var horainicio = document.getElementById('Horainicio').value;
-        var horafinalizacion = document.getElementById('Horafinalizacion').value;
+        var nombre = document.getElementById('nombre').value;
+        var apellidopaterno = document.getElementById('apellidopaterno').value;
+        var apellidomaterno = document.getElementById('apellidomaterno').value;
+        var correo = document.getElementById('correo').value;
+        var fechainicio = document.getElementById('fechainicio').value;
+        var fechafinalizacion = document.getElementById('fechafinalizacion').value;
+        var horainicio = document.getElementById('horainicio').value;
+        var horafinalizacion = document.getElementById('horafinalizacion').value;
+        var personas = document.getElementById('personas').value;
+        var servicios = document.getElementById('servicios').value;
+        var total = document.getElementById('total').value;
+        var enganche = document.getElementById('enganche').value;
         console.log(nombre);
         // Verificar si todos los campos obligatorios están completos
-        if (nombre == '' || apellidopaterno == '' || apellidomaterno == '' || correo == '' || fechainicio == '' || fechafinalizacion == '' || horainicio == '' || horafinalizacion == '') {
+        if (nombre == '' || apellidopaterno == '' || apellidomaterno == '' || correo == '' || fechainicio == '' || fechafinalizacion == '' || horainicio == '' || horafinalizacion == '' || personas == '' || servicios == '' || total == '' || enganche == '') {
           valid = false;
           swal('Error', 'Todos los campos son obligatorios', 'error');
         }
 
-        /* Verificar si las fechas son iguales
-        if (fechainicio === fechafinalizacion && horafinalizacion <= horainicio) {
-          valid = false;
-          document.getElementById('Horafinalizacion').innerHTML="La hora de finalización debe ser mayor que la hora de inicio cuando las fechas son iguales.";
-        }
+         /*// Verificar si las fechas y horas son válidas
+        var fechaInicio = new Date(fechainicio + 'T' + horainicio);
+        var fechaFinalizacion = new Date(fechafinalizacion + 'T' + horafinalizacion);
 
-         Verificar si la hora de finalización es menor o igual que la hora de inicio
-        if (horafinalizacion <= horainicio) {
-          valid = false;
-          document.getElementById('Horafinalizacion').innerHTML="La hora de finalización debe ser mayor que la hora de inicio.";
+        if (fechaInicio.toDateString() === fechaFinalizacion.toDateString()) {
+          // Las fechas son iguales, la hora de finalización no debe ser menor que la hora de inicio
+          if (fechaFinalizacion <= fechaInicio) {
+            valid = false;
+            swal('Error', 'La hora de finalización debe ser mayor que la hora de inicio cuando las fechas son iguales', 'error');
+          }
+        } else {
+          // Las fechas son diferentes, cualquier hora es válida
+          if (fechaFinalizacion < fechaInicio) {
+            valid = false;
+            swal('Error', 'La fecha de finalización debe ser posterior a la fecha de inicio', 'error');
+          }
         }*/
 
-        if(!valid){
+        /*if (!valid) {
           return;
-        }
-
+        }*/
 
         // Realiza una solicitud Ajax al servidor
         $.ajax({
