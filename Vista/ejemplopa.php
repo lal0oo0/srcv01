@@ -77,6 +77,18 @@ if ($total > 0) {
     width: 300px;
     transform: translate(10%, 0%);
   }
+
+  /* Elimina el icono de confirmación de la contraseña */
+  #pass_confirmar:valid,
+        #pass_confirmar:invalid {
+            background-image: none;
+            /* Deja solo el borde */
+            border: 2px solid #007AB6;
+        }
+
+        .input-group > .form-control {
+    padding-right: 38px; /* Ajusta el padding derecho para dejar espacio para el icono de ojo */
+}
 </style>
 <body>
     <div class="container text-center">
