@@ -403,19 +403,21 @@ $(document).ready(function() {
 });
 </script>
 <script>
-    // Validación de contraseñas coincidentes
-    document.getElementById('pass_confirmar').addEventListener('input', function() {
+     // Validación de contraseñas coincidentes
+     document.getElementById('pass_confirmar').addEventListener('input', function() {
         var pass = document.getElementById('valid04').value;
         var passConfirmar = this.value;
 
         if (pass !== passConfirmar) {
             document.getElementById('confirmar').innerHTML = "*Las contraseñas no coinciden";
             this.classList.add('is-invalid');
+            this.setCustomValidity('Las contraseñas no coinciden'); // Marcar como inválido
         } else {
             document.getElementById('confirmar').innerHTML = "";
             this.classList.remove('is-invalid');
+            this.setCustomValidity(''); // Restablecer la validez
         }
     });
- </script>
+</script>
 </body>
 </html>
