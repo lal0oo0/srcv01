@@ -404,7 +404,7 @@ $(document).ready(function() {
 </script>
 <script>
      // Validación de contraseñas coincidentes
-     document.getElementById('pass_confirmar').addEventListener('input', function() {
+    document.getElementById('pass_confirmar').addEventListener('input', function() {
         var pass = document.getElementById('valid04').value;
         var passConfirmar = this.value;
 
