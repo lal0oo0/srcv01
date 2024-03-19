@@ -168,7 +168,7 @@ $row = $resultado->fetch_assoc();
      ?>    
       <!-- Button trigger modal -->
       <button type="button" class="boton btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_<?php echo $filas['ID_SALA'] ?>" onclick="setSelectedRoom('<?php echo $filas['ID_SALA'] ?>')">
-       <?php echo $filas['NOMBRE'] ?>
+       <?php echo $filas['NOMBRE'] ?><br><?php echo $filas['UBICACION'] ?>
       </button>
       <!-- Modal -->
       <div class="modal fade" id="staticBackdrop_<?php echo $filas['ID_SALA'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -182,12 +182,12 @@ $row = $resultado->fetch_assoc();
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" method="post" novalidate>
+              <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" method="POST" novalidate>
                 <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
                 <input type="hidden" name="nombre" id="nombre" value="<?= $filas['NOMBRE'] ?>">
                 <div class="col">
                 <label for="se">Nombre *</label>
-                <input type="text" class="form-control" name="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
+                <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
                 <div class="invalid-feedback">
                   Verifique los datos
                 </div>
@@ -197,14 +197,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Apellido paterno *</label>
-                    <input type="text" class="form-control" name="Apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
+                    <input type="text" class="form-control" name="Apellidopaterno" id="Apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Apellido materno *</label>
-                    <input type="text" class="form-control" name="Apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
+                    <input type="text" class="form-control" name="Apellidomaterno" id="Apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -215,7 +215,7 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Correo electrónico *</label>
-                    <input type="email" class="form-control" name="Correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
+                    <input type="email" class="form-control" name="Correo" id="Correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -248,14 +248,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="Hora inicio">Hora de inicio *</label>
-                    <input type="time" class="form-control" name="Horainicio" placeholder="Hora de inicio " aria-label="Hora de inicio" aria-describedby="basic-addon1" value="<?=$hora_actual?>" required>
+                    <input type="time" class="form-control" name="Horainicio" id="Horainicio" placeholder="Hora de inicio " aria-label="Hora de inicio" aria-describedby="basic-addon1" value="<?=$hora_actual?>" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="Hora finalizacion">Hora de finalización *</label>
-                    <input type="time" class="form-control" name="Horafinalizacion" placeholder="Hora de finalizacion " aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
+                    <input type="time" class="form-control" name="Horafinalizacion" id="Horafinalizacion" placeholder="Hora de finalizacion " aria-label="Hora  de finalizacion" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                     Verifique los datos
                     </div>   
@@ -267,28 +267,28 @@ $row = $resultado->fetch_assoc();
                   <div class="col-md-3"></div>
                   <div class="col-md-6">
                   <label for="personas">Numero de personas</label>
-                  <input type="number" class="form-control" name="Personas" value="1" aria-label="personas" aria-describedby="basic-addon1">
+                  <input type="number" class="form-control" name="Personas" id="Personas" value="1" aria-label="personas" aria-describedby="basic-addon1">
                   </div>
                   <div class="col-md-3"></div>
                 </div>
 
                 <div class="col">
                   <label for="se">Servicios extra</label>
-                  <input type="text" class="form-control" name="Servicios" value="N/A" aria-label="servicios" aria-describedby="basic-addon1">
+                  <input type="text" class="form-control" name="Servicios" id="Servicios" value="N/A" aria-label="servicios" aria-describedby="basic-addon1">
                 </div>
                 <div class="mb-4"></div> <!--Salto de linea-->
 
                 <div class="row">
                   <div class="col">
                     <label for="se">Total *</label>
-                    <input type="number" class="form-control" name="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" id="monto" required>
+                    <input type="number" class="form-control" name="Total" id="Total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" id="monto" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Enganche *</label>
-                    <input type="number" class="form-control" name="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
+                    <input type="number" class="form-control" name="Enganche" id="Enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -329,26 +329,6 @@ $row = $resultado->fetch_assoc();
   }
 
 
-// Script para validaciones
-(() => {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
-
 
 //ALERTAS//
 // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
@@ -358,6 +338,39 @@ $(document).ready(function() {
         // Previene el comportamiento predeterminado del formulario
         e.preventDefault();
         
+        var valid = true;
+        var nombre = document.getElementById('Nombre').value;
+        var apellidopaterno = document.getElementById('Apellidopaterno').value;
+        var apellidomaterno = document.getElementById('Apellidomaterno').value;
+        var correo = document.getElementById('Correo').value;
+        var fechainicio = document.getElementById('Fechainicio').value;
+        var fechafinalizacion = document.getElementById('Fechafinalizacion').value;
+        var horainicio = document.getElementById('Horainicio').value;
+        var horafinalizacion = document.getElementById('Horafinalizacion').value;
+        console.log(nombre);
+        // Verificar si todos los campos obligatorios están completos
+        if (nombre == '' || apellidopaterno == '' || apellidomaterno == '' || correo == '' || fechainicio == '' || fechafinalizacion == '' || horainicio == '' || horafinalizacion == '') {
+          valid = false;
+          swal('Error', 'Todos los campos son obligatorios', 'error');
+        }
+
+        /* Verificar si las fechas son iguales
+        if (fechainicio === fechafinalizacion && horafinalizacion <= horainicio) {
+          valid = false;
+          document.getElementById('Horafinalizacion').innerHTML="La hora de finalización debe ser mayor que la hora de inicio cuando las fechas son iguales.";
+        }
+
+         Verificar si la hora de finalización es menor o igual que la hora de inicio
+        if (horafinalizacion <= horainicio) {
+          valid = false;
+          document.getElementById('Horafinalizacion').innerHTML="La hora de finalización debe ser mayor que la hora de inicio.";
+        }*/
+
+        if(!valid){
+          return;
+        }
+
+
         // Realiza una solicitud Ajax al servidor
         $.ajax({
             // Especifica el método de la solicitud (POST en este caso)
