@@ -131,7 +131,7 @@ if ($total > 0) {
             <div class="col-md-6">
               <label for="pass" class="form-label">Confirmar contraseña *</label>
               <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass_confirmar" id="pass_confirmar" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-              <div class="invalid-feedback " id="confirmar">*Campo obligatorio</div>
+              <div class="invalid-feedback " id="confirmar"></div>
               <br>
             </div>
              <div class="col-md-12">
@@ -391,22 +391,19 @@ $(document).ready(function() {
 });
 </script>
 <script>
-    $(document).ready(function() {
-        $('#pass_confirmar').on('input', function() {
-            var pass = $('#valid04').val();
-            var pass_confirmar = $(this).val();
+    // Validación de contraseñas coincidentes
+    document.getElementById('pass_confirmar').addEventListener('input', function() {
+        var pass = document.getElementById('valid04').value;
+        var passConfirmar = this.value;
 
-            if (pass !== pass_confirmar) {
-                $('#pass_confirmar').addClass('is-invalid');
-                $('#pass_confirmar').removeClass('is-valid');
-                $('#confirmar').html('Las contraseñas no coinciden');
-            } else {
-                $('#pass_confirmar').removeClass('is-invalid');
-                $('#pass_confirmar').addClass('is-valid');
-                $('#confirmar').html('');
-            }
-        });
+        if (pass !== passConfirmar) {
+            document.getElementById('confirmar').innerHTML = "*Las contraseñas no coinciden";
+            this.classList.add('is-invalid');
+        } else {
+            document.getElementById('confirmar').innerHTML = "";
+            this.classList.remove('is-invalid');
+        }
     });
-    </script>
+ </script>
 </body>
 </html>
