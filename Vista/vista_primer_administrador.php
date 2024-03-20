@@ -77,6 +77,18 @@ if ($total > 0) {
     width: 300px;
     transform: translate(10%, 0%);
   }
+
+  /* Elimina el icono de confirmación de la contraseña */
+  #pass_confirmar:valid,
+        #pass_confirmar:invalid {
+            background-image: none;
+            /* Deja solo el borde */
+            border: 2px solid #007AB6;
+        }
+
+        .input-group > .form-control {
+    padding-right: 38px; /* Ajusta el padding derecho para dejar espacio para el icono de ojo */
+}
 </style>
 <body>
     <div class="container text-center">
@@ -325,6 +337,13 @@ $(document).ready(function() {
             document.getElementById('pass_confirmar').classList.remove('is-invalid');
         }
 
+        if (passConfirmar === '') {
+            var com = document.getElementById('confirmar');
+            com.innerHTML = "*Campo obligatorio";
+            document.getElementById('pass_confirmar').classList.add('is-invalid');
+            valid = false;
+        }
+
         var nombre = document.getElementById('valid01').value;
         var ap = document.getElementById('valid02').value;
         var am = document.getElementById('valid03').value;
@@ -389,6 +408,23 @@ $(document).ready(function() {
         });
     });
 });
+</script>
+<script>
+     // Validación de contraseñas coincidentes
+    document.getElementById('pass_confirmar').addEventListener('input', function() {
+        var pass = document.getElementById('valid04').value;
+        var passConfirmar = this.value;
+
+        if (pass !== passConfirmar) {
+            document.getElementById('confirmar').innerHTML = "*Las contraseñas no coinciden";
+            this.classList.add('is-invalid');
+            this.setCustomValidity('Las contraseñas no coinciden'); // Marcar como inválido
+        } else {
+            document.getElementById('confirmar').innerHTML = "";
+            this.classList.remove('is-invalid');
+            this.setCustomValidity(''); // Restablecer la validez
+        }
+    });
 </script>
 </body>
 </html>
