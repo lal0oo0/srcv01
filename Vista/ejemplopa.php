@@ -79,8 +79,7 @@ if ($total > 0) {
   }
 
   /* Elimina el icono de confirmación de la contraseña */
-  #pass_confirmar:valid,
-        #pass_confirmar:invalid {
+  #pass_confirmar:valid{
             background-image: none;
             /* Deja solo el borde */
             border: 2px solid #007AB6;
