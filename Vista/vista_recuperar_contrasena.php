@@ -85,8 +85,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
 }
 
 /* Elimina el icono de confirmación de la contraseña */
-#confirmPasswo:valid,
-    #confirmPasswo:invalid {
+#confirmPasswo:valid{
         background-image: none;
         /* Deja solo el borde */
         border: 2px solid #007AB6;
