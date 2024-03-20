@@ -104,13 +104,19 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
 <div class="container">
 
-  <!--Bucador-->
+<!--buscador-->
+<form action="../PhpSpreadsheet/reporte_administracion.php" method="post">
   <div class="row">
     <div class="col-md-9"></div>
     <div class="col-md-3">
       <input class="form-control mr-sm-2" type="search" id="buscador" name="buscador" placeholder="Buscar" aria-label="Search" style="border: 1px solid rgba(0, 0, 0, 0.7);">
+      <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
+        <img src="../imagenes/excel.png" width="20px">Informe
+      </button>
     </div>
   </div>
+</form>
+
   <div class="mb-3"></div><!--Salto de linea-->
       <!-- ALERTA -->
       <div class="mb-4"></div><!--Salto de linea-->
@@ -258,16 +264,28 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     }
 </script>
 <script>
-  //Script de buscador
-  document.addEventListener('keyup', e =>{
-    if(e.target.matches('#buscador')){
-      document.querySelectorAll('.datos').forEach(dato =>{
-        dato.textContent.toLowerCase().includes(e.target.value)
-        ? dato.classList.remove('filtro')
-        : dato.classList.add('filtro')
-      }) 
+  // Script de buscador en tiempo real por nombre, apellidos y fecha
+  document.addEventListener('keyup', e => {
+    if (e.target.matches('#buscador')) {
+      const textoBusqueda = e.target.value.toLowerCase();
+      document.querySelectorAll('.datos').forEach(dato => {
+        const nombre = dato.children[2].textContent.toLowerCase();
+        const apellidoPaterno = dato.children[3].textContent.toLowerCase();
+        const apellidoMaterno = dato.children[4].textContent.toLowerCase();
+        const fecha = dato.children[1].textContent.toLowerCase();
+        
+        if (nombre.includes(textoBusqueda) || 
+            apellidoPaterno.includes(textoBusqueda) || 
+            apellidoMaterno.includes(textoBusqueda) || 
+            fecha.includes(textoBusqueda)) {
+          dato.classList.remove('filtro');
+        } else {
+          dato.classList.add('filtro');
+        }
+      });
     }
-  })
+  });
+
   //fin del script de buscardor
 
   //Script para mostrar alertas por determinado tiempo 
