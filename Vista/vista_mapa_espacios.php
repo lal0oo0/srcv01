@@ -337,7 +337,7 @@ $(document).ready(function() {
     $(".formulario").submit(function(e) {
         // Previene el comportamiento predeterminado del formulario
         e.preventDefault();
-        
+        //////////////////// V A L I D A C I O N E S /////////////////////////
         var valid = true;
         var nombre = document.getElementById('nombre').value;
         var apellidopaterno = document.getElementById('apellidopaterno').value;
@@ -380,7 +380,7 @@ $(document).ready(function() {
         if (!valid) {
           return;
         }
-
+        //////////////////// F I N   D E  V A L I D A C I O N E S ///////////////////////////
         // Realiza una solicitud Ajax al servidor
         $.ajax({
             // Especifica el método de la solicitud (POST en este caso)
