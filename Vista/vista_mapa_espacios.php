@@ -351,20 +351,20 @@ $(document).ready(function() {
         var servicios = document.getElementById('servicios').value;
         var total = document.getElementById('total').value;
         var enganche = document.getElementById('enganche').value;
-        console.log(nombre);
+
         // Verificar si todos los campos obligatorios están completos
         if (nombre == '' || apellidopaterno == '' || apellidomaterno == '' || correo == '' || fechainicio == '' || fechafinalizacion == '' || horainicio == '' || horafinalizacion == '' || personas == '' || servicios == '' || total == '' || enganche == '') {
           valid = false;
           swal('Error', 'Todos los campos son obligatorios', 'error');
-        }
-
-         /*// Verificar si las fechas y horas son válidas
+        } else{
+          valid = true;
+         // Verificar si las fechas y horas son válidas
         var fechaInicio = new Date(fechainicio + 'T' + horainicio);
         var fechaFinalizacion = new Date(fechafinalizacion + 'T' + horafinalizacion);
 
-        if (fechaInicio.toDateString() === fechaFinalizacion.toDateString()) {
+        if (fechaInicio.toDateString() == fechaFinalizacion.toDateString()) {
           // Las fechas son iguales, la hora de finalización no debe ser menor que la hora de inicio
-          if (fechaFinalizacion <= fechaInicio) {
+          if (fechaFinalizacion < fechaInicio) {
             valid = false;
             swal('Error', 'La hora de finalización debe ser mayor que la hora de inicio cuando las fechas son iguales', 'error');
           }
@@ -374,11 +374,12 @@ $(document).ready(function() {
             valid = false;
             swal('Error', 'La fecha de finalización debe ser posterior a la fecha de inicio', 'error');
           }
-        }*/
+        }
+      }
 
-        /*if (!valid) {
+        if (!valid) {
           return;
-        }*/
+        }
 
         // Realiza una solicitud Ajax al servidor
         $.ajax({
