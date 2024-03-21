@@ -403,6 +403,20 @@ $row = $resultado->fetch_assoc();
       }
     });
   }
+  //Script para mostrar alertas por determinado tiempo 
+  document.addEventListener("DOMContentLoaded", function() {
+        // Selecciona el elemento de alerta
+        var alerta = document.querySelector('.alert');
+
+        // Verifica si se encontró el elemento de alerta
+        if(alerta) {
+            // Temporizador para eliminar la alerta después de 5 segundos (5000 milisegundos)
+            setTimeout(function() {
+                alerta.remove(); // Elimina la alerta del DOM
+            }, 5000);
+        }
+    });
+//Fin del  scripyt
 </script>
 </body>
 </html>
