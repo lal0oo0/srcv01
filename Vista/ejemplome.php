@@ -337,48 +337,40 @@ $(document).ready(function() {
     $(".formulario").submit(function(e) {
         // Previene el comportamiento predeterminado del formulario
         e.preventDefault();
+        
         //////////////////// V A L I D A C I O N E S /////////////////////////
         var valid = true;
-        var nombre = document.getElementById('nombre').value;
-        var apellidopaterno = document.getElementById('apellidopaterno').value;
-        var apellidomaterno = document.getElementById('apellidomaterno').value;
-        var correo = document.getElementById('correo').value;
-        var fechainicio = document.getElementById('fechainicio').value;
-        var fechafinalizacion = document.getElementById('fechafinalizacion').value;
-        var horainicio = document.getElementById('horainicio').value;
-        var horafinalizacion = document.getElementById('horafinalizacion').value;
-        var personas = document.getElementById('personas').value;
-        var servicios = document.getElementById('servicios').value;
-        var total = document.getElementById('total').value;
-        var enganche = document.getElementById('enganche').value;
+        var nombre = $(this).find('#Nombre').val();
+        var apellidopaterno = $(this).find('#apellidopaterno').val();
+        var apellidomaterno = $(this).find('#apellidomaterno').val();
+        var correo = $(this).find('#correo').val();
+        var fechainicio = $(this).find('#fechainicio').val();
+        var fechafinalizacion = $(this).find('#fechafinalizacion').val();
+        var horainicio = $(this).find('#horainicio').val();
+        var horafinalizacion = $(this).find('#horafinalizacion').val();
+        var personas = $(this).find('#personas').val();
+        var servicios = $(this).find('#servicios').val();
+        var total = $(this).find('#total').val();
+        var enganche = $(this).find('#enganche').val();
+        var idSala = $(this).find('#id_sala').val();
 
         // Verificar si todos los campos obligatorios están completos
         if (nombre == '' || apellidopaterno == '' || apellidomaterno == '' || correo == '' || fechainicio == '' || fechafinalizacion == '' || horainicio == '' || horafinalizacion == '' || personas == '' || servicios == '' || total == '' || enganche == '') {
-          valid = false;
-          swal('Error', 'Todos los campos son obligatorios', 'error');
-        } else{
-          valid = true;
-         // Verificar si las fechas y horas son válidas
-        var fechaInicio = new Date(fechainicio + 'T' + horainicio);
-        var fechaFinalizacion = new Date(fechafinalizacion + 'T' + horafinalizacion);
-
-        if (fechaInicio.toDateString() == fechaFinalizacion.toDateString()) {
-          // Las fechas son iguales, la hora de finalización no debe ser menor que la hora de inicio
-          if (fechaFinalizacion < fechaInicio) {
             valid = false;
-            swal('Error', 'La hora de finalización debe ser mayor que la hora de inicio cuando las fechas son iguales', 'error');
-          }
+            swal('Error', 'Todos los campos son obligatorios', 'error');
         } else {
-          // Las fechas son diferentes, cualquier hora es válida
-          if (fechaFinalizacion < fechaInicio) {
-            valid = false;
-            swal('Error', 'La fecha de finalización debe ser posterior a la fecha de inicio', 'error');
-          }
+            // Verificar si las fechas y horas son válidas
+            var fechaInicio = new Date(fechainicio + 'T' + horainicio);
+            var fechaFinalizacion = new Date(fechafinalizacion + 'T' + horafinalizacion);
+
+            if (fechaFinalizacion <= fechaInicio) {
+                valid = false;
+                swal('Error', 'La hora de finalización debe ser mayor que la hora de inicio cuando las fechas son iguales', 'error');
+            }
         }
-      }
 
         if (!valid) {
-          return;
+            return;
         }
         //////////////////// F I N   D E  V A L I D A C I O N E S ///////////////////////////
         // Realiza una solicitud Ajax al servidor
