@@ -338,7 +338,7 @@ $(document).ready(function() {
         // Previene el comportamiento predeterminado del formulario
         e.preventDefault();
         //////////////////// V A L I D A C I O N E S /////////////////////////
-        ar valid = true;
+        var valid = true;
         var nombre = $(this).find('#Nombre').val();
         var apellidopaterno = $(this).find('#apellidopaterno').val();
         var apellidomaterno = $(this).find('#apellidomaterno').val();
