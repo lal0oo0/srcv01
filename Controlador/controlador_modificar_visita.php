@@ -18,7 +18,7 @@ $asunto = $_POST['asunto'];
 $ubicacion = $_POST['ubicacion'];
 
 
-    $consulta="UPDATE srcv_visitas SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', EMPRESA='$empresa', ASUNTO='$asunto', PISO='$ubicacion' WHERE ID_VISITA='$id'";
+    $consulta="UPDATE srcv_visitas SET EMPRESA='$empresa', ASUNTO='$asunto', PISO='$ubicacion', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA='$id'";
     $sql=mysqli_query($conexion, $consulta);
   
 

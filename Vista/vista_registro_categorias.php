@@ -125,10 +125,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
       <form action="../Controlador/controlador_registro_categoria.php" class="formulario needs-validation" method="post" novalidate>
         <div class="row g-3 align-items-center">
           <div class="col-md-2">
-          <label for="Nombre" class="col-form-label">Ingresé el nombre:</label>
+          <label for="Nombre" class="col-form-label">Ingrese el nombre:</label>
           </div>
           <div class="col-md-6">
-          <input type="text" class="form-control" name="Nombre" placeholder="Ingresé el nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
+          <input type="text" class="form-control" name="Nombre" placeholder="Ingrese el nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
           </div>
           <div class="col-md-3">
           <select class="form-select" name="Categoria" id="validationCustom04" required>

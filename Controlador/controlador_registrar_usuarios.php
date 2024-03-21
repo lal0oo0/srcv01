@@ -46,7 +46,7 @@ VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$rol','$pregunta','$
 /*Evitar que el registro se repita*/ 
 $norepetir = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$correo'");
 if(mysqli_num_rows($norepetir) > 0){
-  $mensaje= '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  $mensaje= '<div class="alert alert-warning alert-dismissible fade show" role="alert">
   <strong>Error!</strong> El usuario ya existe, intente nuevamente.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>';
