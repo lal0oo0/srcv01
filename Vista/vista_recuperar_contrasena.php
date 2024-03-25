@@ -131,6 +131,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                         <div class="col-md-6">
                              <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
                              <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                             <div class="invalid-feedback">*Campo obligatorio</div>
                         </div>
                         <div class="col-md-6">
                             <label for="confirmPasswo" class="form-label">Confirmar contraseña</label>
