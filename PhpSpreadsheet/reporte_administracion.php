@@ -512,19 +512,10 @@ while($rows = $resultado->fetch_assoc()){
 }
 
 }else if($rol_urspace->num_rows==1){
-// Obtener el valor del buscador
-$busqueda = $_POST['buscador'];
 
 $sql = "SELECT NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA, ASUNTO, MOTIVO, ENTRADA_URSPACE, SALIDA_URSPACE 
 FROM srcv_visitas
-WHERE (NOMBRE LIKE '%$busqueda%' 
-                OR APELLIDO_PATERNO LIKE '%$busqueda%' 
-                OR APELLIDO_MATERNO LIKE '%$busqueda%' 
-                OR FECHA LIKE '%$busqueda%' 
-                OR ASUNTO LIKE '%$busqueda%' 
-                OR MOTIVO LIKE '%$busqueda%' 
-                OR ENTRADA_URSPACE LIKE '%$busqueda%' 
-                OR SALIDA_URSPACE LIKE '%$busqueda%')";
+WHERE FECHA BETWEEN '$fecha_inicio' AND '$fecha_fin' AND FECHA BETWEEN '$fecha_inicio' AND '$fecha_fin'";
 $resultado = mysqli_query($conexion, $sql);
   
 $excel = new Spreadsheet();
