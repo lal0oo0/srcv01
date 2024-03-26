@@ -55,6 +55,10 @@ $row = $resultado->fetch_assoc();
     display: none;
   }
 
+  .filtro {
+    background-color: rgba(255, 0, 0, 0.2); /* Puedes ajustar este color a tu preferencia */
+  }
+
 </style>
 
 <header>
@@ -168,17 +172,11 @@ $row = $resultado->fetch_assoc();
 <div class="row">
   <div class="col-md-5"></div>
   <div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded">
-    <form action="../PhpSpreadsheet/reporte_urspace.php" method="post">
-      <label for="fecha_inicio">Fecha de inicio:</label>
-      <input type="date" id="fecha_inicio" name="fecha_inicio">
-
-      <label for="fecha_fin">Fecha de fin:</label>
-      <input type="date" id="fecha_fin" name="fecha_fin">
-      
-      <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
+  <form id="form-descargar" action="../PhpSpreadsheet/reporte_urspace.php" method="post">
+    <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
         <img src="../imagenes/excel.png" width="20px">Informe
-      </button>
-    </form>
+    </button>
+</form>
   </div>
   <div class="col-md-1"></div>
 </div>
@@ -187,7 +185,7 @@ $row = $resultado->fetch_assoc();
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 <script>
   //Script de buscador
   document.addEventListener('keyup', e =>{
@@ -235,5 +233,66 @@ $row = $resultado->fetch_assoc();
     });
   }
 </script>
+<script>
+  //Script de buscador
+  document.addEventListener('keyup', e =>{
+    if(e.target.matches('#buscador')){
+      var searchText = e.target.value.toLowerCase();
+      document.querySelectorAll('.datos').forEach(dato =>{
+        var matchFound = false;
+        dato.querySelectorAll('td').forEach(cell => {
+          if(cell.textContent.toLowerCase().includes(searchText)) {
+            matchFound = true;
+          }
+        });
+        if(matchFound) {
+          dato.classList.remove('filtro');
+        } else {
+          dato.classList.add('filtro');
+        }
+      });
+    }
+  });
+</script>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+        // Evento cuando se hace clic en el botón de descarga
+        document.getElementById('form-descargar').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+            // Crear una nueva instancia de Workbook de SheetJS
+            var wb = XLSX.utils.book_new();
+            // Crear una nueva hoja de trabajo y asignarle el HTML de la tabla
+            var ws = XLSX.utils.table_to_sheet(document.querySelector('table'));
+            // Agregar la hoja de trabajo al libro de trabajo
+            XLSX.utils.book_append_sheet(wb, ws, "Reservaciones");
+
+            // Convertir el libro de trabajo a un archivo Excel binario
+            var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+
+            // Función para crear un Blob desde el archivo Excel binario
+            function s2ab(s) {
+                var buf = new ArrayBuffer(s.length);
+                var view = new Uint8Array(buf);
+                for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                return buf;
+            }
+
+            // Crear un Blob desde el archivo Excel binario
+            var blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
+
+            // Crear un enlace <a> para descargar el archivo Excel
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            document.body.appendChild(a);
+            a.href = url;
+            a.download = "reservaciones.xlsx";
+            // Hacer clic en el enlace para descargar el archivo
+            a.click();
+            // Liberar el objeto URL
+            window.URL.revokeObjectURL(url);
+        });
+    });
+    </script>
 </body>
 </html>
