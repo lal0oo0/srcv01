@@ -5,6 +5,15 @@ session_start();
 if (empty($_SESSION["correo"])){
   header("location: vista_inicio_sesion.php");
 }
+
+$ROL=$_SESSION['rol'];
+// Verificar el rol del usuario
+if ($ROL !== "urspace") {
+  // Si el usuario no tiene el rol correcto, redirigir a la página de inicio de sesión
+  header("location: vista_inicio_sesion.php");
+  exit();
+}
+
 $correo = $_SESSION["correo"];
 $sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ";
 $resultado = $conexion->query($sql);

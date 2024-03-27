@@ -1,9 +1,17 @@
 <?php
 session_start();
-$ROL=$_SESSION['rol'];
+
 $CORREO=$_SESSION['correo'];
 if (empty($_SESSION["correo"])){
   header("location: vista_inicio_sesion.php");
+}
+
+$ROL=$_SESSION['rol'];
+// Verificar el rol del usuario
+if ($ROL !== "recepcion") {
+  // Si el usuario no tiene el rol correcto, redirigir a la página de inicio de sesión
+  header("location: vista_inicio_sesion.php");
+  exit();
 }
 ?>
 
@@ -78,9 +86,34 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
     $query = mysqli_query ($conexion, "select * from srcv_visitas");
-    $empresa = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Empresa' and ESTATUS='1'");
-    $asunto = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Asunto' and ESTATUS='1'");
-    $piso = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Piso' and ESTATUS='1'");
+    $result_empresa= mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Empresa' and ESTATUS='1'");
+    $result_asunto = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Asunto' and ESTATUS='1'");
+    $result_piso = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Piso' and ESTATUS='1'");
+
+
+    // Comprobar si hay errores en las consultas
+    if (!$result_empresa || !$result_asunto || !$result_piso) {
+      // Manejar el error aquí
+      echo "Error en la consulta SQL.";
+  }
+  
+  // Almacenar los resultados en arrays
+  $empresas = [];
+  while ($fila_empresa = mysqli_fetch_assoc($result_empresa)) {
+      $empresas[] = $fila_empresa;
+  }
+  
+  $asuntos = [];
+  while ($fila_asunto = mysqli_fetch_assoc($result_asunto)) {
+      $asuntos[] = $fila_asunto;
+  }
+  
+  $pisos = [];
+  while ($fila_piso = mysqli_fetch_assoc($result_piso)) {
+      $pisos[] = $fila_piso;
+  }
+
+
   ?>
  
  <header>
@@ -186,19 +219,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                                   <div class="mb-3"></div> <!-- Salto de línea -->
                                   <label class="form-label" for="empresa">Empresa *</label><br>
                                   <select class="form-select mr-sm-2" id="empresa" name="empresa">
-                                    <div class="invalid-feedback">
-                                      Verifique los datos
-                                    </div>
-                                    <option selected value=""><?=$filas['EMPRESA']?></option>
-                                    <?php
-                                    while ($fila_empresa = mysqli_fetch_assoc($empresa)) {
-                                    ?>
-                                      <option value="<?php echo $fila_empresa['NOMBRE']; ?>">
-                                        <?php echo $fila_empresa['NOMBRE']; ?>
-                                      </option>
-                                    <?php
-                                    }
-                                    ?>
+                                      <option value="">Seleccionar Empresa</option>
+                                      <?php foreach ($empresas as $empresa) { ?>
+                                          <option value="<?php echo $empresa['NOMBRE']; ?>"><?php echo $empresa['NOMBRE']; ?></option>
+                                      <?php } ?>
                                   </select>
                                 </div>
                                 
@@ -206,19 +230,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                                   <div class="mb-3"></div> <!-- Salto de línea -->
                                   <label class="form-label" for="asunto">Asunto *</label><br>
                                   <select class="form-select mr-sm-2" id="asunto" name="asunto">
-                                    <div class="invalid-feedback">
-                                      Verifique los datos
-                                    </div>
-                                    <option selected value=""><?=$filas['ASUNTO']?></option>
-                                    <?php
-                                    while ($fila_asunto = mysqli_fetch_assoc($asunto)) {
-                                    ?>
-                                      <option value="<?php echo $fila_asunto['NOMBRE']; ?>">
-                                        <?php echo $fila_asunto['NOMBRE']; ?>
-                                      </option>
-                                      <?php
-                                        }
-                                      ?>
+                                      <option value="">Seleccionar Asunto</option>
+                                      <?php foreach ($asuntos as $asunto) { ?>
+                                          <option value="<?php echo $asunto['NOMBRE']; ?>"><?php echo $asunto['NOMBRE']; ?></option>
+                                      <?php } ?>
                                   </select>
                                 </div>
                               </div>
@@ -227,21 +242,12 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                               <label class="form-label" for="asunto">Piso *</label><br>
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6">
-                                  <select class="form-select mr-sm-2" id="ubicacion" name="ubicacion" required>
-                                      <div class="invalid-feedback">
-                                        Verifique los datos
-                                      </div>
-                                      <option selected value="">Selecciona</option>
-                                      <?php
-                                        while ($fila_piso = mysqli_fetch_assoc($piso)) {
-                                      ?>
-                                      <option value="<?php echo $fila_piso['NOMBRE']; ?>">
-                                        <?php echo $fila_piso['NOMBRE']; ?>
-                                      </option>
-                                      <?php
-                                        }
-                                      ?>
-                                  </select>
+                                <select class="form-select mr-sm-2" id="asunto" name="asunto">
+                                    <option value="">Seleccionar Piso</option>
+                                    <?php foreach ($pisos as $piso) { ?>
+                                        <option value="<?php echo $piso['NOMBRE']; ?>"><?php echo $piso['NOMBRE']; ?></option>
+                                    <?php } ?>
+                                </select>
                                 </div>
                                 <div class="col-md-3"></div>
                               </div>

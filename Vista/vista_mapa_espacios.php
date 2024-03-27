@@ -1,9 +1,16 @@
 <?php
 session_start();
-$ROL=$_SESSION['rol'];
+
 $CORREO=$_SESSION['correo'];
 if (empty($_SESSION["correo"])){
   header("location: vista_inicio_sesion.php");
+}
+$ROL=$_SESSION['rol'];
+// Verificar el rol del usuario
+if ($ROL !== "urspace") {
+  // Si el usuario no tiene el rol correcto, redirigir a la página de inicio de sesión
+  header("location: vista_inicio_sesion.php");
+  exit();
 }
 ?>
 
