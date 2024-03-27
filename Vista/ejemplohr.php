@@ -173,10 +173,16 @@ $row = $resultado->fetch_assoc();
   <div class="col-md-5"></div>
   <div class="col-md-11 d-flex justify-content-end">
   <form id="form-descargar" action="../PhpSpreadsheet/reporte_urspace.php" method="post">
-      <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
-        <img src="../imagenes/excel.png" width="25px">Informe
-      </button>
-    </form>
+    <label for="fecha_inicio">Fecha de inicio:</label>
+    <input type="date" id="fecha_inicio" name="fecha_inicio">
+
+    <label for="fecha_fin">Fecha de fin:</label>
+    <input type="date" id="fecha_fin" name="fecha_fin">
+    
+    <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
+        <img src="../imagenes/excel.png" width="20px">Informe
+    </button>
+</form>
   </div>
   <div class="col-md-1"></div>
 </div>
