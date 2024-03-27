@@ -9,16 +9,16 @@ $conexion = conect();
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Style\Fill;// Para color de fondo de celdas
-use PhpOffice\PhpSpreadsheet\Style\Color;// Para color de  letras de celdas.
-use PhpOffice\PhpSpreadsheet\Style\Alignment;// Para centrar el texto de las celdas
-use PhpOffice\PhpSpreadsheet\Style\Border;//Para los bordes de las celdas
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 // Verificar si hay una sesión activa
 if (empty($_SESSION["correo"])){
     header("location: vista_inicio_sesion.php");
-    exit; // Detener la ejecución del script después de redirigir
-  }
+    exit;
+}
 
 // Consulta para verificar el rol
 $rol = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$CORREO' AND ROL='UrSpace' AND ESTATUS='1'";
@@ -28,7 +28,26 @@ $rol2 = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$CORREO' A
 $rol_administrador = mysqli_query($conexion, $rol2);
 
 if ($rol_urspace->num_rows == 1) {
-    $sql = "SELECT NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, TELEFONO, FECHA_ENTRADA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL FROM srcv_reservaciones";
+    // Verificar si se ha enviado una solicitud de búsqueda
+    if(isset($_POST['buscador'])) {
+        $busqueda = $_POST['buscador'];
+        // Consulta SQL con el filtro de búsqueda en varios campos
+        $sql = "SELECT NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, TELEFONO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL FROM srcv_reservaciones WHERE 
+        NOMBRE_CLIENTE LIKE '%$busqueda%' OR 
+        APELLIDO_PATERNO LIKE '%$busqueda%' OR 
+        APELLIDO_MATERNO LIKE '%$busqueda%' OR 
+        NOMBRE_ESPACIO LIKE '%$busqueda%' OR 
+        TELEFONO LIKE '%$busqueda%' OR 
+        CORREO_ELECTRONICO LIKE '%$busqueda%' OR 
+        FECHA_ENTRADA LIKE '%$busqueda%' OR 
+        FECHA_SALIDA LIKE '%$busqueda%' OR 
+        HORA_ENTRADA LIKE '%$busqueda%' OR 
+        HORA_SALIDA LIKE '%$busqueda%'";
+    } else {
+        // Consulta SQL sin filtro de búsqueda
+        $sql = "SELECT NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, TELEFONO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL FROM srcv_reservaciones";
+    }
+    
     $resultado = mysqli_query($conexion, $sql);
 
 $excel = new Spreadsheet();

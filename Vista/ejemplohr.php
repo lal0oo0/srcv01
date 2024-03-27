@@ -171,10 +171,10 @@ $row = $resultado->fetch_assoc();
 <div class="mb-3"></div> 
 <div class="row">
   <div class="col-md-5"></div>
-  <div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded">
+  <div class="col-md-11 d-flex justify-content-end">
   <form id="form-descargar" action="../PhpSpreadsheet/reporte_urspace.php" method="post">
       <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
-        <img src="../imagenes/excel.png" width="20px">Informe
+        <img src="../imagenes/excel.png" width="25px">Informe
       </button>
     </form>
   </div>
@@ -256,44 +256,48 @@ $row = $resultado->fetch_assoc();
 </script>
 <script>
         document.addEventListener('DOMContentLoaded', function() {
-    // Evento cuando se hace clic en el botón de descarga
-    document.getElementById('form-descargar').addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+        // Evento cuando se hace clic en el botón de descarga
+        document.getElementById('form-descargar').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
 
-        // Crear una nueva instancia de XMLHttpRequest
-        var xhr = new XMLHttpRequest();
+            // Crear una nueva instancia de XMLHttpRequest
+            var xhr = new XMLHttpRequest();
 
-        // Configurar la solicitud AJAX
-        xhr.open('POST', '../PhpSpreadsheet/ejemploreporteurpace.php', true);
-        xhr.responseType = 'blob'; // Tipo de respuesta esperada
+            // Configurar la solicitud AJAX
+            xhr.open('POST', '../PhpSpreadsheet/ejemploreporteurpace.php', true);
+            xhr.responseType = 'blob'; // Tipo de respuesta esperada
 
-        // Cuando la solicitud AJAX se complete
-        xhr.onload = function(e) {
-            if (this.status === 200) {
-                // Crea un objeto Blob con la respuesta
-                var blobResponse = this.response;
+            // Cuando la solicitud AJAX se complete
+            xhr.onload = function(e) {
+                if (this.status === 200) {
+                    // Crea un objeto Blob con la respuesta
+                    var blobResponse = this.response;
 
-                // Crear un objeto URL para el Blob
-                var url = window.URL.createObjectURL(blobResponse);
+                    // Crear un objeto URL para el Blob
+                    var url = window.URL.createObjectURL(blobResponse);
 
-                // Crear un enlace <a> para descargar el archivo Excel
-                var a = document.createElement("a");
-                document.body.appendChild(a);
-                a.href = url;
-                a.download = "reservaciones.xlsx";
+                    // Crear un enlace <a> para descargar el archivo Excel
+                    var a = document.createElement("a");
+                    document.body.appendChild(a);
+                    a.href = url;
+                    a.download = "reservaciones.xlsx";
 
-                // Hacer clic en el enlace para descargar el archivo
-                a.click();
+                    // Hacer clic en el enlace para descargar el archivo
+                    a.click();
 
-                // Liberar el objeto URL
-                window.URL.revokeObjectURL(url);
-            }
-        };
+                    // Liberar el objeto URL
+                    window.URL.revokeObjectURL(url);
+                }
+            };
 
-        // Enviar la solicitud AJAX
-        xhr.send();
+            // Obtener los datos del formulario de búsqueda
+            var formData = new FormData();
+            formData.append('buscador', document.getElementById('buscador').value);
+
+            // Enviar la solicitud AJAX con los datos del formulario
+            xhr.send(formData);
+        });
     });
-});
     </script>
 </body>
 </html>
