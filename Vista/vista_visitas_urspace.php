@@ -110,9 +110,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     <div class="col-md-9"></div>
     <div class="col-md-3">
       <input class="form-control mr-sm-2" type="search" id="buscador" name="buscador" placeholder="Buscar" aria-label="Search" style="border: 1px solid rgba(0, 0, 0, 0.7);">
-      <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
-        <img src="../imagenes/excel.png" width="20px">Informe
-      </button>
     </div>
   </div>
 </form>
@@ -162,12 +159,18 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
                     <td><?php echo $filas['ASUNTO'] ?></td>
                     <td>
-                        <?php if(empty($filas['SALIDA_URSPACE'])){ ?>
+                        <?php 
+                        if(empty($filas['ENTRADA_URSPACE'])){
+                          echo '';
+                        } else{
+                        if(empty($filas['SALIDA_URSPACE'])){ ?>
                         <a href="../Controlador/controlador_salida_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                         <?php
                         }else{
                         echo $filas['SALIDA_URSPACE'];
-                        }?>
+                        }
+                        }
+                        ?>
                     </td>
                     <td>
                       <?php
@@ -236,7 +239,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <div class="row">
   <div class="col-md-5"></div>
   <div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded">
-    <form action="../PhpSpreadsheet/reporte_administracion.php" method="post">
+    <form action="../PhpSpreadsheet/reporte_administracion.php" method="post"> 
       <label for="fecha_inicio">Fecha de inicio:</label>
       <input type="date" id="fecha_inicio" name="fecha_inicio">
 

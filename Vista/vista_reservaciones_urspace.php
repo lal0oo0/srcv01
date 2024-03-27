@@ -255,7 +255,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     </div>
                   </div>
                   <!--Boton para eliminar-->
-                  <a href="../Controlador/controlador_eliminar_reservacion.php?id=<?=$filas ['ID_RESERVACION']?>" class="link-danger"><i class="fa fa-times" aria-hidden="true"></i></a>
+                  <a href="#" onclick="confirmarEliminar(<?=$filas['ID_RESERVACION']?>);" class="link-danger"><i class="fa fa-times" aria-hidden="true"></i></a>
                   <?php
                   // Se obtiene el id para realizar las consultas
                   $id_reservacion = $filas['ID_RESERVACION'];
@@ -375,6 +375,13 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
         }
     });
 
+
+//confirmacion antes de cancelar 
+function confirmarEliminar(idReservacion) {
+    if (confirm("¿Estás seguro de que quieres eliminar este registro?")) {
+        window.location.href = "../Controlador/controlador_eliminar_reservacion.php?id=" + idReservacion;
+    }
+}
 </script>
 
 
