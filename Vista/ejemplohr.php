@@ -256,43 +256,60 @@ $row = $resultado->fetch_assoc();
 </script>
 <script>
         document.addEventListener('DOMContentLoaded', function() {
-        // Evento cuando se hace clic en el botón de descarga
-        document.getElementById('form-descargar').addEventListener('submit', function(event) {
-            event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+    // Evento cuando se hace clic en el botón de descarga
+    document.getElementById('btn-generar-excel').addEventListener('click', function(event) {
+        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
 
-            // Crear una nueva instancia de Workbook de SheetJS
-            var wb = XLSX.utils.book_new();
-            // Crear una nueva hoja de trabajo y asignarle el HTML de la tabla
-            var ws = XLSX.utils.table_to_sheet(document.querySelector('table'));
-            // Agregar la hoja de trabajo al libro de trabajo
-            XLSX.utils.book_append_sheet(wb, ws, "Reservaciones");
+        // Crea una nueva instancia de Workbook de SheetJS
+        var wb = XLSX.utils.book_new();
+        // Crea una nueva hoja de trabajo y asignarle el HTML de la tabla
+        var ws = XLSX.utils.table_to_sheet(document.querySelector('table'));
+        // Agrega la hoja de trabajo al libro de trabajo
+        XLSX.utils.book_append_sheet(wb, ws, "Reservaciones");
 
-            // Convertir el libro de trabajo a un archivo Excel binario
-            var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+        // Convierte el libro de trabajo a un archivo Excel binario
+        var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
 
-            // Función para crear un Blob desde el archivo Excel binario
-            function s2ab(s) {
-                var buf = new ArrayBuffer(s.length);
-                var view = new Uint8Array(buf);
-                for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
-                return buf;
+        // Convierte el archivo Excel binario a un objeto Blob
+        var blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
+
+        // Crea un objeto FormData y agrega el Blob
+        var formData = new FormData();
+        formData.append('archivo_excel', blob);
+
+        // Realiza una solicitud AJAX al archivo reporte_urspace.php
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../PhpSpreadsheet/ejemploreporteurspace.php', true);
+        xhr.responseType = 'blob';
+        xhr.onload = function(e) {
+            if (this.status === 200) {
+                // Crea un objeto Blob con la respuesta
+                var blobResponse = this.response;
+                // Crea un objeto URL para el Blob
+                var url = window.URL.createObjectURL(blobResponse);
+                // Crea un enlace <a> para descargar el archivo Excel
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.href = url;
+                a.download = "reservaciones.xlsx";
+                // Hace clic en el enlace para descargar el archivo
+                a.click();
+                // Libera el objeto URL
+                window.URL.revokeObjectURL(url);
             }
-
-            // Crear un Blob desde el archivo Excel binario
-            var blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
-
-            // Crear un enlace <a> para descargar el archivo Excel
-            var url = window.URL.createObjectURL(blob);
-            var a = document.createElement("a");
-            document.body.appendChild(a);
-            a.href = url;
-            a.download = "reservaciones.xlsx";
-            // Hacer clic en el enlace para descargar el archivo
-            a.click();
-            // Liberar el objeto URL
-            window.URL.revokeObjectURL(url);
-        });
+        };
+        // Envía la solicitud AJAX con los datos del formulario
+        xhr.send(formData);
     });
+});
+
+// Función para convertir una cadena a una matriz de bytes
+function s2ab(s) {
+    var buf = new ArrayBuffer(s.length);
+    var view = new Uint8Array(buf);
+    for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+    return buf;
+}
     </script>
 </body>
 </html>
