@@ -116,7 +116,7 @@ $row = $resultado->fetch_assoc();
 
   <div class="row">
     <div class="col">
-      <div class="table-responsive my-custom-scrollbar">
+      <div class="table_responsive my-custom-scrollbar">
         <table class="table table-bordered table-striped mb-0">
           <thead class="table-dark">
             <tr>
@@ -173,10 +173,10 @@ $row = $resultado->fetch_assoc();
   <div class="col-md-5"></div>
   <div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded">
   <form id="form-descargar" action="../PhpSpreadsheet/reporte_urspace.php" method="post">
-    <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
+      <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
         <img src="../imagenes/excel.png" width="20px">Informe
-    </button>
-</form>
+      </button>
+    </form>
   </div>
   <div class="col-md-1"></div>
 </div>
@@ -257,59 +257,43 @@ $row = $resultado->fetch_assoc();
 <script>
         document.addEventListener('DOMContentLoaded', function() {
     // Evento cuando se hace clic en el botón de descarga
-    document.getElementById('btn-generar-excel').addEventListener('click', function(event) {
+    document.getElementById('form-descargar').addEventListener('submit', function(event) {
         event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
 
-        // Crea una nueva instancia de Workbook de SheetJS
-        var wb = XLSX.utils.book_new();
-        // Crea una nueva hoja de trabajo y asignarle el HTML de la tabla
-        var ws = XLSX.utils.table_to_sheet(document.querySelector('table'));
-        // Agrega la hoja de trabajo al libro de trabajo
-        XLSX.utils.book_append_sheet(wb, ws, "Reservaciones");
-
-        // Convierte el libro de trabajo a un archivo Excel binario
-        var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
-
-        // Convierte el archivo Excel binario a un objeto Blob
-        var blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
-
-        // Crea un objeto FormData y agrega el Blob
-        var formData = new FormData();
-        formData.append('archivo_excel', blob);
-
-        // Realiza una solicitud AJAX al archivo reporte_urspace.php
+        // Crear una nueva instancia de XMLHttpRequest
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../PhpSpreadsheet/ejemploreporteurspace.php', true);
-        xhr.responseType = 'blob';
+
+        // Configurar la solicitud AJAX
+        xhr.open('POST', '../PhpSpreadsheet/ejemploreporteurpace.php', true);
+        xhr.responseType = 'blob'; // Tipo de respuesta esperada
+
+        // Cuando la solicitud AJAX se complete
         xhr.onload = function(e) {
             if (this.status === 200) {
                 // Crea un objeto Blob con la respuesta
                 var blobResponse = this.response;
-                // Crea un objeto URL para el Blob
+
+                // Crear un objeto URL para el Blob
                 var url = window.URL.createObjectURL(blobResponse);
-                // Crea un enlace <a> para descargar el archivo Excel
+
+                // Crear un enlace <a> para descargar el archivo Excel
                 var a = document.createElement("a");
                 document.body.appendChild(a);
                 a.href = url;
                 a.download = "reservaciones.xlsx";
-                // Hace clic en el enlace para descargar el archivo
+
+                // Hacer clic en el enlace para descargar el archivo
                 a.click();
-                // Libera el objeto URL
+
+                // Liberar el objeto URL
                 window.URL.revokeObjectURL(url);
             }
         };
-        // Envía la solicitud AJAX con los datos del formulario
-        xhr.send(formData);
+
+        // Enviar la solicitud AJAX
+        xhr.send();
     });
 });
-
-// Función para convertir una cadena a una matriz de bytes
-function s2ab(s) {
-    var buf = new ArrayBuffer(s.length);
-    var view = new Uint8Array(buf);
-    for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
-    return buf;
-}
     </script>
 </body>
 </html>
