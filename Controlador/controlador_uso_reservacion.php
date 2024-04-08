@@ -31,9 +31,6 @@ if ($fila['LIQUIDACION'] != 0) {
     // Actualizar la reservación si LIQUIDACION es igual a cero
     $borrar = "UPDATE srcv_reservaciones SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', USO='1' WHERE ID_RESERVACION='$id' AND LIQUIDACION='0'";
     $sql = mysqli_query($conexion, $borrar);
-    //Consulta para eliminar la reservacion de la tabla de visitas si ya se uso 
-    $sql_visitas = "UPDATE srcv_visitas SET ESTATUS='0' WHERE ID_VISITA='$id'";
-    $resultado_visitas=mysqli_query($conexion,$sql_visitas);
 
     if ($sql) {
         // Éxito: alerta de Bootstrap éxito
