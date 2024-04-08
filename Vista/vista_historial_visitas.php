@@ -242,7 +242,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                               <label class="form-label" for="asunto">Piso *</label><br>
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6">
-                                <select class="form-select mr-sm-2" id="asunto" name="asunto">
+                                <select class="form-select mr-sm-2" id="piso" name="piso">
                                     <option value="">Seleccionar Piso</option>
                                     <?php foreach ($pisos as $piso) { ?>
                                         <option value="<?php echo $piso['NOMBRE']; ?>"><?php echo $piso['NOMBRE']; ?></option>

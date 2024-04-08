@@ -15,7 +15,7 @@ $fechamodificacion = date('Y-m-d H:i:s');
 $id = $_POST['idvisita'];
 $empresa = $_POST['empresa'];
 $asunto = $_POST['asunto'];
-$ubicacion = $_POST['ubicacion'];
+$ubicacion = $_POST['piso'];
 
 
     $consulta="UPDATE srcv_visitas SET EMPRESA='$empresa', ASUNTO='$asunto', PISO='$ubicacion', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA='$id'";
