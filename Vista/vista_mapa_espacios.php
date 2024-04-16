@@ -221,8 +221,8 @@ $row = $resultado->fetch_assoc();
 
                 <div class="row">
                   <div class="col">
-                    <label for="se">Correo electrónico *</label>
-                    <input type="email" class="form-control" name="Correo" id="correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1" required>
+                    <label for="se">Correo electrónico</label>
+                    <input type="email" class="form-control" name="Correo" id="correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1">
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
