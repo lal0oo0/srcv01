@@ -331,8 +331,15 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     }
                     ?>
                     <!--Boton de eliminar-->
+                    <?php
+                    if(empty($filas["ENTRADA_RECEPCION"])){
+                    ?>
                     <a href="../Controlador/controlador_eliminar_visita.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
-
+                    <?php
+                    }else{
+                      
+                    }
+                    ?>
                   </td>
                 </tr>
               <?php

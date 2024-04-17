@@ -186,7 +186,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 
 
                   <!-- Modificar reservaciones -->
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_RESERVACION'] ?>" onclick="Reservacion('<?php $filas['ID_RESERVACION'] ?>')" class="link-danger"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_RESERVACION'] ?>" onclick="Reservacion('<?php $filas['ID_RESERVACION'] ?>')" class="link-danger" id="botonModificar"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
                   <!-- Modal para modificar reservaciones-->
                   <div class="modal fade" id="exampleModal_<?php echo $filas['ID_RESERVACION'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -264,7 +264,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     </div>
                   </div>
                   <!--Boton para eliminar-->
-                  <a href="#" onclick="confirmarEliminar(<?=$filas['ID_RESERVACION']?>);" class="link-danger"><i class="fa fa-times" aria-hidden="true"></i></a>
+                  <a href="#" onclick="confirmarEliminar(<?=$filas['ID_RESERVACION']?>);" class="link-danger" id="botonCancelar"><i class="fa fa-times" aria-hidden="true"></i></a>
                   <?php
                   // Se obtiene el id para realizar las consultas
                   $id_reservacion = $filas['ID_RESERVACION'];
@@ -278,7 +278,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   date_default_timezone_set('America/Mexico_City');
                   $hora_actual = date("H:i:s");
                   if(!empty($fila_salida['SALIDA_URSPACE'])){ ?>
-                  <a href="../Controlador/controlador_uso_reservacion.php?id=<?=$filas['ID_RESERVACION']?>"class="link-danger"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                  <a href="../Controlador/controlador_uso_reservacion.php?id=<?=$filas['ID_RESERVACION']?>"class="link-danger" id="botonUso"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
                   <?php }?>
                   <br>
                   <?php
@@ -296,7 +296,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                           //echo '<i class="fa fa-sign-in" aria-hidden="true"></i>';
                       } else {
                           // Si la entrada no está confirmada se habilita el enlace para confirmar la entrada 
-                          echo '<a href="../Controlador/controlador_entrada_urspace.php?id=' . $id_reservacion . '" class="link-danger"><i class="fa fa-sign-in" aria-hidden="true"></i></a>';
+                          echo '<a href="../Controlador/controlador_entrada_urspace.php?id=' . $id_reservacion . '" class="link-danger" id="botonEntrada"><i class="fa fa-sign-in" aria-hidden="true"></i></a>';
                       }
                   } else {
                       echo 'Error al confirmar la salida.';
@@ -322,7 +322,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                          // echo '<i class="fa fa-sign-out" aria-hidden="true"></i>';
                       } else {
                           // Si la salida no está confirmada se habilita el enlace para confirmar la salida 
-                          echo '<a href="../Controlador/controlador_salida_urspace.php?id=' . $id_reservacion . '" class="link-danger"><i class="fa fa-sign-out" aria-hidden="true"></i></a>';
+                          echo '<a href="../Controlador/controlador_salida_urspace.php?id=' . $id_reservacion . '" class="link-danger" id="botonSalida"><i class="fa fa-sign-out" aria-hidden="true"></i></a>';
                       }
                   } else {
                       echo 'Error al confirmar la salida.';
@@ -346,6 +346,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script><!-- Script para crear tippy-->
+<script src="https://unpkg.com/tippy.js@6"></script><!-- Script para crear tippy-->
 <script src="../js/validaciones_reservaciones.js"></script>
 
 <script>
@@ -355,6 +357,34 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     }
 </script>
 <script>
+  // Crear tooltip para el botón 1
+tippy('#botonModificar', {
+        content: 'Modificar reservación',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 2
+tippy('#botonCancelar', {
+        content: 'Cancelar',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 3
+tippy('#botonUso', {
+        content: 'Confirmar uso',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 4
+tippy('#botonEntrada', {
+        content: 'Confirmar entrada',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 5
+tippy('#botonSalida', {
+        content: 'Confirmar salida',
+        placement: 'bottom',
+      });
+
+
+
   //Script de buscador
   document.addEventListener('keyup', e =>{
     if(e.target.matches('#buscador')){

@@ -76,6 +76,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     padding: 20px;
     height: 90px;
   }
+  .filtro{
+    display: none;
+  }
 </style>
 <body>
 <?php
@@ -130,6 +133,22 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
 <!--Registrar nueva sala-->
 <div class="mb-5"></div> <!--Salto de linea-->
+
+<div class="container">
+    <!--Bucador-->
+    <div class="row">
+      <div class="col-md-9"></div>
+      <div class="col-md-3">
+      <input class="form-control mr-sm-2" type="search" id="buscador" name="buscador" placeholder="Buscar" aria-label="Search" style="border: 1px solid rgba(0, 0, 0, 0.7);">
+      </div>
+    </div>
+  <div class="mb-2"></div>
+   <div class="row">
+    <div class="col">
+    </div>
+  </div>
+</div>
+
   <div class="container caja">
     <div class="row">
       <div class="col-md-12">
@@ -206,7 +225,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           $query = mysqli_query ($conexion, "select * from srcv_salas");
           while($filas  = mysqli_fetch_assoc($query)){
         ?>
-        <tr>
+        <tr class="datos">
           <td><?php echo$filas ["NOMBRE"] ?></td>
           <td><?php echo$filas ["UBICACION"] ?></td>
           <td><?php
@@ -218,8 +237,17 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
          echo$filas["ESTATUS"];
           ?></td>
           <td>
-            <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>" class="link-danger"><i class="fa fa-check" aria-hidden="true"></i></a>
-            <a href="../Controlador/controlador_desactivar_espacio.php?id=<?=$filas['ID_SALA']?>" class="link-danger"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <?php
+            if($filas["ESTATUS"]=='Inactivo'){
+            ?>
+            <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>" class="link-danger" id="botonActivar"><i class="fa fa-check" aria-hidden="true"></i></a>
+            <?php
+            }elseif($filas["ESTATUS"]=='Activo'){
+            ?>
+            <a href="../Controlador/controlador_desactivar_espacio.php?id=<?=$filas['ID_SALA']?>" class="link-danger" id="botonDesactivar"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <?php
+            }
+            ?>
           </td>
         </tr>
         <?php
@@ -231,9 +259,26 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     </div>
   </div>
 
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script><!-- Script para crear tippy-->
+<script src="https://unpkg.com/tippy.js@6"></script><!-- Script para crear tippy-->
+
+
+<script>
+  // Crear tooltip para el botón 1
+tippy('#botonActivar', {
+        content: 'Activar espacio',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 2
+tippy('#botonDesactivar', {
+        content: 'Desactivar espacio',
+        placement: 'bottom',
+      });
+</script>
 
 <script>
 // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
@@ -293,6 +338,17 @@ $(document).ready(function() {
         }
     });
 
+  //Script de buscador
+  document.addEventListener('keyup', e =>{
+    if(e.target.matches('#buscador')){
+      document.querySelectorAll('.datos').forEach(dato =>{
+        dato.textContent.toLowerCase().includes(e.target.value)
+        ? dato.classList.remove('filtro')
+        : dato.classList.add('filtro')
+      }) 
+    }
+  })
+  //fin del script de buscardor
 </script>
 
 
