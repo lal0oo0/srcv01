@@ -1,9 +1,9 @@
 <?php
 session_start();
-$ROL=$_SESSION['rol'];
-$CORREO=$_SESSION['correo'];
+$ROL = $_SESSION['rol'];
+$CORREO = $_SESSION['correo'];
 
-require ("../PhpSpreadsheet/vendor/autoload.php");
+require("../PhpSpreadsheet/vendor/autoload.php");
 require_once("../Modelo/conexion2.php");
 $conexion = conect();
 
@@ -15,10 +15,13 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 
 // Verificar si hay una sesión activa
-if (empty($_SESSION["correo"])){
+if (empty($_SESSION["correo"])) {
     header("location: vista_inicio_sesion.php");
     exit;
 }
+
+// Obtener el término de búsqueda proporcionado por el usuario
+$busqueda = isset($_POST['buscador']) ? $_POST['buscador'] : '';
 
 // Consulta para verificar el rol
 $rol = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$CORREO' AND ROL='UrSpace' AND ESTATUS='1'";
@@ -28,8 +31,8 @@ $rol2 = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$CORREO' A
 $rol_administrador = mysqli_query($conexion, $rol2);
 
 if ($rol_urspace->num_rows == 1) {
-    // Verificar si se ha enviado una solicitud de búsqueda
-    if(isset($_POST['buscador'])) {
+    // Verificar si se ha enviado un término de búsqueda
+    if (isset($_POST['buscador'])) {
         $busqueda = $_POST['buscador'];
         // Consulta SQL con el filtro de búsqueda en varios campos
         $sql = "SELECT NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, TELEFONO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL FROM srcv_reservaciones WHERE 
@@ -38,16 +41,13 @@ if ($rol_urspace->num_rows == 1) {
         APELLIDO_MATERNO LIKE '%$busqueda%' OR 
         NOMBRE_ESPACIO LIKE '%$busqueda%' OR 
         TELEFONO LIKE '%$busqueda%' OR 
-        CORREO_ELECTRONICO LIKE '%$busqueda%' OR 
-        FECHA_ENTRADA LIKE '%$busqueda%' OR 
-        FECHA_SALIDA LIKE '%$busqueda%' OR 
-        HORA_ENTRADA LIKE '%$busqueda%' OR 
-        HORA_SALIDA LIKE '%$busqueda%'";
+        CORREO_ELECTRONICO LIKE '%$busqueda%'";
     } else {
-        // Consulta SQL sin filtro de búsqueda
+        // Si no se proporciona un término de búsqueda, mostrar todos los resultados
         $sql = "SELECT NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, TELEFONO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL FROM srcv_reservaciones";
     }
-    
+
+    // Ejecutar la consulta
     $resultado = mysqli_query($conexion, $sql);
 
 $excel = new Spreadsheet();

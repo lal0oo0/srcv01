@@ -111,17 +111,17 @@ if ($total > 0) {
             </div>
             <div class="mb-3"></div> 
               <label for="nombre" class="form-label">Nombre *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="valid01" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="valid01" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z ]{3,30}$" required>
               <div class="invalid-feedback" id="nombre"></div>
             </div>
             <div class="col-md-6">
               <label for="ap" class="form-label">Apellido Paterno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{3,30}$" required>
               <div class="invalid-feedback" id="ap"></div>
             </div>
             <div class="col-md-6">
               <label for="am" class="form-label">Apellido Materno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{3,30}$" required>
               <div class="invalid-feedback" id="am"></div>
             </div>
             <div class="col-md-12">
@@ -235,6 +235,28 @@ $(document).ready(function() {
         var pregunta = document.getElementById('pregunta').value;
         var respuesta = document.getElementById('respuesta').value;
 
+        // Validación de que no se pueden agregar números en el nombre y apellidos
+        if (/.*\d.*/.test(nombre)) { // Comprueba si hay algún número en el nombre
+            document.getElementById('valid01').classList.add('is-invalid');
+            valid = false;
+        } else {
+            document.getElementById('valid01').classList.remove('is-invalid');
+        }
+
+        if (/.*\d.*/.test(ap)) { // Comprueba si hay algún número en el apellido paterno
+            document.getElementById('valid02').classList.add('is-invalid');
+            valid = false;
+        } else {
+            document.getElementById('valid02').classList.remove('is-invalid');
+        }
+
+        if (/.*\d.*/.test(am)) { // Comprueba si hay algún número en el apellido materno
+            document.getElementById('valid03').classList.add('is-invalid');
+            valid = false;
+        } else {
+            document.getElementById('valid03').classList.remove('is-invalid');
+        }
+
         if (nombre == '' || ap == '' || am == '' || pass == '' || pregunta == '' || respuesta == '' || passConfirmar == '') {
             valid = false;
             swal('Error', 'Todos los campos son obligatorios', 'error');
@@ -291,6 +313,18 @@ $(document).ready(function() {
                 }
             }
         });
+    });
+
+    // Evitar el envío del formulario si hay campos inválidos
+    $(".formulario").submit(function(e) {
+        var nombreValido = !document.getElementById('valid01').classList.contains('is-invalid');
+        var apValido = !document.getElementById('valid02').classList.contains('is-invalid');
+        var amValido = !document.getElementById('valid03').classList.contains('is-invalid');
+
+        if (!nombreValido || !apValido || !amValido) {
+            e.preventDefault(); // Evitar el envío del formulario
+            swal('Error', 'Por favor, corrija los campos marcados como inválidos.', 'error');
+        }
     });
 });
 </script>
