@@ -156,7 +156,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <tr class="datos">
                     <td>
                         <?php if(empty($filas['ENTRADA_URSPACE'])){ ?>
-                        <a href="../Controlador/controlador_entrada_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                        <a href="../Controlador/controlador_entrada_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>" id="botonEntrada"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                         <?php
                         }else{
                         echo $filas['ENTRADA_URSPACE'];
@@ -173,7 +173,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                           echo '';
                         } else{
                         if(empty($filas['SALIDA_URSPACE'])){ ?>
-                        <a href="../Controlador/controlador_salida_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                        <a href="../Controlador/controlador_salida_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>" id="botonSalida"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                         <?php
                         }else{
                         echo $filas['SALIDA_URSPACE'];
@@ -187,7 +187,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                         ?>
                         
                   <!-- Modificar reservaciones -->
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>" onclick="VISITA('<?php $filas['ID_VISITA'] ?>')" class="link-danger"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>" onclick="VISITA('<?php $filas['ID_VISITA'] ?>')" class="link-danger" id="botonMotivo"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
                   <!-- Modal para modificar reservaciones-->
                   <div class="modal fade" id="exampleModal_<?php echo $filas['ID_VISITA'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -268,6 +268,28 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script><!-- Script para crear tippy-->
+<script src="https://unpkg.com/tippy.js@6"></script><!-- Script para crear tippy-->
+
+
+<script>
+  // Crear tooltip para el botón 1
+tippy('#botonEntrada', {
+        content: 'Confirmar entrada',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 2
+tippy('#botonSalida', {
+        content: 'Confirmar salida',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 3
+tippy('#botonMotivo', {
+        content: 'Agregar motivo',
+        placement: 'bottom',
+      });
+</script>
+
 
 <script>
   function VISITA(idvisita){
