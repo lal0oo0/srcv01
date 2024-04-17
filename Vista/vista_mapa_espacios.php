@@ -223,9 +223,6 @@ $row = $resultado->fetch_assoc();
                   <div class="col">
                     <label for="se">Correo electrónico</label>
                     <input type="email" class="form-control" name="Correo" id="correo" placeholder="Correo electrónico" aria-label="Correo electronico" aria-describedby="basic-addon1">
-                    <div class="invalid-feedback">
-                      Verifique los datos
-                    </div>
                   </div>
                   <div class="col">
                     <label for="telefono">Teléfono</label>
@@ -349,7 +346,6 @@ $(document).ready(function() {
         var nombre = $(this).find('#Nombre').val();
         var apellidopaterno = $(this).find('#apellidopaterno').val();
         var apellidomaterno = $(this).find('#apellidomaterno').val();
-        var correo = $(this).find('#correo').val();
         var fechainicio = $(this).find('#fechainicio').val();
         var fechafinalizacion = $(this).find('#fechafinalizacion').val();
         var horainicio = $(this).find('#horainicio').val();
@@ -361,7 +357,7 @@ $(document).ready(function() {
         var idSala = $(this).find('#id_sala').val();
 
         // Verificar si todos los campos obligatorios están completos
-        if (nombre == '' || apellidopaterno == '' || apellidomaterno == '' || correo == '' || fechainicio == '' || fechafinalizacion == '' || horainicio == '' || horafinalizacion == '' || personas == '' || servicios == '' || total == '' || enganche == '') {
+        if (nombre == '' || apellidopaterno == '' || apellidomaterno == '' || fechainicio == '' || fechafinalizacion == '' || horainicio == '' || horafinalizacion == '' || personas == '' || servicios == '' || total == '' || enganche == '') {
             valid = false;
             swal('Error', 'Todos los campos son obligatorios', 'error');
         } else {
