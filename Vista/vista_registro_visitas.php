@@ -305,7 +305,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <tr class="datos">
                   <td>
                     <?php if(empty($filas['ENTRADA_SEGURIDAD'])){ ?>
-                  <a href="../Controlador/controlador_entrada_seguridad.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                  <a href="../Controlador/controlador_entrada_seguridad.php?id=<?=$filas['ID_VISITA']?>" id="botonEntrada"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                   <?php
                 }else{
                    echo $filas['ENTRADA_SEGURIDAD'];
@@ -322,7 +322,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <?php
                     if(empty($filas['SALIDA_SEGURIDAD'])){
                     ?>
-                    <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true" id="botonSalida"></i></a>
                     <?php
                     }else{
                     ?>
@@ -334,7 +334,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <?php
                     if(empty($filas["ENTRADA_RECEPCION"])){
                     ?>
-                    <a href="../Controlador/controlador_eliminar_visita.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
+                    <a href="../Controlador/controlador_eliminar_visita.php?id=<?=$filas['ID_VISITA']?>" id="botonEliminar"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
                     <?php
                     }else{
                       
@@ -356,9 +356,29 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <script src="../js/jquery-3.1.1.min.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
   <script src="../js/validar_formulario.js" ></script>
+  <script src="https://unpkg.com/@popperjs/core@2"></script><!-- Script para crear tippy-->
+  <script src="https://unpkg.com/tippy.js@6"></script><!-- Script para crear tippy-->
 
-  <script>
 
+<script>
+  // Crear tooltip para el botón 1
+tippy('#botonEntrada', {
+        content: 'Confirmar entrada',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 2
+tippy('#botonSalida', {
+        content: 'Confirmar salida',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 3
+tippy('#botonEliminar', {
+        content: 'Eliminar visita',
+        placement: 'bottom',
+      });
+</script>
+
+<script>
  //Script para validaciones
 (function () {
   'use strict'
