@@ -72,14 +72,17 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
   .caja{
     border: 1px solid #B0ADAD;
-    padding: 20px;
-    height: 70px;
+    padding: auto;
+    height: 50px;
   }
 
   .caja2{
     border: 1px solid #B0ADAD;
     padding: 20px;
-    height: 90px
+    height: 80px
+  }
+  .filtro{
+    display: none;
   }
 </style>
 
@@ -120,6 +123,22 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <br><br><br><br><br>
 <h3 class="text-center">LISTA DE CATEGORÍAS</h3>
 <div class="mb-5"></div> <!--Salto de linea-->
+
+<div class="container">
+    <!--Bucador-->
+    <div class="row">
+      <div class="col-md-9"></div>
+      <div class="col-md-3">
+      <input class="form-control mr-sm-2" type="search" id="buscador" name="buscador" placeholder="Buscar" aria-label="Search" style="border: 1px solid rgba(0, 0, 0, 0.7);">
+      </div>
+    </div>
+  <div class="mb-2"></div>
+   <div class="row">
+    <div class="col">
+    </div>
+  </div>
+</div>
+
 <div class="container caja">
   <div class="row">
     <div class="col-md-12">
@@ -155,7 +174,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     </div>
   </div>
 </div>
-<div class="mb-4"></div> <!--Salto de linea-->
+
+<div class="mb-2"></div> <!--Salto de linea-->
 
 <div class="row">
   <div class="col-md-1"></div>
@@ -164,9 +184,11 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   </div>
   <div class="col md-1"></div>
 </div>
-<div class="mb-3"></div><!--Salto de linea-->
+<div class="mb-2"></div><!--Salto de linea-->
 
 <div class="container">
+
+  <div class="mb-2"></div>
   <div class="row">
     <div class="col">
       <div class="table-responsive my-custom-scrollbar">
@@ -186,7 +208,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   
             while($filas  = mysqli_fetch_assoc($query)){
           ?>
-          <tr>
+          <tr class="datos">
             <td><?php echo$filas ["NOMBRE"] ?></td>
             <td><?php echo$filas ["CATEGORIA"] ?></td>
             <td><?php
@@ -304,6 +326,19 @@ $(document).ready(function() {
 
 <!--script para mostrar alerta de confirmación antes de cerrar sesión-->
 <script>
+
+  //Script de buscador
+  document.addEventListener('keyup', e =>{
+    if(e.target.matches('#buscador')){
+      document.querySelectorAll('.datos').forEach(dato =>{
+        dato.textContent.toLowerCase().includes(e.target.value)
+        ? dato.classList.remove('filtro')
+        : dato.classList.add('filtro')
+      }) 
+    }
+  })
+  //fin del script de buscardor
+
   function cerrarsesion(event) {
     // Previene el comportamiento predeterminado del enlace
     event.preventDefault();
