@@ -240,11 +240,11 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <?php
             if($filas["ESTATUS"]=='Inactivo'){
             ?>
-            <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>" class="link-danger"><i class="fa fa-check" aria-hidden="true"></i></a>
+            <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>" class="link-danger" id="botonActivar"><i class="fa fa-check" aria-hidden="true"></i></a>
             <?php
             }elseif($filas["ESTATUS"]=='Activo'){
             ?>
-            <a href="../Controlador/controlador_desactivar_espacio.php?id=<?=$filas['ID_SALA']?>" class="link-danger"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <a href="../Controlador/controlador_desactivar_espacio.php?id=<?=$filas['ID_SALA']?>" class="link-danger" id="botonDesactivar"><i class="fa fa-times" aria-hidden="true"></i></a>
             <?php
             }
             ?>
@@ -259,9 +259,26 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     </div>
   </div>
 
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script><!-- Script para crear tippy-->
+<script src="https://unpkg.com/tippy.js@6"></script><!-- Script para crear tippy-->
+
+
+<script>
+  // Crear tooltip para el botón 1
+tippy('#botonActivar', {
+        content: 'Activar espacio',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 2
+tippy('#botonDesactivar', {
+        content: 'Desactivar espacio',
+        placement: 'bottom',
+      });
+</script>
 
 <script>
 // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
