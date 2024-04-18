@@ -277,9 +277,18 @@ $row = $resultado->fetch_assoc();
           echo$filas["ESTATUS"];
             ?></td>
             <td>
+            <?php
+            if($filas["ESTATUS"]=='Activo'){
+            ?>
             <a href="../Controlador/controlador_eliminar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>"><i class="fa fa-times" aria-hidden="true" onclick="eliminar()" ></i></a>
+            <?php
+            }elseif($filas["ESTATUS"]=='Inactivo'){
+            ?>
             <a href="../Controlador/controlador_activar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>"><i class="fa fa-check" aria-hidden="true"></i></a>
-            </td>
+            <?php
+            }
+            ?>
+          </td>
         </tr>
         <?php
         };
