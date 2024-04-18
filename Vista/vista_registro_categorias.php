@@ -66,21 +66,16 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     font-size: 18px;
   }
 
+.highlight-container {/* Estilos para resaltar el contenedor */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Agrega una sombra al contenedor */
+    padding: 15px; /* Añade un relleno al contenedor para separarlo visualmente */
+    margin-bottom: 20px; /* Agrega un margen inferior al contenedor */
+  }
+
   .Titulo{
     color:white;
   }
 
-  .caja{
-    border: 1px solid #B0ADAD;
-    padding: auto;
-    height: 50px;
-  }
-
-  .caja2{
-    border: 1px solid #B0ADAD;
-    padding: 20px;
-    height: 80px
-  }
   .filtro{
     display: none;
   }
@@ -138,42 +133,45 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     </div>
   </div>
 </div>
+<div class="mb-2"></div> <!--Salto de linea-->
 
-<div class="container caja">
+<div class="container highlight-container">
   <div class="row">
-    <div class="col-md-12">
-        <label for="Nombre" class="col-form-label">Registro de una nueva categoría</label>
+    <div class="col-12">
+      <label for="Nombre" class="form-label">Registro de una nueva categoría</label>
     </div>
   </div>
-</div>
+  <div class="mb-3"></div> <!--Salto de linea-->
 
-<div class="container caja2">
+<!--div class="container highlight-container"-->
   <div class="row">
-    <div class="col-md-12">
-      <form action="../Controlador/controlador_registro_categoria.php" class="formulario needs-validation" method="post" novalidate>
+    <div class="col-12">
+      <form action="../Controlador/controlador_registro_categoria.php" class="needs-validation" method="post" novalidate>
         <div class="row g-3 align-items-center">
-          <div class="col-md-2">
-          <label for="Nombre" class="col-form-label">Ingrese el nombre:</label>
+          <div class="col-sm-12 col-md-3">
+            <label for="Nombre" class="form-label">Ingrese el nombre:</label>
           </div>
-          <div class="col-md-6">
-          <input type="text" class="form-control" name="Nombre" placeholder="Ingrese el nombre" aria-label="Nombre" aria-describedby="basic-addon1" required>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control" name="Nombre" placeholder="Ingrese el nombre" required>
           </div>
-          <div class="col-md-3">
-          <select class="form-select" name="Categoria" id="validationCustom04" required>
-            <option selected value="" >Selecciona la categoría</option>
-            <option value="Empresa">Empresa</option>
-            <option value="Asunto">Asunto</option>
-            <option value="Piso">Piso</option>
-          </select>
+          <div class="col-sm-12 col-md-3">
+            <select class="form-select" name="Categoria" required>
+              <option selected value="">Selecciona la categoría</option>
+              <option value="Empresa">Empresa</option>
+              <option value="Asunto">Asunto</option>
+              <option value="Piso">Piso</option>
+            </select>
           </div>
-          <div class="col-md-1">
-          <button type="submit" class="btn btn-danger">AGREGAR</button>
+          <div class="col-sm-12 col-md-2">
+            <button type="submit" class="btn btn-sm btn-danger w-auto w-md-100">AGREGAR</button>
           </div>
         </div>
       </form>
     </div>
   </div>
 </div>
+
+
 
 <div class="mb-2"></div> <!--Salto de linea-->
 
@@ -220,8 +218,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             echo$filas["ESTATUS"];
             ?></td>
            <td>
-            <a href="../Controlador/controlador_activar_categorias.php?id=<?=$filas['ID_LISTA']?>"><i class="fa fa-check" aria-hidden="true"></i></a>
-            <a href="../Controlador/controlador_desactivar_categorias.php?id=<?=$filas['ID_LISTA']?>"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <a href="../Controlador/controlador_activar_categorias.php?id=<?=$filas['ID_LISTA']?>" id="botonActivar"><i class="fa fa-check" aria-hidden="true"></i></a>
+            <a href="../Controlador/controlador_desactivar_categorias.php?id=<?=$filas['ID_LISTA']?>" id="botonDesactivar"><i class="fa fa-times" aria-hidden="true"></i></a>
           </td>
           </tr>
           <?php
@@ -237,9 +235,24 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script><!-- Script para crear tippy-->
+  <script src="https://unpkg.com/tippy.js@6"></script><!-- Script para crear tippy-->
+
 
 <script>
+  // Crear tooltip para el botón 1
+tippy('#botonActivar', {
+        content: 'Activar categoría',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 2
+tippy('#botonDesactivar', {
+        content: 'Desactivar categoría',
+        placement: 'bottom',
+      });
+</script>
 
+<script>
 //VALIDACIONES
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
