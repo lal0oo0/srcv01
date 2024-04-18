@@ -111,17 +111,17 @@ if ($total > 0) {
             </div>
             <div class="mb-3"></div> 
               <label for="nombre" class="form-label">Nombre *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="valid01" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z ]{3,30}$" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="nombre" id="valid01" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required>
               <div class="invalid-feedback" id="nombre"></div>
             </div>
             <div class="col-md-6">
               <label for="ap" class="form-label">Apellido Paterno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{3,30}$" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name=ap id="valid02" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required>
               <div class="invalid-feedback" id="ap"></div>
             </div>
             <div class="col-md-6">
               <label for="am" class="form-label">Apellido Materno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{3,30}$" required>
+              <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="am" id="valid03" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required>
               <div class="invalid-feedback" id="am"></div>
             </div>
             <div class="col-md-12">
