@@ -218,8 +218,17 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             echo$filas["ESTATUS"];
             ?></td>
            <td>
+            <?php
+            if($filas["ESTATUS"]==='Inactivo'){
+            ?>
             <a href="../Controlador/controlador_activar_categorias.php?id=<?=$filas['ID_LISTA']?>" id="botonActivar"><i class="fa fa-check" aria-hidden="true"></i></a>
+            <?php
+            }elseif($filas["ESTATUS"]==='Activo'){
+            ?>
             <a href="../Controlador/controlador_desactivar_categorias.php?id=<?=$filas['ID_LISTA']?>" id="botonDesactivar"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <?php
+            }
+            ?>
           </td>
           </tr>
           <?php
