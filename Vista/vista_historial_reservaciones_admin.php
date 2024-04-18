@@ -60,6 +60,12 @@ $row = $resultado->fetch_assoc();
     color:white;
   }
 
+  .highlight-container {/* Estilos para resaltar el contenedor */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Agrega una sombra al contenedor */
+    padding: 15px; /* Añade un relleno al contenedor para separarlo visualmente */
+    margin-bottom: 20px; /* Agrega un margen inferior al contenedor */
+  }
+
   .filtro{
     display: none;
   }
@@ -170,23 +176,30 @@ $row = $resultado->fetch_assoc();
     </div>
   </div>
 </div>
-<div class="mb-3"></div> 
-<div class="row">
-  <div class="col-md-5"></div>
-  <div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded">
-    <form action="../PhpSpreadsheet/reporte_urspace.php" method="post">
-      <label for="fecha_inicio">Fecha de inicio:</label>
-      <input type="date" id="fecha_inicio" name="fecha_inicio">
-
-      <label for="fecha_fin">Fecha de fin:</label>
-      <input type="date" id="fecha_fin" name="fecha_fin">
-      
-      <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
-        <img src="../imagenes/excel.png" width="20px">Informe
-      </button>
-    </form>
+<div class="mb-4"></div> 
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-5"></div>
+    <div class="col-sm-12 col-md-7 highlight-container">
+      <form action="../PhpSpreadsheet/reporte_urspace.php" method="post">
+        <div class="row">
+          <div class="col-sm-5">
+            <label for="fecha_inicio">Fecha de inicio:</label>
+            <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control">
+          </div>
+          <div class="col-sm-5">
+            <label for="fecha_fin">Fecha de fin:</label>
+            <input type="date" id="fecha_fin" name="fecha_fin" class="form-control">
+          </div>
+          <div class="col-sm-2 d-flex align-items-center justify-content-center"> <!-- Modificado para centrar el botón verticalmente -->
+            <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000; width: 150px;"> <!-- Ajusta el ancho del botón según tus necesidades -->
+              <img src="../imagenes/excel.png" width="20px">Informe
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="col-md-1"></div>
 </div>
 <div class="mb-2"></div> 
 
