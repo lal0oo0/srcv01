@@ -325,9 +325,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true" id="botonSalida"></i></a>
                     <?php
                     }else{
-                    ?>
-                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                    <?php
                     }
                     ?>
                     <!--Boton de eliminar-->
