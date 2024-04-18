@@ -237,23 +237,29 @@ $(document).ready(function() {
 
         // Validación de que no se pueden agregar números en el nombre y apellidos
         if (/.*\d.*/.test(nombre)) { // Comprueba si hay algún número en el nombre
+            document.getElementById('nombre').innerHTML = "*El nombre no puede contener números";
             document.getElementById('valid01').classList.add('is-invalid');
             valid = false;
         } else {
+            document.getElementById('nombre').innerHTML = '';
             document.getElementById('valid01').classList.remove('is-invalid');
         }
 
         if (/.*\d.*/.test(ap)) { // Comprueba si hay algún número en el apellido paterno
+            document.getElementById('ap').innerHTML = "*El apellido paterno no puede contener números";
             document.getElementById('valid02').classList.add('is-invalid');
             valid = false;
         } else {
+            document.getElementById('ap').innerHTML = '';
             document.getElementById('valid02').classList.remove('is-invalid');
         }
 
         if (/.*\d.*/.test(am)) { // Comprueba si hay algún número en el apellido materno
+            document.getElementById('am').innerHTML = "*El apellido materno no puede contener números";
             document.getElementById('valid03').classList.add('is-invalid');
             valid = false;
         } else {
+            document.getElementById('am').innerHTML = '';
             document.getElementById('valid03').classList.remove('is-invalid');
         }
 
