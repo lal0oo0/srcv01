@@ -202,14 +202,14 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <?php
                     if(empty($filas['ENTRADA_RECEPCION'])){
                     ?>
-                    <a href="../Controlador/controlador_entrada_recepcion.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                    <a href="../Controlador/controlador_entrada_recepcion.php?id=<?=$filas['ID_VISITA']?>" id="botonEntrada"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                     <?php
                     }else{ //Aqui desaparece el botón 
                     }
                     ?>
 
                  <!-- Modificar visitas -->
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>" id="botonModificar"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
                   <!-- Modal para modificar visitas-->
                   <div class="modal fade" id="exampleModal_<?php echo $filas['ID_VISITA'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -276,7 +276,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <?php
                     if(!empty($filas['ENTRADA_RECEPCION']) && empty($filas['SALIDA_RECEPCION'])){
                     ?>
-                    <a href="../Controlador/controlador_salida_recepcion.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    <a href="../Controlador/controlador_salida_recepcion.php?id=<?=$filas['ID_VISITA']?>" id="botonSalida"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     <?php
                     }else{  ///Desaparece el botón
                     }
@@ -317,6 +317,28 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script> <!-- Abra y cierre el menú -->
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script><!-- Script para crear tippy-->
+<script src="https://unpkg.com/tippy.js@6"></script><!-- Script para crear tippy-->
+
+
+<script>
+  // Crear tooltip para el botón 1
+tippy('#botonEntrada', {
+        content: 'Confirmar entrada',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 2
+tippy('#botonSalida', {
+        content: 'Confirmar salida',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 3
+tippy('#botonModificar', {
+        content: 'Modificar visita',
+        placement: 'bottom',
+      });
+</script>
+
 <script>
   //SCRIPT PARA VALIDACIONES
   // Example starter JavaScript for disabling form submissions if there are invalid fields

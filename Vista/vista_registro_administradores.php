@@ -292,11 +292,11 @@ $row = $resultado->fetch_assoc();
             <?php
             if($filas["ESTATUS"]=='Activo'){
             ?>
-            <a href="../Controlador/controlador_eliminar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>"><i class="fa fa-times" aria-hidden="true" onclick="eliminar()" ></i></a>
+            <a href="../Controlador/controlador_eliminar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>" id="botonDesactivar"><i class="fa fa-times" aria-hidden="true" onclick="eliminar()" ></i></a>
             <?php
             }elseif($filas["ESTATUS"]=='Inactivo'){
             ?>
-            <a href="../Controlador/controlador_activar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>"><i class="fa fa-check" aria-hidden="true"></i></a>
+            <a href="../Controlador/controlador_activar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>" id="botonActivar"><i class="fa fa-check" aria-hidden="true"></i></a>
             <?php
             }
             ?>
@@ -317,6 +317,22 @@ $row = $resultado->fetch_assoc();
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="..js/validator.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script><!-- Script para crear tippy-->
+  <script src="https://unpkg.com/tippy.js@6"></script><!-- Script para crear tippy-->
+
+
+<script>
+  // Crear tooltip para el botón 1
+tippy('#botonActivar', {
+        content: 'Activar usuario',
+        placement: 'bottom',
+      });
+// Crear tooltip para el botón 2
+tippy('#botonDesactivar', {
+        content: 'Desactivar usuario',
+        placement: 'bottom',
+      });
+</script>
 
 <script>
   //Limpiar fromulario

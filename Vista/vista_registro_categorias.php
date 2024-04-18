@@ -143,7 +143,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   </div>
   <div class="mb-3"></div> <!--Salto de linea-->
 
-<!--div class="container highlight-container"-->
   <div class="row">
     <div class="col-12">
       <form action="../Controlador/controlador_registro_categoria.php" class="needs-validation" method="post" novalidate>
