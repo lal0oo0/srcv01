@@ -77,6 +77,16 @@ $row = $resultado->fetch_assoc();
         .input-group > .form-control {
     padding-right: 38px; /* Ajusta el padding derecho para dejar espacio para el icono de ojo */
 }
+
+#rol:valid{
+            /* Deja solo el borde */
+            border: 2px solid #007AB6;
+        }
+
+        #rol:invalid{
+            /* Deja solo el borde */
+            border: 2px solid #007AB6;
+        }
 </style>
 <header>
 <nav class="navbar navbar-dark  fixed-top navbar-custom" >
@@ -160,21 +170,21 @@ $row = $resultado->fetch_assoc();
       
 
               <label for="nombre" class="form-label">Nombre *</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="valid01" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="valid01" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z ]{3,30}$" required>
               <div class="invalid-feedback">
               Ingrese informacion valida.
               </div>
             </div>
             <div class="col-md-6">
               <label for="ap" class="form-label">Apellido Paterno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="valid02" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="valid02" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{3,30}$" required>
               <div class="invalid-feedback">
               Ingrese informacion valida.
               </div>
             </div>
             <div class="col-md-6">
               <label for="am" class="form-label">Apellido Materno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="valid03" pattern="(?=.*[a-z])(?=.*[A-Z]).{3,30}" required>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="valid03" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{3,30}$" required>
               <div class="invalid-feedback">
               Ingrese informacion valida.
               </div>
@@ -210,6 +220,7 @@ $row = $resultado->fetch_assoc();
                 <option value="2">Recepcion UrSpace</option>
                 <option value="3">Seguridad</option>
             </select>
+            <div class="invalid-feedback"></div>
             </div>
             <div class="col-md-6 text-md-end">
             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #1E90FF;" required>
@@ -220,6 +231,7 @@ $row = $resultado->fetch_assoc();
             </select>
                 <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="respuesta" name="respuesta" required>
             </div>
+            <div class="invalid-feedback"></div>
             </div>
             <br>
             <div class="col-12">
@@ -334,6 +346,8 @@ $row = $resultado->fetch_assoc();
   var nombre=document.getElementById('valid01').value;
   var ap=document.getElementById('valid02').value;
   var am=document.getElementById('valid03').value;
+  var pregunta = document.getElementById('pregunta').value;
+  var respuesta = document.getElementById('respuesta').value;
   var pass=document.getElementById('valid04').value;
 
   if (nombre=='') {
