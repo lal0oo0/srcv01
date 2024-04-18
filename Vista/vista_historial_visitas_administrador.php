@@ -193,19 +193,19 @@ $row = $resultado->fetch_assoc();
 <div class="mb-4"></div> 
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-5"></div>
-    <div class="col-sm-12 col-md-7 highlight-container">
+    <div class="col-sm-12 col-md-4"></div>
+    <div class="col-sm-12 col-md-8 highlight-container">
       <form action="../PhpSpreadsheet/reporte_administracion.php" method="post">
         <div class="row">
-          <div class="col-sm-5">
+          <div class="col-sm-4">
             <label for="fecha_inicio">Fecha de inicio:</label>
             <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control">
           </div>
-          <div class="col-sm-5">
+          <div class="col-sm-4">
             <label for="fecha_fin">Fecha de fin:</label>
             <input type="date" id="fecha_fin" name="fecha_fin" class="form-control">
           </div>
-          <div class="col-sm-2 d-flex align-items-center justify-content-center"> <!-- Modificado para centrar el botón verticalmente -->
+          <div class="col-sm-4 d-flex align-items-center justify-content-center"> <!-- Modificado para centrar el botón verticalmente -->
             <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000; width: 150px;"> <!-- Ajusta el ancho del botón según tus necesidades -->
               <img src="../imagenes/excel.png" width="20px">Informe
             </button>
