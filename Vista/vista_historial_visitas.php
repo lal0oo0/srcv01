@@ -197,9 +197,20 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <td><?php echo $filas['PISO'] ?></td>
           <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
           <td>
-                  <!-- Modificar reservaciones -->
+<!----Aqui van los botones de acciones---->
+                  <!--Boton para confirmar entrada-->
+                    <?php
+                    if(empty($filas['ENTRADA_RECEPCION'])){
+                    ?>
+                    <a href="../Controlador/controlador_entrada_recepcion.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                    <?php
+                    }else{ //Aqui desaparece el botón 
+                    }
+                    ?>
+
+                 <!-- Modificar visitas -->
                   <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
-                  <!-- Modal para modificar reservaciones-->
+                  <!-- Modal para modificar visitas-->
                   <div class="modal fade" id="exampleModal_<?php echo $filas['ID_VISITA'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -210,7 +221,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="mb-3"></div> <!--Salto de linea-->
-                        <!--posponer reservaciones-->
+                        <!--modificar visitas-->
                         <div class="modal-body">
                           <form action="../Controlador/controlador_modificar_visita.php" class="formulario row g-3 needs-validation" method="post" novalidate>
                               <input type="hidden" name="idvisita" value="<?= $filas['ID_VISITA'] ?>">
@@ -261,28 +272,13 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     </div>
                   </div>
 
-
-
+                    <!--Boton para confirmar salida aparece solo si ya confirmaron entrada-->
                     <?php
-                    if(empty($filas['ENTRADA_RECEPCION'])){
-                    ?>
-                    <a href="../Controlador/controlador_entrada_recepcion.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-in" aria-hidden="true"></i></a> |
-                    <?php
-                    }else{
-                    ?>
-                    <i class="fa fa-sign-in" aria-hidden="true"></i>
-                    <?php
-                    }
-                    ?>
-                    <?php
-                    if(empty($filas['SALIDA_RECEPCION'])){
+                    if(!empty($filas['ENTRADA_RECEPCION']) && empty($filas['SALIDA_RECEPCION'])){
                     ?>
                     <a href="../Controlador/controlador_salida_recepcion.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     <?php
-                    }else{
-                    ?>
-                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                    <?php
+                    }else{  ///Desaparece el botón
                     }
                     ?>
                     </td>
