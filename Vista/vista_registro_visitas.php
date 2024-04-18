@@ -195,7 +195,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <br>
                 <div class="col">
                   <label for="nombre" class="form-label">Nombre *</label>
-                  <input type="text" class="form-control" id="nombre" name="nombre" required>
+                  <input type="text" class="form-control" id="nombre" name="nombre" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z ]{3,30}$" required>
                   <div class="invalid-feedback">
                     Verifique los datos
                   </div>
@@ -205,7 +205,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <div class="col">
                     <div class="mb-3"></div> <!-- Salto de línea -->
                     <label for="ap" class="form-label">Apellido Paterno *</label>
-                    <input type="text" class="form-control" id="ap" name="ap" required>
+                    <input type="text" class="form-control" id="ap" name="ap" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{3,30}$" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -214,7 +214,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <div class="col">
                     <div class="mb-3"></div> <!-- Salto de línea -->
                     <label for="am" class="form-label">Apellido Materno *</label>
-                    <input type="text" class="form-control" id="am" name="am" required>
+                    <input type="text" class="form-control" id="am" name="am" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{3,30}$" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
