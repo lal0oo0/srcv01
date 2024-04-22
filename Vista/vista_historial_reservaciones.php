@@ -184,7 +184,7 @@ $row = $resultado->fetch_assoc();
   <div class="row">
     <div class="col-sm-12 col-md-5"></div>
     <div class="col-sm-12 col-md-7 highlight-container">
-      <form action="../PhpSpreadsheet/reporte_urspace.php" method="post">
+      <form action="../PhpSpreadsheet/reporte_reservaciones.php" method="post">
         <div class="row">
           <div class="col-sm-4">
             <label for="fecha_inicio">Fecha de inicio:</label>
