@@ -119,7 +119,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
  <header>
   <nav class="navbar navbar-dark  fixed-top navbar-custom" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="../imagenes/yyj.png" width="120px"> SRCV RECEPCIÓN</a>
+    <a class="navbar-brand" id="actualizarPagina" href="#"><img src="../imagenes/yyj.png" width="120px"> SRCV RECEPCIÓN</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -206,6 +206,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <?php
                     }else{ //Aqui desaparece el botón 
                     }
+
+                    ///Desaparecer boton de modificar 
+                    if(empty($filas["SALIDA_RECEPCION"])){
                     ?>
 
                  <!-- Modificar visitas -->
@@ -271,7 +274,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                       </div>
                     </div>
                   </div>
-
+                  <?php
+                    } else{/*No imprime nada*/}
+                  ?>
                     <!--Boton para confirmar salida aparece solo si ya confirmaron entrada-->
                     <?php
                     if(!empty($filas['ENTRADA_RECEPCION']) && empty($filas['SALIDA_RECEPCION'])){
@@ -391,6 +396,13 @@ tippy('#botonModificar', {
         }
     });
   //Fin del script
+
+  ///Script para recargar pagina
+  document.getElementById("actualizarPagina").addEventListener("click", function() {
+            // Al hacer clic en el botón, recargamos la página
+            location.reload();
+        });
+  ///Fin del script
 </script>
 
 
