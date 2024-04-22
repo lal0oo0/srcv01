@@ -19,6 +19,9 @@ $sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORRE
 $resultado = $conexion->query($sql);
 $row = $resultado->fetch_assoc();
 ?>
+<?php
+$mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,6 +61,12 @@ $row = $resultado->fetch_assoc();
 
   .titulo{
     color:white;
+  }
+
+  .highlight-container {/* Estilos para resaltar el contenedor */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Agrega una sombra al contenedor */
+    padding: 15px; /* Añade un relleno al contenedor para separarlo visualmente */
+    margin-bottom: 20px; /* Agrega un margen inferior al contenedor */
   }
 
   .filtro{
@@ -105,8 +114,8 @@ $row = $resultado->fetch_assoc();
 <h3 class="text-center">HISTORIAL DE RESERVACIONES URSPACE</h3>
 <div class="mb-5"></div>
 
-<div class="container">
 
+<div class="container">
   <!--Bucador-->
   <div class="row">
     <div class="col-md-9"></div>
@@ -114,6 +123,14 @@ $row = $resultado->fetch_assoc();
       <input class="form-control mr-sm-2" type="search" id="buscador" name="buscador" placeholder="Buscar" aria-label="Search" style="border: 1px solid rgba(0, 0, 0, 0.7);">
     </div>
   </div>
+  <div class="mb-3"></div><!--Salto de linea-->
+
+  <div class="mb-3"></div><!--Salto de linea-->
+    <!-- ALERTA -->
+    <div class="mb-4"></div><!--Salto de linea-->
+    <div id="mensaje">
+      <?php echo $mensaje; ?>
+    </div>
   <div class="mb-3"></div><!--Salto de linea-->
 
   <div class="row">
@@ -170,23 +187,30 @@ $row = $resultado->fetch_assoc();
     </div>
   </div>
 </div>
-<div class="mb-3"></div> 
-<div class="row">
-  <div class="col-md-5"></div>
-  <div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded">
-    <form action="../PhpSpreadsheet/reporte_urspace.php" method="post">
-      <label for="fecha_inicio">Fecha de inicio:</label>
-      <input type="date" id="fecha_inicio" name="fecha_inicio">
-
-      <label for="fecha_fin">Fecha de fin:</label>
-      <input type="date" id="fecha_fin" name="fecha_fin">
-      
-      <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000">
-        <img src="../imagenes/excel.png" width="20px">Informe
-      </button>
-    </form>
+<div class="mb-4"></div> 
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-5"></div>
+    <div class="col-sm-12 col-md-7 highlight-container">
+      <form action="../PhpSpreadsheet/reporte_reservaciones.php" method="post">
+        <div class="row">
+          <div class="col-sm-4">
+            <label for="fecha_inicio">Fecha de inicio:</label>
+            <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control">
+          </div>
+          <div class="col-sm-4">
+            <label for="fecha_fin">Fecha de fin:</label>
+            <input type="date" id="fecha_fin" name="fecha_fin" class="form-control">
+          </div>
+          <div class="col-sm-4 d-flex align-items-center justify-content-center"> <!-- Modificado para centrar el botón verticalmente -->
+            <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000; width: 150px;"> <!-- Ajusta el ancho del botón según tus necesidades -->
+              <img src="../imagenes/excel.png" width="20px">Informe
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="col-md-1"></div>
 </div>
 <div class="mb-2"></div> 
 
@@ -206,6 +230,21 @@ $row = $resultado->fetch_assoc();
     }
   })
   //fin del script de buscardor
+
+  //Script para mostrar alertas por determinado tiempo 
+  document.addEventListener("DOMContentLoaded", function() {
+        // Selecciona el elemento de alerta
+        var alerta = document.querySelector('.alert');
+
+        // Verifica si se encontró el elemento de alerta
+        if(alerta) {
+            // Temporizador para eliminar la alerta después de 5 segundos (5000 milisegundos)
+            setTimeout(function() {
+                alerta.remove(); // Elimina la alerta del DOM
+            }, 5000);
+        }
+    });
+//Fin del  scripyt
 </script>
 
 

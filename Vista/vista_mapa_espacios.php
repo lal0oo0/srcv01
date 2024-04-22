@@ -194,7 +194,7 @@ $row = $resultado->fetch_assoc();
                 <input type="hidden" name="nombre" id="nombre" value="<?= $filas['NOMBRE'] ?>">
                 <div class="col">
                 <label for="se">Nombre *</label>
-                <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre" aria-label="nombre" aria-describedby="basic-addon1" required>
+                <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre" aria-label="nombre" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required>
                 <div class="invalid-feedback">
                   Verifique los datos
                 </div>
@@ -204,14 +204,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Apellido paterno *</label>
-                    <input type="text" class="form-control" name="Apellidopaterno" id="apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" required>
+                    <input type="text" class="form-control" name="Apellidopaterno" id="apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Apellido materno *</label>
-                    <input type="text" class="form-control" name="Apellidomaterno" id="apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" required>
+                    <input type="text" class="form-control" name="Apellidomaterno" id="apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -369,6 +369,16 @@ $(document).ready(function() {
                 valid = false;
                 swal('Error', 'La hora de finalización debe ser mayor que la hora de inicio cuando las fechas son iguales', 'error');
             }
+        }
+
+        var nombre = $(this).find('#Nombre').val();
+        var apellidopaterno = $(this).find('#apellidopaterno').val();
+        var apellidomaterno = $(this).find('#apellidomaterno').val();
+
+        // Verifica si los campos contienen números
+        if (/\d/.test(nombre) || /\d/.test(apellidopaterno) || /\d/.test(apellidomaterno)) {
+            swal('Error', 'Los campos de nombre y apellidos no pueden contener números', 'error');
+            return;
         }
 
         if (!valid) {

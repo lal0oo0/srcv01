@@ -114,6 +114,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <br>
 <br>
 <br>
+<br>
+<br>
 <h3 class="text-center">RESERVACIONES</h3>
 <div class="mb-4"></div> <!--Salto de linea-->
 <div class="row">
@@ -455,6 +457,27 @@ function confirmarEliminar(idReservacion) {
       }
     });
   }
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Selecciona el formulario de abono
+    var formAbono = document.querySelector('.formulario');
+
+    // Agrega un event listener para el envío del formulario
+    formAbono.addEventListener('submit', function(event) {
+      // Obtiene el valor del campo de abono
+      var abono = parseFloat(document.querySelector('input[name="Abono"]').value);
+
+      // Verifica si el abono es menor o igual a cero
+      if (abono <= 0 || isNaN(abono)) {
+        // Muestra una alerta utilizando SweetAlert
+        swal("Error", "La cantidad de abono debe ser mayor que cero.", "error");
+
+        // Evita que el formulario se envíe
+        event.preventDefault();
+      }
+    });
+  });
 </script>
 </body>
 </html>

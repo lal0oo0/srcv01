@@ -170,21 +170,21 @@ $row = $resultado->fetch_assoc();
       
 
               <label for="nombre" class="form-label">Nombre *</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="valid01" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z ]{3,30}$" required>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="valid01" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required>
               <div class="invalid-feedback">
               Ingrese informacion valida.
               </div>
             </div>
             <div class="col-md-6">
               <label for="ap" class="form-label">Apellido Paterno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="valid02" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{3,30}$" required>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="valid02" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required>
               <div class="invalid-feedback">
               Ingrese informacion valida.
               </div>
             </div>
             <div class="col-md-6">
               <label for="am" class="form-label">Apellido Materno *</label>
-              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="valid03" pattern="^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{3,30}$" required>
+              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="valid03" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required>
               <div class="invalid-feedback">
               Ingrese informacion valida.
               </div>

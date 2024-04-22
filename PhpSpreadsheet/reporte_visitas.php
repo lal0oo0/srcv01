@@ -20,10 +20,6 @@ if (empty($_SESSION["correo"])){
     exit; // Detener la ejecución del script después de redirigir
   }
 
-// Obtener las fechas enviadas por el formulario
-
-$fecha_inicio = $_POST['fecha_inicio'];
-$fecha_fin = $_POST['fecha_fin'];
 
 //Consulta para verificar el rol
 $rol = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$CORREO' AND ROL='Administrador' AND ESTATUS='1'";
@@ -34,6 +30,31 @@ $rol_recepcion = mysqli_query($conexion, $rol2);
 
 $rol3 = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$CORREO' AND ROL='UrSpace' AND ESTATUS='1'";
 $rol_urspace = mysqli_query($conexion, $rol3);
+
+
+// Obtener las fechas enviadas por el formulario
+$fecha_inicio = $_POST['fecha_inicio'];
+$fecha_fin = $_POST['fecha_fin'];
+
+// Verificar si no se ingreso ninguna fecha
+if (empty($fecha_inicio) || empty($fecha_fin)) {
+    // Mensaje de error
+    $mensaje = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> No se puede descargar el informe hasta que introduzca un rango de fechas.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+  //Mostrar error en diferentes interfaces segun el rol
+  if ($rol_admin->num_rows == 1) {
+    header("location: ../Vista/vista_historial_visitas_administrador.php?mensaje=" . urlencode($mensaje));
+} elseif ($rol_recepcion->num_rows == 1) {
+    header("location: ../Vista/vista_historial_visitas.php?mensaje=" . urlencode($mensaje));
+} elseif ($rol_urspace->num_rows == 1) {
+    header("location: ../Vista/vista_visitas_urspace.php?mensaje=" . urlencode($mensaje));
+} else {
+    header("location: ../Vista/error.php?mensaje=" . urlencode($mensaje));
+}
+    exit; 
+}
 
 
 if($rol_admin->num_rows==1){
@@ -694,6 +715,7 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('H'.$fila)->getAlignment()->setWrapText(true);
 
     $fila++;
+
 
 }
 }

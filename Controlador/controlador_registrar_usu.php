@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+
 //Codigo de conexion a la base de datos
 include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
@@ -49,8 +50,8 @@ if (!preg_match($correo_valido, $correo)) {
 }
 
 //Codigo para guardar un registro temporalmente en una variable php
-$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA,ROL, ESTATUS) 
-VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$pregunta','$respuesta', 'Administrador', '1')";
+$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA,ROL, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
+VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$pregunta','$respuesta', 'Administrador', '$correo','$correo', '1')";
 
 //Evitar que el registro se repita
 $norepetir = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$correo'");
