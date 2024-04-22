@@ -111,7 +111,11 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   </div>
 </nav>
 </header>
-<div class="mb-4"></div> <!--Salto de linea-->
+<br>
+<br>
+<br>
+<br>
+<br>
 <h3 class="text-center">RESERVACIONES</h3>
 <div class="mb-4"></div> <!--Salto de linea-->
 <div class="row">
