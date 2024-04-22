@@ -145,7 +145,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
   <div class="row">
     <div class="col-12">
-      <form action="../Controlador/controlador_registro_categoria.php" class="needs-validation" method="post" novalidate>
+      <form action="../Controlador/controlador_registro_categoria.php" class="formulario needs-validation" method="post" novalidate>
         <div class="row g-3 align-items-center">
           <div class="col-sm-12 col-md-3">
             <label for="Nombre" class="form-label">Ingrese el nombre:</label>
