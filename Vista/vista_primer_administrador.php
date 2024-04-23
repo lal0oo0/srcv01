@@ -127,7 +127,7 @@ if ($total > 0) {
             <div class="col-md-12">
               <label for="email" class="form-label">Correo Electrónico *</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" required>
+                <input type="text" class="form-control" style="border: 2px solid #007AB6;" name="email" id="email" aria-describedby="emailHelp" pattern="[a-zA-ZñÑ0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
                 <div class="invalid-feedback">
                   Campo obligatorio*
                 </div>
@@ -348,6 +348,19 @@ $(document).ready(function() {
             document.getElementById('confirmar').innerHTML = "";
             this.classList.remove('is-invalid');
             this.setCustomValidity(''); // Restablecer la validez
+        }
+    });
+</script>
+<script>
+    document.getElementById('email').addEventListener('input', function() {
+        var email = this.value.trim();
+        var isValid = /^[a-zA-ZñÑ0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+        if (!isValid) {
+            this.setCustomValidity('Por favor, ingrese un correo electrónico válido.');
+            this.classList.add('is-invalid');
+        } else {
+            this.setCustomValidity('');
+            this.classList.remove('is-invalid');
         }
     });
 </script>

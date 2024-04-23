@@ -91,6 +91,21 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
         border: 2px solid #007AB6;
     }
 
+    /* Estilo para que el texto del checkbox se estire y no se divida en varias líneas */
+    .form-check-label {
+            white-space: nowrap;
+        }
+
+.was-validated .form-check-label:valid {
+    background-color: transparent;
+    border-color: #000; /* Color del borde negro */
+}
+
+.was-validated .form-check-label:invalid {
+    background-color: transparent;
+    border-color: #000; /* Color del borde negro */
+}
+
     </style>
 </head>
 <body>
@@ -128,6 +143,16 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                             </select>
                             <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
                         </div>
+                        <div class="form-check col-md-6">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="border: 2px solid #007AB6;">
+                            <label class="form-check-label align-middle" for="flexCheckDefault" style="font-size: 17px">
+                                ¿No recuerdas tu pregunta de seguridad y respuesta?
+                            </label>
+                            </div>
+                            <div class="col-md-12" id="codigo_recuperacion_wrapper" style="display: none;">
+                                <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="codigo_recuperacion" name="codigo_recuperacion" placeholder="Ingrese el código de recuperación" required>
+                            </div>
+                            <div class="mb-1"></div>
                         <div class="col-md-6">
                              <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
                              <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
@@ -281,5 +306,60 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
         }, 5000);
     }
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var checkbox = document.getElementById("flexCheckDefault");
+        var preguntaInput = document.getElementById("pregunta");
+        var respuestaInput = document.getElementById("respuesta");
+        var passwo1Input = document.getElementById("passwo1");
+        var confirmPasswoInput = document.getElementById("confirmPasswo");
+        var codigoRecuperacionInput = document.getElementById("codigo_recuperacion");
+        var codigoRecuperacionWrapper = document.getElementById("codigo_recuperacion_wrapper");
+
+        checkbox.addEventListener("change", function() {
+            if (checkbox.checked) {
+                // Si se selecciona la opción de no recordar, ocultar la pregunta y respuesta
+                preguntaInput.style.display = "none";
+                respuestaInput.style.display = "none";
+                // Mostrar solo el campo para ingresar el código de recuperación
+                codigoRecuperacionWrapper.style.display = "block";
+                // Ocultar campos de contraseña y confirmación
+                passwo1Input.style.display = "none";
+                confirmPasswoInput.style.display = "none";
+            } else {
+                // Si no se selecciona la opción de no recordar, mostrar la pregunta y respuesta
+                preguntaInput.style.display = "block";
+                respuestaInput.style.display = "block";
+                // Ocultar campo para ingresar el código de recuperación
+                codigoRecuperacionWrapper.style.display = "none";
+                // Mostrar campos de contraseña y confirmación
+                passwo1Input.style.display = "block";
+                confirmPasswoInput.style.display = "block";
+            }
+        });
+    });
+</script>
+<script>
+        // Función para deshabilitar la validación de los campos de contraseña cuando se seleccione el checkbox
+        document.addEventListener("DOMContentLoaded", function() {
+            var checkbox = document.getElementById("flexCheckDefault");
+            var passwo1Input = document.getElementById("passwo1");
+            var confirmPasswoInput = document.getElementById("confirmPasswo");
+
+            checkbox.addEventListener("change", function() {
+                if (checkbox.checked) {
+                    // Si se selecciona la opción de no recordar, deshabilitar la validación de los campos de contraseña
+                    passwo1Input.removeAttribute("required");
+                    confirmPasswoInput.removeAttribute("required");
+                    passwo1Input.classList.remove("is-invalid");
+                    confirmPasswoInput.classList.remove("is-invalid");
+                } else {
+                    // Si no se selecciona la opción de no recordar, habilitar la validación de los campos de contraseña
+                    passwo1Input.setAttribute("required", "");
+                    confirmPasswoInput.setAttribute("required", "");
+                }
+            });
+        });
+    </script>
 </body>
 </html>
