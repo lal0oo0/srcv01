@@ -364,5 +364,32 @@ $(document).ready(function() {
         }
     });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('valid01').addEventListener('input', function() {
+        var nombre = this.value.toLowerCase();
+        nombre = nombre.replace(/\b\w/g, function(txt) {
+            return txt.toUpperCase();
+        });
+        this.value = nombre;
+    });
+
+    document.getElementById('valid02').addEventListener('input', function() {
+        var ap = this.value.toLowerCase();
+        ap = ap.replace(/\b\w/g, function(txt) {
+            return txt.toUpperCase();
+        });
+        this.value = ap;
+    });
+
+    document.getElementById('valid03').addEventListener('input', function() {
+        var am = this.value.toLowerCase();
+        am = am.replace(/\b\w/g, function(txt) {
+            return txt.toUpperCase();
+        });
+        this.value = am;
+    });
+});
+</script>
 </body>
 </html>

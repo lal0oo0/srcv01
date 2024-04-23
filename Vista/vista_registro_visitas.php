@@ -465,5 +465,32 @@ document.addEventListener('keyup', e =>{
     });
   }
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('nombre').addEventListener('input', function() {
+        var nombre = this.value.toLowerCase();
+        nombre = nombre.replace(/\b\w/g, function(txt) {
+            return txt.toUpperCase();
+        });
+        this.value = nombre;
+    });
+
+    document.getElementById('ap').addEventListener('input', function() {
+        var ap = this.value.toLowerCase();
+        ap = ap.replace(/\b\w/g, function(txt) {
+            return txt.toUpperCase();
+        });
+        this.value = ap;
+    });
+
+    document.getElementById('am').addEventListener('input', function() {
+        var am = this.value.toLowerCase();
+        am = am.replace(/\b\w/g, function(txt) {
+            return txt.toUpperCase();
+        });
+        this.value = am;
+    });
+});
+</script>
 </body>
 </html>
