@@ -369,7 +369,23 @@ $(document).ready(function() {
                 valid = false;
                 swal('Error', 'La hora de finalización debe ser mayor que la hora de inicio cuando las fechas son iguales', 'error');
             }
+             // Validar que total no sea menor a cero
+            if (parseFloat(total) < 0) {
+                valid = false;
+                swal('Error', 'El total no puede ser menor que cero', 'error');
+            }
+             // Validar que enganche no sea menor a cero
+             if (parseFloat(enganche) < 0) {
+                valid = false;
+                swal('Error', 'El enganche no puede ser menor que cero', 'error');
+            }
         }
+
+        if (/\d/.test(nombre) || /\d/.test(apellidopaterno) || /\d/.test(apellidomaterno)) {
+            swal('Error', 'Los campos de nombre y apellidos no pueden contener números', 'error');
+            return;
+        }
+
 
         var nombre = $(this).find('#Nombre').val();
         var apellidopaterno = $(this).find('#apellidopaterno').val();
