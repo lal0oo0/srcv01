@@ -189,7 +189,7 @@ $row = $resultado->fetch_assoc();
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" method="POST" novalidate>
+              <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" name="myForm" id="myForm" method="POST" novalidate>
                 <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
                 <input type="hidden" name="nombre" id="nombre" value="<?= $filas['NOMBRE'] ?>">
                 <div class="col">
@@ -302,7 +302,7 @@ $row = $resultado->fetch_assoc();
                 <div class="mb-5"></div> <!--Salto de linea-->
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Confirmar</button>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-secondary" onclick="limpiar()" data-bs-dismiss="modal">Cancelar</button>
                 </div>
               </form>
 
@@ -332,7 +332,12 @@ $row = $resultado->fetch_assoc();
     document.getElementById('salaSeleccionada_' + idSala).value = idSala;
   }
 
-
+  //Limpiar fromulario
+  function limpiar() {
+      var formulario = document.getElementById("myForm");
+      // Resetear el formulario
+      formulario.reset();
+    }
 
 //ALERTAS//
 // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script

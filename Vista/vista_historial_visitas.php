@@ -233,7 +233,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                         <div class="mb-3"></div> <!--Salto de linea-->
                         <!--modificar visitas-->
                         <div class="modal-body">
-                          <form action="../Controlador/controlador_modificar_visita.php" class="formulario row g-3 needs-validation" method="post" novalidate>
+                          <form action="../Controlador/controlador_modificar_visita.php" class="formulario row g-3 needs-validation" name="myForm" id="myForm" method="post" novalidate>
                               <input type="hidden" name="idvisita" value="<?= $filas['ID_VISITA'] ?>">
                               <div class="row">
                                 <div class="col">
@@ -274,7 +274,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                               </div>
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-primary">Confirmar</button>
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                              <button type="button" class="btn btn-secondary" onclick="limpiar()" data-bs-dismiss="modal">Cancelar</button>
                             </div>
                           </form>
                         </div>
@@ -341,6 +341,14 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
 
 <script>
+
+  //Limpiar fromulario
+  function limpiar() {
+      var formulario = document.getElementById("myForm");
+      // Resetear el formulario
+      formulario.reset();
+    }
+
   // Crear tooltip para el botón 1
 tippy('#botonEntrada', {
         content: 'Confirmar entrada',
