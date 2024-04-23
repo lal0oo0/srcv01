@@ -302,7 +302,7 @@ $row = $resultado->fetch_assoc();
                 <div class="mb-5"></div> <!--Salto de linea-->
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Confirmar</button>
-                  <button type="button" class="btn btn-secondary" onclick="limpiar()" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" onclick="limpiar()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </div>
               </form>
 
@@ -327,17 +327,19 @@ $row = $resultado->fetch_assoc();
 <script src="../js/bootstrap.bundle.min.js"></script>
 
 <script>
+    //Limpiar fromulario
+    function limpiar() {
+      var formulario = document.getElementById("myForm");
+      // Resetear el formulario
+      formulario.reset();
+    }
+
   function setSelectedRoom(idSala) {
     // Asigna el ID de la sala al campo oculto en el formulario
     document.getElementById('salaSeleccionada_' + idSala).value = idSala;
   }
 
-  //Limpiar fromulario
-  function limpiar() {
-      var formulario = document.getElementById("myForm");
-      // Resetear el formulario
-      formulario.reset();
-    }
+
 
 //ALERTAS//
 // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
