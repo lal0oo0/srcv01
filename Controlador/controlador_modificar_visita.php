@@ -18,12 +18,16 @@ date_default_timezone_set('America/Mexico_City');
 $fechamodificacion = date('Y-m-d H:i:s');
 /*Para capturar los campos*/
 $id = $_POST['idvisita'];
+$nombre = $_POST['nombre'];
+$apellidopa = $_POST['apellidopaterno'];
+$apellidoma = $_POST['apellidomaterno'];
 $empresa = $_POST['empresa'];
 $asunto = $_POST['asunto'];
 $ubicacion = $_POST['piso'];
 
 
-    $consulta="UPDATE srcv_visitas SET EMPRESA='$empresa', ASUNTO='$asunto', PISO='$ubicacion', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA='$id'";
+    $consulta="UPDATE srcv_visitas
+    SET NOMBRE='$nombre', APELLIDO_PATERNO='$apellidopa', APELLIDO_MATERNO='$apellidoma', EMPRESA='$empresa', ASUNTO='$asunto', PISO='$ubicacion', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA='$id'";
     $sql=mysqli_query($conexion, $consulta);
   
 
