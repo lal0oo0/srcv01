@@ -386,6 +386,11 @@ $(document).ready(function() {
                 valid = false;
                 swal('Error', 'El enganche no puede ser menor que cero', 'error');
             }
+            // Validar que el numero de personas no sea menor o igual a cero
+            if (personas <= 0) {
+                valid = false;
+                swal('Error', 'El numero de personas no puede ser menor o igual que cero', 'error');
+            }
         }
 
         if (/\d/.test(nombre) || /\d/.test(apellidopaterno) || /\d/.test(apellidomaterno)) {
