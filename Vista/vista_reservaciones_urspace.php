@@ -260,7 +260,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                             <div class="mb-5"></div> <!--Salto de linea-->
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-primary">Confirmar</button>
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                              <button type="button" class="btn btn-secondary" onclick="limpiar('<?php echo $idForm?>')" data-bs-dismiss="modal">Cancelar</button>
                             </div>
                           </form>
                         </div>

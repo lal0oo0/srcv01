@@ -158,6 +158,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               $conexion = conect();
               $query = mysqli_query ($conexion, "SELECT * FROM srcv_visitas WHERE ASUNTO <> 'Reservacion' AND EMPRESA='UrSpace'");
               while($filas  = mysqli_fetch_assoc($query)){
+                $idVis=$filas["ID_VISITA"];
+                $idForm='myForm_' . $idVis;
           ?>
           <tr class="datos">
                     <td>
@@ -207,7 +209,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                         <div class="mb-3"></div> <!--Salto de linea-->
                         <!--posponer reservaciones-->
                         <div class="modal-body">
-                          <form action="../Controlador/controlador_motivo.php" class="formulario row g-3 needs-validation" method="post" novalidate>
+                          <form action="../Controlador/controlador_motivo.php" class="formulario row g-3 needs-validation" id="<?php echo $idForm ;?>" name="<?php echo $idForm ;?>" method="post" novalidate>
                             <div class="mb-3"></div> <!-- Salto de línea -->
                               <input type="hidden" name="id" value="<?= $filas['ID_VISITA'] ?>">
 
@@ -228,7 +230,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                             <div class="mb-5"></div> <!--Salto de linea-->
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-primary">Confirmar</button>
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                              <button type="button" class="btn btn-secondary" onclick="limpiar('<?php echo $idForm;?>')" data-bs-dismiss="modal">Cancelar</button>
                             </div>
                           </form>
                         </div>
@@ -308,6 +310,12 @@ tippy('#botonMotivo', {
   function VISITA(idvisita){
     document.getElementById('Visita_' + idvisita).value = idvisita;
 
+    }
+      //Limpiar fromulario
+        function limpiar(idForm) {
+        var formulario = document.getElementById(idForm);
+      // Resetear el formulario
+      formulario.reset();
     }
 </script>
 <script>
