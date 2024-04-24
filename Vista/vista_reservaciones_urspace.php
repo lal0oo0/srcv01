@@ -266,10 +266,19 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     </div>
                   </div>
                   <!--Boton para eliminar-->
-                  <a href="#" onclick="confirmarEliminar(<?=$filas['ID_RESERVACION']?>);" class="link-danger" id="botonCancelar"><i class="fa fa-times" aria-hidden="true"></i></a>
                   <?php
                   // Se obtiene el id para realizar las consultas
                   $id_reservacion = $filas['ID_RESERVACION'];
+
+                  $entVis = mysqli_query($conexion, "SELECT * FROM srcv_visitas WHERE ID_VISITA = $id_reservacion");
+                  $EUS = mysqli_fetch_assoc($entVis);
+                  if(empty($EUS["ENTRADA_URSPACE"]) && empty($EUS["SALIDA_URSPACE"])){
+                  ?>
+                  <a href="#" onclick="confirmarEliminar(<?=$filas['ID_RESERVACION']?>);" class="link-danger" id="botonCancelar"><i class="fa fa-times" aria-hidden="true"></i></a>
+                  <?php
+                  }else{
+                    
+                  }
 
                   $salidavisita = "SELECT SALIDA_URSPACE FROM srcv_visitas WHERE ID_VISITA = $id_reservacion";
                   $visitasale = mysqli_query($conexion, $salidavisita);
