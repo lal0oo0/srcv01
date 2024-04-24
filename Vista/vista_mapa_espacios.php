@@ -145,6 +145,7 @@ $row = $resultado->fetch_assoc();
     while ($filas = mysqli_fetch_assoc($query)) {
      ////Recupera el id de la sala
      $ID = $filas['ID_SALA'];
+     $idForm='myForm_' . $ID;
      ////esta consulta nos va a permitir buscar si
      ////uno de los espacios tiene una reservacion
      ////en la fecha y hora actuales
@@ -189,7 +190,7 @@ $row = $resultado->fetch_assoc();
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" name="myForm" id="myForm" method="POST" novalidate>
+              <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" name="<?php echo $idForm;?>" id="<?php echo $idForm;?>" method="POST" novalidate>
                 <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
                 <input type="hidden" name="nombre" id="nombre" value="<?= $filas['NOMBRE'] ?>">
                 <div class="col">
@@ -302,7 +303,7 @@ $row = $resultado->fetch_assoc();
                 <div class="mb-5"></div> <!--Salto de linea-->
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Confirmar</button>
-                  <button type="button" onclick="limpiar()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-secondary" onclick="limpiar('<?php echo $idForm; ?>')" data-bs-dismiss="modal">Cancelar</button>
                 </div>
               </form>
 
@@ -328,8 +329,8 @@ $row = $resultado->fetch_assoc();
 
 <script>
     //Limpiar fromulario
-    function limpiar() {
-      var formulario = document.getElementById("myForm");
+    function limpiar(idForm) {
+      var formulario = document.getElementById(idForm);
       // Resetear el formulario
       formulario.reset();
     }
