@@ -167,6 +167,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               $conexion = conect();
               $query = mysqli_query ($conexion, "SELECT * FROM srcv_reservaciones WHERE ESTATUS='1' AND USO='0'");
               while($filas  = mysqli_fetch_assoc($query)){
+                $idRegistro=$filas["ID_RESERVACION"];
+                $idForm='myForm_' . $idRegistro;
           ?>
           <tr class="datos">
               <td><?php echo$filas ["NOMBRE_CLIENTE"] ?></td>
@@ -202,7 +204,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                         <div class="mb-3"></div> <!--Salto de linea-->
                         <!--posponer reservaciones-->
                         <div class="modal-body">
-                          <form action="../Controlador/controlador_posponer_reservacion.php" class="formulario row g-3 needs-validation" method="post" novalidate>
+                          <form action="../Controlador/controlador_posponer_reservacion.php" class="formulario row g-3 needs-validation" name="<?php echo $idForm; ?>" id="<?php echo $idForm; ?>" method="post" novalidate>
                             <div class="mb-3"></div> <!-- Salto de línea -->
                               <input type="hidden" name="id" value="<?= $filas['ID_RESERVACION'] ?>">
                             <div class="row">
@@ -365,6 +367,12 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   function Reservacion(idreservacion){
     document.getElementById('Reservacion_' + idreservacion).value = idreservacion;
 
+    }
+      //Limpiar fromulario
+  function limpiar(idForm) {
+      var formulario = document.getElementById(idForm);
+      // Resetear el formulario
+      formulario.reset();
     }
 </script>
 <script>
