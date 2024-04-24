@@ -192,7 +192,7 @@ $row = $resultado->fetch_assoc();
             <div class="col-md-12">
               <label for="email" class="form-label">Correo Electronico *</label>
               <div class="input-group has-validation">
-                <input type="email" class="form-control" style="border: 2px solid #1E90FF;" name="email" id="email" aria-describedby="emailHelp" required autocomplete="username">
+                <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="email" id="email" aria-describedby="emailHelp" required autocomplete="username">
                 <div class="invalid-feedback">
                 Ingrese informacion valida.
                 </div>
@@ -498,6 +498,59 @@ tippy('#botonDesactivar', {
             document.getElementById('confirmar').innerHTML = "";
             this.classList.remove('is-invalid');
             this.setCustomValidity(''); // Restablecer la validez
+        }
+    });
+</script>
+<script>
+    document.getElementById('email').addEventListener('input', function() {
+        var email = this.value.trim();
+        var isValid = /^[a-zA-ZñÑ0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+        if (!isValid) {
+            this.setCustomValidity('Por favor, ingrese un correo electrónico válido.');
+            this.classList.add('is-invalid');
+        } else {
+            this.setCustomValidity('');
+            this.classList.remove('is-invalid');
+        }
+    });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('valid01').addEventListener('input', function() {
+        var nombre = this.value.toLowerCase();
+        nombre = nombre.replace(/\b\w/g, function(txt) {
+            return txt.toUpperCase();
+        });
+        this.value = nombre;
+    });
+
+    document.getElementById('valid02').addEventListener('input', function() {
+        var ap = this.value.toLowerCase();
+        ap = ap.replace(/\b\w/g, function(txt) {
+            return txt.toUpperCase();
+        });
+        this.value = ap;
+    });
+
+    document.getElementById('valid03').addEventListener('input', function() {
+        var am = this.value.toLowerCase();
+        am = am.replace(/\b\w/g, function(txt) {
+            return txt.toUpperCase();
+        });
+        this.value = am;
+    });
+});
+</script>
+<script>
+    document.getElementById('email').addEventListener('input', function() {
+        var email = this.value.trim();
+        var isValid = /^[a-zA-ZñÑ0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+        if (!isValid) {
+            this.setCustomValidity('Por favor, ingrese un correo electrónico válido.');
+            this.classList.add('is-invalid');
+        } else {
+            this.setCustomValidity('');
+            this.classList.remove('is-invalid');
         }
     });
 </script>
