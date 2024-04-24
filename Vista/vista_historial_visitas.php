@@ -238,6 +238,32 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                         <div class="modal-body">
                           <form action="../Controlador/controlador_modificar_visita.php" class="formulario row g-3 needs-validation" name="<?php echo $idForm; ?>" id="<?php echo $idForm; ?>" method="post" novalidate>
                               <input type="hidden" name="idvisita" value="<?= $filas['ID_VISITA'] ?>">
+                              <div class="col">
+                                <label for="se">Nombre *</label>
+                                <input type="text" class="form-control" name="nombre" id="nombre" value="<?=$filas['NOMBRE']?>" placeholder="Nombre" aria-label="nombre" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
+                                <div class="invalid-feedback">
+                                  Verifique los datos
+                                </div>
+                              </div>
+                              <div class="mb-2"></div> <!--Salto de linea-->
+
+                              <div class="row">
+                                <div class="col">
+                                  <label for="se">Apellido paterno *</label>
+                                  <input type="text" class="form-control" name="apellidopaterno" id="pellidopaterno" value="<?=$filas['APELLIDO_PATERNO']?>" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
+                                  <div class="invalid-feedback">
+                                    Verifique los datos
+                                  </div>
+                                </div>
+                                <div class="col">
+                                  <label for="se">Apellido materno *</label>
+                                  <input type="text" class="form-control" name="apellidomaterno" id="apellidomaterno" placeholder="Apellido materno" value="<?=$filas['APELLIDO_MATERNO']?>" aria-label="Apellido materno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
+                                  <div class="invalid-feedback">
+                                    Verifique los datos
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="mb-2"></div> <!--Salto de linea-->
                               <div class="row">
                                 <div class="col">
                                   <div class="mb-3"></div> <!-- Salto de línea -->
