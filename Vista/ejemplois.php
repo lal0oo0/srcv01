@@ -111,14 +111,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             </div>
             <div class="col-12">
               <label for="validationCustom03" class="form-label">Contraseña *</label>
-              <div class="input-group has-validation">
-              <input type="text" class="form-control" style="border: 2px solid #007AB6" name="contrasena" id="exampleInputPassword1"  id="validationCustom05" aria-describedby="passwordHelp" required>
-              <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-              <i class="fa fa-eye" aria-hidden="true"></i>
-              </button>
+              <input type="password" class="form-control" style="border: 2px solid #007AB6" name="contrasena" id="exampleInputPassword1"  id="validationCustom05" aria-describedby="passwordHelp" required>
               <div class="invalid-feedback">
               Campo obligatorio
-              </div>
               </div>
             </div>
             <div class="mb-3"></div><!--Salto de linea-->
@@ -170,23 +165,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             setTimeout(function() {
                 alerta.remove(); // Elimina la alerta del DOM
             }, 3000);
-        }
-    });
-</script>
-<script>
-    // Cambiar dinámicamente el tipo de entrada del campo de contraseña
-    document.getElementById('togglePassword').addEventListener('click', function() {
-        var passwordInput = document.getElementById('exampleInputPassword1');
-        var icon = this.querySelector('i');
-
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            icon.classList.remove('bi-eye');
-            icon.classList.add('bi-eye-slash');
-        } else {
-            passwordInput.type = 'password';
-            icon.classList.remove('bi-eye-slash');
-            icon.classList.add('bi-eye');
         }
     });
 </script>
