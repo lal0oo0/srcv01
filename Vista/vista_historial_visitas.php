@@ -205,7 +205,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <td><?php echo $filas['EMPRESA'] ?></td>
           <td><?php echo $filas['ASUNTO'] ?></td>
           <td><?php echo $filas['PISO'] ?></td>
-          <td><?php echo $filas['SALIDA_SEGURIDAD']; echo $idForm?></td>
+          <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
           <td>
 <!----Aqui van los botones de acciones---->
                   <!--Boton para confirmar entrada-->
