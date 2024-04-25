@@ -366,28 +366,34 @@ $(document).ready(function() {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById('valid01').addEventListener('input', function() {
-        var nombre = this.value.toLowerCase();
-        nombre = nombre.replace(/\b\w/g, function(txt) {
+    function capitalizeFirstLetter(input) {
+        return input.replace(/(^|\s)\S/g, function(txt) {
             return txt.toUpperCase();
         });
+    }
+
+    document.getElementById('valid01').addEventListener('input', function() {
+        var nombre = this.value.toLowerCase();
+        nombre = capitalizeFirstLetter(nombre);
         this.value = nombre;
     });
 
     document.getElementById('valid02').addEventListener('input', function() {
         var ap = this.value.toLowerCase();
-        ap = ap.replace(/\b\w/g, function(txt) {
-            return txt.toUpperCase();
-        });
+        ap = capitalizeFirstLetter(ap);
         this.value = ap;
     });
 
     document.getElementById('valid03').addEventListener('input', function() {
         var am = this.value.toLowerCase();
-        am = am.replace(/\b\w/g, function(txt) {
-            return txt.toUpperCase();
-        });
+        am = capitalizeFirstLetter(am);
         this.value = am;
+    });
+
+    document.getElementById('respuesta').addEventListener('input', function() {
+        var respuesta = this.value.toLowerCase();
+        respuesta = capitalizeFirstLetter(respuesta);
+        this.value = respuesta;
     });
 });
 </script>

@@ -495,5 +495,32 @@ tippy('#botonModificar', {
     });
   }
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function capitalizeFirstLetter(input) {
+        return input.replace(/(^|\s)\S/g, function(txt) {
+            return txt.toUpperCase();
+        });
+    }
+
+    document.getElementById('nombre').addEventListener('input', function() {
+        var nombre = this.value.toLowerCase();
+        nombre = capitalizeFirstLetter(nombre);
+        this.value = nombre;
+    });
+
+    document.getElementById('pellidopaterno').addEventListener('input', function() {
+        var apellidopaterno = this.value.toLowerCase();
+        apellidopaterno = capitalizeFirstLetter(apellidopaterno);
+        this.value = aapellidopaterno;
+    });
+
+    document.getElementById('apellidomaterno').addEventListener('input', function() {
+        var apellidomaterno = this.value.toLowerCase();
+        apellidomaterno = capitalizeFirstLetter(apellidomaterno);
+        this.value = apellidomaterno;
+    });
+});
+</script>
 </body>
 </html>
