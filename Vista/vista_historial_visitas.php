@@ -93,32 +93,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
     $query = mysqli_query ($conexion, "select * from srcv_visitas");
-    $result_empresa= mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Empresa' and ESTATUS='1'");
-    $result_asunto = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Asunto' and ESTATUS='1'");
-    $result_piso = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Piso' and ESTATUS='1'");
-
-
-    // Comprobar si hay errores en las consultas
-    if (!$result_empresa || !$result_asunto || !$result_piso) {
-      // Manejar el error aquí
-      echo "Error en la consulta SQL.";
-  }
-  
-  // Almacenar los resultados en arrays
-  $empresas = [];
-  while ($fila_empresa = mysqli_fetch_assoc($result_empresa)) {
-      $empresas[] = $fila_empresa;
-  }
-  
-  $asuntos = [];
-  while ($fila_asunto = mysqli_fetch_assoc($result_asunto)) {
-      $asuntos[] = $fila_asunto;
-  }
-  
-  $pisos = [];
-  while ($fila_piso = mysqli_fetch_assoc($result_piso)) {
-      $pisos[] = $fila_piso;
-  }
 
 
   ?>
@@ -268,23 +242,45 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                                 <div class="col">
                                   <div class="mb-3"></div> <!-- Salto de línea -->
                                   <label class="form-label" for="empresa">Empresa *</label><br>
-                                  <select class="form-select mr-sm-2" id="empresa" name="empresa">
-                                      <option value="">Seleccionar Empresa</option>
-                                      <?php foreach ($empresas as $empresa) { ?>
-                                          <option value="<?php echo $empresa['NOMBRE']; ?>"><?php echo $empresa['NOMBRE']; ?></option>
-                                      <?php } ?>
-                                  </select>
+                                <?php
+                                    $conexion = conect();
+
+                                    $queryEmpr= mysqli_query($conexion,"SELECT NOMBRE FROM srcv_listas WHERE CATEGORIA = 'Empresa' and ESTATUS = '1';");
+                                    //$result_empresa= mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='Empresa' and ESTATUS='1'");
+                                ?>
+                                    <select class="form-select mr-sm-2" id="empresa" name="empresa" required="" title="Selecciona una empresa ">
+                                        <option value="">Selecciona una empresa</option>
+                                        <?php
+                                            while($datosEmp = mysqli_fetch_array($queryEmpr)){
+                                        ?>
+                                        <option value="<?php echo $datosEmp['NOMBRE']?>" <?php if($filas['EMPRESA'] == $datosEmp['NOMBRE']) echo "selected"; ?>><?php echo $datosEmp['NOMBRE'];?></option>
+                                        <?php
+                                            }
+                                            $conexion->close();
+                                        ?>
+                                    </select>
                                 </div>
                                 
                                 <div class="col">
                                   <div class="mb-3"></div> <!-- Salto de línea -->
                                   <label class="form-label" for="asunto">Asunto *</label><br>
-                                  <select class="form-select mr-sm-2" id="asunto" name="asunto">
-                                      <option value="">Seleccionar Asunto</option>
-                                      <?php foreach ($asuntos as $asunto) { ?>
-                                          <option value="<?php echo $asunto['NOMBRE']; ?>"><?php echo $asunto['NOMBRE']; ?></option>
-                                      <?php } ?>
-                                  </select>
+
+                                <?php
+                                    $conexion = conect();
+
+                                    $queryAsun= mysqli_query($conexion,"SELECT NOMBRE FROM srcv_listas WHERE CATEGORIA = 'Asunto' and ESTATUS = '1';");
+                                ?>
+                                    <select class="form-select mr-sm-2" id="asunto" name="asunto" required="" title="Selecciona el asunto ">
+                                        <option value="" >Selecciona el asunto</option>
+                                        <?php
+                                            while($datosAsun = mysqli_fetch_array($queryAsun)){
+                                        ?>
+                                        <option value="<?php echo $datosAsun['NOMBRE']?>" <?php if($filas['ASUNTO'] == $datosAsun['NOMBRE']) echo "selected"; ?>><?php echo $datosAsun['NOMBRE'];?></option>
+                                        <?php
+                                            }
+                                            $conexion->close();
+                                        ?>
+                                    </select>
                                 </div>
                               </div>
                               <div class="mb-3"></div> <!-- Salto de línea -->
@@ -292,12 +288,22 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                               <label class="form-label" for="asunto">Piso *</label><br>
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6">
-                                <select class="form-select mr-sm-2" id="piso" name="piso">
-                                    <option value="">Seleccionar Piso</option>
-                                    <?php foreach ($pisos as $piso) { ?>
-                                        <option value="<?php echo $piso['NOMBRE']; ?>"><?php echo $piso['NOMBRE']; ?></option>
-                                    <?php } ?>
-                                </select>
+                                    <?php
+                                    $conexion = conect();
+
+                                    $queryPiso= mysqli_query($conexion,"SELECT NOMBRE FROM srcv_listas WHERE CATEGORIA = 'Piso' and ESTATUS = '1';");
+                                ?>
+                                    <select class="form-select mr-sm-2" id="piso" name="piso" required="" title="Selecciona el piso ">
+                                        <option value="" >Selecciona el piso</option>
+                                        <?php
+                                            while($datosPiso = mysqli_fetch_array($queryPiso)){
+                                        ?>
+                                        <option value="<?php echo $datosPiso['NOMBRE']?>" <?php if($filas['PISO'] == $datosPiso['NOMBRE']) echo "selected"; ?>><?php echo $datosPiso['NOMBRE'];?></option>
+                                        <?php
+                                            }
+                                            $conexion->close();
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="col-md-3"></div>
                               </div>
