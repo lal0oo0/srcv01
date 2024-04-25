@@ -190,7 +190,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 
 
                   <!-- Modificar reservaciones -->
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_RESERVACION'] ?>" onclick="Reservacion('<?php $filas['ID_RESERVACION'] ?>')" class="link-danger" id="botonModificar"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_RESERVACION'] ?>" onclick="Reservacion('<?php $filas['ID_RESERVACION'] ?>')" class="link-danger" id="botonModificar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                   <!-- Modal para modificar reservaciones-->
                   <div class="modal fade" id="exampleModal_<?php echo $filas['ID_RESERVACION'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">

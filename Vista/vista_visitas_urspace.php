@@ -164,7 +164,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <tr class="datos">
                     <td>
                         <?php if(empty($filas['ENTRADA_URSPACE'])){ ?>
-                        <a href="../Controlador/controlador_entrada_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>" id="botonEntrada"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                        <a href="../Controlador/controlador_entrada_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>" id="botonEntrada" class="link-danger"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                         <?php
                         }else{
                         echo $filas['ENTRADA_URSPACE'];
@@ -194,9 +194,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                       if(empty($filas['MOTIVO'])){
                         ?>
                         
-                  <!-- Modificar reservaciones -->
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>" onclick="VISITA('<?php $filas['ID_VISITA'] ?>')" class="link-danger" id="botonMotivo"> <i class="fa fa-refresh" aria-hidden="true"></i></a>
-                  <!-- Modal para modificar reservaciones-->
+                  <!-- Modificar visitas -->
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>" onclick="VISITA('<?php $filas['ID_VISITA'] ?>')" class="link-danger" id="botonMotivo"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                  <!-- Modal para modificar visitas-->
                   <div class="modal fade" id="exampleModal_<?php echo $filas['ID_VISITA'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -207,7 +207,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="mb-3"></div> <!--Salto de linea-->
-                        <!--posponer reservaciones-->
+                        <!--agregar motivo de visita-->
                         <div class="modal-body">
                           <form action="../Controlador/controlador_motivo.php" class="formulario row g-3 needs-validation" id="<?php echo $idForm ;?>" name="<?php echo $idForm ;?>" method="post" novalidate>
                             <div class="mb-3"></div> <!-- Salto de línea -->
