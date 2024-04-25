@@ -485,7 +485,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Verifica si el abono es menor o igual a cero
         if ((abono) < 0) {
             // Muestra una alerta utilizando SweetAlert
-            swal("Error", "La cantidad de abono debe ser mayor que cero.", "error");
+            swal("Error", "La cantidad de abono no puede ser negativa.", "error");
 
             // Evita que el formulario se envíe
             event.preventDefault();
