@@ -162,7 +162,6 @@ $row = $resultado->fetch_assoc();
 
       <div class="card-body">
             
-            <!--Faltaba el method POST -->
             <form action="../Controlador/controlador_registrar_usuarios.php" method="POST" class="row g-3 needs-validation" name="myForm" id="myForm" novalidate>
             
             <div class="col-md-12">
@@ -300,6 +299,76 @@ $row = $resultado->fetch_assoc();
             <?php
             }
             ?>
+                  <!-- Modificar usuario -->
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_ADMINISTRADOR'] ?>" onclick="VISITA('<?php $filas['ID_ADMINISTRADOR'] ?>')" id="botonAdmin"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                  <!-- Modal para modificar usuarios-->
+                  <div class="modal fade" id="exampleModal_<?php echo $filas['ID_ADMINISTRADOR'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar informacion de <?= $filas['NOMBRE'] ?></h1>
+                          <input id="Administrador_<?php echo $filas['ID_ADMINISTRADOR'] ?>" name="idadmin" value="" hidden>
+                            <input type="hidden" name="idadmin" id="idadmin" value="<?php echo $filas['ID_ADMINISTRADOR'] ?>">
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="mb-3"></div> <!--Salto de linea-->
+                        <!--agregar motivo de visita-->
+                        <div class="modal-body">
+                          <form action="../Controlador/controlador_editar_admin.php" class="formulario row g-3 needs-validation" id="<?php echo $idForm ;?>" name="<?php echo $idForm ;?>" method="post" novalidate>
+                            <div class="mb-3"></div> <!-- Salto de línea -->
+                              <input type="hidden" name="idadmin" id="idadmin" value="<?= $filas['ID_ADMINISTRADOR'] ?>">
+
+                              <div class="col-md-12">
+
+                              <label for="nombre" class="form-label">Nombre *</label>
+                              <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="valid01" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" value="<?php echo $filas['NOMBRE'] ?>" required>
+                              <div class="invalid-feedback">
+                              Ingrese informacion valida.
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="ap" class="form-label">Apellido Paterno *</label>
+                              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="valid02" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" value="<?php echo $filas['APELLIDO_PATERNO']?>" required>
+                              <div class="invalid-feedback">
+                              Ingrese informacion valida.
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="am" class="form-label">Apellido Materno *</label>
+                              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="valid03" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" value="<?php echo $filas['APELLIDO_MATERNO']?>" required>
+                              <div class="invalid-feedback">
+                              Ingrese informacion valida.
+                              </div>
+                            </div>
+
+                              <div class="col-md-6">
+
+                            </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                            <div class="col-md-6">
+                                <select class="form-select" id="rol" name="rol" style="border: 2px solid #1E90FF;" required>
+                                <option selected value="<?php echo $filas['ROL']?>"><?php echo $filas['ROL']?></option>
+                                <option value="1">Recepcion IT-Global</option>
+                                <option value="2">Recepcion UrSpace</option>
+                                <option value="3">Seguridad</option>
+                            </select>
+                            <div class="invalid-feedback"></div>
+                            </div>
+                            </div>
+                            <br>
+                            <div class="col-12">
+                              <input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></button>
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
+                            </div>
+
+                            <div class="mb-5"></div> <!--Salto de linea-->
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
           </td>
         </tr>
         <?php
