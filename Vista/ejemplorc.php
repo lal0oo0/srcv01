@@ -146,7 +146,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                         <div class="form-check col-md-6">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="border: 2px solid #007AB6;">
                             <label class="form-check-label align-middle" for="flexCheckDefault" style="font-size: 17px">
-                                ¿No recuerdas tu pregunta de seguridad y respuesta?
+                                No recuerdas tu pregunta de seguridad y respuesta
                             </label>
                             </div>
                             <div class="col-md-12" id="codigo_recuperacion_wrapper" style="display: none;">
