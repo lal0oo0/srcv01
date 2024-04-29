@@ -356,7 +356,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                 } else {
                     // Si no se selecciona la opción de no recordar, habilitar la validación de los campos de contraseña
                     passwo1Input.setAttribute("required", "");
-                    confirmPasswoInput.setAttribute("required", "");
+                    confirmPasswoInput.setAttribute("required", "");holaaa
                 }
             });
         });
