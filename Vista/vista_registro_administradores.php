@@ -318,46 +318,50 @@ $row = $resultado->fetch_assoc();
                             <div class="mb-3"></div> <!-- Salto de línea -->
                               <input type="hidden" name="idadmin" id="idadmin" value="<?= $filas['ID_ADMINISTRADOR'] ?>">
 
-                              <div class="col-md-12">
-
-                              <label for="nombre" class="form-label">Nombre *</label>
+                            <div class="col-md-12">
+                              <label for="nombre" class="form-label">Nombre</label>
                               <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="valid01" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" value="<?php echo $filas['NOMBRE'] ?>" required>
                               <div class="invalid-feedback">
                               Ingrese informacion valida.
                               </div>
                             </div>
+
                             <div class="col-md-6">
-                              <label for="ap" class="form-label">Apellido Paterno *</label>
+                              <label for="ap" class="form-label">Apellido Paterno</label>
                               <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name=ap id="valid02" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" value="<?php echo $filas['APELLIDO_PATERNO']?>" required>
                               <div class="invalid-feedback">
                               Ingrese informacion valida.
                               </div>
                             </div>
                             <div class="col-md-6">
-                              <label for="am" class="form-label">Apellido Materno *</label>
+                              <label for="am" class="form-label">Apellido Materno</label>
                               <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="am" id="valid03" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" value="<?php echo $filas['APELLIDO_MATERNO']?>" required>
                               <div class="invalid-feedback">
                               Ingrese informacion valida.
                               </div>
                             </div>
 
-                              <div class="col-md-6">
+                            <div class="col-md-12">
+                              <label for="nombre" class="form-label">Correo electrónico</label>
+                              <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="correo" id="correo" aria-describedby="emailHelp" value="<?php echo $filas['CORREO_ELECTRONICO']?>" required>
+                              <div class="invalid-feedback">
+                              Ingrese informacion valida.
+                              </div>
+                            </div>
 
-                            </div>
-                            </div>
-                            <br>
-                            <div class="row">
+                            <div class="col-md-3"></div>
                             <div class="col-md-6">
-                                <select class="form-select" id="rol" name="rol" style="border: 2px solid #1E90FF;" required>
+                              <label for="am" class="form-label">Rol</label>
+                              <select class="form-select" id="rol" name="rol" style="border: 2px solid #1E90FF;" required>
                                 <option selected value="<?php echo $filas['ROL']?>"><?php echo $filas['ROL']?></option>
                                 <option value="1">Recepcion IT-Global</option>
                                 <option value="2">Recepcion UrSpace</option>
                                 <option value="3">Seguridad</option>
-                            </select>
-                            <div class="invalid-feedback"></div>
+                              </select>
+                              <div class="invalid-feedback"></div>
                             </div>
-                            </div>
-                            <br>
+                            <div class="col-md-3"></div>
+                            <div class="mb-3"></div> <!--Salto de linea-->
                             <div class="col-12">
                               <input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></button>
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>

@@ -11,6 +11,12 @@ include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
 
+// Verificar si la variable de session no esta definida para el numero de intentos
+if (!isset($_SESSION['intentos'])) {
+    //Si no esta definida se inicializa en 0
+    $_SESSION['intentos'] = 0;
+}
+
 
 // Recibir datos del formulario
 $correoelectronico = $_POST['correoelectronico'];
@@ -21,6 +27,14 @@ if (!filter_var($correoelectronico, FILTER_VALIDATE_EMAIL)) {
     // Correo electrónico no válido, mostrar mensaje de error y salir
     $mensaje = '<div class="alert alert-danger">El formato del correo electrónico no es válido.</div>';
     header("location: ../Vista/vista_inicio_sesion.php?mensaje=" . urlencode($mensaje));
+    exit();
+}
+
+$_SESSION['intentos']++;
+// Si el usuario ha excedido de 3 intentos lo redirige a la pantalla para recuperar contraseña
+if ($_SESSION['intentos'] > 3) {
+    header("Location: ../Vista/vista_recuperar_contrasena.php");
+    $_SESSION['intentos'] = 0;
     exit();
 }
 
@@ -96,8 +110,11 @@ if($urspace->num_rows==1){
     exit();
 
 } 
+// Si logra acceder antes de los intentos marcados se reinicia el contador en 0
+if ($urspace->num_rows == 1 || $recepcion->num_rows == 1 || $seguridad->num_rows == 1 || $administrador->num_rows == 1) {
+    $_SESSION['intentos'] = 0; 
 
-else {
+} else {
     // Error: alerta de Bootstrap
     $mensaje = '<div class="alert alert-danger">Contraseña y/o correo electrónico incorrectos.' . mysqli_error($conexion) . '</div>';
 }

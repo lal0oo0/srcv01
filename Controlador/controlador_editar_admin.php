@@ -22,10 +22,11 @@ $nombre = $_POST['nombre'];
 $apellidopa = $_POST['ap'];
 $apellidoma = $_POST['am'];
 $rol = $_POST['rol'];
+$correo = $_POST['correo'];
 
 
     $consulta="UPDATE srcv_administradores
-    SET NOMBRE='$nombre', APELLIDO_PATERNO='$apellidopa', APELLIDO_MATERNO='$apellidoma', ROL='$rol', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_ADMINISTRADOR='$id'";
+    SET NOMBRE='$nombre', APELLIDO_PATERNO='$apellidopa', APELLIDO_MATERNO='$apellidoma', ROL='$rol', CORREO_ELECTRONICO='$correo', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_ADMINISTRADOR='$id'";
     $sql=mysqli_query($conexion, $consulta);
   
 
