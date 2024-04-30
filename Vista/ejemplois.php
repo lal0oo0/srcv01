@@ -113,7 +113,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <div class="col-12">
               <label for="validationCustom03" class="form-label">Contraseña *</label>
               <div class="input-group has-validation">
-                <input type="text" class="form-control" style="border: 2px solid #007AB6" name="contrasena" id="exampleInputPassword1"  id="validationCustom05" aria-describedby="passwordHelp" required>
+                <input type="password" class="form-control" style="border: 2px solid #007AB6" name="contrasena" id="exampleInputPassword1"  id="validationCustom05" aria-describedby="passwordHelp" required>
                 <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="togglePassword">
                   <i class="fa fa-eye-slash" aria-hidden="true"></i>
                 </button>
