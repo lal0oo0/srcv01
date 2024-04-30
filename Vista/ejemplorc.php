@@ -1,6 +1,6 @@
 <?php
 require_once '../Modelo/conexion2.php';
-require_once '../PHPMailer/controlador_recuperar_contrasena.php';
+require_once '../PHPMailer/ejemplocontroladorrc.php';
 if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa']) {
     $mensaje_enviado = true;
 } else {
@@ -311,8 +311,6 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
         var checkbox = document.getElementById("flexCheckDefault");
         var preguntaInput = document.getElementById("pregunta");
         var respuestaInput = document.getElementById("respuesta");
-        var passwo1Input = document.getElementById("passwo1");
-        var confirmPasswoInput = document.getElementById("confirmPasswo");
         var codigoRecuperacionInput = document.getElementById("codigo_recuperacion");
         var codigoRecuperacionWrapper = document.getElementById("codigo_recuperacion_wrapper");
 
@@ -323,18 +321,12 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                 respuestaInput.style.display = "none";
                 // Mostrar solo el campo para ingresar el código de recuperación
                 codigoRecuperacionWrapper.style.display = "block";
-                // Ocultar campos de contraseña y confirmación
-                passwo1Input.style.display = "none";
-                confirmPasswoInput.style.display = "none";
             } else {
                 // Si no se selecciona la opción de no recordar, mostrar la pregunta y respuesta
                 preguntaInput.style.display = "block";
                 respuestaInput.style.display = "block";
                 // Ocultar campo para ingresar el código de recuperación
                 codigoRecuperacionWrapper.style.display = "none";
-                // Mostrar campos de contraseña y confirmación
-                passwo1Input.style.display = "block";
-                confirmPasswoInput.style.display = "block";
             }
         });
     });
@@ -361,5 +353,38 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
             });
         });
     </script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    var checkbox = document.getElementById("flexCheckDefault");
+    var boton = document.getElementById("enviar");
+    var passwo1Input = document.getElementById("passwo1");
+    var confirmPasswoInput = document.getElementById("confirmPasswo");
+
+    checkbox.addEventListener("change", function() {
+        if (checkbox.checked) {
+            // Si se selecciona la opción de no recordar, cambiar el texto del botón
+            boton.textContent = "Enviar código de verificación";
+            // Deshabilitar campos de contraseña y confirmación
+            passwo1Input.disabled = true;
+            confirmPasswoInput.disabled = true;
+        } else {
+            // Si no se selecciona la opción de no recordar, restaurar el texto del botón
+            boton.textContent = "Enviar";
+            // Habilitar campos de contraseña y confirmación
+            passwo1Input.disabled = false;
+            confirmPasswoInput.disabled = false;
+        }
+    });
+
+    boton.addEventListener("click", function() {
+        if (boton.textContent === "Enviar código de verificación") {
+            // Aquí enviarías el correo con el código de verificación
+            // Luego deshabilita los campos de contraseña
+            passwo1Input.disabled = true;
+            confirmPasswoInput.disabled = true;
+        }
+    });
+});
+</script>
 </body>
 </html>
