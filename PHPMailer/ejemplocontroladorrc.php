@@ -71,7 +71,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
             $mail->addAddress($correo);
             $mail->isHTML(true);
             $mail->Subject = 'Código de Verificación';
-            $mail->Body = '<html><body><p>Hola ' . $_SESSION['nombre_usuario'] . ',</p><p>Aquí está tu código de verificación para actualizar la contraseña: <b>' . $codigo_verificacion . '</b></p></body></html>';
+            $mail->Body = '<html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Actualización de Contraseña</title>
+            </head>
+            <body>
+            <div style="width: 100%; max-width: 500px; margin: 0 auto; padding: 20px;">
+            <div style="padding: 20px; text-align: center; background: #007AB6;max-width: 100%;height: auto; align: center;">
+            <h1 style="color: white;">iT-Global</h1>
+            </div>
+                    <p style="font-size: 16px; color: black;">Hola ' . $_SESSION['nombre_usuario'] . ',</p>
+                    <p style="font-size: 16px; color: black;">Aquí está tu código de verificación para actualizar la contraseña: </p>
+                    <p style="font-size: 17px; text-align: center;"><b>' . $codigo_verificacion . '</b></p>
+                    <p style="font-size: 16px; color: black;">Por favor, guarda esta información en un lugar seguro.</p>
+                    <p style="font-size: 16px; color: black;">Atentamente,<br>iT-Global</p>
+                </div>
+                </div>
+                      </body>
+                      </html>';
+                      
             if ($mail->send()) {
                 $mensaje .= '<div class="alert alert-success" role="alert">Se ha enviado un correo electrónico con el código de verificación.</div>';
             } else {

@@ -150,7 +150,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                             </label>
                             </div>
                             <div class="col-md-12" id="codigo_recuperacion_wrapper" style="display: none;">
-                                <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="codigo_recuperacion" name="codigo_recuperacion" placeholder="Ingrese el código de recuperación" required>
+                                <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="codigo_recuperacion" name="codigo_recuperacion" placeholder="Ingrese el código de recuperación" maxlength="8" pattern="[A-Za-z0-9]{8}" required>
                             </div>
                             <div class="mb-1"></div>
                         <div class="col-md-6">
