@@ -24,6 +24,7 @@ if ($total == 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iniciar sesion</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 <?php
     require_once("../Modelo/conexion2.php");
@@ -111,10 +112,15 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             </div>
             <div class="col-12">
               <label for="validationCustom03" class="form-label">Contraseña *</label>
+              <div class="input-group has-validation">
               <input type="password" class="form-control" style="border: 2px solid #007AB6" name="contrasena" id="exampleInputPassword1"  id="validationCustom05" aria-describedby="passwordHelp" required>
+              <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="togglePassword">
+                  <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                </button>
               <div class="invalid-feedback">
               Campo obligatorio
               </div>
+            </div>
             </div>
             <div class="mb-3"></div><!--Salto de linea-->
             <div class="col-12">
@@ -165,6 +171,22 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             setTimeout(function() {
                 alerta.remove(); // Elimina la alerta del DOM
             }, 3000);
+        }
+    });
+</script>
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('exampleInputPassword1');
+        const icon = document.querySelector('#togglePassword i');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
         }
     });
 </script>

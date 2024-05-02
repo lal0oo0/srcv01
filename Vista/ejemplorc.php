@@ -14,6 +14,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar contraseña</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
     <style>
         body{
     background-color: #007AB6 ;
@@ -106,6 +107,10 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
     border-color: #000; /* Color del borde negro */
 }
 
+#flexCheckDefault + label.form-check-label {
+    color: black; /* Cambia el color del texto del checkbox */
+}
+
     </style>
 </head>
 <body>
@@ -144,7 +149,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                             <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
                         </div>
                         <div class="form-check col-md-6">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="border: 2px solid #007AB6;">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="border: 2px solid #007AB6;" onchange="habilitarEnviarCodigo()">
                             <label class="form-check-label align-middle" for="flexCheckDefault" style="font-size: 17px">
                                 No recuerdas tu pregunta de seguridad y respuesta
                             </label>
@@ -155,20 +160,33 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                             <div class="mb-1"></div>
                         <div class="col-md-6">
                              <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
+                             <div class="input-group has-validation">
                              <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                             <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="togglePassword">
+                                <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                            </button>
                              <div class="invalid-feedback">*Campo obligatorio</div>
+                        </div>
                         </div>
                         <div class="col-md-6">
                             <label for="confirmPasswo" class="form-label">Confirmar contraseña</label>
+                            <div class="input-group has-validation">
                             <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                            <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="toggleConfirmPassword">
+                                <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                            </button>
                             <div class="invalid-feedback" id="passwordMismatch" style="color: red; display: none;">
                              Las contraseñas no coinciden.
                              </div>
+                            </div>
                         </div>
                         <?php $correo_encontrado = true; ?>
                         <?php endif; ?>
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit" id="enviar" onclick="return validarCampos()" name="enviar">Siguiente</button>
+                        <div class="col-12 d-flex justify-content-center">
+                         <div style="display: flex; justify-content: space-between;">
+                        <button class="btn btn-primary" type="submit" id="enviar" onclick="return validarCampos()" name="enviar">Siguiente</button>
+                        <button class="btn btn-primary" type="submit" id="enviar_codigo" style="display: none;" name="enviar_codigo" onclick="window.location.href = 'controlador_generar_codigo.php'>Enviar código de verificación</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -362,29 +380,83 @@ document.addEventListener("DOMContentLoaded", function() {
 
     checkbox.addEventListener("change", function() {
         if (checkbox.checked) {
-            // Si se selecciona la opción de no recordar, cambiar el texto del botón
-            boton.textContent = "Enviar código de verificación";
             // Deshabilitar campos de contraseña y confirmación
             passwo1Input.disabled = true;
             confirmPasswoInput.disabled = true;
         } else {
-            // Si no se selecciona la opción de no recordar, restaurar el texto del botón
-            boton.textContent = "Enviar";
             // Habilitar campos de contraseña y confirmación
             passwo1Input.disabled = false;
             confirmPasswoInput.disabled = false;
         }
     });
+});
+    document.addEventListener("DOMContentLoaded", function() {
+        var checkbox = document.getElementById("flexCheckDefault");
+        var enviarBtn = document.getElementById("enviar");
+        var enviarCodigoBtn = document.getElementById("enviar_codigo");
 
-    boton.addEventListener("click", function() {
-        if (boton.textContent === "Enviar código de verificación") {
-            // Aquí enviarías el correo con el código de verificación
-            // Luego deshabilita los campos de contraseña
-            passwo1Input.disabled = true;
-            confirmPasswoInput.disabled = true;
+        checkbox.addEventListener("change", function() {
+            if (checkbox.checked) {
+                // Si el checkbox está seleccionado, ocultar el botón "Enviar"
+                enviarBtn.style.display = "none";
+                // Y mostrar el botón "Enviar código de verificación"
+                enviarCodigoBtn.style.display = "block";
+            } else {
+                // Si el checkbox no está seleccionado, mostrar el botón "Enviar"
+                enviarBtn.style.display = "block";
+                // Y ocultar el botón "Enviar código de verificación"
+                enviarCodigoBtn.style.display = "none";
+            }
+        });
+    });
+</script>
+<script>
+    // Función para habilitar o deshabilitar el botón de enviar código según el estado del checkbox
+function habilitarEnviarCodigo() {
+    var checkbox = document.getElementById("flexCheckDefault");
+    var enviarCodigoBtn = document.getElementById("enviar_codigo");
+
+    if (checkbox.checked) {
+        enviarCodigoBtn.style.display = "inline-block"; // Mostrar el botón si el checkbox está seleccionado
+    } else {
+        enviarCodigoBtn.style.display = "none"; // Ocultar el botón si el checkbox no está seleccionado
+    }
+}
+</script>
+<script>
+    // Función para alternar la visibilidad de la contraseña
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('passwo1'); // Campo de contraseña
+        const icon = document.querySelector('#togglePassword i');
+
+        // Alterna entre tipo de entrada 'password' y 'text'
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
         }
     });
-});
+
+    // Función para alternar la visibilidad de la confirmación de contraseña
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+        const confirmPasswordInput = document.getElementById('confirmPasswo'); // Campo de confirmación de contraseña
+        const icon = document.querySelector('#toggleConfirmPassword i');
+
+        // Alterna entre tipo de entrada 'password' y 'text'
+        if (confirmPasswordInput.type === 'password') {
+            confirmPasswordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            confirmPasswordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
 </script>
 </body>
 </html>

@@ -26,6 +26,7 @@ if ($total > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 <?php
     require_once("../Modelo/conexion2.php");
@@ -135,14 +136,24 @@ if ($total > 0) {
             </div>
             <div class="col-md-6">
               <label for="pass" class="form-label">Contraseña *</label>
+              <div class="input-group has-validation">
               <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass" id="valid04" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+              <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="togglePassword">
+                  <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                </button>
               <div class="invalid-feedback " id="pass"></div>
+              </div>
               <br>
             </div>
             <div class="col-md-6">
               <label for="pass" class="form-label">Confirmar contraseña *</label>
+              <div class="input-group has-validation">
               <input type="password" class="form-control" style="border: 2px solid #007AB6;" name="pass_confirmar" id="pass_confirmar" required>
+              <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="toggleConfirmPassword">
+                  <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                </button>
               <div class="invalid-feedback " id="confirmar"></div>
+              </div>
               <br>
             </div>
              <div class="col-md-12">
@@ -396,6 +407,41 @@ document.addEventListener("DOMContentLoaded", function() {
         this.value = respuesta;
     });
 });
+</script>
+<script>
+    // Función para alternar la visibilidad de la contraseña
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('valid04'); // Campo de contraseña
+        const icon = document.querySelector('#togglePassword i');
+
+        // Alterna entre tipo de entrada 'password' y 'text'
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
+
+    // Función para alternar la visibilidad de la confirmación de contraseña
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+        const confirmPasswordInput = document.getElementById('pass_confirmar'); // Campo de confirmación de contraseña
+        const icon = document.querySelector('#toggleConfirmPassword i');
+
+        // Alterna entre tipo de entrada 'password' y 'text'
+        if (confirmPasswordInput.type === 'password') {
+            confirmPasswordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            confirmPasswordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
 </script>
 </body>
 </html>
