@@ -185,7 +185,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                           echo '';
                         } else{
                         if(empty($filas['SALIDA_URSPACE'])){ ?>
-                        <a href="../Controlador/controlador_salida_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>" id="botonSalida"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                        <a href="../Controlador/controlador_salida_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>" id="botonSalida" class="link-danger"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                         <?php
                         }else{
                         echo $filas['SALIDA_URSPACE'];
