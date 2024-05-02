@@ -377,7 +377,7 @@ $row = $resultado->fetch_assoc();
                             <div class="col-md-3"></div>
                             <div class="mb-3"></div> <!--Salto de linea-->
                             <div class="col-12">
-                              <input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></button>
+                              <input type="submit" value="Confirmar" class="btn btn-primary" name="Registrar"></button>
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
                             </div>
 
