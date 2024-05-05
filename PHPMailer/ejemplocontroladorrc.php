@@ -5,6 +5,98 @@ use PHPMailer\PHPMailer\Exception;
 require_once '../Modelo/conexion2.php';
 require 'vendor/autoload.php';
 
+$conexion = conect();
+session_start();
+
+$mensaje = '';
+
+// Verificar si se envió un formulario con el correo electrónico proporcionado y el botón de enviar código de verificación
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['enviar_codigo'])) {
+    $correo = $_POST["correo"];
+    // Validar el correo electrónico antes de enviar el código de verificación
+    if (verificarCorreoExistente($correo)) {
+        $_SESSION['correo'] = $correo;
+        $mensaje_enviado = enviarCodigoVerificacion();
+    } else {
+        $mensaje = '<div class="alert alert-danger" role="alert">El correo electrónico no está registrado.</div>';
+    }
+}
+
+// Función para verificar si el correo existe en la base de datos
+function verificarCorreoExistente($correo) {
+    global $conexion;
+    $sql = "SELECT COUNT(*) AS total FROM srcv_administradores WHERE CORREO_ELECTRONICO=?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("s", $correo);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return ($row['total'] > 0);
+}
+
+// Función para enviar el código de verificación
+function enviarCodigoVerificacion() {
+    global $conexion;
+
+    // Obtener el correo electrónico de la sesión
+    $correo_destino = $_SESSION['correo'];
+
+    // Función para generar un código de verificación aleatorio
+    function generarCodigoVerificacion($longitud = 8) {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $codigo_verificacion = '';
+        for ($i = 0; $i < $longitud; $i++) {
+            $codigo_verificacion .= $caracteres[rand(0, strlen($caracteres) - 1)];
+        }
+        return $codigo_verificacion;
+    }
+
+    // Generar y almacenar el código de verificación en la sesión
+    $codigo_verificacion = generarCodigoVerificacion();
+    $_SESSION['codigo_verificacion'] = $codigo_verificacion;
+
+    // Envío de correo electrónico con el código de verificación
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'itglobal071@gmail.com'; 
+    $mail->Password = 'sqtwacekbdmnqjyq'; 
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+    $mail->CharSet = 'UTF-8';
+    $mail->setFrom('itglobal071@gmail.com', 'iT-Global');
+    $mail->addAddress($correo_destino);
+    $mail->isHTML(true);
+    $mail->Subject = 'Código de Verificación';
+    $mail->Body = '<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Actualización de Contraseña</title>
+    </head>
+    <body>
+    <div style="width: 100%; max-width: 500px; margin: 0 auto; padding: 20px;">
+    <div style="padding: 20px; text-align: center; background: #007AB6;max-width: 100%;height: auto; align: center;">
+    <h1 style="color: white;">iT-Global</h1>
+    </div>
+            <p style="font-size: 16px; color: black;">Hola ' . $_SESSION['nombre_usuario'] . ',</p>
+            <p style="font-size: 16px; color: black;">Aquí está tu código de verificación para actualizar la contraseña:</p>
+            <p style="font-size: 17px; text-align: center;"><b>' . $codigo_verificacion .  '</b></p>
+            <p style="font-size: 16px; color: black;">Por favor, guarda esta información en un lugar seguro.</p>
+            <p style="font-size: 16px; color: black;">Atentamente,<br>iT-Global</p>
+        </div>
+        </div>
+              </body>
+              </html>';
+
+    if ($mail->send()) {
+        return true;
+    } else {
+        return false;
+    }
+} 
+
 $link = $_SERVER['HTTP_HOST'];
 
 $conexion = conect();
@@ -16,7 +108,6 @@ $pregunta = '';
 $respuesta_correcta = '';
 $nombre_usuario = '';
 
-session_start();
 
 // Verificar si se envió un formulario con el correo electrónico
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {

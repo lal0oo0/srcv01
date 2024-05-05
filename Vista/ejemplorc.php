@@ -6,7 +6,9 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
 } else {
     $mensaje_enviado = false;
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -126,8 +128,8 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                     <div class="col-12 user-img">
                         <img src="../imagenes/logocorporativo.png" alt="" class="logo">
                     </div>
-                    <form action="" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
-                        <div class="col-12">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
+                        <div class="col-md-12">
                             <h3>Recuperar contraseña</h3>
                             <?php echo $mensaje; ?>
                             <label for="validationexampleInputEmail1" class="form-label <?php if ($correo_encontrado) echo 'd-none'; ?>">Ingrese su correo electrónico</label>
@@ -149,13 +151,17 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                             <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
                         </div>
                         <div class="form-check col-md-6">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="border: 2px solid #007AB6;" onchange="habilitarEnviarCodigo()">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="border: 2px solid #007AB6;">
                             <label class="form-check-label align-middle" for="flexCheckDefault" style="font-size: 17px">
                                 No recuerdas tu pregunta de seguridad y respuesta
                             </label>
                             </div>
                             <div class="col-md-12" id="codigo_recuperacion_wrapper" style="display: none;">
-                                <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="codigo_recuperacion" name="codigo_recuperacion" placeholder="Ingrese el código de recuperación" maxlength="8" pattern="[A-Za-z0-9]{8}" required>
+                                <div class="input-group">
+                                     <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="codigo_recuperacion" name="codigo_recuperacion" placeholder="Ingrese el código de recuperación" maxlength="8" pattern="[A-Za-z0-9]{8}">
+                                     <input type="hidden" name="action" value="enviar_codigo">
+                                     <button class="btn btn-primary" type="submit" id="enviar_codigo" name="enviar_codigo" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Enviar código de verificación</button>
+                                </div>
                             </div>
                             <div class="mb-1"></div>
                         <div class="col-md-6">
@@ -182,12 +188,11 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                         </div>
                         <?php $correo_encontrado = true; ?>
                         <?php endif; ?>
-                        <div class="col-12 d-flex justify-content-center">
-                         <div style="display: flex; justify-content: space-between;">
-                        <button class="btn btn-primary" type="submit" id="enviar" onclick="return validarCampos()" name="enviar">Siguiente</button>
-                        <button class="btn btn-primary" type="submit" id="enviar_codigo" style="display: none;" name="enviar_codigo" onclick="window.location.href = 'controlador_generar_codigo.php'>Enviar código de verificación</button>
+                            <div class="col-12 d-flex justify-content-center">
+                                <div style="display: flex; justify-content: space-between;">
+                                         <button class="btn btn-primary" type="submit" id="siguiente" onclick="verificarCorreo()" name="siguiente">Siguiente</button>
                             </div>
-                        </div>
+                         </div>
                     </form>
                 </div>
             </div>
@@ -217,26 +222,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
             })
         })();
     </script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var boton = document.getElementById("enviar");
-        var emailInput = document.getElementById("correo");
-        <?php if ($correo_encontrado): ?>
-            boton.textContent = "Enviar";
-        <?php endif; ?>
-        boton.addEventListener("click", function() {
-            if (boton.textContent == "Siguiente" && emailInput.value !== "") {
-                boton.textContent = "Enviar";
-            } 
-        });
-        setTimeout(function() {
-            var alertas = document.querySelectorAll('.alert');
-            alertas.forEach(function(alerta) {
-                alerta.style.display = 'none';
-            });
-        }, 5000);
-    });
-</script>
+    
 <script>
     // Script de validación de contraseñas
     document.getElementById('confirmPasswo').addEventListener('input', function() {
@@ -255,15 +241,38 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
 </script>
 <script>
     // Función para validar campos y enviar formulario
-    function validarCampos() {
+    // Función para validar campos y enviar formulario
+// Función para validar campos y enviar formulario
+function validarCampos() {
         var formulario = document.getElementById("formulario3");
+        var checkbox = document.getElementById("flexCheckDefault");
+        var codigoRecuperacionInput = document.getElementById("codigo_recuperacion");
 
-        // Verificar si el formulario es válido según las validaciones de Bootstrap
+        // Verificar si el checkbox está seleccionado
+        if (checkbox.checked) {
+            // Si el checkbox está seleccionado, ocultar el campo de pregunta y respuesta
+            document.getElementById("pregunta").setAttribute("disabled", "disabled");
+            document.getElementById("respuesta").setAttribute("disabled", "disabled");
+            // Mostrar el campo de código de recuperación
+            document.getElementById("codigo_recuperacion_wrapper").style.display = "block";
+        } else {
+            // Si el checkbox no está seleccionado, mostrar el campo de pregunta y respuesta
+            document.getElementById("pregunta").removeAttribute("disabled");
+            document.getElementById("respuesta").removeAttribute("disabled");
+            // Ocultar el campo de código de recuperación
+            document.getElementById("codigo_recuperacion_wrapper").style.display = "none";
+        }
+
+        // Validar el formulario según las reglas actuales
         if (!formulario.checkValidity()) {
             // Si el formulario no es válido, mostrar las validaciones de Bootstrap
             formulario.classList.add('was-validated');
             return false;
         }
+
+        // Si todo está bien, continuar con el envío del formulario
+        return true;
+    }
 
         var correo = document.getElementById("correo").value;
         var pregunta = document.getElementById("pregunta").value;
@@ -289,7 +298,6 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
         mostrarSweetAlert();
         formulario.classList.remove('was-validated'); // Quitar las validaciones de Bootstrap
         return true;
-    }
 
     // Script de validación de contraseñas
     document.getElementById('confirmPasswo').addEventListener('input', function() {
@@ -374,7 +382,6 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
     <script>
 document.addEventListener("DOMContentLoaded", function() {
     var checkbox = document.getElementById("flexCheckDefault");
-    var boton = document.getElementById("enviar");
     var passwo1Input = document.getElementById("passwo1");
     var confirmPasswoInput = document.getElementById("confirmPasswo");
 
@@ -390,38 +397,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-    document.addEventListener("DOMContentLoaded", function() {
-        var checkbox = document.getElementById("flexCheckDefault");
-        var enviarBtn = document.getElementById("enviar");
-        var enviarCodigoBtn = document.getElementById("enviar_codigo");
-
-        checkbox.addEventListener("change", function() {
-            if (checkbox.checked) {
-                // Si el checkbox está seleccionado, ocultar el botón "Enviar"
-                enviarBtn.style.display = "none";
-                // Y mostrar el botón "Enviar código de verificación"
-                enviarCodigoBtn.style.display = "block";
-            } else {
-                // Si el checkbox no está seleccionado, mostrar el botón "Enviar"
-                enviarBtn.style.display = "block";
-                // Y ocultar el botón "Enviar código de verificación"
-                enviarCodigoBtn.style.display = "none";
-            }
-        });
-    });
-</script>
-<script>
-    // Función para habilitar o deshabilitar el botón de enviar código según el estado del checkbox
-function habilitarEnviarCodigo() {
-    var checkbox = document.getElementById("flexCheckDefault");
-    var enviarCodigoBtn = document.getElementById("enviar_codigo");
-
-    if (checkbox.checked) {
-        enviarCodigoBtn.style.display = "inline-block"; // Mostrar el botón si el checkbox está seleccionado
-    } else {
-        enviarCodigoBtn.style.display = "none"; // Ocultar el botón si el checkbox no está seleccionado
-    }
-}
 </script>
 <script>
     // Función para alternar la visibilidad de la contraseña
@@ -458,5 +433,20 @@ function habilitarEnviarCodigo() {
         }
     });
 </script>
+<script>
+        $(document).ready(function() {
+            $('#enviar_codigo').click(function() {
+                var correo = $('#correo').val();
+                $.ajax({
+                    url: 'enviar_codigo.php',
+                    method: 'POST',
+                    data: { correo: correo },
+                    success: function(response) {
+                        $('#mensaje').html(response);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
