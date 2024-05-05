@@ -1,14 +1,12 @@
 <?php
 require_once '../Modelo/conexion2.php';
-require_once '../PHPMailer/ejemplocontroladorrc.php';
+require_once '../PHPMailer/controlador_recuperar_contrasena.php';
 if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa']) {
     $mensaje_enviado = true;
 } else {
     $mensaje_enviado = false;
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,7 +14,6 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar contraseña</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
     <style>
         body{
     background-color: #007AB6 ;
@@ -94,28 +91,22 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
         border: 2px solid #007AB6;
     }
 
-    /* Estilo para que el texto del checkbox se estire y no se divida en varias líneas */
-    .form-check-label {
-            white-space: nowrap;
-        }
-
-.was-validated .form-check-label:valid {
-    background-color: transparent;
-    border-color: #000; /* Color del borde negro */
-}
-
-.was-validated .form-check-label:invalid {
-    background-color: transparent;
-    border-color: #000; /* Color del borde negro */
-}
-
-#flexCheckDefault + label.form-check-label {
-    color: black; /* Cambia el color del texto del checkbox */
-}
-
     </style>
 </head>
-<?php if ($correo_encontrado): ?>
+<body>
+<?php if ($mensaje_enviado): ?>
+    <!-- Aquí puedes agregar cualquier código adicional que desees mostrar después de enviar el correo y actualizar la contraseña -->
+<?php endif; ?>
+    <div class="container text-center">
+        <br><br><br>
+        <div class="row justify-content-center">
+            <div class="col-11">
+                <div class="card-body">
+                    <br>
+                    <div class="col-12 user-img">
+                        <img src="../imagenes/logocorporativo.png" alt="" class="logo">
+                    </div>
+                    <form action="" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
                         <div class="col-md-12">
                             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
                                 <option selected value="">Seleccione con la que mejor se identifique *</option>
@@ -125,56 +116,22 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                             </select>
                             <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
                         </div>
-                        <div class="form-check col-md-6">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="border: 2px solid #007AB6;">
-                            <label class="form-check-label align-middle" for="flexCheckDefault" style="font-size: 17px">
-                                No recuerdas tu pregunta de seguridad y respuesta
-                            </label>
-                            </div>
-                            <div class="col-md-12" id="codigo_recuperacion_wrapper" style="display: none;">
-                                <div class="input-group">
-                                     <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="codigo_recuperacion" name="codigo_recuperacion" placeholder="Ingrese el código de recuperación" maxlength="8" pattern="[A-Za-z0-9]{8}">
-                                     <input type="hidden" name="action" value="enviar_codigo">
-                                     <button class="btn btn-primary" type="submit" id="enviar_codigo" name="enviar_codigo" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Enviar código de verificación</button>
-                                </div>
-                            </div>
-                            <div class="mb-1"></div>
                         <div class="col-md-6">
                              <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
-                             <div class="input-group has-validation">
                              <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-                             <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="togglePassword">
-                                <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                            </button>
                              <div class="invalid-feedback">*Campo obligatorio</div>
-                        </div>
                         </div>
                         <div class="col-md-6">
                             <label for="confirmPasswo" class="form-label">Confirmar contraseña</label>
-                            <div class="input-group has-validation">
                             <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-                            <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="toggleConfirmPassword">
-                                <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                            </button>
                             <div class="invalid-feedback" id="passwordMismatch" style="color: red; display: none;">
                              Las contraseñas no coinciden.
                              </div>
-                            </div>
                         </div>
                         <?php $correo_encontrado = true; ?>
-                        <?php endif; ?>
-                        <?php if ($mostrar_siguiente || $mostrar_enviar): ?>
-                            <div class="col-12 d-flex justify-content-center">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <?php if ($mostrar_siguiente): ?>
-                                         <button class="btn btn-primary" type="submit" id="siguiente" onclick="verificarCorreo()" name="siguiente">Siguiente</button>
-                        <?php endif; ?>
-                    <?php if ($mostrar_enviar): ?>
-                <button class="btn btn-primary" type="submit" id="enviar" onclick="enviarCorreo()" name="enviar">Enviar</button>
-            <?php endif; ?>
-        </div>
-    </div>
-<?php endif; ?>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit" id="enviar" onclick="return validarCampos()" name="enviar">Siguiente</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -184,3 +141,132 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+        // Ejemplo de JavaScript inicial para deshabilitar el envío de formularios si hay campos no válidos
+        (() => {
+            'use strict'
+
+            // Recupera todos los formularios a los que queremos aplicar estilos de validación Bootstrap personalizados
+            const forms = document.querySelectorAll('.needs-validation')
+
+            // Bucle sobre ellos y evitar la presentación
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })();
+    </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var boton = document.getElementById("enviar");
+        var emailInput = document.getElementById("correo");
+        <?php if ($correo_encontrado): ?>
+            boton.textContent = "Enviar";
+        <?php endif; ?>
+        boton.addEventListener("click", function() {
+            if (boton.textContent == "Siguiente" && emailInput.value !== "") {
+                boton.textContent = "Enviar";
+            } 
+        });
+        setTimeout(function() {
+            var alertas = document.querySelectorAll('.alert');
+            alertas.forEach(function(alerta) {
+                alerta.style.display = 'none';
+            });
+        }, 5000);
+    });
+</script>
+<script>
+    // Script de validación de contraseñas
+    document.getElementById('confirmPasswo').addEventListener('input', function() {
+        var passwo1 = document.getElementById('passwo1').value;
+        var confirmPasswo = this.value;
+        var mensajeError = document.getElementById('passwordMismatch');
+
+        if (passwo1 !== confirmPasswo) {
+            mensajeError.style.display = 'block';
+            this.classList.add('is-invalid');
+        } else {
+            mensajeError.style.display = 'none';
+            this.classList.remove('is-invalid');
+        }
+    });
+</script>
+<script>
+    // Función para validar campos y enviar formulario
+    function validarCampos() {
+        var formulario = document.getElementById("formulario3");
+
+        // Verificar si el formulario es válido según las validaciones de Bootstrap
+        if (!formulario.checkValidity()) {
+            // Si el formulario no es válido, mostrar las validaciones de Bootstrap
+            formulario.classList.add('was-validated');
+            return false;
+        }
+
+        var correo = document.getElementById("correo").value;
+        var pregunta = document.getElementById("pregunta").value;
+        var respuesta = document.getElementById("respuesta").value;
+        var passwo1 = document.getElementById("passwo1").value;
+        var confirmPasswo = document.getElementById("confirmPasswo").value;
+        var mensajeError = document.getElementById('passwordMismatch');
+
+        // Verificar si todos los campos requeridos están llenos
+        if (correo.trim() === "" || pregunta.trim() === "" || respuesta.trim() === "" || passwo1.trim() === "" || confirmPasswo.trim() === "") {
+            alert("Por favor, complete todos los campos.");
+            return false;
+        }
+
+        // Verificar si las contraseñas coinciden
+        if (passwo1 !== confirmPasswo) {
+            mensajeError.style.display = 'block';
+            document.getElementById('confirmPasswo').classList.add('is-invalid');
+            return false;
+        }
+
+        // Si todo está bien, mostrar la SweetAlert y quitar las validaciones de Bootstrap
+        mostrarSweetAlert();
+        formulario.classList.remove('was-validated'); // Quitar las validaciones de Bootstrap
+        return true;
+    }
+
+    // Script de validación de contraseñas
+    document.getElementById('confirmPasswo').addEventListener('input', function() {
+        var passwo1 = document.getElementById('passwo1').value;
+        var confirmPasswo = this.value;
+        var mensajeError = document.getElementById('passwordMismatch');
+        var confirmPasswoInput = document.getElementById('confirmPasswo');
+
+        if (passwo1 !== confirmPasswo) {
+            mensajeError.style.display = 'block';
+            confirmPasswoInput.classList.add('is-invalid');
+            confirmPasswoInput.setCustomValidity('Las contraseñas no coinciden'); // Marcar como inválido
+        } else {
+            mensajeError.style.display = 'none';
+            confirmPasswoInput.classList.remove('is-invalid');
+            confirmPasswoInput.setCustomValidity(''); // Restablecer la validez
+        }
+    });
+    // Función para mostrar SweetAlert y enviar formulario después de 5 segundos
+    function mostrarSweetAlert() {
+        swal({
+            title: "Enviando correo y actualizando contraseña",
+            text: "Espere unos momentos...",
+            icon: "info",
+            buttons: false, // No mostrar botones
+            closeOnClickOutside: false, // No cerrar al hacer clic fuera del modal
+            closeOnEsc: false // No cerrar al presionar la tecla Esc
+        });
+
+        setTimeout(function () {
+            document.getElementById("formulario3").submit(); // Envía el formulario
+        }, 5000);
+    }
+</script>
+</body>
+</html>

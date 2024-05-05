@@ -1,6 +1,5 @@
 <?php
 require_once '../Modelo/conexion2.php';
-require_once '../PHPMailer/ejemplocontroladorrc.php';
 if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa']) {
     $mensaje_enviado = true;
 } else {
@@ -128,7 +127,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                     <div class="col-12 user-img">
                         <img src="../imagenes/logocorporativo.png" alt="" class="logo">
                     </div>
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
+                    <form action="../Controlador/ejemplocontroladorrc.php" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
                         <div class="col-md-12">
                             <h3>Recuperar contraseña</h3>
                             <?php echo $mensaje; ?>
@@ -140,57 +139,9 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                                 </div>
                             </div>
                         </div>
-                        <?php if ($correo_encontrado): ?>
-                        <div class="col-md-12">
-                            <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
-                                <option selected value="">Seleccione con la que mejor se identifique *</option>
-                                <option value="1">Nombre del mejor amig@</option>
-                                <option value="2">Nombre de la mascota</option>
-                                <option value="3">Película Favorita</option>
-                            </select>
-                            <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
-                        </div>
-                        <div class="form-check col-md-6">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="border: 2px solid #007AB6;">
-                            <label class="form-check-label align-middle" for="flexCheckDefault" style="font-size: 17px">
-                                No recuerdas tu pregunta de seguridad y respuesta
-                            </label>
-                            </div>
-                            <div class="col-md-12" id="codigo_recuperacion_wrapper" style="display: none;">
-                                <div class="input-group">
-                                     <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="codigo_recuperacion" name="codigo_recuperacion" placeholder="Ingrese el código de recuperación" maxlength="8" pattern="[A-Za-z0-9]{8}">
-                                     <input type="hidden" name="action" value="enviar_codigo">
-                                     <button class="btn btn-primary" type="submit" id="enviar_codigo" name="enviar_codigo" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Enviar código de verificación</button>
-                                </div>
-                            </div>
-                            <div class="mb-1"></div>
-                        <div class="col-md-6">
-                             <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
-                             <div class="input-group has-validation">
-                             <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-                             <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="togglePassword">
-                                <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                            </button>
-                             <div class="invalid-feedback">*Campo obligatorio</div>
-                        </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="confirmPasswo" class="form-label">Confirmar contraseña</label>
-                            <div class="input-group has-validation">
-                            <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-                            <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="toggleConfirmPassword">
-                                <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                            </button>
-                            <div class="invalid-feedback" id="passwordMismatch" style="color: red; display: none;">
-                             Las contraseñas no coinciden.
-                             </div>
-                            </div>
-                        </div>
-                        <?php $correo_encontrado = true; ?>
-                        <?php endif; ?>
                             <div class="col-12 d-flex justify-content-center">
                                 <div style="display: flex; justify-content: space-between;">
-                                         <button class="btn btn-primary" type="submit" id="siguiente" onclick="verificarCorreo()" name="siguiente">Siguiente</button>
+                                         <button class="btn btn-primary" type="submit" id="siguiente" href="vista_pregunta_respuesta.php" name="siguiente">Siguiente</button>
                             </div>
                          </div>
                     </form>
