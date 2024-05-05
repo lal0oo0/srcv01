@@ -86,6 +86,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   .botones{
     display: none;
   }
+
+  .botonconfirmar {
+    background-color: #007bff; /*color boton de cerrar sesion */
+  }
 </style>
 
 <body>
@@ -471,7 +475,13 @@ tippy('#botonModificar', {
 
     // Muestra la alerta de SweetAlert
     swal("¿Estás seguro de que deseas cerrar sesión?", {
-      buttons: ["Cancelar", "Aceptar"],
+      buttons: {
+        cancel: "Cancelar",
+        confirm: {
+          text: "Aceptar",
+          className: "botonconfirmar"
+        }
+      },
     }).then(function (confirmed) {
       // confirmed será true si se hace clic en "Aceptar", false si se hace clic en "Cancelar"
       if (confirmed) {

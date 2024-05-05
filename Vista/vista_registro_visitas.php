@@ -83,6 +83,11 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   .filtro{
     display: none;
   }
+
+  .botonconfirmar {
+    background-color: #007bff; /*color boton de cerrar sesion */
+  }
+
   
 </style>
 
@@ -331,7 +336,28 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <?php
                     if(empty($filas["ENTRADA_RECEPCION"]) && empty($filas["SALIDA_RECEPCION"]) && empty($filas["SALIDA_SEGURIDAD"]) && empty($filas["SALIDA_URSPACE"])){
                     ?>
-                    <a href="../Controlador/controlador_eliminar_visita.php?id=<?=$filas['ID_VISITA']?>" id="botonEliminar"><i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i></a>
+
+
+                    <a href="#" id="botonEliminar" data-bs-toggle="modal" data-bs-target="#eliminar">
+                    <i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i>
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Estás seguro de que deseas eliminar esta visita?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <a href="../Controlador/controlador_eliminar_visita.php?id=<?=$filas['ID_VISITA']?>" id="eliminarVisita" class="btn btn-primary">Eliminar</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <?php
                     }else{
                       
@@ -441,7 +467,13 @@ document.addEventListener('keyup', e =>{
 
     // Muestra la alerta de SweetAlert
     swal("¿Estás seguro de que deseas cerrar sesión?", {
-      buttons: ["Cancelar", "Aceptar"],
+      buttons: {
+        cancel: "Cancelar",
+        confirm: {
+          text: "Aceptar",
+          className: "botonconfirmar"
+        }
+      },
     }).then(function (confirmed) {
       // confirmed será true si se hace clic en "Aceptar", false si se hace clic en "Cancelar"
       if (confirmed) {

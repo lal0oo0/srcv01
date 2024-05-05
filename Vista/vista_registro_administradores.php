@@ -87,6 +87,10 @@ $row = $resultado->fetch_assoc();
             /* Deja solo el borde */
             border: 2px solid #007AB6;
         }
+
+.botonconfirmar {
+  background-color: #007bff; /*color boton de cerrar sesion */
+}
 </style>
 <header>
 <nav class="navbar navbar-dark  fixed-top navbar-custom" >
@@ -373,7 +377,7 @@ $row = $resultado->fetch_assoc();
                             <div class="col-md-3"></div>
                             <div class="mb-3"></div> <!--Salto de linea-->
                             <div class="col-12">
-                              <input type="submit" value="Registrarse" class="btn btn-primary" name="Registrar"></button>
+                              <input type="submit" value="Confirmar" class="btn btn-primary" name="Registrar"></button>
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
                             </div>
 
@@ -529,7 +533,13 @@ tippy('#botonDesactivar', {
 
     // Muestra la alerta de SweetAlert
     swal("¿Estás seguro de que deseas cerrar sesión?", {
-      buttons: ["Cancelar", "Aceptar"],
+      buttons: {
+        cancel: "Cancelar",
+        confirm: {
+          text: "Aceptar",
+          className: "botonconfirmar"
+        }
+      },
     }).then(function (confirmed) {
       // confirmed será true si se hace clic en "Aceptar", false si se hace clic en "Cancelar"
       if (confirmed) {

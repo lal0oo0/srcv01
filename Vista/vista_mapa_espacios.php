@@ -91,6 +91,10 @@ $row = $resultado->fetch_assoc();
     justify-content: space-around;
     align-items: center;
   }
+
+  .botonconfirmar {
+    background-color: #007bff; /*color boton de cerrar sesion */
+  }
 </style>
 
 <header>
@@ -457,7 +461,13 @@ $(document).ready(function() {
 
     // Muestra la alerta de SweetAlert
     swal("¿Estás seguro de que deseas cerrar sesión?", {
-      buttons: ["Cancelar", "Aceptar"],
+      buttons: {
+        cancel: "Cancelar",
+        confirm: {
+          text: "Aceptar",
+          className: "botonconfirmar"
+        }
+      },
     }).then(function (confirmed) {
       // confirmed será true si se hace clic en "Aceptar", false si se hace clic en "Cancelar"
       if (confirmed) {

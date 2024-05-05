@@ -72,6 +72,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     display: none;
   }
 
+  .botonconfirmar {
+    background-color: #007bff; /*color boton de cerrar sesion */
+  }
+
 </style>
 
 <header>
@@ -196,7 +200,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar reservacion de <?= $filas['NOMBRE_CLIENTE'] ?></h1>
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar reservación de <?= $filas['NOMBRE_CLIENTE'] ?></h1>
                           <input id="Reservacion_<?php echo $filas['ID_RESERVACION'] ?>" name="Reservacion" value="" hidden>
                             <input type="hidden" name="idreservacion" id="idreservacion" value="<?php echo $filas['ID_RESERVACION'] ?>">
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -216,7 +220,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                                 </div>
                               </div>
                               <div class="col">
-                                <label for="Fecha finalizacion">Fecha de finalizacion *</label>
+                                <label for="Fecha finalizacion">Fecha de finalización *</label>
                                 <input type="date" class="form-control" name="Fechafinalizacion" value="<?=$filas['FECHA_SALIDA']?>" placeholder="Fecha de finalizacion" aria-label="Fecha  de finalizacion" aria-describedby="basic-addon1" required>
                                 <div class="invalid-feedback">
                                 Verifique los datos
@@ -451,7 +455,13 @@ function confirmarEliminar(idReservacion) {
 
     // Muestra la alerta de SweetAlert
     swal("¿Estás seguro de que deseas cerrar sesión?", {
-      buttons: ["Cancelar", "Aceptar"],
+      buttons: {
+        cancel: "Cancelar",
+        confirm: {
+          text: "Aceptar",
+          className: "botonconfirmar"
+        }
+      },
     }).then(function (confirmed) {
       // confirmed será true si se hace clic en "Aceptar", false si se hace clic en "Cancelar"
       if (confirmed) {
