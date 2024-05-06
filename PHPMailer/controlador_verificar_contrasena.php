@@ -5,10 +5,17 @@ use PHPMailer\PHPMailer\Exception;
 require_once '../Modelo/conexion2.php';
 require 'vendor/autoload.php';
 
+$link = $_SERVER['HTTP_HOST'];
+
 $conexion = conect();
+$correo = '';
 $mensaje = '';
 $correo_encontrado = false;
 $correo_mostrado = true;
+$pregunta = ''; 
+$respuesta_correcta = '';
+$nombre_usuario = '';
+$checkbox_checked = false;
 
 session_start();
 

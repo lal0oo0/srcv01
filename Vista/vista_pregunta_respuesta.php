@@ -1,17 +1,12 @@
 <?php
 require_once '../Modelo/conexion2.php';
+require_once '../PHPMailer/controlador_recuperar_contrasena.php';
 if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa']) {
     $mensaje_enviado = true;
 } else {
     $mensaje_enviado = false;
 }
-
-$correo = '';
-$mensaje = '';
-$correo_encontrado = false;
-$correo_mostrado = true;
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,7 +14,6 @@ $correo_mostrado = true;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar contraseña</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
     <style>
         body{
     background-color: #007AB6 ;
@@ -97,25 +91,6 @@ $correo_mostrado = true;
         border: 2px solid #007AB6;
     }
 
-    /* Estilo para que el texto del checkbox se estire y no se divida en varias líneas */
-    .form-check-label {
-            white-space: nowrap;
-        }
-
-.was-validated .form-check-label:valid {
-    background-color: transparent;
-    border-color: #000; /* Color del borde negro */
-}
-
-.was-validated .form-check-label:invalid {
-    background-color: transparent;
-    border-color: #000; /* Color del borde negro */
-}
-
-#flexCheckDefault + label.form-check-label {
-    color: black; /* Cambia el color del texto del checkbox */
-}
-
     </style>
 </head>
 <body>
@@ -131,23 +106,41 @@ $correo_mostrado = true;
                     <div class="col-12 user-img">
                         <img src="../imagenes/logocorporativo.png" alt="" class="logo">
                     </div>
-                    <form action="../Controlador/ejemplocontroladorrc.php" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
+                    <form action="" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
                         <div class="col-md-12">
-                            <h3>Recuperar contraseña</h3>
-                            <?php echo $mensaje; ?>
-                            <label for="validationexampleInputEmail1" class="form-label <?php if ($correo_encontrado) echo 'd-none'; ?>">Ingrese su correo electrónico</label>
-                            <div class="input-group has-validation">
-                            <input type="email" style="border: 2px solid #007AB6;" class="form-control <?php if ($correo_encontrado) echo 'border-0'; ?>" name="correo" id="correo" aria-describedby="emailHelp" required <?php if (!$correo_mostrado) echo 'disabled'; ?> value="<?php echo htmlspecialchars($correo); ?>">
-                                <div class="invalid-feedback">
-                                    *Campo obligatorio
-                                </div>
+                            <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
+                                <option selected value="">Seleccione con la que mejor se identifique *</option>
+                                <option value="1">Nombre del mejor amig@</option>
+                                <option value="2">Nombre de la mascota</option>
+                                <option value="3">Película Favorita</option>
+                            </select>
+                            <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input d-flex align-items-center" type="checkbox" value="" style="border: 2px solid #007AB6;" id="flexCheckDefault">
+                                <label class="form-check-label mb-0" for="flexCheckDefault" style="margin-right: 55px;" style="max-width: 150px;">
+                                No te sabes tu pregunta y respuesta
+                                </label>
                             </div>
                         </div>
-                            <div class="col-12 d-flex justify-content-center">
-                                <div style="display: flex; justify-content: space-between;">
-                                         <button class="btn btn-primary" type="submit" id="siguiente" href="vista_pregunta_respuesta.php" name="siguiente">Siguiente</button>
-                            </div>
-                         </div>
+                        <div class= "col-md-1"></div>
+                        <div class="col-md-6">
+                             <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
+                             <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                             <div class="invalid-feedback">*Campo obligatorio</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="confirmPasswo" class="form-label">Confirmar contraseña</label>
+                            <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                            <div class="invalid-feedback" id="passwordMismatch" style="color: red; display: none;">
+                             Las contraseñas no coinciden.
+                             </div>
+                        </div>
+                        <?php $correo_encontrado = true; ?>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit" id="enviar" onclick="return validarCampos()" name="enviar">Enviar</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -177,7 +170,41 @@ $correo_mostrado = true;
             })
         })();
     </script>
-    
+    <script>
+    // Función para alternar la visibilidad de la contraseña
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('passwo1'); // Campo de contraseña
+        const icon = document.querySelector('#togglePassword i');
+
+        // Alterna entre tipo de entrada 'password' y 'text'
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
+
+    // Función para alternar la visibilidad de la confirmación de contraseña
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+        const confirmPasswordInput = document.getElementById('confirmPasswo'); // Campo de confirmación de contraseña
+        const icon = document.querySelector('#toggleConfirmPassword i');
+
+        // Alterna entre tipo de entrada 'password' y 'text'
+        if (confirmPasswordInput.type === 'password') {
+            confirmPasswordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            confirmPasswordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
+</script>
 <script>
     // Script de validación de contraseñas
     document.getElementById('confirmPasswo').addEventListener('input', function() {
@@ -196,38 +223,15 @@ $correo_mostrado = true;
 </script>
 <script>
     // Función para validar campos y enviar formulario
-    // Función para validar campos y enviar formulario
-// Función para validar campos y enviar formulario
-function validarCampos() {
+    function validarCampos() {
         var formulario = document.getElementById("formulario3");
-        var checkbox = document.getElementById("flexCheckDefault");
-        var codigoRecuperacionInput = document.getElementById("codigo_recuperacion");
 
-        // Verificar si el checkbox está seleccionado
-        if (checkbox.checked) {
-            // Si el checkbox está seleccionado, ocultar el campo de pregunta y respuesta
-            document.getElementById("pregunta").setAttribute("disabled", "disabled");
-            document.getElementById("respuesta").setAttribute("disabled", "disabled");
-            // Mostrar el campo de código de recuperación
-            document.getElementById("codigo_recuperacion_wrapper").style.display = "block";
-        } else {
-            // Si el checkbox no está seleccionado, mostrar el campo de pregunta y respuesta
-            document.getElementById("pregunta").removeAttribute("disabled");
-            document.getElementById("respuesta").removeAttribute("disabled");
-            // Ocultar el campo de código de recuperación
-            document.getElementById("codigo_recuperacion_wrapper").style.display = "none";
-        }
-
-        // Validar el formulario según las reglas actuales
+        // Verificar si el formulario es válido según las validaciones de Bootstrap
         if (!formulario.checkValidity()) {
             // Si el formulario no es válido, mostrar las validaciones de Bootstrap
             formulario.classList.add('was-validated');
             return false;
         }
-
-        // Si todo está bien, continuar con el envío del formulario
-        return true;
-    }
 
         var correo = document.getElementById("correo").value;
         var pregunta = document.getElementById("pregunta").value;
@@ -253,6 +257,7 @@ function validarCampos() {
         mostrarSweetAlert();
         formulario.classList.remove('was-validated'); // Quitar las validaciones de Bootstrap
         return true;
+    }
 
     // Script de validación de contraseñas
     document.getElementById('confirmPasswo').addEventListener('input', function() {
@@ -287,86 +292,5 @@ function validarCampos() {
         }, 5000);
     }
 </script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var checkbox = document.getElementById("flexCheckDefault");
-        var preguntaInput = document.getElementById("pregunta");
-        var respuestaInput = document.getElementById("respuesta");
-        var codigoRecuperacionInput = document.getElementById("codigo_recuperacion");
-        var codigoRecuperacionWrapper = document.getElementById("codigo_recuperacion_wrapper");
-
-        checkbox.addEventListener("change", function() {
-            if (checkbox.checked) {
-                // Si se selecciona la opción de no recordar, ocultar la pregunta y respuesta
-                preguntaInput.style.display = "none";
-                respuestaInput.style.display = "none";
-                // Mostrar solo el campo para ingresar el código de recuperación
-                codigoRecuperacionWrapper.style.display = "block";
-            } else {
-                // Si no se selecciona la opción de no recordar, mostrar la pregunta y respuesta
-                preguntaInput.style.display = "block";
-                respuestaInput.style.display = "block";
-                // Ocultar campo para ingresar el código de recuperación
-                codigoRecuperacionWrapper.style.display = "none";
-            }
-        });
-    });
-</script>
-<script>
-        // Función para deshabilitar la validación de los campos de contraseña cuando se seleccione el checkbox
-        document.addEventListener("DOMContentLoaded", function() {
-            var checkbox = document.getElementById("flexCheckDefault");
-            var passwo1Input = document.getElementById("passwo1");
-            var confirmPasswoInput = document.getElementById("confirmPasswo");
-
-            checkbox.addEventListener("change", function() {
-                if (checkbox.checked) {
-                    // Si se selecciona la opción de no recordar, deshabilitar la validación de los campos de contraseña
-                    passwo1Input.removeAttribute("required");
-                    confirmPasswoInput.removeAttribute("required");
-                    passwo1Input.classList.remove("is-invalid");
-                    confirmPasswoInput.classList.remove("is-invalid");
-                } else {
-                    // Si no se selecciona la opción de no recordar, habilitar la validación de los campos de contraseña
-                    passwo1Input.setAttribute("required", "");
-                    confirmPasswoInput.setAttribute("required", "");
-                }
-            });
-        });
-    </script>
-    <script>
-document.addEventListener("DOMContentLoaded", function() {
-    var checkbox = document.getElementById("flexCheckDefault");
-    var passwo1Input = document.getElementById("passwo1");
-    var confirmPasswoInput = document.getElementById("confirmPasswo");
-
-    checkbox.addEventListener("change", function() {
-        if (checkbox.checked) {
-            // Deshabilitar campos de contraseña y confirmación
-            passwo1Input.disabled = true;
-            confirmPasswoInput.disabled = true;
-        } else {
-            // Habilitar campos de contraseña y confirmación
-            passwo1Input.disabled = false;
-            confirmPasswoInput.disabled = false;
-        }
-    });
-});
-</script>
-<script>
-        $(document).ready(function() {
-            $('#enviar_codigo').click(function() {
-                var correo = $('#correo').val();
-                $.ajax({
-                    url: 'enviar_codigo.php',
-                    method: 'POST',
-                    data: { correo: correo },
-                    success: function(response) {
-                        $('#mensaje').html(response);
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
