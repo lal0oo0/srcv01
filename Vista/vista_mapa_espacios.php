@@ -391,6 +391,11 @@ $(document).ready(function() {
                 valid = false;
                 swal('Error', 'El enganche no puede ser menor que cero', 'error');
             }
+            // Validar que el enganche no sea mayor que el total
+            if (parseFloat(enganche) > parseFloat(total)) {
+                valid = false;
+                swal('Error', 'El enganche no puede ser mayor que el total', 'error');
+            }
             // Validar que el numero de personas no sea menor o igual a cero
             if (personas <= 0) {
                 valid = false;
