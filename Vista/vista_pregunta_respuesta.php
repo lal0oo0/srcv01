@@ -117,6 +117,15 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                             <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
                         </div>
                         <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input d-flex align-items-center" type="checkbox" value="" style="border: 2px solid #007AB6;" id="flexCheckDefault">
+                                <label class="form-check-label mb-0" for="flexCheckDefault" style="margin-right: 55px;" style="max-width: 150px;">
+                                No te sabes tu pregunta y respuesta
+                                </label>
+                            </div>
+                        </div>
+                        <div class= "col-md-1"></div>
+                        <div class="col-md-6">
                              <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
                              <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
                              <div class="invalid-feedback">*Campo obligatorio</div>
@@ -130,7 +139,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                         </div>
                         <?php $correo_encontrado = true; ?>
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit" id="enviar" onclick="return validarCampos()" name="enviar">Siguiente</button>
+                            <button class="btn btn-primary" type="submit" id="enviar" onclick="return validarCampos()" name="enviar">Enviar</button>
                         </div>
                     </form>
                 </div>
@@ -162,23 +171,38 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
         })();
     </script>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var boton = document.getElementById("enviar");
-        var emailInput = document.getElementById("correo");
-        <?php if ($correo_encontrado): ?>
-            boton.textContent = "Enviar";
-        <?php endif; ?>
-        boton.addEventListener("click", function() {
-            if (boton.textContent == "Siguiente" && emailInput.value !== "") {
-                boton.textContent = "Enviar";
-            } 
-        });
-        setTimeout(function() {
-            var alertas = document.querySelectorAll('.alert');
-            alertas.forEach(function(alerta) {
-                alerta.style.display = 'none';
-            });
-        }, 5000);
+    // Función para alternar la visibilidad de la contraseña
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('passwo1'); // Campo de contraseña
+        const icon = document.querySelector('#togglePassword i');
+
+        // Alterna entre tipo de entrada 'password' y 'text'
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
+
+    // Función para alternar la visibilidad de la confirmación de contraseña
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+        const confirmPasswordInput = document.getElementById('confirmPasswo'); // Campo de confirmación de contraseña
+        const icon = document.querySelector('#toggleConfirmPassword i');
+
+        // Alterna entre tipo de entrada 'password' y 'text'
+        if (confirmPasswordInput.type === 'password') {
+            confirmPasswordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            confirmPasswordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
     });
 </script>
 <script>

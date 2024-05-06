@@ -6,6 +6,10 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
     $mensaje_enviado = false;
 }
 
+$correo = '';
+$mensaje = '';
+$correo_encontrado = false;
+$correo_mostrado = true;
 ?>
 
 <!DOCTYPE html>
@@ -348,41 +352,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-</script>
-<script>
-    // Función para alternar la visibilidad de la contraseña
-    document.getElementById('togglePassword').addEventListener('click', function() {
-        const passwordInput = document.getElementById('passwo1'); // Campo de contraseña
-        const icon = document.querySelector('#togglePassword i');
-
-        // Alterna entre tipo de entrada 'password' y 'text'
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
-        } else {
-            passwordInput.type = 'password';
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
-        }
-    });
-
-    // Función para alternar la visibilidad de la confirmación de contraseña
-    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
-        const confirmPasswordInput = document.getElementById('confirmPasswo'); // Campo de confirmación de contraseña
-        const icon = document.querySelector('#toggleConfirmPassword i');
-
-        // Alterna entre tipo de entrada 'password' y 'text'
-        if (confirmPasswordInput.type === 'password') {
-            confirmPasswordInput.type = 'text';
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
-        } else {
-            confirmPasswordInput.type = 'password';
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
-        }
-    });
 </script>
 <script>
         $(document).ready(function() {
