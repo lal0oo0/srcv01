@@ -178,9 +178,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               <td><?php echo$filas ["HORA_SALIDA"] ?></td>
               <td><?php echo$filas ["NUMERO_PERSONAS"] ?></td>
               <td><?php echo$filas ["SERVICIOS_EXTRA"] ?></td>
-              <td>$<?php echo$filas ["TOTAL"] ?></td>
-              <td>$<?php echo$filas ["ENGANCHE"] ?></td>
-              <td>$<?php echo$filas ["LIQUIDACION"] ?></td>
+              <td>$<?php echo number_format($filas ["TOTAL"], 2, '.', ',') ?></td>
+              <td>$<?php echo number_format($filas ["ENGANCHE"], 2, '.', ',') ?></td>
+              <td>$<?php echo number_format($filas ["LIQUIDACION"], 2, '.', ',') ?></td>
           </tr>
           <?php
           };

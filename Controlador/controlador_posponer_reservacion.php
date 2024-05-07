@@ -24,7 +24,9 @@ $variable3 = $_POST['Horainicio'];
 $variable4 = $_POST['Horafinalizacion'];
 $variable5 = $_POST['Total'];
 $variable6 = $_POST['enganche'];
-$variable8 = $_POST['Abono'];
+$variableab = $_POST['Abono'];
+// Eliminar el símbolo de la moneda y otros caracteres no numéricos
+$variable8 = floatval(preg_replace('/[^0-9.]/', '', $variableab));
 $variableSuma= $variable6+$variable8;
 $variable7 = intval($variable5)-intval($variableSuma);
 

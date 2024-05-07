@@ -26,8 +26,14 @@ $horaini = $_POST['Horainicio'];
 $horafin = $_POST['Horafinalizacion'];
 $personas = $_POST['Personas'];
 $servicios = $_POST['Servicios'];
-$total = $_POST['Total'];
-$enganche = $_POST['Enganche'];
+$to = $_POST['Total'];
+// Eliminar el símbolo de la moneda y otros caracteres no numéricos
+$total = floatval(preg_replace('/[^0-9.]/', '', $to));
+
+$eng = $_POST['Enganche'];
+// Eliminar el símbolo de la moneda y otros caracteres no numéricos
+$enganche = floatval(preg_replace('/[^0-9.]/', '', $eng));
+
 $liquidacion = $total-$enganche;
 $idsala = $_POST['id_sala'];
 $espacio = $_POST['nombre'];
