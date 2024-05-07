@@ -159,7 +159,7 @@ $correo_mostrado = true;
                         </div>
                             <div class="col-12 d-flex justify-content-center">
                                 <div style="display: flex; justify-content: space-between;">
-                                <button class="btn btn-primary" type="button" id="enviar_codigo">Enviar Código de Verificación</button>
+                                <button class="btn btn-primary" type="button" id="enviar_codigo">Enviar</button>
                             </div>
                          </div>
                     </form>
