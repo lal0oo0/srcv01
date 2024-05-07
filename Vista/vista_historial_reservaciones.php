@@ -19,6 +19,9 @@ $sql  = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORRE
 $resultado = $conexion->query($sql);
 $row = $resultado->fetch_assoc();
 ?>
+<?php
+$mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -128,6 +131,13 @@ $row = $resultado->fetch_assoc();
   </div>
   <div class="mb-3"></div><!--Salto de linea-->
 
+  <!-- ALERTA -->
+  <div class="mb-4"></div><!--Salto de linea-->
+    <div id="mensaje">
+      <?php echo $mensaje; ?>
+    </div>
+  <div class="mb-3"></div><!--Salto de linea-->
+
   <div class="row">
     <div class="col">
       <div class="table-responsive my-custom-scrollbar">
@@ -225,6 +235,21 @@ $row = $resultado->fetch_assoc();
     }
   })
   //fin del script de buscardor
+
+  //Script para mostrar alertas por determinado tiempo 
+  document.addEventListener("DOMContentLoaded", function() {
+        // Selecciona el elemento de alerta
+        var alerta = document.querySelector('.alert');
+
+        // Verifica si se encontró el elemento de alerta
+        if(alerta) {
+            // Temporizador para eliminar la alerta después de 5 segundos (5000 milisegundos)
+            setTimeout(function() {
+                alerta.remove(); // Elimina la alerta del DOM
+            }, 5000);
+        }
+    });
+//Fin del  scripyt
 </script>
 
 

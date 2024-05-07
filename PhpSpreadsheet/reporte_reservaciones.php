@@ -42,7 +42,7 @@ if (empty($fecha_inicio) || empty($fecha_fin)) {
     </div>';
   //Mostrar error en diferentes interfaces segun el rol
   if ($rol_urspace->num_rows == 1) {
-    header("location: ../Vista/vista_historial_reservacines.php?mensaje=" . urlencode($mensaje));
+    header("location: ../Vista/vista_historial_reservaciones.php?mensaje=" . urlencode($mensaje));
 } elseif ($rol_administrador->num_rows == 1) {
     header("location: ../Vista/vista_historial_reservaciones_admin.php?mensaje=" . urlencode($mensaje));
 } else {
@@ -61,6 +61,7 @@ $resultado = mysqli_query($conexion, $sql);
 $excel = new Spreadsheet();
 $hojaActiva = $excel->getActiveSheet();
 $hojaActiva->setTitle("Reservaciones");
+$aumentCont = 0;
 
 $hojaActiva->getStyle('A1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('CC0000'); // Color en la celda
 $hojaActiva->getStyle('A1')->getFont()->setSize(12); // Tamaño de letra en la celda
@@ -182,6 +183,9 @@ $hojaActiva->getStyle('I1')->getAlignment()->setWrapText(true);// Ajustar el tex
 
 $fila = 2;
 
+// Inicializa la variable en 0 para almacenar la sumatoria total
+$totalSum = 0;
+
 while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('A'. $fila)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('F0F0F0'); // Color en la celda
     $hojaActiva->getStyle('A'. $fila)->getFont()->setSize(11); // Tamaño de letra en la celda
@@ -247,6 +251,7 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('H'.$fila)->getAlignment()->setWrapText(true);
 
 
+    $hojaActiva->getStyle('I'.$fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE); //Formato moneda
     $hojaActiva->getStyle('I'. $fila)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('F0F0F0'); // Color en la celda
     $hojaActiva->getStyle('I'. $fila)->getFont()->setSize(11); // Tamaño de letra en la celda
     $hojaActiva->getStyle('I'. $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
@@ -256,6 +261,17 @@ while($rows = $resultado->fetch_assoc()){
 
 
     $fila++;
+
+
+    // Suma el valor del campo 'TOTAL' a la sumatoria total
+    $totalSum += $rows['TOTAL'];
+    // Calcular el número total de registros
+    $total_registros = $fila - 2; // Resta 2 para excluir la fila de encabezado y la fila donde empezaron los registros
+    //Fila para mostrar el total de registros
+    $hojaActiva->setCellValue('H' . $fila, 'Total de Registros: ' . $total_registros);
+    $hojaActiva->setCellValue('I' . $fila, 'Sumatoria total: ' . $totalSum);
+    $hojaActiva->getStyle('I'. $totalSum)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE); //Formato moneda
+
 }
 
 }else if ($rol_administrador->num_rows==1){
@@ -324,7 +340,7 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('E1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('64BAFF'); // Color en la celda
     $hojaActiva->getStyle('E1')->getFont()->setSize(12); // Tamaño de letra en la celda
     $hojaActiva->getStyle('E1')->getFont()->setBold(true);// Establecer el texto en negrita
-    $hojaActiva->getColumnDimension('E')->setWidth(20);// Establecer el ancho de la columna a 20 unidades de ancho
+    $hojaActiva->getColumnDimension('E')->setWidth(30);// Establecer el ancho de la columna a 20 unidades de ancho
     $hojaActiva->getStyle('E1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('E1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
     // Establecer la altura de una fila (por ejemplo, fila 1)
@@ -428,7 +444,7 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('M1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('64BAFF'); // Color en la celda
     $hojaActiva->getStyle('M1')->getFont()->setSize(12); // Tamaño de letra en la celda
     $hojaActiva->getStyle('M1')->getFont()->setBold(true);// Establecer el texto en negrita
-    $hojaActiva->getColumnDimension('M')->setWidth(20);// Establecer el ancho de la columna a 20 unidades de ancho
+    $hojaActiva->getColumnDimension('M')->setWidth(25);// Establecer el ancho de la columna a 20 unidades de ancho
     $hojaActiva->getStyle('M1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('M1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
     // Establecer la altura de una fila (por ejemplo, fila 1)
@@ -441,7 +457,7 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('N1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('64BAFF'); // Color en la celda
     $hojaActiva->getStyle('N1')->getFont()->setSize(12); // Tamaño de letra en la celda
     $hojaActiva->getStyle('N1')->getFont()->setBold(true);// Establecer el texto en negrita
-    $hojaActiva->getColumnDimension('N')->setWidth(20);// Establecer el ancho de la columna a 20 unidades de ancho
+    $hojaActiva->getColumnDimension('N')->setWidth(25);// Establecer el ancho de la columna a 20 unidades de ancho
     $hojaActiva->getStyle('N1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('N1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
     // Establecer la altura de una fila (por ejemplo, fila 1)
@@ -454,7 +470,7 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('O1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('64BAFF'); // Color en la celda
     $hojaActiva->getStyle('O1')->getFont()->setSize(12); // Tamaño de letra en la celda
     $hojaActiva->getStyle('O1')->getFont()->setBold(true);// Establecer el texto en negrita
-    $hojaActiva->getColumnDimension('O')->setWidth(20);// Establecer el ancho de la columna a 20 unidades de ancho
+    $hojaActiva->getColumnDimension('O')->setWidth(25);// Establecer el ancho de la columna a 20 unidades de ancho
     $hojaActiva->getStyle('O1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('O1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
     // Establecer la altura de una fila (por ejemplo, fila 1)
@@ -465,6 +481,11 @@ while($rows = $resultado->fetch_assoc()){
 
 
     $fila = 2;
+
+    // Inicializa la variable en 0 para almacenar la sumatoria total de los campos
+    $totalSum = 0;
+    $totalEng = 0;
+    $totalLiq = 0;
 
     while($rows = $resultado->fetch_assoc()){
         $hojaActiva->getStyle('A'. $fila)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('F0F0F0'); // Color en la celda
@@ -562,7 +583,7 @@ while($rows = $resultado->fetch_assoc()){
         $hojaActiva->setCellValue('L'.$fila, $rows['SERVICIOS_EXTRA']);
         $hojaActiva->getStyle('L'.$fila)->getAlignment()->setWrapText(true);
     
-    
+        $hojaActiva->getStyle('M'.$fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE); //Formato moneda
         $hojaActiva->getStyle('M'. $fila)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('F0F0F0'); // Color en la celda
         $hojaActiva->getStyle('M'. $fila)->getFont()->setSize(11); // Tamaño de letra en la celda
         $hojaActiva->getStyle('M'. $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
@@ -570,7 +591,7 @@ while($rows = $resultado->fetch_assoc()){
         $hojaActiva->setCellValue('M'.$fila, $rows['TOTAL']);
         $hojaActiva->getStyle('M'.$fila)->getAlignment()->setWrapText(true);
     
-    
+        $hojaActiva->getStyle('N'.$fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE); //Formato moneda
         $hojaActiva->getStyle('N'. $fila)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('F0F0F0'); // Color en la celda
         $hojaActiva->getStyle('N'. $fila)->getFont()->setSize(11); // Tamaño de letra en la celda
         $hojaActiva->getStyle('N'. $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
@@ -578,7 +599,7 @@ while($rows = $resultado->fetch_assoc()){
         $hojaActiva->setCellValue('N'.$fila, $rows['ENGANCHE']);
         $hojaActiva->getStyle('N'.$fila)->getAlignment()->setWrapText(true);
     
-    
+        $hojaActiva->getStyle('O'.$fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE); //Formato moneda
         $hojaActiva->getStyle('O'. $fila)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('F0F0F0'); // Color en la celda
         $hojaActiva->getStyle('O'. $fila)->getFont()->setSize(11); // Tamaño de letra en la celda
         $hojaActiva->getStyle('O'. $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
@@ -589,6 +610,19 @@ while($rows = $resultado->fetch_assoc()){
         
         $fila++;
     
+        // Suma el valor del campo 'TOTAL' a la sumatoria total
+        $totalSum += $rows['TOTAL'];
+        // Suma el valor del campo 'ENGANCHE' a la variable
+        $totalEng += $rows['ENGANCHE'];
+        // Suma el valor del campo 'ENGANCHE' a la variable
+        $totalLiq += $rows['LIQUIDACION'];
+
+        // Variable para almacenar el total de registros
+        $total_registros = $fila - 2; // Resta 2 para excluir la fila de encabezado y la fila donde empezaron los registros
+        $hojaActiva->setCellValue('L' . $fila, 'Total de Registros: ' . $total_registros);//Fila para mostrar el total de registros
+        $hojaActiva->setCellValue('M' . $fila, 'Sumatoria total: ' . $totalSum);//Fila para mostrar la sumatoria total 
+        $hojaActiva->setCellValue('N' . $fila, 'Sumatoria enganche: ' . $totalEng);//Fila para mostrar la sumatoria total de enganche
+        $hojaActiva->setCellValue('O' . $fila, 'Sumatoria liquidación: ' . $totalLiq);//Fila para mostrar la sumatoria total de liquidacion
     }
 
 
