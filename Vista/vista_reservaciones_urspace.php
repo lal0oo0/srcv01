@@ -187,9 +187,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               <td><?php echo$filas ["HORA_SALIDA"] ?></td>
               <td><?php echo$filas ["NUMERO_PERSONAS"] ?></td>
               <td><?php echo$filas ["SERVICIOS_EXTRA"] ?></td>
-              <td>$<?php echo$filas ["TOTAL"] ?></td>
-              <td>$<?php echo$filas ["ENGANCHE"] ?></td>
-              <td>$<?php echo$filas ["LIQUIDACION"] ?></td>
+              <td>$<?php echo number_format($filas ["TOTAL"], 2, '.', ',') ?></td>
+              <td>$<?php echo number_format($filas ["ENGANCHE"], 2, '.', ',') ?></td>
+              <td>$<?php echo number_format($filas ["LIQUIDACION"], 2, '.', ',') ?></td>
               <td>
                 
 
@@ -254,7 +254,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                             <div class="col">
                               <input type="hidden" name="enganche" value="<?= $filas['ENGANCHE'] ?>">
                               <label for="Abono">Abono *</label>
-                              <input type="number" class="form-control" name="Abono" placeholder="Abono" aria-label="Abono" aria-describedby="basic-addon1" value=0 required>
+                              <input type="text" class="form-control" name="Abono" placeholder="Abono" aria-label="Abono" aria-describedby="basic-addon1" value=0 onblur="formatoMoneda(this)" required>
                               <div class="invalid-feedback">
                                 Verifique los datos
                               </div>
@@ -368,6 +368,23 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script src="../js/validaciones_reservaciones.js"></script>
 
 <script>
+function formatoMoneda(input) {
+    // Obtener el valor numérico ingresado
+    const numero = parseFloat(input.value);
+
+    // Verificar si es un número válido
+    if (!isNaN(numero)) {
+        // Formatear el número con separadores de miles y como moneda
+        const formatoMoneda = numero.toLocaleString('es-MX', {
+            style: 'currency',
+            currency: 'MXN' // Cambiar a pesos mexicanos
+        });
+        
+        // Actualizar el valor del campo de entrada con el formato de moneda
+        input.value = formatoMoneda;
+    }
+}
+
   function Reservacion(idreservacion){
     document.getElementById('Reservacion_' + idreservacion).value = idreservacion;
 

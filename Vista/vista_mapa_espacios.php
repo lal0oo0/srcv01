@@ -290,14 +290,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Total *</label>
-                    <input type="number" class="form-control" name="Total" id="total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" id="monto" required>
+                    <input type="text" class="form-control" name="Total" id="total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" onblur="formatoMoneda(this, 'total')" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Enganche *</label>
-                    <input type="number" class="form-control" name="Enganche" id="enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" required>
+                    <input type="text" class="form-control" name="Enganche" id="enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this, 'enganche')" step="any" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -330,8 +330,46 @@ $row = $resultado->fetch_assoc();
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 <script>
+function formatoMoneda(input, tipo) {
+    // Obtener el valor numérico ingresado
+    const numero = parseFloat(input.value);
+
+    // Verificar si es un número válido
+    if (!isNaN(numero)) {
+        // Formatear el número con separadores de miles y como moneda
+        const formatoMoneda = numero.toLocaleString('es-MX', {
+            style: 'currency',
+            currency: 'MXN' // Cambiar a pesos mexicanos
+        });
+        
+        // Actualizar el valor del campo de entrada con el formato de moneda
+        input.value = formatoMoneda;
+        
+        // Dependiendo del tipo, actualizamos el valor del campo correspondiente en el formulario
+        if (tipo === 'total') {
+            // Actualizar el campo total
+            document.getElementById('total').value = formatoMoneda;
+        } else if (tipo === 'enganche') {
+            // Actualizar el campo enganche
+            document.getElementById('enganche').value = formatoMoneda;
+        }
+    }
+}
+
+
+
+// Permitir que el usuario edite el número manteniendo el formato de moneda
+function desformatoMoneda(input) {
+    // Obtener el valor numérico sin formato del atributo de datos
+    const numero = parseFloat(input.dataset.valorNumerico);
+
+    // Actualizar el valor visual con el valor numérico sin formato
+    input.value = numero;
+}
+
     //Limpiar fromulario
     function limpiar(idForm) {
       var formulario = document.getElementById(idForm);
@@ -392,7 +430,9 @@ $(document).ready(function() {
                 swal('Error', 'El enganche no puede ser menor que cero', 'error');
             }
             // Validar que el enganche no sea mayor que el total
-            if (parseFloat(enganche) > parseFloat(total)) {
+            const engancheNumero = parseFloat(enganche.replace(/[^\d.]/g, ''));
+            const totalNumero = parseFloat(total.replace(/[^\d.]/g, ''));
+            if (engancheNumero > totalNumero) {
                 valid = false;
                 swal('Error', 'El enganche no puede ser mayor que el total', 'error');
             }
