@@ -163,7 +163,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
     } else {
         $mensaje = '<div class="alert alert-danger" role="alert">La respuesta proporcionada es incorrecta o la pregunta no coincide con la registrada.</div>';
     }
-    header("Location: ../Vista/vista_rescuperar_contrasena.php");
-    exit();
+    $_SESSION['correo_recuperacion'] = $_POST['correo'];
+// Redirigir a la segunda interfaz
+header("Location: ../Vista/vista_verificar_codigo.php");
+exit();
 }
 ?>

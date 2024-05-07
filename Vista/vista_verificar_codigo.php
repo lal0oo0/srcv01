@@ -1,5 +1,6 @@
 <?php
 require_once '../Modelo/conexion2.php';
+require_once '../PHPMailer/controlador_verificar_contrasena.php';
 if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa']) {
     $mensaje_enviado = true;
 } else {
@@ -10,6 +11,7 @@ $correo = '';
 $mensaje = '';
 $correo_encontrado = false;
 $correo_mostrado = true;
+
 
 ?>
 
@@ -132,16 +134,10 @@ $correo_mostrado = true;
                     <div class="col-12 user-img">
                         <img src="../imagenes/logocorporativo.png" alt="" class="logo">
                     </div>
-                    <form action="../PHPMailer/controlador_verificar_contraseña.php" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
+                    <form action="" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
                         <div class="col-md-12">
                             <h3>Codigo de verificacion</h3>
-                            <?php echo $mensaje; ?>
-                            <div class="col-md-12">
-                            <div class="input-group has-validation">
-                            <input type="email" style="border: 2px solid #007AB6;" class="form-control <?php if ($correo_encontrado) echo 'border-0'; ?>" name="correo" id="correo" aria-describedby="emailHelp" required <?php if (!$correo_mostrado) echo 'disabled'; ?> value="<?php echo htmlspecialchars($correo); ?>">
-                                </div>
-                            </div>
-                            <label for="validationexampleInputEmail1" class="form-label">Ingrese su codigo</label>
+                            <label for="" class="form-label">Ingrese su codigo</label>
                             <div class="input-group has-validation">
                             <input type="codigo" style="border: 2px solid #007AB6;" class="form-control" name="codigo" id="codigo" placeholder="ingrese su codigo de verificacion" required maxlength="8">
                                 <div class="invalid-feedback">
@@ -373,18 +369,20 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 <script>
         $(document).ready(function() {
-            $('#enviar_codigo').click(function() {
-                var correo = $('#correo').val();
-                $.ajax({
-                    url: '../PHPMailer/controlador_verificar_contraseña.php',
-                    method: 'POST',
-                    data: { correo: correo },
-                    success: function(response) {
-                        $('#mensaje').html(response);
-                    }
-                });
-            });
+    $('#enviar_codigo').click(function(event) {
+        event.preventDefault(); // Evitar el comportamiento predeterminado de enviar el formulario
+        
+        var correo = $('#correo').val();
+        $.ajax({
+            url: '../PHPMailer/controlador_verificar_contraseña.php',
+            method: 'POST',
+            data: { correo: correo },
+            success: function(response) {
+                $('#mensaje').html(response);
+            }
         });
+    });
+});
     </script>
 </body>
 </html>

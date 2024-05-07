@@ -1,6 +1,6 @@
 <?php
 require_once '../Modelo/conexion2.php';
-require_once '../PHPMailer/controlador_recuperar_contrasena.php';
+require_once '../PHPMailer/ejemplocontroladorrc.php';
 if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa']) {
     $mensaje_enviado = true;
 } else {
@@ -125,7 +125,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                     <div class="col-12 user-img">
                         <img src="../imagenes/logocorporativo.png" alt="" class="logo">
                     </div>
-                    <form action="../PHPMailer/ejemplocontroladorrc.php" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
+                    <form action="" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
                         <div class="col-12">
                             <h3>Recuperar contraseña</h3>
                             <?php echo $mensaje; ?>
@@ -149,8 +149,8 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                         </div>
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input d-flex align-items-center" type="checkbox" value="" style="border: 2px solid #007AB6;" id="flexCheckDefault" onclick="redirigirInterfaz()">
-                                <label class="form-check-label" for="flexCheckDefault" >
+                                <input class="form-check-input d-flex align-items-center" type="checkbox" value="" style="border: 2px solid #007AB6;" id="enviarCodigoCheckbox" onclick="redirigirInterfaz()">
+                                <label class="form-check-label" for="enviarCodigoCheckbox" style="font-size: 18px;">
                                 No te sabes tu pregunta y respuesta
                                 </label>
                             </div>
@@ -313,6 +313,46 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
     function redirigirInterfaz() {
         // Aquí puedes especificar la URL de la interfaz a la que quieres redirigir
         window.location.href = '../Vista/vista_verificar_codigo.php';
+    }
+</script>
+<script>
+    // Escuchar cambios en el checkbox
+    $(document).ready(function() {
+        $('#enviarCodigoCheckbox').change(function() {
+            if ($(this).is(':checked')) {
+                enviarCodigoVerificacion();
+            }
+        });
+    });
+
+    // Función para enviar el código de verificación por correo
+    function enviarCodigoVerificacion() {
+        // Obtener el correo electrónico del campo
+        var correo = $('#correo').val();
+
+        // Validar que haya un correo electrónico
+        if (correo.trim() === '') {
+            alert('Por favor ingresa un correo electrónico válido.');
+            return;
+        }
+
+        // Enviar solicitud AJAX para enviar el correo
+        $.ajax({
+            type: 'POST',
+            url: '../PHPMailer/controlador_verificar_contrasena.php', // Ruta a tu controlador para enviar el correo
+            data: { correo: correo },
+            success: function(response) {
+                // Si el correo se envía correctamente, redirigir a la siguiente interfaz
+                if (response === 'success') {
+                    window.location.href = '../Vista/vista_verificar_codigo.php';
+                } else {
+                    alert('Error al enviar el código de verificación por correo.');
+                }
+            },
+            error: function() {
+                alert('Error en la solicitud AJAX.');
+            }
+        });
     }
 </script>
 </body>
