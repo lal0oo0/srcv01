@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
 
     // Validar el formato del correo electrónico
     if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        $sql = "SELECT CORREO_ELECTRONICO, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO=? LIMIT 1";
+        $sql = "SELECT CORREO_ELECTRONICO, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, NOMBRE, CODIGO FROM srcv_administradores WHERE CORREO_ELECTRONICO=? LIMIT 1";
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("s", $correo);
         $stmt->execute();
@@ -41,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
             $_SESSION['pregunta'] = $row['PREGUNTA_SEGURIDAD'];
             $_SESSION['respuesta'] = $row['RESPUESTA_PREGUNTA'];
             $_SESSION['nombre_usuario'] = $row['NOMBRE'];
+
             $correo_mostrado = false;
 
         } else {

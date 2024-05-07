@@ -1,6 +1,5 @@
 <?php
 require_once '../Modelo/conexion2.php';
-require_once '../PHPMailer/controlador_verificar_contrasena.php';
 if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa']) {
     $mensaje_enviado = true;
 } else {
@@ -100,24 +99,6 @@ $correo_mostrado = true;
         border: 2px solid #007AB6;
     }
 
-    /* Estilo para que el texto del checkbox se estire y no se divida en varias líneas */
-    .form-check-label {
-            white-space: nowrap;
-        }
-
-.was-validated .form-check-label:valid {
-    background-color: transparent;
-    border-color: #000; /* Color del borde negro */
-}
-
-.was-validated .form-check-label:invalid {
-    background-color: transparent;
-    border-color: #000; /* Color del borde negro */
-}
-
-#flexCheckDefault + label.form-check-label {
-    color: black; /* Cambia el color del texto del checkbox */
-}
 
     </style>
 </head>
@@ -134,12 +115,12 @@ $correo_mostrado = true;
                     <div class="col-12 user-img">
                         <img src="../imagenes/logocorporativo.png" alt="" class="logo">
                     </div>
-                    <form action="" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
+                    <form action="../PHPMailer/controlador_verificar_contrasena.php" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
                         <div class="col-md-12">
                             <h3>Codigo de verificacion</h3>
-                            <label for="" class="form-label">Ingrese su codigo</label>
+                            <label for="" class="form-label">Ingrese el codigo</label>
                             <div class="input-group has-validation">
-                            <input type="codigo" style="border: 2px solid #007AB6;" class="form-control" name="codigo" id="codigo" placeholder="ingrese su codigo de verificacion" required maxlength="8">
+                            <input type="codigo" style="border: 2px solid #007AB6;" class="form-control" name="codigo" id="codigo" placeholder="Ingrese su codigo que le mandamos en su correo" required maxlength="8">
                                 <div class="invalid-feedback">
                                     *Campo obligatorio
                                 </div>
@@ -147,19 +128,29 @@ $correo_mostrado = true;
                         </div>
                             <div class="col-md-6">
                                 <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
+                                <div class="input-group has-validation">
                                 <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                                <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="togglePassword">
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                </button>
                                 <div class="invalid-feedback">*Campo obligatorio</div>
                             </div>
+                        </div>
                         <div class="col-md-6">
                             <label for="confirmPasswo" class="form-label">Confirmar contraseña</label>
+                            <div class="input-group has-validation">
                             <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                            <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="toggleConfirmPassword">
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                            </button>
                             <div class="invalid-feedback" id="passwordMismatch" style="color: red; display: none;">
-                             Las contraseñas no coinciden.
+                             *Las contraseñas no coinciden
                              </div>
                         </div>
+                    </div>
                             <div class="col-12 d-flex justify-content-center">
                                 <div style="display: flex; justify-content: space-between;">
-                                <button class="btn btn-primary" type="button" id="enviar_codigo">Enviar</button>
+                                <button class="btn btn-primary" type="submit" onclick="return validarCampos()" id="enviar_codigo">Enviar</button>
                             </div>
                          </div>
                     </form>
@@ -210,49 +201,16 @@ $correo_mostrado = true;
 </script>
 <script>
     // Función para validar campos y enviar formulario
-    // Función para validar campos y enviar formulario
-// Función para validar campos y enviar formulario
-function validarCampos() {
+    function validarCampos() {
         var formulario = document.getElementById("formulario3");
-        var checkbox = document.getElementById("flexCheckDefault");
-        var codigoRecuperacionInput = document.getElementById("codigo_recuperacion");
-
-        // Verificar si el checkbox está seleccionado
-        if (checkbox.checked) {
-            // Si el checkbox está seleccionado, ocultar el campo de pregunta y respuesta
-            document.getElementById("pregunta").setAttribute("disabled", "disabled");
-            document.getElementById("respuesta").setAttribute("disabled", "disabled");
-            // Mostrar el campo de código de recuperación
-            document.getElementById("codigo_recuperacion_wrapper").style.display = "block";
-        } else {
-            // Si el checkbox no está seleccionado, mostrar el campo de pregunta y respuesta
-            document.getElementById("pregunta").removeAttribute("disabled");
-            document.getElementById("respuesta").removeAttribute("disabled");
-            // Ocultar el campo de código de recuperación
-            document.getElementById("codigo_recuperacion_wrapper").style.display = "none";
-        }
-
-        // Validar el formulario según las reglas actuales
-        if (!formulario.checkValidity()) {
-            // Si el formulario no es válido, mostrar las validaciones de Bootstrap
-            formulario.classList.add('was-validated');
-            return false;
-        }
-
-        // Si todo está bien, continuar con el envío del formulario
-        return true;
-    }
-
-        var correo = document.getElementById("correo").value;
-        var pregunta = document.getElementById("pregunta").value;
-        var respuesta = document.getElementById("respuesta").value;
+        var codigo = document.getElementById("codigo").value;
         var passwo1 = document.getElementById("passwo1").value;
         var confirmPasswo = document.getElementById("confirmPasswo").value;
         var mensajeError = document.getElementById('passwordMismatch');
 
         // Verificar si todos los campos requeridos están llenos
-        if (correo.trim() === "" || pregunta.trim() === "" || respuesta.trim() === "" || passwo1.trim() === "" || confirmPasswo.trim() === "") {
-            alert("Por favor, complete todos los campos.");
+        if (codigo.trim() === "" || passwo1.trim() === "" || confirmPasswo.trim() === "") {
+            mostrarSweetAlert("Por favor, complete todos los campos.");
             return false;
         }
 
@@ -263,11 +221,18 @@ function validarCampos() {
             return false;
         }
 
-        // Si todo está bien, mostrar la SweetAlert y quitar las validaciones de Bootstrap
-        mostrarSweetAlert();
-        formulario.classList.remove('was-validated'); // Quitar las validaciones de Bootstrap
         return true;
+    }
 
+    // Función para mostrar SweetAlert
+    function mostrarSweetAlert(mensaje) {
+        swal({
+            title: "Error",
+            text: mensaje,
+            icon: "error",
+            button: "Aceptar"
+        });
+    }
     // Script de validación de contraseñas
     document.getElementById('confirmPasswo').addEventListener('input', function() {
         var passwo1 = document.getElementById('passwo1').value;
@@ -285,87 +250,6 @@ function validarCampos() {
             confirmPasswoInput.setCustomValidity(''); // Restablecer la validez
         }
     });
-    // Función para mostrar SweetAlert y enviar formulario después de 5 segundos
-    function mostrarSweetAlert() {
-        swal({
-            title: "Enviando correo y actualizando contraseña",
-            text: "Espere unos momentos...",
-            icon: "info",
-            buttons: false, // No mostrar botones
-            closeOnClickOutside: false, // No cerrar al hacer clic fuera del modal
-            closeOnEsc: false // No cerrar al presionar la tecla Esc
-        });
-
-        setTimeout(function () {
-            document.getElementById("formulario3").submit(); // Envía el formulario
-        }, 5000);
-    }
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var checkbox = document.getElementById("flexCheckDefault");
-        var preguntaInput = document.getElementById("pregunta");
-        var respuestaInput = document.getElementById("respuesta");
-        var codigoRecuperacionInput = document.getElementById("codigo_recuperacion");
-        var codigoRecuperacionWrapper = document.getElementById("codigo_recuperacion_wrapper");
-
-        checkbox.addEventListener("change", function() {
-            if (checkbox.checked) {
-                // Si se selecciona la opción de no recordar, ocultar la pregunta y respuesta
-                preguntaInput.style.display = "none";
-                respuestaInput.style.display = "none";
-                // Mostrar solo el campo para ingresar el código de recuperación
-                codigoRecuperacionWrapper.style.display = "block";
-            } else {
-                // Si no se selecciona la opción de no recordar, mostrar la pregunta y respuesta
-                preguntaInput.style.display = "block";
-                respuestaInput.style.display = "block";
-                // Ocultar campo para ingresar el código de recuperación
-                codigoRecuperacionWrapper.style.display = "none";
-            }
-        });
-    });
-</script>
-<script>
-        // Función para deshabilitar la validación de los campos de contraseña cuando se seleccione el checkbox
-        document.addEventListener("DOMContentLoaded", function() {
-            var checkbox = document.getElementById("flexCheckDefault");
-            var passwo1Input = document.getElementById("passwo1");
-            var confirmPasswoInput = document.getElementById("confirmPasswo");
-
-            checkbox.addEventListener("change", function() {
-                if (checkbox.checked) {
-                    // Si se selecciona la opción de no recordar, deshabilitar la validación de los campos de contraseña
-                    passwo1Input.removeAttribute("required");
-                    confirmPasswoInput.removeAttribute("required");
-                    passwo1Input.classList.remove("is-invalid");
-                    confirmPasswoInput.classList.remove("is-invalid");
-                } else {
-                    // Si no se selecciona la opción de no recordar, habilitar la validación de los campos de contraseña
-                    passwo1Input.setAttribute("required", "");
-                    confirmPasswoInput.setAttribute("required", "");
-                }
-            });
-        });
-    </script>
-    <script>
-document.addEventListener("DOMContentLoaded", function() {
-    var checkbox = document.getElementById("flexCheckDefault");
-    var passwo1Input = document.getElementById("passwo1");
-    var confirmPasswoInput = document.getElementById("confirmPasswo");
-
-    checkbox.addEventListener("change", function() {
-        if (checkbox.checked) {
-            // Deshabilitar campos de contraseña y confirmación
-            passwo1Input.disabled = true;
-            confirmPasswoInput.disabled = true;
-        } else {
-            // Habilitar campos de contraseña y confirmación
-            passwo1Input.disabled = false;
-            confirmPasswoInput.disabled = false;
-        }
-    });
-});
 </script>
 <script>
         $(document).ready(function() {
@@ -374,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         var correo = $('#correo').val();
         $.ajax({
-            url: '../PHPMailer/controlador_verificar_contraseña.php',
+            url: '../PHPMailer/controlador_verificar_contrasena.php',
             method: 'POST',
             data: { correo: correo },
             success: function(response) {
@@ -384,5 +268,40 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
     </script>
+    <script>
+    // Función para alternar la visibilidad de la contraseña
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('passwo1'); // Campo de contraseña
+        const icon = document.querySelector('#togglePassword i');
+
+        // Alterna entre tipo de entrada 'password' y 'text'
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
+
+    // Función para alternar la visibilidad de la confirmación de contraseña
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+        const confirmPasswordInput = document.getElementById('confirmPasswo'); // Campo de confirmación de contraseña
+        const icon = document.querySelector('#toggleConfirmPassword i');
+
+        // Alterna entre tipo de entrada 'password' y 'text'
+        if (confirmPasswordInput.type === 'password') {
+            confirmPasswordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            confirmPasswordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
+</script>
 </body>
 </html>
