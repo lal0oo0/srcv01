@@ -12,10 +12,7 @@ $correo = '';
 $mensaje = '';
 $correo_encontrado = false;
 $correo_mostrado = true;
-$pregunta = ''; 
-$respuesta_correcta = '';
 $nombre_usuario = '';
-$checkbox_checked = false;
 
 session_start();
 
@@ -49,8 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
             $_SESSION['correo_encontrado'] = true;
             $correo_mostrado = false;
             $_SESSION['correo'] = $correo; 
-            $_SESSION['pregunta'] = $row['PREGUNTA_SEGURIDAD'];
-            $_SESSION['respuesta'] = $row['RESPUESTA_PREGUNTA'];
             $_SESSION['nombre_usuario'] = $row['NOMBRE'];
             $correo_mostrado = false;
 
@@ -76,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Actualización de Contraseña</title>
+                <title>Codigo de verificacion</title>
             </head>
             <body>
             <div style="width: 100%; max-width: 500px; margin: 0 auto; padding: 20px;">
@@ -94,6 +89,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
                       </html>';
             if ($mail->send()) {
                 $mensaje .= '<div class="alert alert-success" role="alert">Se ha enviado un correo electrónico con el código de verificación.</div>';
+                // Almacenar el correo en la sesión para usarlo en el siguiente paso
+                $_SESSION['correo_verificacion'] = $correo;
+                // Redirigir a la página donde el usuario ingresará el código de verificación
+                header("Location: ../Vista/vista_verificar_codigo.php");
+                exit();
             } else {
                 $mensaje .= '<div class="alert alert-danger" role="alert">Error al enviar el correo electrónico con el código de verificación.</div>';
             }

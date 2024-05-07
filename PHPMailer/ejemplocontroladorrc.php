@@ -5,10 +5,6 @@ use PHPMailer\PHPMailer\Exception;
 require_once '../Modelo/conexion2.php';
 require 'vendor/autoload.php';
 
-session_start();
-// Recuperar el correo electrónico de la variable de sesión
-$correo = isset($_SESSION['correo']) ? $_SESSION['correo'] : '';
-
 $link = $_SERVER['HTTP_HOST'];
 
 $conexion = conect();
@@ -20,13 +16,14 @@ $pregunta = '';
 $respuesta_correcta = '';
 $nombre_usuario = '';
 
+session_start();
+
 // Verificar si se envió un formulario con el correo electrónico
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
     $correo = $_POST["correo"];
-    
+
     // Validar el formato del correo electrónico
     if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        // Consultar la base de datos para verificar si el correo existe
         $sql = "SELECT CORREO_ELECTRONICO, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO=? LIMIT 1";
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("s", $correo);
@@ -35,22 +32,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
 
         // Verificar si se encontró el correo electrónico en la base de datos
         if ($result->num_rows > 0) {
-            // Si el correo existe, establecer las variables de sesión
             $correo_encontrado = true;
             $row = $result->fetch_assoc();
-            $_SESSION['correo'] = $correo; // Aquí se establece la sesión con el correo proporcionado
+            $mensaje = '<div class="alert alert-success" role="alert">El correo electrónico está registrado.</div>';
+            $_SESSION['correo_encontrado'] = true;
+            $correo_mostrado = false;
+            $_SESSION['correo'] = $correo; 
             $_SESSION['pregunta'] = $row['PREGUNTA_SEGURIDAD'];
             $_SESSION['respuesta'] = $row['RESPUESTA_PREGUNTA'];
             $_SESSION['nombre_usuario'] = $row['NOMBRE'];
+            $correo_mostrado = false;
 
-            // Aquí debería mostrar algún mensaje o redireccionar a la página de preguntas de seguridad
         } else {
-            // Si el correo no existe en la base de datos, mostrar un mensaje de error
             $mensaje = '<div class="alert alert-danger" role="alert">El correo electrónico no está registrado.</div>';
             $_SESSION['correo_mostrado'] = true;
+            
         }
     } else {
-        // Si el formato del correo electrónico no es válido, mostrar un mensaje de error
         $mensaje = '<div class="alert alert-danger" role="alert">El formato del correo electrónico no es válido.</div>';
     }
 }
@@ -165,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
     } else {
         $mensaje = '<div class="alert alert-danger" role="alert">La respuesta proporcionada es incorrecta o la pregunta no coincide con la registrada.</div>';
     }
-    header("location: ../Vista/vista_pregunta_respuesta.php?mensaje=" . urlencode($mensaje));
+    header("Location: ../Vista/vista_rescuperar_contrasena.php");
     exit();
 }
 ?>

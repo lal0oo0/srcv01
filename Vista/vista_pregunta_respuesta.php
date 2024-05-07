@@ -1,11 +1,26 @@
 <?php
 require_once '../Modelo/conexion2.php';
-require_once '../PHPMailer/controlador_recuperar_contrasena.php';
 if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa']) {
     $mensaje_enviado = true;
 } else {
     $mensaje_enviado = false;
 }
+
+// Verificar si hay un correo almacenado en la sesión
+if (isset($_SESSION['correo'])) {
+    $correo = $_SESSION['correo']; // Asignar el valor del correo almacenado en la sesión a la variable $correo
+} else {
+    $correo = ''; // Establecer un valor predeterminado si no hay un correo almacenado en la sesión
+}
+
+$correo = '';
+$mensaje = '';
+$correo_hidden = '';
+$correo_encontrado = false;
+$correo_mostrado = true;
+$correo_validado = true;
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -91,6 +106,25 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
         border: 2px solid #007AB6;
     }
 
+/* Estilo para que el texto del checkbox se estire y no se divida en varias líneas */
+.form-check-label {
+            white-space: nowrap;
+        }
+
+.was-validated .form-check-label:valid {
+    background-color: transparent;
+    border-color: #000; /* Color del borde negro */
+}
+
+.was-validated .form-check-label:invalid {
+    background-color: transparent;
+    border-color: #000; /* Color del borde negro */
+}
+
+#flexCheckDefault + label.form-check-label {
+    color: black; /* Cambia el color del texto del checkbox */
+}
+
     </style>
 </head>
 <body>
@@ -106,7 +140,10 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                     <div class="col-12 user-img">
                         <img src="../imagenes/logocorporativo.png" alt="" class="logo">
                     </div>
-                    <form action="" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
+                    <form action="../PHPMailer/controlador_pregunta_respuesta.php" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-12">
+                    <input type="email" class="form-control"  id="correo" name="correo" aria-describedby="emailHelp" required disabled value="<?php echo htmlspecialchars($correo); ?>">
+                            </div>
                         <div class="col-md-12">
                             <select class="form-select" id="pregunta" name="pregunta" style="border: 2px solid #007AB6;" required>
                                 <option selected value="">Seleccione con la que mejor se identifique *</option>
@@ -116,20 +153,20 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                             </select>
                             <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
                         </div>
-                        <div class="col-md-6">
+                        <!--div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input d-flex align-items-center" type="checkbox" value="" style="border: 2px solid #007AB6;" id="flexCheckDefault">
-                                <label class="form-check-label mb-0" for="flexCheckDefault" style="margin-right: 55px;" style="max-width: 150px;">
+                                <input class="form-check-input d-flex align-items-center" type="checkbox" value="" style="border: 2px solid #007AB6;" id="flexCheckDefault" onclick="redirigirInterfaz()">
+                                <label class="form-check-label" for="flexCheckDefault" >
                                 No te sabes tu pregunta y respuesta
                                 </label>
                             </div>
                         </div>
-                        <div class= "col-md-1"></div>
-                        <div class="col-md-6">
-                             <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
-                             <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-                             <div class="invalid-feedback">*Campo obligatorio</div>
-                        </div>
+                        <div class= "col-md-1"></div-->
+                            <div class="col-md-6">
+                                <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
+                                <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                                <div class="invalid-feedback">*Campo obligatorio</div>
+                            </div>
                         <div class="col-md-6">
                             <label for="confirmPasswo" class="form-label">Confirmar contraseña</label>
                             <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
@@ -222,43 +259,6 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
     });
 </script>
 <script>
-    // Función para validar campos y enviar formulario
-    function validarCampos() {
-        var formulario = document.getElementById("formulario3");
-
-        // Verificar si el formulario es válido según las validaciones de Bootstrap
-        if (!formulario.checkValidity()) {
-            // Si el formulario no es válido, mostrar las validaciones de Bootstrap
-            formulario.classList.add('was-validated');
-            return false;
-        }
-
-        var correo = document.getElementById("correo").value;
-        var pregunta = document.getElementById("pregunta").value;
-        var respuesta = document.getElementById("respuesta").value;
-        var passwo1 = document.getElementById("passwo1").value;
-        var confirmPasswo = document.getElementById("confirmPasswo").value;
-        var mensajeError = document.getElementById('passwordMismatch');
-
-        // Verificar si todos los campos requeridos están llenos
-        if (correo.trim() === "" || pregunta.trim() === "" || respuesta.trim() === "" || passwo1.trim() === "" || confirmPasswo.trim() === "") {
-            alert("Por favor, complete todos los campos.");
-            return false;
-        }
-
-        // Verificar si las contraseñas coinciden
-        if (passwo1 !== confirmPasswo) {
-            mensajeError.style.display = 'block';
-            document.getElementById('confirmPasswo').classList.add('is-invalid');
-            return false;
-        }
-
-        // Si todo está bien, mostrar la SweetAlert y quitar las validaciones de Bootstrap
-        mostrarSweetAlert();
-        formulario.classList.remove('was-validated'); // Quitar las validaciones de Bootstrap
-        return true;
-    }
-
     // Script de validación de contraseñas
     document.getElementById('confirmPasswo').addEventListener('input', function() {
         var passwo1 = document.getElementById('passwo1').value;
@@ -291,6 +291,15 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
             document.getElementById("formulario3").submit(); // Envía el formulario
         }, 5000);
     }
+</script>
+<script>
+    function redirigirInterfaz() {
+        // Aquí puedes especificar la URL de la interfaz a la que quieres redirigir
+        window.location.href = '../Vista/vista_verificar_codigo.php';
+    }
+</script>
+<script>
+    document.getElementById("correo").disabled = true;
 </script>
 </body>
 </html>
