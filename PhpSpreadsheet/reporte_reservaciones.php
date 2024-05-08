@@ -185,6 +185,7 @@ $fila = 2;
 
 // Inicializa la variable en 0 para almacenar la sumatoria total
 $totalSum = 0;
+$contador = 0;
 
 while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('A'. $fila)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('F0F0F0'); // Color en la celda
@@ -262,17 +263,38 @@ while($rows = $resultado->fetch_assoc()){
 
     $fila++;
 
-
     // Suma el valor del campo 'TOTAL' a la sumatoria total
     $totalSum += $rows['TOTAL'];
     // Calcular el número total de registros
     $total_registros = $fila - 2; // Resta 2 para excluir la fila de encabezado y la fila donde empezaron los registros
-    //Fila para mostrar el total de registros
-    $hojaActiva->setCellValue('H' . $fila, 'Total de Registros: ' . $total_registros);
-    $hojaActiva->setCellValue('I' . $fila, 'Sumatoria total: ' . $totalSum);
-    $hojaActiva->getStyle('I'. $totalSum)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE); //Formato moneda
-
+    
 }
+    $fila += 2;
+
+    // Definir los encabezados de la segunda tabla
+    $hojaActiva->setCellValue('H'.$fila, 'Total de registros:');
+    $hojaActiva->getStyle('H' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('H' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+    
+    $hojaActiva->setCellValue('I'.$fila, 'Sumatoria total:');
+    $hojaActiva->getStyle('I' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('I' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+
+    $fila++;
+    //Fila para mostrar el total de registros
+    $hojaActiva->setCellValue('H' . $fila, $total_registros);
+    $hojaActiva->getStyle('H' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('H' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+    $hojaActiva->getStyle('H' . $fila)->getAlignment()->setWrapText(true); // Ajustar el texto si es necesario
+
+    //Fila para mostrar la sumatoria total
+    $hojaActiva->getStyle('I' . $fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
+    $hojaActiva->setCellValue('I' . $fila, $totalSum);
+    $hojaActiva->getStyle('I' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('I' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+    $hojaActiva->getStyle('I' . $fila)->getAlignment()->setWrapText(true); // Ajustar el texto si es necesario
+
+
 
 }else if ($rol_administrador->num_rows==1){
     $sql = "SELECT NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, CORREO_ELECTRONICO, TELEFONO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE, LIQUIDACION
@@ -616,17 +638,62 @@ while($rows = $resultado->fetch_assoc()){
         $totalEng += $rows['ENGANCHE'];
         // Suma el valor del campo 'ENGANCHE' a la variable
         $totalLiq += $rows['LIQUIDACION'];
-
         // Variable para almacenar el total de registros
         $total_registros = $fila - 2; // Resta 2 para excluir la fila de encabezado y la fila donde empezaron los registros
-        $hojaActiva->setCellValue('L' . $fila, 'Total de Registros: ' . $total_registros);//Fila para mostrar el total de registros
-        $hojaActiva->setCellValue('M' . $fila, 'Sumatoria total: ' . $totalSum);//Fila para mostrar la sumatoria total 
-        $hojaActiva->setCellValue('N' . $fila, 'Sumatoria enganche: ' . $totalEng);//Fila para mostrar la sumatoria total de enganche
-        $hojaActiva->setCellValue('O' . $fila, 'Sumatoria liquidación: ' . $totalLiq);//Fila para mostrar la sumatoria total de liquidacion
+
     }
+
+    $fila += 2;
+
+    // Definir los encabezados de la segunda tabla
+    $hojaActiva->setCellValue('L'.$fila, 'Total de registros:');
+    $hojaActiva->getStyle('L' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('L' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+    
+    $hojaActiva->setCellValue('M'.$fila, 'Sumatoria total:');
+    $hojaActiva->getStyle('M' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('M' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+
+    $hojaActiva->setCellValue('N'.$fila, 'Sumatoria enganche:');
+    $hojaActiva->getStyle('N' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('N' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+
+    $hojaActiva->setCellValue('O'.$fila, 'Sumatoria liquidacion:');
+    $hojaActiva->getStyle('O' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('O' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+
+    $fila++;
+
+    //Fila para mostrar el total de registros
+    $hojaActiva->setCellValue('L' . $fila, $total_registros);
+    $hojaActiva->getStyle('L' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('L' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+    $hojaActiva->getStyle('L' . $fila)->getAlignment()->setWrapText(true); // Ajustar el texto si es necesario
+
+    //Fila para mostrar la sumatoria total
+    $hojaActiva->getStyle('M' . $fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
+    $hojaActiva->setCellValue('M' . $fila, $totalSum);
+    $hojaActiva->getStyle('M' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('M' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+    $hojaActiva->getStyle('M' . $fila)->getAlignment()->setWrapText(true); // Ajustar el texto si es necesario
+
+    //Fila para mostrar la sumatoria enganche
+    $hojaActiva->getStyle('N' . $fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
+    $hojaActiva->setCellValue('N' . $fila, $totalEng);
+    $hojaActiva->getStyle('N' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('N' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+    $hojaActiva->getStyle('N' . $fila)->getAlignment()->setWrapText(true); // Ajustar el texto si es necesario
+
+    //Fila para mostrar la sumatoria liquidacion
+    $hojaActiva->getStyle('O' . $fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
+    $hojaActiva->setCellValue('O' . $fila, $totalLiq);
+    $hojaActiva->getStyle('O' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('O' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+    $hojaActiva->getStyle('O' . $fila)->getAlignment()->setWrapText(true); // Ajustar el texto si es necesario
 
 
 }
+
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="reservaciones.xlsx"');
 header('Cache-Control: max-age=0');
