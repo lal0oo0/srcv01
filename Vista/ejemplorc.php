@@ -106,7 +106,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
     border-color: #000; /* Color del borde negro */
 }
 
-#flexCheckDefault + label.form-check-label {
+#enviarCodigoCheckbox + label.form-check-label {
     color: black; /* Cambia el color del texto del checkbox */
 }
 
@@ -151,7 +151,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                             <div class="form-check">
                                 <input class="form-check-input d-flex align-items-center" type="checkbox" value="" style="border: 2px solid #007AB6;" id="enviarCodigoCheckbox" onclick="redirigirInterfaz()">
                                 <label class="form-check-label" for="enviarCodigoCheckbox" style="font-size: 18px;">
-                                No te sabes tu pregunta y respuesta
+                                Sí, no recuerdo mi pregunta y respuesta de seguridad.
                                 </label>
                             </div>
                         </div>
