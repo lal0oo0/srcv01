@@ -115,7 +115,7 @@ $correo_mostrado = true;
                     <div class="col-12 user-img">
                         <img src="../imagenes/logocorporativo.png" alt="" class="logo">
                     </div>
-                    <form action="../PHPMailer/controlador_verificar_contrasena.php" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
+                    <form action="../Controlador/controlador_comparar_codigo.php" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
                         <div class="col-md-12">
                             <h3>Codigo de verificacion</h3>
                             <label for="" class="form-label">Ingrese el codigo</label>
@@ -258,11 +258,20 @@ $correo_mostrado = true;
         
         var correo = $('#correo').val();
         $.ajax({
-            url: '../PHPMailer/controlador_verificar_contrasena.php',
+            url: '../PHPMailer/controlador_verificar_contrasena.php', // Primer controlador
             method: 'POST',
             data: { correo: correo },
             success: function(response) {
-                $('#mensaje').html(response);
+                $('#mensaje').html(response); // Mostrar la respuesta en algún lugar adecuado de tu interfaz
+            }
+        });
+
+
+        $.ajax({
+            url: '../PHPMailer/controlador_comparar_codigo.php', // Segundo controlador
+            method: 'POST',
+            data: { codigo: $('#codigo').val() }, 
+            success: function(response) {
             }
         });
     });

@@ -149,9 +149,9 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
                         </div>
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input d-flex align-items-center" type="checkbox" value="" style="border: 2px solid #007AB6;" id="enviarCodigoCheckbox" onclick="redirigirInterfaz()">
+                                <input class="form-check-input d-flex align-items-center" type="checkbox" value="" style="border: 2px solid #007AB6;" id="enviarCodigoCheckbox">
                                 <label class="form-check-label" for="enviarCodigoCheckbox" style="font-size: 18px;">
-                                Sí, no recuerdo mi pregunta y respuesta de seguridad.
+                                No recuerdo mi pregunta y respuesta de seguridad.
                                 </label>
                             </div>
                         </div>
@@ -178,31 +178,57 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
             </div>
         </div>
     </div>
-    <script src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        // Ejemplo de JavaScript inicial para deshabilitar el envío de formularios si hay campos no válidos
-        (() => {
-            'use strict'
 
-            // Recupera todos los formularios a los que queremos aplicar estilos de validación Bootstrap personalizados
-            const forms = document.querySelectorAll('.needs-validation')
+<!-- Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Codigo verificacion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <label for="" class="form-label">Ingrese el codigo</label>
+        <div class="input-group has-validation">
+        <input type="codigo" style="border: 2px solid #007AB6;" class="form-control" name="codigo" id="codigo" placeholder="Ingrese su codigo que le mandamos en su correo" required maxlength="8">
+        <div class="invalid-feedback">
+        *Campo obligatorio
+            </div>
+                </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="verificarCodigo()">Verificar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-            // Bucle sobre ellos y evitar la presentación
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    // Ejemplo de JavaScript inicial para deshabilitar el envío de formularios si hay campos no válidos
+    (() => {
+        'use strict'
 
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })();
-    </script>
-    <script>
+        // Recupera todos los formularios a los que queremos aplicar estilos de validación Bootstrap personalizados
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Bucle sobre ellos y evitar la presentación
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })();
+</script>
+<script>
     document.addEventListener("DOMContentLoaded", function() {
         var boton = document.getElementById("enviar");
         var emailInput = document.getElementById("correo");
@@ -310,12 +336,6 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
     }
 </script>
 <script>
-    function redirigirInterfaz() {
-        // Aquí puedes especificar la URL de la interfaz a la que quieres redirigir
-        window.location.href = '../Vista/vista_verificar_codigo.php';
-    }
-</script>
-<script>
     // Escuchar cambios en el checkbox
     $(document).ready(function() {
         $('#enviarCodigoCheckbox').change(function() {
@@ -342,18 +362,66 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
             url: '../PHPMailer/controlador_verificar_contrasena.php', // Ruta a tu controlador para enviar el correo
             data: { correo: correo },
             success: function(response) {
-                // Si el correo se envía correctamente, redirigir a la siguiente interfaz
-                if (response === 'success') {
-                    window.location.href = '../Vista/vista_verificar_codigo.php';
-                } else {
-                    alert('Error al enviar el código de verificación por correo.');
-                }
             },
             error: function() {
                 alert('Error en la solicitud AJAX.');
             }
         });
     }
+</script>
+<script>
+// Función para abrir el modal cuando se seleccione el checkbox
+function abrirModal() {
+  $('#myModal').modal('show'); // Abre el modal utilizando jQuery
+}
+
+// Escuchar cambios en el checkbox
+$(document).ready(function() {
+    $('#enviarCodigoCheckbox').change(function() {
+        if ($(this).is(':checked')) {
+            abrirModal(); // Llama a la función para abrir el modal
+        }
+    });
+});
+</script>
+<script>
+    // Función para verificar el código de verificación
+    function verificarCodigo() {
+        // Obtener el código ingresado
+        var codigo = $('#codigo').val();
+
+        // Validar que se haya ingresado un código
+        if (codigo.trim() === '') {
+            alert('Por favor ingresa el código de verificación.');
+            return;
+        }
+
+        // Enviar solicitud AJAX para verificar el código
+        $.ajax({
+            type: 'POST',
+            url: '../PHPMailer/controlador_verificar_contrasena.php', // Reemplaza 'ruta_a_tu_script_de_verificacion.php' con la ruta correcta
+            data: { codigo: codigo },
+            success: function(response) {
+                // Procesar la respuesta del servidor
+                if (response === 'correcto') {
+                    // El código de verificación es correcto, redirigir a la página de actualización de contraseña
+                    window.location.href = '../Vista/ejemplorc.php';
+                } else {
+                    // El código de verificación no es válido, mostrar mensaje de error
+                    swal('El código de verificación ingresado no es válido.');
+                }
+            },
+            error: function() {
+                swal('Error en la solicitud AJAX.');
+            }
+        });
+    }
+</script>
+<script>
+    // Función para desmarcar el checkbox cuando se cierra el modal
+    $('#myModal').on('hidden.bs.modal', function () {
+        $('#enviarCodigoCheckbox').prop('checked', false); // Desmarca el checkbox
+    });
 </script>
 </body>
 </html>
