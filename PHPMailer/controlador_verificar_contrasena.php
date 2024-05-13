@@ -8,6 +8,7 @@ require_once 'vendor/autoload.php';
 $conexion = conect();
 $mensaje = '';
 $correo_mostrado = true;
+$codigo_ingresado = '';
 $nombre_usuario = '';
 
 // Función para generar un código de verificación aleatorio
@@ -28,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Validar el formato del correo electrónico
         if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
             // Validar si el correo electrónico está registrado
-            $sql = "SELECT CORREO_ELECTRONICO, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO=? LIMIT 1";
+            $sql = "SELECT CORREO_ELECTRONICO, CODIGO FROM srcv_administradores WHERE CORREO_ELECTRONICO=? LIMIT 1";
             $stmt = $conexion->prepare($sql);
             $stmt->bind_param("s", $correo);
             $stmt->execute();
@@ -36,11 +37,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Verificar si se encontró el correo electrónico en la base de datos
             if ($result->num_rows > 0) {
+                $correo_encontrado = true;
                 $row = $result->fetch_assoc();
                 $mensaje = '<div class="alert alert-success" role="alert">El correo electrónico está registrado.</div>';
                 $_SESSION['correo_encontrado'] = true;
                 $correo_mostrado = false;
                 $_SESSION['correo'] = $correo; 
+                $_SESSION['codigo'] = $row['CODIGO'];
                 $_SESSION['nombre_usuario'] = $row['NOMBRE'];
 
                 // Generar y almacenar el código de verificación en la sesión
@@ -48,10 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['codigo_verificacion'] = $codigo_verificacion;
 
                 // Almacenar el código de verificación en la base de datos
-                $sql_insert = "UPDATE srcv_administradores SET CODIGO = ? WHERE CORREO_ELECTRONICO = ?";
-                $stmt_insert = $conexion->prepare($sql_insert);
-                $stmt_insert->bind_param("ss", $codigo_verificacion, $correo);
-                $stmt_insert->execute();
+                $sql_update_codigo = "UPDATE srcv_administradores SET CODIGO = ? WHERE CORREO_ELECTRONICO = ? LIMIT 1";
+                $stmt_update_codigo = $conexion->prepare($sql_update_codigo);
+                $stmt_update_codigo->bind_param("ss", $codigo_verificacion, $correo);
+                $stmt_update_codigo->execute();
 
                 // Envío de correo electrónico con el código de verificación
                 $mail = new PHPMailer(true);
@@ -97,25 +100,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mensaje = '<div class="alert alert-danger" role="alert">El formato del correo electrónico no es válido.</div>';
         }
     }
-    // Verificar si se envió el código de verificación desde el modal
-    if (isset($_POST["codigo"])) {
-        // Obtener el código ingresado en el modal
+
+// Verificar si se envió un formulario
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["correo"])) {
+        // Procesar el formulario con el correo electrónico
+        // Tu código aquí
+    } elseif (isset($_POST["codigo"]) && isset($_POST["correo_modal"])) {
+        // Procesar el formulario con el código de verificación desde el modal
         $codigo_ingresado = $_POST["codigo"];
+        $correo_modal = $_POST["correo_modal"];
 
-        // Verificar si el código ingresado coincide con el almacenado en la base de datos
-        $sql_select = mysqli_query($conexion, "SELECT CORREO_ELECTRONICO, CODIGO FROM srcv_administradores WHERE CORREO_ELECTRONICO = $correo");
-        $sqlres = mysqli_fetch_assoc($sql_select);
-        $codigobd=$sqlres['CODIGO'];
+        // Consultar la base de datos para obtener el código asociado con el correo ingresado
+        $consulta = "SELECT CODIGO FROM srcv_administradores WHERE CORREO_ELECTRONICO = ? LIMIT 1";
+        $statement = $conexion->prepare($consulta);
+        $statement->bind_param("s", $correo_modal);
+        $statement->execute();
+        $resultado = $statement->get_result();
+        //encriptar el codigo
+        
 
-        if ($codigobd=$codigo_ingresado) {
-            // El código ingresado es correcto, puedes continuar con el proceso de actualización de contraseña
-            // Por ejemplo, redirigir a la página donde el usuario puede ingresar una nueva contraseña
-            header("Location: ../Vista/ejemplorc.php");
-            exit();
+        //Fin de la encriptacion
+
+        // Verificar si se encontró algún resultado
+        if ($resultado->num_rows > 0) {
+            $row = $resultado->fetch_assoc();
+            $codigo_bd = $row['CODIGO'];
+
+            // Verificar si el código ingresado coincide con el código almacenado en la base de datos
+            if ($codigo_ingresado == $codigo_bd) {
+                // El código ingresado es correcto
+                $mensaje = '<div class="alert alert-success" role="alert">Código correcto.</div>';
+                // Aquí puedes realizar alguna acción adicional, como permitir el acceso al usuario, etc.
+            } else {
+                // El código ingresado no es correcto
+                $mensaje = '<div class="alert alert-danger" role="alert">El código ingresado no es válido.</div>';
+            }
         } else {
-            // El código ingresado no es correcto, puedes mostrar un mensaje de error
-            $mensaje = '<div class="alert alert-danger" role="alert">El código ingresado no es válido.</div>';
+            // No se encontró ningún registro con el correo ingresado
+            $mensaje = '<div class="alert alert-danger" role="alert">No se encontró ningún registro con el correo ingresado.</div>';
         }
     }
+}
 }
 ?>

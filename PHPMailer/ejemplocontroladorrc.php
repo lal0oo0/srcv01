@@ -16,7 +16,6 @@ $pregunta = '';
 $respuesta_correcta = '';
 $nombre_usuario = '';
 
-session_start();
 
 // Verificar si se envió un formulario con el correo electrónico
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
@@ -24,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
 
     // Validar el formato del correo electrónico
     if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        $sql = "SELECT CORREO_ELECTRONICO, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, NOMBRE, CODIGO FROM srcv_administradores WHERE CORREO_ELECTRONICO=? LIMIT 1";
+        $sql = "SELECT CORREO_ELECTRONICO, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, NOMBRE FROM srcv_administradores WHERE CORREO_ELECTRONICO=? LIMIT 1";
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("s", $correo);
         $stmt->execute();
@@ -46,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["correo"])) {
 
         } else {
             $mensaje = '<div class="alert alert-danger" role="alert">El correo electrónico no está registrado.</div>';
-            $_SESSION['correo_mostrado'] = true;
+            $_SESSION['correo_mostrado'] = true; 
             
         }
     } else {
@@ -164,9 +163,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["respuesta"])) {
     } else {
         $mensaje = '<div class="alert alert-danger" role="alert">La respuesta proporcionada es incorrecta o la pregunta no coincide con la registrada.</div>';
     }
-    $_SESSION['correo_recuperacion'] = $_POST['correo'];
-// Redirigir a la segunda interfaz
-header("Location: ../Vista/vista_verificar_codigo.php");
-exit();
 }
 ?>
