@@ -335,7 +335,7 @@ $row = $resultado->fetch_assoc();
 <script>
 function formatoMoneda(input, tipo) {
     // Obtener el valor numérico ingresado
-    const numero = parseFloat(input.value);
+    let numero = parseFloat(input.value.replace(/[^\d.]/g, ''));
 
     // Verificar si es un número válido
     if (!isNaN(numero)) {
@@ -344,10 +344,10 @@ function formatoMoneda(input, tipo) {
             style: 'currency',
             currency: 'MXN' // Cambiar a pesos mexicanos
         });
-        
+
         // Actualizar el valor del campo de entrada con el formato de moneda
         input.value = formatoMoneda;
-        
+
         // Dependiendo del tipo, actualizamos el valor del campo correspondiente en el formulario
         if (tipo === 'total') {
             // Actualizar el campo total
@@ -359,16 +359,15 @@ function formatoMoneda(input, tipo) {
     }
 }
 
+// Aplicar formato de moneda nuevamente cuando se edita el campo
+document.getElementById('total').addEventListener('input', function() {
+    formatoMoneda(this, 'total');
+});
 
+document.getElementById('enganche').addEventListener('input', function() {
+    formatoMoneda(this, 'enganche');
+});
 
-// Permitir que el usuario edite el número manteniendo el formato de moneda
-function desformatoMoneda(input) {
-    // Obtener el valor numérico sin formato del atributo de datos
-    const numero = parseFloat(input.dataset.valorNumerico);
-
-    // Actualizar el valor visual con el valor numérico sin formato
-    input.value = numero;
-}
 
     //Limpiar fromulario
     function limpiar(idForm) {
