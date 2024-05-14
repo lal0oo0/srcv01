@@ -82,7 +82,7 @@ if ($codigo == $codigo_bd) {
             $mail->setFrom('itglobal071@gmail.com', 'iT-Global');
             $mail->addAddress($correo);
             $mail->isHTML(true);
-            $mail->Subject = 'Código de Verificación';
+            $mail->Subject = 'Actualización de contraseña.';
             $mail->Body = '<html lang="en">
                     <head>
                         <meta charset="UTF-8">
