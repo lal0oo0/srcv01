@@ -95,7 +95,7 @@ try {
        header("Location: ../Vista/vista_recuperar_contrasena_codigo.php?mensaje=" . urlencode($mensaje));
         exit();
 } catch (Exception $e) {
-    echo "Error al enviar el código correo electrónico: {$mail->ErrorInfo}";
+    echo "Error al enviar el código a su correo electrónico: {$mail->ErrorInfo}";
 }
 
 mysqli_close($conexion);

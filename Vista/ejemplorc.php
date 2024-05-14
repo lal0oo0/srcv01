@@ -1,10 +1,19 @@
 <?php
+
+session_start();
+
 require_once '../Modelo/conexion2.php';
 require_once '../PHPMailer/ejemplocontroladorrc.php';
 if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa']) {
     $mensaje_enviado = true;
 } else {
     $mensaje_enviado = false;
+}
+
+// Obtener el correo electrónico
+$correo = ""; // Inicializa una variable para almacenar el correo electrónico
+if (isset($_POST['correo'])) {
+    $correo = htmlspecialchars($_POST['correo']);
 }
 ?>
 <!DOCTYPE html>
@@ -188,6 +197,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+      <input type="email" class="form-control" name="correo_modal" id="correo_modal" disabled value="<?php echo $correo; ?>">
       <label for="" class="form-label">Ingrese el codigo</label>
         <div class="input-group has-validation">
         <input type="codigo" style="border: 2px solid #007AB6;" class="form-control" name="codigo" id="codigo" placeholder="Ingrese su codigo que le mandamos en su correo" required maxlength="8">
@@ -347,6 +357,8 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
 
     // Función para enviar el código de verificación por correo
     function enviarCodigoVerificacion() {
+    // Verificar si el checkbox está marcado
+    if ($('#enviarCodigoCheckbox').is(':checked')) {
         // Obtener el correo electrónico del campo
         var correo = $('#correo').val();
 
@@ -368,6 +380,7 @@ if (isset($_SESSION['recuperacion_exitosa']) && $_SESSION['recuperacion_exitosa'
             }
         });
     }
+}
 </script>
 <script>
 // Función para abrir el modal cuando se seleccione el checkbox
@@ -385,10 +398,20 @@ $(document).ready(function() {
 });
 </script>
 <script>
+    // Función para limpiar el modal después de ingresar el código correctamente
+    function limpiarModal() {
+        // Restablecer el valor del campo de código
+        $('#codigo').val('');
+        
+        // Eliminar cualquier mensaje de error presente
+        $('.modal-body .invalid-feedback').hide();
+    }
+
     // Función para verificar el código de verificación
     function verificarCodigo() {
         // Obtener el código ingresado
         var codigo = $('#codigo').val();
+        var correo_modal = $('#correo_modal').val();
 
         // Validar que se haya ingresado un código
         if (codigo.trim() === '') {
@@ -399,23 +422,51 @@ $(document).ready(function() {
         // Enviar solicitud AJAX para verificar el código
         $.ajax({
             type: 'POST',
-            url: '../PHPMailer/controlador_verificar_contrasena.php', // Reemplaza 'ruta_a_tu_script_de_verificacion.php' con la ruta correcta
-            data: { codigo: codigo },
+            url: '../PHPMailer/controlador_verificar_contrasena.php',
+            data: { codigo: codigo, correo_modal: correo_modal },
             success: function(response) {
                 // Procesar la respuesta del servidor
                 if (response === 'correcto') {
-                    // El código de verificación es correcto, redirigir a la página de actualización de contraseña
+                    swal('Código correcto. Puedes proceder con la recuperación de contraseña.');
+                    $('#myModal').modal('hide');
                     window.location.href = '../Vista/ejemplorc.php';
+                    limpiarModal(); // Limpia el modal
                 } else {
-                    // El código de verificación no es válido, mostrar mensaje de error
-                    swal('El código de verificación ingresado no es válido.');
+                    swal("El código de verificación ingresado no es válido",{
+                    icon: "error",
+                    buttons: "Ok", 
+                     });
+                    limpiarModal(); // Limpia el modal
                 }
             },
             error: function() {
                 swal('Error en la solicitud AJAX.');
+                limpiarModal(); // Limpia el modal
             }
         });
     }
+
+    // Escuchar el evento cuando el modal se cierra
+    $('#myModal').on('hidden.bs.modal', function () {
+        limpiarModal(); // Limpia el modal
+        // Habilitar la pregunta y la respuesta de seguridad
+        $('#pregunta').prop('disabled', false);
+        $('#respuesta').prop('disabled', false);
+    });
+
+    $(document).ready(function() {
+        $('#enviarCodigoCheckbox').change(function() {
+            if ($(this).is(':checked')) {
+                // Si el checkbox está marcado, deshabilitar la pregunta y la respuesta
+                $('#pregunta').prop('disabled', true);
+                $('#respuesta').prop('disabled', true);
+            } else {
+                // Si el checkbox está desmarcado, habilitar la pregunta y la respuesta
+                $('#pregunta').prop('disabled', false);
+                $('#respuesta').prop('disabled', false);
+            }
+        });
+    });
 </script>
 <script>
     // Función para desmarcar el checkbox cuando se cierra el modal

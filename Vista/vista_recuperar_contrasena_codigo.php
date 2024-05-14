@@ -85,16 +85,16 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <input type="email" style="border: 2px solid #007AB6;" class="form-control" value="<?php echo isset($_SESSION['correo']) ? $_SESSION['correo'] : ''; ?>" readonly>
               </div>
               <div class="col-md-12">
-                <label for="" class="form-label">Ingrese el código enviado a su correo electrónico</label>
+                <label for="" class="form-label">Ingresar código *</label>
                 <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="codigo" name="codigo" required>
               </div>
               <div class="col-md-6">
-                <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
+                <label for="passwo1" class="form-label">Agregar nueva contraseña *</label>
                 <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="contrasena" name="contrasena" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
                 <div class="invalid-feedback">*Campo obligatorio</div>
               </div>
               <div class="col-md-6">
-                <label for="confirmPasswo" class="form-label">Confirmar contraseña</label>
+                <label for="confirmPasswo" class="form-label">Confirmar contraseña *</label>
                 <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
                 <div class="invalid-feedback" id="passwordMismatch" style="color: red; display: none;">
                   Las contraseñas no coinciden.
@@ -108,7 +108,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
         </div>
       </div>
     </div>
-
+<script src="https://unpkg.com/@popperjs/core@2"></script><!--enlace para el tooltip-->
+<script src="https://unpkg.com/tippy.js@6"></script><!--enlace para agregar el tooltip-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
@@ -221,6 +222,20 @@ $(document).ready(function() {
         }
     });
   //Fin del  scripyt
+
+//Script para agregar tooltip a la contraseña
+  tippy('#contrasena', {
+        content: `
+        <ul>
+            <li>La contraseña debe contener de 8 a 16 caracteres</li>
+            <li>Debe incluir al menos una mayúscula</li>
+            <li>Debe incluir al menos una minúscula</li>
+            <li>Debe incluir al menos un número</li>
+            <li>Debe incluir al menos un caracter especial</li>
+        </ul>
+        `,
+        allowHTML: true // Esto permite que el contenido del tooltip se interprete como HTML
+    });
 </script>
 </body>
 </html>
