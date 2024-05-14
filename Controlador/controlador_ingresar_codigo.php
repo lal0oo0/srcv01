@@ -45,15 +45,22 @@ if(isset($_SESSION['correo'])) {
     exit("Error: No existe un correo electrónico.");
 }
 
-// Recuperar el código de verificación almacenado en la base de datos para el correo electrónico de la sesión
-$sql = "SELECT NOMBRE, CODIGO FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo'";
+$sql = "SELECT NOMBRE, CODIGO, CONTRASENA FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo'";
 $resultado = mysqli_query($conexion, $sql);
 $fila = mysqli_fetch_assoc($resultado);
 $codigo_bd = $fila['CODIGO'];
 $usuario = $fila['NOMBRE'];
+$contra_bd = $fila['CONTRASENA'];
 
 // Verificar si el código ingresado por el usuario coincide con el código de la base de datos
 if ($codigo == $codigo_bd) {
+
+    // Validar que la nueva contraseña sea diferente a la actual
+    if ($contraEncrip == $contra_bd) {
+        echo json_encode(array('success' => false, 'error' => 'La nueva contraseña debe ser diferente a la actual.'));
+        exit(); 
+    }
+
     // Consulta para actualizar la contraseña en la base de datos
     $sql_update = "UPDATE srcv_administradores SET CONTRASENA = '$contraEncrip' WHERE CORREO_ELECTRONICO = '$correo'";
     $resultado_update = mysqli_query($conexion, $sql_update);
