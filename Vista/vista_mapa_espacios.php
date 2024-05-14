@@ -333,23 +333,17 @@ $row = $resultado->fetch_assoc();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 <script>
-// Agregar eventos input para actualizar el formato mientras se edita el campo
-document.getElementById('total').addEventListener('input', function() {
-    formatoMoneda(this, 'total');
-});
-
-document.getElementById('enganche').addEventListener('input', function() {
-    formatoMoneda(this, 'enganche');
-});
-
 function formatoMoneda(input, tipo) {
-    // Obtener el valor numérico ingresado sin formato de moneda
-    let numero = parseFloat(input.value.replace(/[^\d.]/g, ''));
+    // Obtener el valor del campo sin formato de moneda
+    let numero = input.value.replace(/[^\d.]/g, '');
+
+    // Convertir el valor a un número flotante
+    let numeroFloat = parseFloat(numero);
 
     // Verificar si es un número válido
-    if (!isNaN(numero)) {
+    if (!isNaN(numeroFloat)) {
         // Formatear el número con separadores de miles y como moneda
-        const formatoMoneda = numero.toLocaleString('es-MX', {
+        const formatoMoneda = numeroFloat.toLocaleString('es-MX', {
             style: 'currency',
             currency: 'MXN' // Cambiar a pesos mexicanos
         });
@@ -367,7 +361,6 @@ function formatoMoneda(input, tipo) {
         }
     }
 }
-
 
 
     //Limpiar fromulario
