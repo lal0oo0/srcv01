@@ -290,14 +290,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Total *</label>
-                    <input type="text" class="form-control" name="Total" id="total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" onblur="formatoMoneda(this, 'total')" value=0 required>
+                    <input type="text" class="form-control" name="Total" id="total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" oninput="formatoMoneda(this, 'total')" value=0 required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Enganche *</label>
-                    <input type="text" class="form-control" name="Enganche" id="enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this, 'enganche')" step="any" value=0 required>
+                    <input type="text" class="form-control" name="Enganche" id="enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" oninput="formatoMoneda(this, 'enganche')" step="any" value=0 required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -333,8 +333,17 @@ $row = $resultado->fetch_assoc();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 <script>
+// Agregar eventos input para actualizar el formato mientras se edita el campo
+document.getElementById('total').addEventListener('input', function() {
+    formatoMoneda(this, 'total');
+});
+
+document.getElementById('enganche').addEventListener('input', function() {
+    formatoMoneda(this, 'enganche');
+});
+
 function formatoMoneda(input, tipo) {
-    // Obtener el valor numérico ingresado
+    // Obtener el valor numérico ingresado sin formato de moneda
     let numero = parseFloat(input.value.replace(/[^\d.]/g, ''));
 
     // Verificar si es un número válido
@@ -359,14 +368,6 @@ function formatoMoneda(input, tipo) {
     }
 }
 
-// Aplicar formato de moneda nuevamente cuando se edita el campo
-document.getElementById('total').addEventListener('input', function() {
-    formatoMoneda(this, 'total');
-});
-
-document.getElementById('enganche').addEventListener('input', function() {
-    formatoMoneda(this, 'enganche');
-});
 
 
     //Limpiar fromulario
