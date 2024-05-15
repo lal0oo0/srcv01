@@ -290,14 +290,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Total *</label>
-                    <input type="text" class="form-control" name="Total" id="total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" oninput="formatoMoneda(this, 'total')" value=0 required>
+                    <input type="text" class="form-control moneda" name="Total" id="total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" onblur="formatoMoneda(this)" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Enganche *</label>
-                    <input type="text" class="form-control" name="Enganche" id="enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" oninput="formatoMoneda(this, 'enganche')" step="any" value=0 required>
+                    <input type="text" class="form-control moneda" name="Enganche" id="enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this)" step="any" value=0 required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -333,34 +333,49 @@ $row = $resultado->fetch_assoc();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 <script>
-function formatoMoneda(input, tipo) {
-    // Obtener el valor del campo sin formato de moneda
-    let numero = input.value.replace(/[^\d.]/g, '');
-
-    // Convertir el valor a un número flotante
-    let numeroFloat = parseFloat(numero);
+function formatoMoneda(input) {
+    // Obtener el valor numérico ingresado
+    let numero = parseFloat(input.value.replace(/[^\d.]/g, ''));
 
     // Verificar si es un número válido
-    if (!isNaN(numeroFloat)) {
+    if (!isNaN(numero)) {
         // Formatear el número con separadores de miles y como moneda
-        const formatoMoneda = numeroFloat.toLocaleString('es-MX', {
+        const formatoMoneda = numero.toLocaleString('es-MX', {
             style: 'currency',
             currency: 'MXN' // Cambiar a pesos mexicanos
         });
-
+        
         // Actualizar el valor del campo de entrada con el formato de moneda
         input.value = formatoMoneda;
-
-        // Dependiendo del tipo, actualizamos el valor del campo correspondiente en el formulario
-        if (tipo === 'total') {
-            // Actualizar el campo total
-            document.getElementById('total').value = formatoMoneda;
-        } else if (tipo === 'enganche') {
-            // Actualizar el campo enganche
-            document.getElementById('enganche').value = formatoMoneda;
-        }
     }
 }
+
+// Aplicar formato de moneda nuevamente cuando se edita el campo
+document.getElementById('total').addEventListener('input', function() {
+    formatoMoneda(this);
+});
+
+function formatoMoneda(input) {
+    // Obtener el valor numérico ingresado
+    let numero = parseFloat(input.value.replace(/[^\d.]/g, ''));
+
+    // Verificar si es un número válido
+    if (!isNaN(numero)) {
+        // Formatear el número con separadores de miles y como moneda
+        const formatoMoneda = numero.toLocaleString('es-MX', {
+            style: 'currency',
+            currency: 'MXN' // Cambiar a pesos mexicanos
+        });
+        
+        // Actualizar el valor del campo de entrada con el formato de moneda
+        input.value = formatoMoneda;
+    }
+}
+
+// Aplicar formato de moneda nuevamente cuando se edita el campo
+document.getElementById('enganche').addEventListener('input', function() {
+    formatoMoneda(this);
+});
 
 
     //Limpiar fromulario
