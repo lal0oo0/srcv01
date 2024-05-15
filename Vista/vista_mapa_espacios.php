@@ -150,6 +150,8 @@ $row = $resultado->fetch_assoc();
      ////Recupera el id de la sala
      $ID = $filas['ID_SALA'];
      $idForm='myForm_' . $ID;
+     $total = 'total_' . $ID;
+     $enganche = 'enganche_' . $ID;
      ////esta consulta nos va a permitir buscar si
      ////uno de los espacios tiene una reservacion
      ////en la fecha y hora actuales
@@ -290,14 +292,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Total *</label>
-                    <input type="text" class="form-control moneda" name="Total" id="total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" onblur="formatoMoneda(this)" required>
+                    <input type="text" class="form-control moneda" name="Total" id="<?php echo $total ?>" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" onblur="formatoMoneda(this)" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Enganche *</label>
-                    <input type="text" class="form-control moneda" name="Enganche" id="enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this)" step="any" value=0 required>
+                    <input type="text" class="form-control moneda" name="Enganche" id="<?php echo $enganche ?>" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this)" step="any" value=0 required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -354,23 +356,6 @@ function formatoMoneda(input) {
 document.getElementById('total').addEventListener('input', function() {
     formatoMoneda(this);
 });
-
-function formatoMoneda(input) {
-    // Obtener el valor numérico ingresado
-    let numero = parseFloat(input.value.replace(/[^\d.]/g, ''));
-
-    // Verificar si es un número válido
-    if (!isNaN(numero)) {
-        // Formatear el número con separadores de miles y como moneda
-        const formatoMoneda = numero.toLocaleString('es-MX', {
-            style: 'currency',
-            currency: 'MXN' // Cambiar a pesos mexicanos
-        });
-        
-        // Actualizar el valor del campo de entrada con el formato de moneda
-        input.value = formatoMoneda;
-    }
-}
 
 // Aplicar formato de moneda nuevamente cuando se edita el campo
 document.getElementById('enganche').addEventListener('input', function() {
