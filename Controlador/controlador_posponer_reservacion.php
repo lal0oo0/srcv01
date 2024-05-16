@@ -28,7 +28,10 @@ $variableab = $_POST['Abono'];
 // Eliminar el símbolo de la moneda y otros caracteres no numéricos
 $variable8 = floatval(preg_replace('/[^0-9.]/', '', $variableab));
 $variableSuma= $variable6+$variable8;
-$variable7 = intval($variable5)-intval($variableSuma);
+
+if(($variable7 = intval($variable5)-intval($variableSuma))<0){
+  $mensaje = '<div class="alert alert-danger" role="alert">Error al registrar cambios: No se puede abonar una cantidad mayor al total</div>';
+}else{
 
 
     $consulta="UPDATE srcv_reservaciones SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', FECHA_ENTRADA='$variable1', FECHA_SALIDA='$variable2', HORA_ENTRADA='$variable3', HORA_SALIDA='$variable4', ENGANCHE='$variableSuma', LIQUIDACION='$variable7' WHERE ID_RESERVACION='$variable'";
@@ -46,9 +49,9 @@ $variable7 = intval($variable5)-intval($variableSuma);
         $mensaje = '<div class="alert alert-danger" role="alert">Error al registrar cambios: ' . mysqli_error($conexion) . '</div>';
     }
     
-    mysqli_close($conexion);
+    mysqli_close($conexion);}
     
     header("location: ../Vista/vista_reservaciones_urspace.php?mensaje=" . urlencode($mensaje));
-    
+  
     
     ?>

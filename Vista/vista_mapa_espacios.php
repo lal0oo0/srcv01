@@ -150,6 +150,8 @@ $row = $resultado->fetch_assoc();
      ////Recupera el id de la sala
      $ID = $filas['ID_SALA'];
      $idForm='myForm_' . $ID;
+     $total = 'total_' . $ID;
+     $enganche = 'enganche_' . $ID;
      ////esta consulta nos va a permitir buscar si
      ////uno de los espacios tiene una reservacion
      ////en la fecha y hora actuales
@@ -290,14 +292,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Total *</label>
-                    <input type="text" class="form-control" name="Total" id="total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" onblur="formatoMoneda(this, 'total')" required>
+                    <input type="text" class="form-control moneda" name="Total" id="<?php echo $total ?>" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" onblur="formatoMoneda(this)" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Enganche *</label>
-                    <input type="text" class="form-control" name="Enganche" id="enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this, 'enganche')" step="any" required>
+                    <input type="text" class="form-control moneda" name="Enganche" id="<?php echo $enganche ?>" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this)" step="any" value=0 required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -333,9 +335,9 @@ $row = $resultado->fetch_assoc();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 <script>
-function formatoMoneda(input, tipo) {
+function formatoMoneda(input) {
     // Obtener el valor numérico ingresado
-    const numero = parseFloat(input.value);
+    let numero = parseFloat(input.value.replace(/[^\d.]/g, ''));
 
     // Verificar si es un número válido
     if (!isNaN(numero)) {
@@ -347,28 +349,19 @@ function formatoMoneda(input, tipo) {
         
         // Actualizar el valor del campo de entrada con el formato de moneda
         input.value = formatoMoneda;
-        
-        // Dependiendo del tipo, actualizamos el valor del campo correspondiente en el formulario
-        if (tipo === 'total') {
-            // Actualizar el campo total
-            document.getElementById('total').value = formatoMoneda;
-        } else if (tipo === 'enganche') {
-            // Actualizar el campo enganche
-            document.getElementById('enganche').value = formatoMoneda;
-        }
     }
 }
 
+// Aplicar formato de moneda nuevamente cuando se edita el campo
+document.getElementById('total').addEventListener('input', function() {
+    formatoMoneda(this);
+});
 
+// Aplicar formato de moneda nuevamente cuando se edita el campo
+document.getElementById('enganche').addEventListener('input', function() {
+    formatoMoneda(this);
+});
 
-// Permitir que el usuario edite el número manteniendo el formato de moneda
-function desformatoMoneda(input) {
-    // Obtener el valor numérico sin formato del atributo de datos
-    const numero = parseFloat(input.dataset.valorNumerico);
-
-    // Actualizar el valor visual con el valor numérico sin formato
-    input.value = numero;
-}
 
     //Limpiar fromulario
     function limpiar(idForm) {

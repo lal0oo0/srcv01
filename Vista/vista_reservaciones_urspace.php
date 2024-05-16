@@ -370,7 +370,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script>
 function formatoMoneda(input) {
     // Obtener el valor numérico ingresado
-    const numero = parseFloat(input.value);
+    let numero = parseFloat(input.value.replace(/[^\d.]/g, ''));
 
     // Verificar si es un número válido
     if (!isNaN(numero)) {
@@ -384,6 +384,12 @@ function formatoMoneda(input) {
         input.value = formatoMoneda;
     }
 }
+
+// Aplicar formato de moneda nuevamente cuando se edita el campo
+document.getElementById('total').addEventListener('input', function() {
+    formatoMoneda(this);
+});
+
 
   function Reservacion(idreservacion){
     document.getElementById('Reservacion_' + idreservacion).value = idreservacion;

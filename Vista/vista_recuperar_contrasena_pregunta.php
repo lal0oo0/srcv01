@@ -80,7 +80,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <div id="mensaje">
               <?php echo $mensaje; ?>
             </div>
-            <form action="" method="POST" id="formulario3" class="row g-3 needs-validation" novalidate>
+            <form action="../Controlador/controlador_recuperar_pregunta.php" method="POST" id="myForm" class="row g-3 needs-validation formulario" novalidate>
               <div class="col-12">
                 <input type="email" style="border: 2px solid #007AB6;" class="form-control" value="<?php echo isset($_SESSION['correo']) ? $_SESSION['correo'] : ''; ?>" readonly>
               </div>
@@ -93,18 +93,30 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 </select>
                 <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="respuesta" name="respuesta" required>
               </div>
-              <div class="col-md-6">
-                <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
-                <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-                <div class="invalid-feedback">*Campo obligatorio</div>
-              </div>
-              <div class="col-md-6">
-                <label for="confirmPasswo" class="form-label">Confirmar contraseña</label>
-                <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-                <div class="invalid-feedback" id="passwordMismatch" style="color: red; display: none;">
-                  Las contraseñas no coinciden.
+              <div class="row">
+                <div class="col-md-6">
+                    <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="passwo1" name="passwo1" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                        <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="togglePassword">
+                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="invalid-feedback">*La contraseña debe tener al menos 8 caracteres incluyendo un número, una mayúscula y un carácter especial</div>
                 </div>
-              </div>
+                <div class="col-md-6">
+                    <label for="confirmPasswo" class="form-label">Confirmar nueva contraseña</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                        <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="toggleConfirmPassword">
+                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="invalid-feedback" id="passwordMismatch" style="color: red; display: none;">
+                        Las contraseñas no coinciden.
+                    </div>
+                </div>
+             </div>
               <a href="../Controlador/controlador_verificar_codigo.php">No recuerdo mi pregunta de seguridad</a>
               <div class="col-12">
                 <button class="btn btn-primary" type="submit" id="enviar" onclick="return validarCampos()" name="enviar">Siguiente</button>
@@ -121,7 +133,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script>
     // Función para validar campos y enviar formulario
     function validarCampos() {
-        var formulario = document.getElementById("formulario3");
+        var formulario = document.getElementById("myForm");
 
         // Verificar si el formulario es válido según las validaciones de Bootstrap
         if (!formulario.checkValidity()) {
@@ -188,6 +200,47 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             document.getElementById("formulario3").submit(); // Envía el formulario
         }, 5000);
     }
+
+    
+    //ALERTAS
+// Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
+$(document).ready(function() {
+    // Captura el evento de envío del formulario con la clase 'formulario'
+    $(".formulario").submit(function(e) {
+        // Previene el comportamiento predeterminado del formulario
+        e.preventDefault();
+
+        // Realiza una solicitud Ajax al servidor
+        $.ajax({
+            // Especifica el método de la solicitud (POST en este caso)
+            type: "POST",
+            // Obtiene la URL del atributo 'action' del formulario
+            url: $(this).attr('action'),
+            // Serializa los datos del formulario para enviarlos al servidor
+            data: $(this).serialize(),
+            // Especifica que se espera recibir datos en formato JSON
+            dataType: "json",
+            // Función que se ejecuta cuando la solicitud Ajax tiene éxito
+            success: function(response) {
+                // Verifica si la operación en el servidor fue exitosa
+                if (response.success) {
+                    // Muestra una alerta de éxito con SweetAlert
+                    swal({
+                        title: 'Exito!',
+                        text: 'Se ha recuperado la contraseña correctamente!',
+                        icon: 'success'
+                    }).then(function() {
+                        // Recarga la página después de cerrar la alerta (opcional)
+                        window.location.href = '../Vista/vista_inicio_sesion.php';
+                    });
+                } else {
+                    // Muestra una alerta de error con SweetAlert
+                    swal('Error', response.error, 'error');
+                }
+            }
+        });
+    });
+});
 </script>
 <script>  
     //Script para mostrar alertas por determinado tiempo 
@@ -203,7 +256,35 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             }, 4000);
         }
     });
-  //Fin del  scripyt
+  //Fin del  script
+  document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('passwo1');
+        const icon = document.querySelector('#togglePassword i');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('confirmPasswo');
+        const icon = document.querySelector('#toggleConfirmPassword i');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
 </script>
 </body>
 </html>
