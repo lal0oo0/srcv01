@@ -155,6 +155,7 @@ $row = $resultado->fetch_assoc();
      $ID = $filas['ID_SALA'];
      $idForm='myForm_' . $ID;
      $idSelect='selectContainer_' . $ID;
+     $idinput='Select_' . $ID;
      ////esta consulta nos va a permitir buscar si
      ////uno de los espacios tiene una reservacion
      ////en la fecha y hora actuales
@@ -214,23 +215,25 @@ $row = $resultado->fetch_assoc();
                     $conexion = conect();
                     $queryVisi= mysqli_query($conexion,"SELECT DISTINCT NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO FROM srcv_visitas WHERE EMPRESA = 'UrSpace' and FECHA = '$fecha_actual'");
                   ?>
-                  <select class="form-select mr-sm-2" title="Selecciona">
+                  <select class="form-select mr-sm-2" title="Selecciona" id="<?php echo $idinput;?>" onchange="autofillForm(this)">
                     <option value="" >Selecciona </option>
                     <?php
                       while($datosVisi = mysqli_fetch_array($queryVisi)){
+                      $fullName = $datosVisi['NOMBRE'] . ' ' . $datosVisi['APELLIDO_PATERNO'] . ' ' . $datosVisi['APELLIDO_MATERNO'];
+                      $fullNameValue = $datosVisi['NOMBRE'] . '|' . $datosVisi['APELLIDO_PATERNO'] . '|' . $datosVisi['APELLIDO_MATERNO'];
                     ?>
-                    <option>
-                      <?php echo $datosVisi['NOMBRE'] . ' ' . $datosVisi['APELLIDO_PATERNO'] . ' ' . $datosVisi['APELLIDO_MATERNO'];?>
+                    <option value="<?php echo $fullNameValue; ?>">
+                      <?php echo $fullName; ?>
                     </option>
                     <?php
-                      }
+                    }
                     ?>
                   </select>
                 </div>
 
                 <div class="col">
                 <label for="se">Nombre *</label>
-                <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre" aria-label="nombre" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
+                <input type="text" class="form-control nombre" name="Nombre" id="Nombre" placeholder="Nombre" aria-label="nombre" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
                 <div class="invalid-feedback">
                   Verifique los datos
                 </div>
@@ -240,14 +243,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Apellido paterno *</label>
-                    <input type="text" class="form-control" name="Apellidopaterno" id="apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
+                    <input type="text" class="form-control apellidopaterno" name="Apellidopaterno" id="apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Apellido materno *</label>
-                    <input type="text" class="form-control" name="Apellidomaterno" id="apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
+                    <input type="text" class="form-control apellidomaterno" name="Apellidomaterno" id="apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -367,7 +370,7 @@ $row = $resultado->fetch_assoc();
 
 
 <script>
-  
+//Funcion para ocultar o mostrar el select al presionar el check
   function toggleDisplay(id, checkboxId) {
     var selectContainer = document.getElementById(id);
     var checkbox = document.getElementById(checkboxId);
@@ -378,6 +381,24 @@ $row = $resultado->fetch_assoc();
         selectContainer.style.display = 'block';
     }
 }
+
+//funcion para autocompletar el formulario
+function autofillForm(selectElement) {
+    const selectOpcion = selectElement.value;
+
+    if (selectOpcion) {
+        const [nombre, apellidopaterno, apellidomaterno] = selectOpcion.split('|');
+        
+        // Encuentra el formulario padre del elemento select actual
+        const form = selectElement.closest('form');
+
+        // Busca los elementos en el formulario y establece sus valores
+        form.querySelector('.nombre').value = nombre;
+        form.querySelector('.apellidopaterno').value = apellidopaterno;
+        form.querySelector('.apellidomaterno').value = apellidomaterno;
+    }
+}
+
 
 </script>
 
