@@ -1,4 +1,8 @@
 <?php
+// Habilitar la visualización de errores
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 
 $CORREO=$_SESSION['correo'];
@@ -150,8 +154,8 @@ $row = $resultado->fetch_assoc();
      ////Recupera el id de la sala
      $ID = $filas['ID_SALA'];
      $idForm='myForm_' . $ID;
-     $total = 'total_' . $ID;
-     $enganche = 'enganche_' . $ID;
+     $idSelect='selectContainer_' . $ID;
+     $idinput='Select_' . $ID;
      ////esta consulta nos va a permitir buscar si
      ////uno de los espacios tiene una reservacion
      ////en la fecha y hora actuales
@@ -199,9 +203,37 @@ $row = $resultado->fetch_assoc();
               <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" name="<?php echo $idForm;?>" id="<?php echo $idForm;?>" method="POST" novalidate>
                 <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
                 <input type="hidden" name="nombre" id="nombre" value="<?= $filas['NOMBRE'] ?>">
+
+                <div class="col-md-12">
+                <input class="form-check-input" type="checkbox" value="" id="check_<?php echo $ID;?>" name="check" onclick="toggleDisplay('<?php echo $idSelect; ?>', 'check_<?php echo $ID; ?>')">
+                <label class="form-check-label" for="check">
+                    Tengo una visita registrada
+                </label>
+                </div> 
+                <div class="col-md-12" id="<?php echo $idSelect;?>" style="display: none;">
+                  <?php
+                    $conexion = conect();
+                    $queryVisi= mysqli_query($conexion,"SELECT DISTINCT NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO FROM srcv_visitas WHERE EMPRESA = 'UrSpace' and FECHA = '$fecha_actual'");
+                  ?>
+                  <select class="form-select mr-sm-2" title="Selecciona" id="<?php echo $idinput;?>" onchange="autofillForm(this)">
+                    <option value="" >Selecciona </option>
+                    <?php
+                      while($datosVisi = mysqli_fetch_array($queryVisi)){
+                      $fullName = $datosVisi['NOMBRE'] . ' ' . $datosVisi['APELLIDO_PATERNO'] . ' ' . $datosVisi['APELLIDO_MATERNO'];
+                      $fullNameValue = $datosVisi['NOMBRE'] . '|' . $datosVisi['APELLIDO_PATERNO'] . '|' . $datosVisi['APELLIDO_MATERNO'];
+                    ?>
+                    <option value="<?php echo $fullNameValue; ?>">
+                      <?php echo $fullName; ?>
+                    </option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>
+
                 <div class="col">
                 <label for="se">Nombre *</label>
-                <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre" aria-label="nombre" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
+                <input type="text" class="form-control nombre" name="Nombre" id="Nombre" placeholder="Nombre" aria-label="nombre" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
                 <div class="invalid-feedback">
                   Verifique los datos
                 </div>
@@ -211,14 +243,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Apellido paterno *</label>
-                    <input type="text" class="form-control" name="Apellidopaterno" id="apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
+                    <input type="text" class="form-control apellidopaterno" name="Apellidopaterno" id="apellidopaterno" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Apellido materno *</label>
-                    <input type="text" class="form-control" name="Apellidomaterno" id="apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
+                    <input type="text" class="form-control apellidomaterno" name="Apellidomaterno" id="apellidomaterno" placeholder="Apellido materno" aria-label="Apellido materno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -292,14 +324,14 @@ $row = $resultado->fetch_assoc();
                 <div class="row">
                   <div class="col">
                     <label for="se">Total *</label>
-                    <input type="text" class="form-control moneda" name="Total" id="<?php echo $total ?>" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" onblur="formatoMoneda(this)" required>
+                    <input type="text" class="form-control" name="Total" id="total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" onblur="formatoMoneda(this, 'total')" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
                     <label for="se">Enganche *</label>
-                    <input type="text" class="form-control moneda" name="Enganche" id="<?php echo $enganche ?>" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this)" step="any" value=0 required>
+                    <input type="text" class="form-control" name="Enganche" id="enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this, 'enganche')" step="any" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -309,7 +341,7 @@ $row = $resultado->fetch_assoc();
                 <div class="mb-5"></div> <!--Salto de linea-->
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Confirmar</button>
-                  <button type="button" class="btn btn-secondary" onclick="limpiar('<?php echo $idForm; ?>')" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-secondary" onclick="limpiar('<?php echo $idForm; ?>', '<?php echo $idSelect; ?>')" data-bs-dismiss="modal">Cancelar</button>
                 </div>
               </form>
 
@@ -332,9 +364,46 @@ $row = $resultado->fetch_assoc();
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <script>
+//Funcion para ocultar o mostrar el select al presionar el check
+  function toggleDisplay(id, checkboxId) {
+    var selectContainer = document.getElementById(id);
+    var checkbox = document.getElementById(checkboxId);
+
+    if (!checkbox.checked) {
+        selectContainer.style.display = 'none';
+    } else {
+        selectContainer.style.display = 'block';
+    }
+}
+
+//funcion para autocompletar el formulario
+function autofillForm(selectElement) {
+    const selectOpcion = selectElement.value;
+
+    if (selectOpcion) {
+        const [nombre, apellidopaterno, apellidomaterno] = selectOpcion.split('|');
+        
+        // Encuentra el formulario padre del elemento select actual
+        const form = selectElement.closest('form');
+
+        // Busca los elementos en el formulario y establece sus valores
+        form.querySelector('.nombre').value = nombre;
+        form.querySelector('.apellidopaterno').value = apellidopaterno;
+        form.querySelector('.apellidomaterno').value = apellidomaterno;
+    }
+}
+
+
+</script>
+
+<script>
+//Formato moneda
 function formatoMoneda(input) {
     // Obtener el valor numérico ingresado
     let numero = parseFloat(input.value.replace(/[^\d.]/g, ''));
@@ -363,12 +432,28 @@ document.getElementById('enganche').addEventListener('input', function() {
 });
 
 
+
+// Permitir que el usuario edite el número manteniendo el formato de moneda
+function desformatoMoneda(input) {
+    // Obtener el valor numérico sin formato del atributo de datos
+    const numero = parseFloat(input.dataset.valorNumerico);
+
+    // Actualizar el valor visual con el valor numérico sin formato
+    input.value = numero;
+}
+
     //Limpiar fromulario
-    function limpiar(idForm) {
-      var formulario = document.getElementById(idForm);
-      // Resetear el formulario
-      formulario.reset();
-    }
+    function limpiar(idForm, idSelect) {
+    var formulario = document.getElementById(idForm);
+    var selectContainer = document.getElementById(idSelect);
+    
+    // Resetear el formulario
+    formulario.reset();
+
+    // Ocultar el contenedor
+    selectContainer.style.display = 'none';
+}
+
 
   function setSelectedRoom(idSala) {
     // Asigna el ID de la sala al campo oculto en el formulario
