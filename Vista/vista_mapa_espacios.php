@@ -200,12 +200,13 @@ $row = $resultado->fetch_assoc();
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" name="<?php echo $idForm;?>" id="<?php echo $idForm;?>" method="POST" novalidate>
+              <form action="../Controlador/controlador_reservacion_version2.php" class="formulario row g-3 needs-validation" name="<?php echo $idForm;?>" id="<?php echo $idForm;?>" method="POST" novalidate>
                 <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
                 <input type="hidden" name="nombre" id="nombre" value="<?= $filas['NOMBRE'] ?>">
+                <input type="hidden" name="id_visita" id="id_visita"> <!-- Campo oculto para el ID de la visita -->
 
                 <div class="col-md-12">
-                <input class="form-check-input" type="checkbox" value="" id="check_<?php echo $ID;?>" name="check" onclick="toggleDisplay('<?php echo $idSelect; ?>', 'check_<?php echo $ID; ?>')">
+                <input class="form-check-input" type="checkbox" value="1" id="check_<?php echo $ID;?>" name="check" onclick="toggleDisplay('<?php echo $idSelect; ?>', 'check_<?php echo $ID; ?>')">
                 <label class="form-check-label" for="check">
                     Tengo una visita registrada
                 </label>
@@ -213,14 +214,14 @@ $row = $resultado->fetch_assoc();
                 <div class="col-md-12" id="<?php echo $idSelect;?>" style="display: none;">
                   <?php
                     $conexion = conect();
-                    $queryVisi= mysqli_query($conexion,"SELECT DISTINCT NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO FROM srcv_visitas WHERE EMPRESA = 'UrSpace' and FECHA = '$fecha_actual'");
+                    $queryVisi= mysqli_query($conexion,"SELECT DISTINCT ID_VISITA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO FROM srcv_visitas WHERE EMPRESA = 'UrSpace' and FECHA = '$fecha_actual'");
                   ?>
                   <select class="form-select mr-sm-2" title="Selecciona" id="<?php echo $idinput;?>" onchange="autofillForm(this)">
                     <option value="" >Selecciona </option>
                     <?php
                       while($datosVisi = mysqli_fetch_array($queryVisi)){
                       $fullName = $datosVisi['NOMBRE'] . ' ' . $datosVisi['APELLIDO_PATERNO'] . ' ' . $datosVisi['APELLIDO_MATERNO'];
-                      $fullNameValue = $datosVisi['NOMBRE'] . '|' . $datosVisi['APELLIDO_PATERNO'] . '|' . $datosVisi['APELLIDO_MATERNO'];
+                      $fullNameValue = $datosVisi['ID_VISITA'] . '|' . $datosVisi['NOMBRE'] . '|' . $datosVisi['APELLIDO_PATERNO'] . '|' . $datosVisi['APELLIDO_MATERNO'];
                     ?>
                     <option value="<?php echo $fullNameValue; ?>">
                       <?php echo $fullName; ?>
@@ -230,7 +231,7 @@ $row = $resultado->fetch_assoc();
                     ?>
                   </select>
                 </div>
-
+                
                 <div class="col">
                 <label for="se">Nombre *</label>
                 <input type="text" class="form-control nombre" name="Nombre" id="Nombre" placeholder="Nombre" aria-label="nombre" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
@@ -387,7 +388,7 @@ function autofillForm(selectElement) {
     const selectOpcion = selectElement.value;
 
     if (selectOpcion) {
-        const [nombre, apellidopaterno, apellidomaterno] = selectOpcion.split('|');
+        const [idVisita, nombre, apellidopaterno, apellidomaterno] = selectOpcion.split('|');
         
         // Encuentra el formulario padre del elemento select actual
         const form = selectElement.closest('form');
@@ -396,17 +397,17 @@ function autofillForm(selectElement) {
         form.querySelector('.nombre').value = nombre;
         form.querySelector('.apellidopaterno').value = apellidopaterno;
         form.querySelector('.apellidomaterno').value = apellidomaterno;
+
+        // Establecer el ID_VISITA en el campo oculto
+        form.querySelector('#id_visita').value = idVisita;
     }
 }
-
-
 </script>
 
 <script>
-//Formato moneda
-function formatoMoneda(input) {
+function formatoMoneda(input, tipo) {
     // Obtener el valor numérico ingresado
-    let numero = parseFloat(input.value.replace(/[^\d.]/g, ''));
+    const numero = parseFloat(input.value);
 
     // Verificar si es un número válido
     if (!isNaN(numero)) {
@@ -418,18 +419,17 @@ function formatoMoneda(input) {
         
         // Actualizar el valor del campo de entrada con el formato de moneda
         input.value = formatoMoneda;
+        
+        // Dependiendo del tipo, actualizamos el valor del campo correspondiente en el formulario
+        if (tipo === 'total') {
+            // Actualizar el campo total
+            document.getElementById('total').value = formatoMoneda;
+        } else if (tipo === 'enganche') {
+            // Actualizar el campo enganche
+            document.getElementById('enganche').value = formatoMoneda;
+        }
     }
 }
-
-// Aplicar formato de moneda nuevamente cuando se edita el campo
-document.getElementById('total').addEventListener('input', function() {
-    formatoMoneda(this);
-});
-
-// Aplicar formato de moneda nuevamente cuando se edita el campo
-document.getElementById('enganche').addEventListener('input', function() {
-    formatoMoneda(this);
-});
 
 
 
