@@ -21,6 +21,9 @@ $apellidop = $_POST['Apellidopaterno'];
 $apellidom = $_POST['Apellidomaterno'];
 $correo = $_POST['Correo'];
 $telefono = $_POST['Telefono'];
+if(empty($telefono)){
+    $telefono=0;
+}
 $fechaini = $_POST['Fechainicio'];
 $fechafin = $_POST['Fechafinalizacion'];
 $horaini = $_POST['Horainicio'];

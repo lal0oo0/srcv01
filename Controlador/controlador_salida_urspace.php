@@ -20,7 +20,7 @@ $hora_actual = date("H:i");
 
 
 // Verificar si la hora de entrada no ha sido confirmada entonces no se puede confirmar la hora de salida
-$verificarhora = "SELECT ENTRADA_URSPACE FROM srcv_visitas WHERE ID_VISITA='$id'";
+$verificarhora = "SELECT ENTRADA_URSPACE FROM srcv_visitas WHERE ID_RESERVACION='$id'";
 $resultado = mysqli_query($conexion, $verificarhora);
 $fila = mysqli_fetch_assoc($resultado);
 
@@ -32,7 +32,7 @@ if (empty($fila['ENTRADA_URSPACE'])) {
               </div>';
 } else {
   // Actualizar si la hora de entrada ya se confirmo
-  $consulta="UPDATE srcv_visitas SET SALIDA_URSPACE ='$hora_actual', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA='$id'";
+  $consulta="UPDATE srcv_visitas SET SALIDA_URSPACE ='$hora_actual', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_RESERVACION='$id'";
   $sql=mysqli_query($conexion, $consulta);
 
   if ($sql) {

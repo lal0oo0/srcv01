@@ -276,7 +276,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   // Se obtiene el id para realizar las consultas
                   $id_reservacion = $filas['ID_RESERVACION'];
 
-                  $entVis = mysqli_query($conexion, "SELECT * FROM srcv_visitas WHERE ID_VISITA = $id_reservacion");
+                  $entVis = mysqli_query($conexion, "SELECT * FROM srcv_visitas WHERE ID_RESERVACION = $id_reservacion");
                   $EUS = mysqli_fetch_assoc($entVis);
                   if(empty($EUS["ENTRADA_URSPACE"]) && empty($EUS["SALIDA_URSPACE"])){
                   ?>
@@ -301,7 +301,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <?php
 
                   // Realizar consulta para obtener la información de la entrada
-                  $query_entrada = "SELECT ENTRADA_URSPACE FROM srcv_visitas WHERE ID_VISITA = $id_reservacion";
+                  $query_entrada = "SELECT ENTRADA_URSPACE FROM srcv_visitas WHERE ID_RESERVACION = $id_reservacion";
                   $resultado_entrada = mysqli_query($conexion, $query_entrada);
 
                   if ($resultado_entrada) {
@@ -325,7 +325,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   $id_reservacion = $filas['ID_RESERVACION'];
 
                   // Realizar consulta para obtener la información de la salida
-                  $query_salida = "SELECT SALIDA_URSPACE FROM srcv_visitas WHERE ID_VISITA = $id_reservacion";
+                  $query_salida = "SELECT SALIDA_URSPACE FROM srcv_visitas WHERE ID_RESERVACION = $id_reservacion";
                   $resultado_salida = mysqli_query($conexion, $query_salida);
 
                   if ($resultado_salida) {

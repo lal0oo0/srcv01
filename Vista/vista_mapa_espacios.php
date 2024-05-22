@@ -327,14 +327,14 @@ $row = $resultado->fetch_assoc();
 
                 <div class="row">
                   <div class="col">
-                    <label for="se">Total <?php echo $total; ?> *</label>
+                    <label for="se">Total*</label>
                     <input type="text" class="form-control" name="Total" id="<?php echo $total; ?>" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" onblur="formatoMoneda(this, '<?php echo $total;?>')" value="" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
-                    <label for="se">Enganche <?php echo $enganche; ?>*</label>
+                    <label for="se">Enganche*</label>
                     <input type="text" class="form-control" name="Enganche" id="<?php echo $enganche; ?>" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this, '<?php echo $enganche;?>')" step="any" value="" required>
                     <div class="invalid-feedback">
                       Verifique los datos
