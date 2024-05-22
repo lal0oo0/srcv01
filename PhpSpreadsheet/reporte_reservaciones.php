@@ -54,7 +54,7 @@ if (empty($fecha_inicio) || empty($fecha_fin)) {
 
 if($rol_urspace->num_rows==1){
 
-$sql = "SELECT NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, TELEFONO, FECHA_ENTRADA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL FROM srcv_reservaciones
+$sql = "SELECT NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, TELEFONO, FECHA_ENTRADA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE FROM srcv_reservaciones
 WHERE FECHA_ENTRADA BETWEEN '$fecha_inicio' AND '$fecha_fin' AND FECHA_SALIDA BETWEEN '$fecha_inicio' AND '$fecha_fin'";
 $resultado = mysqli_query($conexion, $sql);
 
@@ -181,10 +181,24 @@ $hojaActiva->getStyle('I1')->getFont()->getColor()->setRGB('FFFFFF'); // Obtener
 $hojaActiva->getStyle('I1')->getAlignment()->setWrapText(true);// Ajustar el texto si es necesario
 
 
+$hojaActiva->getStyle('J1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('CC0000'); // Color en la celda
+$hojaActiva->getStyle('J1')->getFont()->setSize(12); // Tamaño de letra en la celda
+$hojaActiva->getStyle('J1')->getFont()->setBold(true);// Establecer el texto en negrita
+$hojaActiva->getColumnDimension('J')->setWidth(20);// Establecer el ancho de la columna a 20 unidades de ancho
+$hojaActiva->getStyle('J1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+$hojaActiva->getStyle('J1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+// Establecer la altura de una fila (por ejemplo, fila 1)
+$hojaActiva->getRowDimension(1)->setRowHeight(40); // Altura de la fila 1 ajustada
+$hojaActiva->setCellValue('J1', 'ENGANCHE');
+$hojaActiva->getStyle('J1')->getFont()->getColor()->setRGB('FFFFFF'); // Obtener el estilo de la celda y establecer el color del texto en RGB
+$hojaActiva->getStyle('J1')->getAlignment()->setWrapText(true);// Ajustar el texto si es necesario
+
+
 $fila = 2;
 
 // Inicializa la variable en 0 para almacenar la sumatoria total
 $totalSum = 0;
+$totalEng = 0;
 $contador = 0;
 
 while($rows = $resultado->fetch_assoc()){
@@ -261,15 +275,25 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('I'.$fila)->getAlignment()->setWrapText(true);
 
 
+    $hojaActiva->getStyle('J'.$fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE); //Formato moneda
+    $hojaActiva->getStyle('J'. $fila)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('F0F0F0'); // Color en la celda
+    $hojaActiva->getStyle('J'. $fila)->getFont()->setSize(11); // Tamaño de letra en la celda
+    $hojaActiva->getStyle('J'. $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('J'. $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+    $hojaActiva->setCellValue('J'.$fila, $rows['ENGANCHE']);
+    $hojaActiva->getStyle('J'.$fila)->getAlignment()->setWrapText(true);
+
     $fila++;
 
     // Suma el valor del campo 'TOTAL' a la sumatoria total
     $totalSum += $rows['TOTAL'];
+    // Suma el valor del campo 'ENGANCHE' a la variable
+    $totalEng += $rows['ENGANCHE'];
     // Calcular el número total de registros
     $total_registros = $fila - 2; // Resta 2 para excluir la fila de encabezado y la fila donde empezaron los registros
     
 }
-    $fila += 2;
+    $fila += 1;
 
     // Definir los encabezados de la segunda tabla
     $hojaActiva->setCellValue('H'.$fila, 'Total de registros:');
@@ -280,6 +304,10 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('I' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('I' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
 
+    $hojaActiva->setCellValue('J'.$fila, 'Sumatoria enganche:');
+    $hojaActiva->getStyle('J' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('J' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+  
     $fila++;
     //Fila para mostrar el total de registros
     $hojaActiva->setCellValue('H' . $fila, $total_registros);
@@ -294,6 +322,12 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('I' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
     $hojaActiva->getStyle('I' . $fila)->getAlignment()->setWrapText(true); // Ajustar el texto si es necesario
 
+    //Fila para mostrar la sumatoria total
+    $hojaActiva->getStyle('J' . $fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
+    $hojaActiva->setCellValue('J' . $fila, $totalEng);
+    $hojaActiva->getStyle('J' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('J' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+    $hojaActiva->getStyle('J' . $fila)->getAlignment()->setWrapText(true); // Ajustar el texto si es necesario
 
 
 }else if ($rol_administrador->num_rows==1){
@@ -643,7 +677,7 @@ while($rows = $resultado->fetch_assoc()){
 
     }
 
-    $fila += 2;
+    $fila += 1;
 
     // Definir los encabezados de la segunda tabla
     $hojaActiva->setCellValue('L'.$fila, 'Total de registros:');
