@@ -96,7 +96,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <?php
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
-    $query = mysqli_query ($conexion, "select * from srcv_visitas");
+    date_default_timezone_set('America/Mexico_City');
+    $hoy=date("Y-m-d");
+    $query = mysqli_query ($conexion, "SELECT * FROM srcv_visitas WHERE FECHA='$hoy'");
 
 
   ?>

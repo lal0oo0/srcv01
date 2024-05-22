@@ -66,8 +66,8 @@ if ($check == '1') {
 
     if ($ejecutar) {
         // Consulta para guardar también el registro en la tabla de visitas
-        $consulta2 = "INSERT INTO srcv_visitas (ID_VISITA, HORA_ENTRADA, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS)
-        VALUES ('$id_unico', '$horaini', '$fechaini', '$nombre', '$apellidop', '$apellidom', 'UrSpace', 'Reservacion', '$useralta', '$useralta', '1')";
+        $consulta2 = "INSERT INTO srcv_visitas (ID_VISITA, HORA_ENTRADA, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, ID_RESERVACION, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS)
+        VALUES ('$id_unico', '$horaini', '$fechaini', '$nombre', '$apellidop', '$apellidom', 'UrSpace', 'Reservacion', '$id_unico','$useralta', '$useralta', '1')";
         $ejecutar2 = mysqli_query($conexion, $consulta2);
     }
 }

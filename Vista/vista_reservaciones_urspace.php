@@ -286,7 +286,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     
                   }
 
-                  $salidavisita = "SELECT SALIDA_URSPACE FROM srcv_visitas WHERE ID_VISITA = $id_reservacion";
+                  $salidavisita = "SELECT SALIDA_URSPACE FROM srcv_visitas WHERE ID_RESERVACION = $id_reservacion";
                   $visitasale = mysqli_query($conexion, $salidavisita);
                   $fila_salida = mysqli_fetch_assoc($visitasale);
                   $salious=$fila_salida['SALIDA_URSPACE'];

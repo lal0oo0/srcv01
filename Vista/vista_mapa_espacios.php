@@ -203,7 +203,7 @@ $row = $resultado->fetch_assoc();
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="../Controlador/controlador_reservacion_version2.php" class="formulario row g-3 needs-validation" name="<?php echo $idForm;?>" id="<?php echo $idForm;?>" method="POST" novalidate>
+              <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" name="<?php echo $idForm;?>" id="<?php echo $idForm;?>" method="POST" novalidate>
                 <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
                 <input type="hidden" name="nombre" id="nombre" value="<?= $filas['NOMBRE'] ?>">
                 <input type="hidden" name="id_visita" id="id_visita"> <!-- Campo oculto para el ID de la visita -->
