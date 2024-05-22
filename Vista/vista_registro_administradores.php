@@ -419,6 +419,20 @@ tippy('#botonDesactivar', {
         content: 'Desactivar usuario',
         placement: 'bottom',
       });
+
+  //Script para agregar tooltip a la contraseña
+  tippy('#valid04', {
+        content: `
+        <ul>
+            <li>La contraseña debe contener de 8 a 16 caracteres</li>
+            <li>Debe incluir al menos una mayúscula</li>
+            <li>Debe incluir al menos una minúscula</li>
+            <li>Debe incluir al menos un número</li>
+            <li>Debe incluir al menos un caracter especial</li>
+        </ul>
+        `,
+        allowHTML: true // Esto permite que el contenido del tooltip se interprete como HTML
+    });
 </script>
 
 <script>
