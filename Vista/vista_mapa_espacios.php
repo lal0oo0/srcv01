@@ -110,7 +110,7 @@ $row = $resultado->fetch_assoc();
       </button>
       <div class="offcanvas offcanvas-end navbar-custom" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
         <div class="offcanvas-header">
-          <h3 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel"> Bienvenid@ <?php echo utf8_decode($row['NOMBRE']); ?> </h3>
+          <h3 class="offcanvas-title tit-color" id="offcanvasDarkNavbarLabel"> Bienvenid@ <?php echo$row['NOMBRE']; ?> </h3>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -156,6 +156,9 @@ $row = $resultado->fetch_assoc();
      $idForm='myForm_' . $ID;
      $idSelect='selectContainer_' . $ID;
      $idinput='Select_' . $ID;
+     $total = 'total_' . $ID;
+     $enganche = 'enganche_' . $ID;
+
      ////esta consulta nos va a permitir buscar si
      ////uno de los espacios tiene una reservacion
      ////en la fecha y hora actuales
@@ -214,7 +217,7 @@ $row = $resultado->fetch_assoc();
                 <div class="col-md-12" id="<?php echo $idSelect;?>" style="display: none;">
                   <?php
                     $conexion = conect();
-                    $queryVisi= mysqli_query($conexion,"SELECT DISTINCT ID_VISITA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO FROM srcv_visitas WHERE EMPRESA = 'UrSpace' and FECHA = '$fecha_actual'");
+                    $queryVisi= mysqli_query($conexion,"SELECT DISTINCT ID_VISITA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO FROM srcv_visitas WHERE EMPRESA = 'UrSpace' AND FECHA = '$fecha_actual'");
                   ?>
                   <select class="form-select mr-sm-2" title="Selecciona" id="<?php echo $idinput;?>" onchange="autofillForm(this)">
                     <option value="" >Selecciona </option>
@@ -324,15 +327,15 @@ $row = $resultado->fetch_assoc();
 
                 <div class="row">
                   <div class="col">
-                    <label for="se">Total *</label>
-                    <input type="text" class="form-control" name="Total" id="total" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" onblur="formatoMoneda(this, 'total')" required>
+                    <label for="se">Total <?php echo $total; ?> *</label>
+                    <input type="text" class="form-control" name="Total" id="<?php echo $total; ?>" placeholder="Total" aria-label="Total" aria-describedby="basic-addon1" onblur="formatoMoneda(this, '<?php echo $total;?>')" value="" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
                   </div>
                   <div class="col">
-                    <label for="se">Enganche *</label>
-                    <input type="text" class="form-control" name="Enganche" id="enganche" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this, 'enganche')" step="any" required>
+                    <label for="se">Enganche <?php echo $enganche; ?>*</label>
+                    <input type="text" class="form-control" name="Enganche" id="<?php echo $enganche; ?>" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this, '<?php echo $enganche;?>')" step="any" value="" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -402,34 +405,7 @@ function autofillForm(selectElement) {
         form.querySelector('#id_visita').value = idVisita;
     }
 }
-</script>
 
-<script>
-function formatoMoneda(input, tipo) {
-    // Obtener el valor numérico ingresado
-    const numero = parseFloat(input.value);
-
-    // Verificar si es un número válido
-    if (!isNaN(numero)) {
-        // Formatear el número con separadores de miles y como moneda
-        const formatoMoneda = numero.toLocaleString('es-MX', {
-            style: 'currency',
-            currency: 'MXN' // Cambiar a pesos mexicanos
-        });
-        
-        // Actualizar el valor del campo de entrada con el formato de moneda
-        input.value = formatoMoneda;
-        
-        // Dependiendo del tipo, actualizamos el valor del campo correspondiente en el formulario
-        if (tipo === 'total') {
-            // Actualizar el campo total
-            document.getElementById('total').value = formatoMoneda;
-        } else if (tipo === 'enganche') {
-            // Actualizar el campo enganche
-            document.getElementById('enganche').value = formatoMoneda;
-        }
-    }
-}
 
 
 
@@ -462,13 +438,51 @@ function desformatoMoneda(input) {
 
 
 
-//ALERTAS//
-// Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
+ // Definir la función formatoMoneda
+function formatoMoneda(input) {
+    // Obtener el valor numérico ingresado
+    let numero = parseFloat(input.value.replace(/[^\d.]/g, ''));
+
+    // Verificar si es un número válido
+    if (!isNaN(numero)) {
+        // Formatear el número con separadores de miles y como moneda
+        const formatoMoneda = numero.toLocaleString('es-MX', {
+            style: 'currency',
+            currency: 'MXN' // Cambiar a pesos mexicanos
+        });
+        
+        // Actualizar el valor del campo de entrada con el formato de moneda
+        input.value = formatoMoneda;
+        console.log(input);
+    }
+}
+
 $(document).ready(function() {
+    /* Aplicar formato de moneda cuando se edita el campo
+    var totalElement = document.getElementById('<?php// echo $total; ?>');
+    var engancheElement = document.getElementById('<?php //echo $enganche; ?>');
+
+    if (totalElement) {
+        totalElement.addEventListener('input', function() {
+            formatoMoneda(this);
+        });
+    } else {
+        console.error('Element with ID "total" not found.');
+    }
+
+    if (engancheElement) {
+        engancheElement.addEventListener('input', function() {
+            formatoMoneda(this);
+        });
+    } else {
+        console.error('Element with ID "enganche" not found.');
+    }*/
+
     // Captura el evento de envío del formulario con la clase 'formulario'
     $(".formulario").submit(function(e) {
         // Previene el comportamiento predeterminado del formulario
         e.preventDefault();
+
         //////////////////// V A L I D A C I O N E S /////////////////////////
         var valid = true;
         var nombre = $(this).find('#Nombre').val();
@@ -480,9 +494,12 @@ $(document).ready(function() {
         var horafinalizacion = $(this).find('#horafinalizacion').val();
         var personas = $(this).find('#personas').val();
         var servicios = $(this).find('#servicios').val();
-        var total = $(this).find('#total').val();
-        var enganche = $(this).find('#enganche').val();
+        var total = $(this).find('input[id^="total_"]').val();
+        var enganche = $(this).find('input[id^="enganche_"]').val();
         var idSala = $(this).find('#id_sala').val();
+
+        console.log("Total:", total);
+        console.log("Enganche:", enganche);
 
         // Verificar si todos los campos obligatorios están completos
         if (nombre == '' || apellidopaterno == '' || apellidomaterno == '' || fechainicio == '' || fechafinalizacion == '' || horainicio == '' || horafinalizacion == '' || personas == '' || servicios == '' || total == '' || enganche == '') {
@@ -497,50 +514,55 @@ $(document).ready(function() {
                 valid = false;
                 swal('Error', 'La hora de finalización debe ser mayor que la hora de inicio cuando las fechas son iguales', 'error');
             }
-             // Validar que total no sea menor a cero
-            if (parseFloat(total) < 0) {
+
+            // Limpiar el formato de moneda antes de convertir a número
+            try {
+                const engancheNumero = parseFloat(enganche.replace(/[^\d.]/g, ''));
+                const totalNumero = parseFloat(total.replace(/[^\d.]/g, ''));
+
+                console.log('Antes de limpiar:', total, enganche);
+                console.log('Después de limpiar:', totalNumero, engancheNumero);
+
+                // Validar que total no sea menor a cero
+                if (totalNumero < 0) {
+                    valid = false;
+                    swal('Error', 'El total no puede ser menor que cero', 'error');
+                }
+                // Validar que enganche no sea menor a cero
+                if (engancheNumero < 0) {
+                    valid = false;
+                    swal('Error', 'El enganche no puede ser menor que cero', 'error');
+                }
+                // Validar que el enganche no sea mayor que el total
+                if (engancheNumero > totalNumero) {
+                    valid = false;
+                    swal('Error', 'El enganche no puede ser mayor que el total', 'error');
+                }
+            } catch (error) {
+                console.error('Error parsing numbers:', error);
                 valid = false;
-                swal('Error', 'El total no puede ser menor que cero', 'error');
             }
-             // Validar que enganche no sea menor a cero
-             if (parseFloat(enganche) < 0) {
-                valid = false;
-                swal('Error', 'El enganche no puede ser menor que cero', 'error');
-            }
-            // Validar que el enganche no sea mayor que el total
-            const engancheNumero = parseFloat(enganche.replace(/[^\d.]/g, ''));
-            const totalNumero = parseFloat(total.replace(/[^\d.]/g, ''));
-            if (engancheNumero > totalNumero) {
-                valid = false;
-                swal('Error', 'El enganche no puede ser mayor que el total', 'error');
-            }
+
             // Validar que el numero de personas no sea menor o igual a cero
-            if (personas <= 0) {
+            if (parseInt(personas) <= 0) {
                 valid = false;
                 swal('Error', 'El numero de personas no puede ser menor o igual que cero', 'error');
             }
         }
 
+        // Verificar si los campos de nombre y apellidos contienen números
         if (/\d/.test(nombre) || /\d/.test(apellidopaterno) || /\d/.test(apellidomaterno)) {
+            valid = false;
             swal('Error', 'Los campos de nombre y apellidos no pueden contener números', 'error');
-            return;
         }
 
-
-        var nombre = $(this).find('#Nombre').val();
-        var apellidopaterno = $(this).find('#apellidopaterno').val();
-        var apellidomaterno = $(this).find('#apellidomaterno').val();
-
-        // Verifica si los campos contienen números
-        if (/\d/.test(nombre) || /\d/.test(apellidopaterno) || /\d/.test(apellidomaterno)) {
-            swal('Error', 'Los campos de nombre y apellidos no pueden contener números', 'error');
-            return;
-        }
-
+        // Si no es válido, salir de la función
         if (!valid) {
             return;
         }
+
         //////////////////// F I N   D E  V A L I D A C I O N E S ///////////////////////////
+
         // Realiza una solicitud Ajax al servidor
         $.ajax({
             // Especifica el método de la solicitud (POST en este caso)
@@ -572,6 +594,8 @@ $(document).ready(function() {
         });
     });
 });
+
+
 
 </script>
 
