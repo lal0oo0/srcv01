@@ -13,9 +13,12 @@ $conexion = conect();
 
 date_default_timezone_set('America/Mexico_City');
 
+$fechamodificacion = date('Y-m-d H:i:s');
+
 // Capturar los campos del formulario
 $check = isset($_POST['check']) ? $_POST['check'] : '0';
 $idVisita = $_POST['id_visita'];
+$piso = $_POST['piso'];
 $nombre = $_POST['Nombre'];
 $apellidop = $_POST['Apellidopaterno'];
 $apellidom = $_POST['Apellidomaterno'];
@@ -54,6 +57,8 @@ if ($check == '1') {
     $consulta3 = "INSERT INTO srcv_reservaciones (ID_RESERVACION, ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, CORREO_ELECTRONICO, TELEFONO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE, LIQUIDACION, USO, ID_VISITA, ESTATUS, USUARIO_ALTA, USUARIO_MODIFICACION) 
     VALUES ('$id_unico', '$idsala', '$nombre', '$apellidop', '$apellidom', '$espacio', '$correo', '$telefono', '$fechaini', '$fechafin', '$horaini', '$horafin', '$personas', '$servicios', '$total', '$enganche', '$liquidacion', '0', '$idVisita', '1', '$useralta', '$useralta')";
     $ejecutar3 = mysqli_query($conexion, $consulta3);
+    $visita = "UPDATE srcv_visitas SET PISO = '$piso', ASUNTO = 'Reservación', USUARIO_MODIFICACION = '$useralta', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA = '$idVisita'";
+    $ejecutar_visita = mysqli_query($conexion, $visita);
 
 } else {
     // Consulta para guardar el registro en la tabla reservaciones
@@ -63,8 +68,8 @@ if ($check == '1') {
 
     if ($ejecutar) {
         // Consulta para guardar también el registro en la tabla de visitas
-        $consulta2 = "INSERT INTO srcv_visitas (ID_VISITA, HORA_ENTRADA, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS)
-        VALUES ('$id_unico', '$horaini', '$fechaini', '$nombre', '$apellidop', '$apellidom', 'UrSpace', 'Reservacion','$useralta', '$useralta', '1')";
+        $consulta2 = "INSERT INTO srcv_visitas (ID_VISITA, HORA_ENTRADA, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, PISO, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS)
+        VALUES ('$id_unico', '$horaini', '$fechaini', '$nombre', '$apellidop', '$apellidom', 'UrSpace', 'Reservacion', '$piso', '$useralta', '$useralta', '1')";
         $ejecutar2 = mysqli_query($conexion, $consulta2);
     }
 }

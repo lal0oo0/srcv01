@@ -153,6 +153,7 @@ $row = $resultado->fetch_assoc();
     while ($filas = mysqli_fetch_assoc($query)) {
      ////Recupera el id de la sala
      $ID = $filas['ID_SALA'];
+     $piso = $filas['UBICACION'];
      $idForm='myForm_' . $ID;
      $idSelect='selectContainer_' . $ID;
      $idinput='Select_' . $ID;
@@ -206,6 +207,7 @@ $row = $resultado->fetch_assoc();
               <form action="../Controlador/controlador_registro_reservacion.php" class="formulario row g-3 needs-validation" name="<?php echo $idForm;?>" id="<?php echo $idForm;?>" method="POST" novalidate>
                 <input type="hidden" name="id_sala" id="id_sala" value="<?= $filas['ID_SALA'] ?>">
                 <input type="hidden" name="nombre" id="nombre" value="<?= $filas['NOMBRE'] ?>">
+                <input type="hidden" name="piso" id="piso" value="<?= $filas['UBICACION'] ?>">
                 <input type="hidden" name="id_visita" id="id_visita"> <!-- Campo oculto para el ID de la visita -->
 
                 <div class="col-md-12">

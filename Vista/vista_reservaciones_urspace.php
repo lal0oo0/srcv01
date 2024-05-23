@@ -275,8 +275,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <?php
                   // Se obtiene el id para realizar las consultas
                   $id_reservacion = $filas['ID_RESERVACION'];
+                  $id_vis_res = $filas['ID_VISITA'];
 
-                  $entVis = mysqli_query($conexion, "SELECT * FROM srcv_visitas WHERE ID_RESERVACION = $id_reservacion");
+                  $entVis = mysqli_query($conexion, "SELECT * FROM srcv_visitas WHERE ID_VISITA = $id_vis_res");
                   $EUS = mysqli_fetch_assoc($entVis);
                   if(empty($EUS["ENTRADA_URSPACE"]) && empty($EUS["SALIDA_URSPACE"])){
                   ?>
@@ -286,7 +287,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     
                   }
 
-                  $salidavisita = "SELECT SALIDA_URSPACE FROM srcv_visitas WHERE ID_RESERVACION = $id_reservacion";
+                  $salidavisita = "SELECT SALIDA_URSPACE FROM srcv_visitas WHERE ID_VISITA = $id_vis_res";
                   $visitasale = mysqli_query($conexion, $salidavisita);
                   $fila_salida = mysqli_fetch_assoc($visitasale);
                   $salious=$fila_salida['SALIDA_URSPACE'];
@@ -301,7 +302,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <?php
 
                   // Realizar consulta para obtener la información de la entrada
-                  $query_entrada = "SELECT ENTRADA_URSPACE FROM srcv_visitas WHERE ID_RESERVACION = $id_reservacion";
+                  $query_entrada = "SELECT ENTRADA_URSPACE FROM srcv_visitas WHERE ID_VISITA = $id_vis_res";
                   $resultado_entrada = mysqli_query($conexion, $query_entrada);
 
                   if ($resultado_entrada) {
@@ -313,7 +314,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                           //echo '<i class="fa fa-sign-in" aria-hidden="true"></i>';
                       } else {
                           // Si la entrada no está confirmada se habilita el enlace para confirmar la entrada 
-                          echo '<a href="../Controlador/controlador_entrada_urspace.php?id=' . $id_reservacion . '" class="link-danger" id="botonEntrada"><i class="fa fa-sign-in" aria-hidden="true"></i></a>';
+                          echo '<a href="../Controlador/controlador_entrada_urspace.php?id=' . $id_vis_res . '" class="link-danger" id="botonEntrada"><i class="fa fa-sign-in" aria-hidden="true"></i></a>';
                       }
                   } else {
                       echo 'Error al confirmar la salida.';
@@ -323,9 +324,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <?php
                   // Se obtiene el id para poder hacer la consulta
                   $id_reservacion = $filas['ID_RESERVACION'];
+                  $id_vis_res = $filas['ID_VISITA'];
 
                   // Realizar consulta para obtener la información de la salida
-                  $query_salida = "SELECT SALIDA_URSPACE FROM srcv_visitas WHERE ID_RESERVACION = $id_reservacion";
+                  $query_salida = "SELECT SALIDA_URSPACE FROM srcv_visitas WHERE ID_VISITA = $id_vis_res";
                   $resultado_salida = mysqli_query($conexion, $query_salida);
 
                   if ($resultado_salida) {
@@ -339,7 +341,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                          // echo '<i class="fa fa-sign-out" aria-hidden="true"></i>';
                       } else {
                           // Si la salida no está confirmada se habilita el enlace para confirmar la salida 
-                          echo '<a href="../Controlador/controlador_salida_urspace.php?id=' . $id_reservacion . '" class="link-danger" id="botonSalida"><i class="fa fa-sign-out" aria-hidden="true"></i></a>';
+                          echo '<a href="../Controlador/controlador_salida_urspace.php?id=' . $id_vis_res . '" class="link-danger" id="botonSalida"><i class="fa fa-sign-out" aria-hidden="true"></i></a>';
                       }
                   } else {
                       echo 'Error al confirmar la salida.';
