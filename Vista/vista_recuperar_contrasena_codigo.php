@@ -192,7 +192,7 @@ $(document).ready(function() {
                     // Muestra una alerta de éxito con SweetAlert
                     swal({
                         title: 'Éxito!',
-                        text: 'La contraseña se ha actualizado correctamnete!',
+                        text: 'La contraseña se ha actualizado correctamente!',
                         icon: 'success'
                     }).then(function() {
                         // Redirige a la página de inicio de sesión después de cerrar la alerta

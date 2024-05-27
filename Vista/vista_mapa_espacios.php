@@ -33,7 +33,7 @@ $row = $resultado->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <title>Mapa salas</title>
+    <title>Mapa espacios</title>
 </head>
 
 <body>
@@ -526,9 +526,9 @@ $(document).ready(function() {
                 console.log('Después de limpiar:', totalNumero, engancheNumero);
 
                 // Validar que total no sea menor a cero
-                if (totalNumero < 0) {
+                if (totalNumero <= 0) {
                     valid = false;
-                    swal('Error', 'El total no puede ser menor que cero', 'error');
+                    swal('Error', 'El total no puede ser menor o igual que cero', 'error');
                 }
                 // Validar que enganche no sea menor a cero
                 if (engancheNumero < 0) {
