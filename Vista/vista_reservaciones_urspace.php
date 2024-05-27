@@ -281,7 +281,25 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   $EUS = mysqli_fetch_assoc($entVis);
                   if(empty($EUS["ENTRADA_URSPACE"]) && empty($EUS["SALIDA_URSPACE"])){
                   ?>
-                  <a href="#" onclick="confirmarEliminar(<?=$filas['ID_RESERVACION']?>);" class="link-danger" id="botonCancelar"><i class="fa fa-times" aria-hidden="true"></i></a>
+                  <a hhref="#" id="botonEliminar" data-bs-toggle="modal" data-bs-target="#eliminar">
+                  <i class="fa fa-times" aria-hidden="true" style="color: #dc3545;"></i>
+                  </a>
+                  <!-- Modal de confirmación-->
+                  <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Estás seguro de que deseas eliminar la reservación?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <a href="../Controlador/controlador_eliminar_reservacion.php?id=<?=$filas['ID_RESERVACION']?>" id="botonCancelar" class="btn btn-primary">Aceptar</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   <?php
                   }else{
                     
@@ -462,13 +480,6 @@ tippy('#botonSalida', {
         }
     });
 
-
-//confirmacion antes de cancelar 
-function confirmarEliminar(idReservacion) {
-    if (confirm("¿Estás seguro de que quieres eliminar este registro?")) {
-        window.location.href = "../Controlador/controlador_eliminar_reservacion.php?id=" + idReservacion;
-    }
-}
 </script>
 
 
