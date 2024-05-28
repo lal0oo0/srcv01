@@ -117,7 +117,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesion</a>
+            <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesión</a>
           </li>
         </ul>
       </div>
@@ -190,7 +190,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <!----Aqui van los botones de acciones---->
                   <!--Boton para confirmar entrada-->
                     <?php
-                    if(empty($filas['ENTRADA_RECEPCION'])){
+                    if(empty($filas['ENTRADA_RECEPCION']) && empty($filas['ENTRADA_URSPACE']) && empty($filas['SALIDA_SEGURIDAD'])){
                     ?>
                     <a href="../Controlador/controlador_entrada_recepcion.php?id=<?=$filas['ID_VISITA']?>" id="botonEntrada"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                     <?php
@@ -327,13 +327,67 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   ?>
                     <!--Boton para confirmar salida aparece solo si ya confirmaron entrada-->
                     <?php
-                    if(!empty($filas['ENTRADA_RECEPCION']) && empty($filas['SALIDA_RECEPCION'])){
-                    ?>
-                    <a href="../Controlador/controlador_salida_recepcion.php?id=<?=$filas['ID_VISITA']?>" id="botonSalida"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-                    <?php
-                    }else{  ///Desaparece el botón
+                    // Obtener los valores actuales para depuración
+                    $salidaRecepcion = $filas['SALIDA_RECEPCION'];
+                    $entradaRecepcion = $filas['ENTRADA_RECEPCION'];
+                    $entradaUrspace = $filas['ENTRADA_URSPACE'];
+                    $salidaUrspace = $filas['SALIDA_URSPACE'];
+                    $salidaSeguridad = $filas['SALIDA_SEGURIDAD'];
+
+                    // Imprimir valores para depuración
+                    echo "SALIDA_RECEPCION: " . (empty($salidaRecepcion) ? "empty" : "not empty") . "<br>";
+                    echo "ENTRADA_RECEPCION: " . (empty($entradaRecepcion) ? "empty" : "not empty") . "<br>";
+                    echo "ENTRADA_URSPACE: " . (empty($entradaUrspace) ? "empty" : "not empty") . "<br>";
+                    echo "SALIDA_URSPACE: " . (empty($salidaUrspace) ? "empty" : "not empty") . "<br>";
+                    echo "SALIDA_SEGURIDAD: " . (empty($salidaSeguridad) ? "empty" : "not empty") . "<br>";
+
+                    // Inicializar variable para ocultar el botón
+                    $hideButton = false;
+
+                    // Comprobar cada condición por separado
+                    if (!empty($entradaRecepcion) && !empty($entradaUrspace) && empty($salidaUrspace) && !empty($salidaSeguridad)) {
+                        $hideButton = true;
+                    }
+
+                    if (empty($entradaRecepcion) && !empty($entradaUrspace) && empty($salidaUrspace) && !empty($salidaSeguridad)) {
+                        $hideButton = true;
+                    }
+
+                    if (!empty($entradaRecepcion) && empty($entradaUrspace) && !empty($salidaUrspace) && !empty($salidaSeguridad)) {
+                        $hideButton = true;
+                    }
+
+                    if (empty($entradaRecepcion) && empty($entradaUrspace) && !empty($salidaUrspace) && !empty($salidaSeguridad)) {
+                        $hideButton = true;
+                    }
+
+                    if (!empty($entradaRecepcion) && !empty($entradaUrspace) && !empty($salidaUrspace) && !empty($salidaSeguridad)) {
+                        $hideButton = true;
+                    }
+
+                    if (empty($entradaRecepcion) && !empty($entradaUrspace) && !empty($salidaUrspace) && !empty($salidaSeguridad)) {
+                        $hideButton = true;
+                    }
+
+                    // Para clientes que pasan solo por seguridad y recepción
+                    if (empty($entradaUrspace) && empty($salidaUrspace) && !empty($entradaRecepcion) && !empty($salidaSeguridad)) {
+                        $hideButton = true;
+                    }
+
+                    if (empty($entradaUrspace) && empty($salidaUrspace) && empty($entradaRecepcion) && !empty($salidaSeguridad)) {
+                        $hideButton = true;
+                    }
+                    if (empty($entradaRecepcion) && empty($entradaUrspace) && empty($salidaUrspace) && empty($salidaSeguridad)) {
+                        $hideButton = true;
+                    }
+                    // Mostrar el botón si no se debe ocultar
+                    if (!$hideButton) {
+                        ?>
+                        <a href="../Controlador/controlador_salida_recepcion.php?id=<?=$filas['ID_VISITA']?>" id="botonSalida"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                        <?php
                     }
                     ?>
+
                     </td>
       </tr>
       <?php
