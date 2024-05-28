@@ -116,7 +116,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesion</a>
+                <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesión</a>
               </li>
             </ul>
           </div>
@@ -179,7 +179,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
                 <div class="row">
                   <div class="col">
-                    <label for="he" class="form-label">Hora de entrada </label>
+                    <label for="he" class="form-label">Hora de entrada* </label>
                     <input type="time" disabled class="form-control" value="<?=$hora_actual?>" >
                     <input type="time" hidden class="form-control" id="he" name="he" value="<?= $hora_actual ?>" required>
                     <!--<div class="invalid-feedback">

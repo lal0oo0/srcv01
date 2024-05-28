@@ -193,7 +193,7 @@ $row = $resultado->fetch_assoc();
               </div>
             </div>
             <div class="col-md-12">
-              <label for="email" class="form-label">Correo Electronico *</label>
+              <label for="email" class="form-label">Correo Electrónico *</label>
               <div class="input-group has-validation">
                 <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="email" id="email" aria-describedby="emailHelp" required autocomplete="username">
                 <div class="invalid-feedback">
@@ -240,7 +240,7 @@ $row = $resultado->fetch_assoc();
                 <option selected value="">Seleccione con la que mejor se identifique *</option>
                 <option value="1">Nombre del mejor amigo</option>
                 <option value="2">Nombre de la mascota</option>
-                <option value="3">Pelicula Favorita</option>
+                <option value="3">Película Favorita</option>
             </select>
                 <input type="text" class="form-control form-control-sm" style="border: 2px solid #1E90FF;" id="respuesta" name="respuesta" required>
             </div>
@@ -275,7 +275,7 @@ $row = $resultado->fetch_assoc();
         <th scope="col">Nombre</th>
         <th scope="col">Apellido Paterno</th>
         <th scope="col">Apellido Materno</th>
-        <th scope="col">Correo Electronico</th>
+        <th scope="col">Correo Electrónico</th>
         <th scope="col">Rol</th>
         <th scope="col">Estatus</th>
         <th scope="col">Acciones</th>

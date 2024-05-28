@@ -21,10 +21,6 @@ $row = $resultado->fetch_assoc();
 ?>
 
 <?php
-$id=$_GET["id"];
-echo $id;
-?>
-<?php
 $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 ?>
 

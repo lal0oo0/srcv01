@@ -94,11 +94,11 @@ if ($codigo == $codigo_bd) {
                     <div style="padding: 20px; text-align: center; background: #007AB6;max-width: 100%;height: auto; align: center;">
                     <h1 style="color: white;">iT-Global</h1>
                     </div>
-                            <p style="font-size: 16px; color: black;">Hola ' . $usuario . ',</p>
+                            <p style="font-size: 16px; color: black;">Hola ' . $usuario . '.</p>
                             <p style="font-size: 16px; color: black;">Se ha actualizado correctamente la contraseña, la nueva contraseña es:</p>
                             <p style="font-size: 17px; text-align: center;"><b>' . $contrasena . '</b></p>
                             <p style="font-size: 16px; color: black;">Por favor, guarda esta información en un lugar seguro.</p>
-                            <p style="font-size: 16px; color: black;">Ingrese al boton para que inicie sesion</p>
+                            <p style="font-size: 16px; color: black;">Ingrese al botón para iniciar sesión</p>
                             <p><span style="font-size: 16px;">
                             <a class="btn btn-primary" href="http://'.$link.'/srcv01/Vista/vista_inicio_sesion.php" style="display: inline-block; padding: 10px 20px; background-color: #007AB6; color: #ffffff; text-decoration: none; border-radius: 4px;">
                             Iniciar sesion</a></p>
