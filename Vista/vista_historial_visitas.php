@@ -380,6 +380,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     if (empty($entradaRecepcion) && empty($entradaUrspace) && empty($salidaUrspace) && empty($salidaSeguridad)) {
                         $hideButton = true;
                     }
+                    if(!empty($salidaRecepcion)){
+                      $hideButton = true;
+                    }
                     // Mostrar el botón si no se debe ocultar
                     if (!$hideButton) {
                         ?>

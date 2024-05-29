@@ -455,7 +455,6 @@ function formatoMoneda(input) {
         
         // Actualizar el valor del campo de entrada con el formato de moneda
         input.value = formatoMoneda;
-        console.log(input);
     }
 }
 
@@ -500,8 +499,8 @@ $(document).ready(function() {
         var enganche = $(this).find('input[id^="enganche_"]').val();
         var idSala = $(this).find('#id_sala').val();
 
-        console.log("Total:", total);
-        console.log("Enganche:", enganche);
+        //console.log("Total:", total);
+        //console.log("Enganche:", enganche);
 
         // Verificar si todos los campos obligatorios están completos
         if (nombre == '' || apellidopaterno == '' || apellidomaterno == '' || fechainicio == '' || fechafinalizacion == '' || horainicio == '' || horafinalizacion == '' || personas == '' || servicios == '' || total == '' || enganche == '') {
@@ -522,8 +521,8 @@ $(document).ready(function() {
                 const engancheNumero = parseFloat(enganche.replace(/[^\d.]/g, ''));
                 const totalNumero = parseFloat(total.replace(/[^\d.]/g, ''));
 
-                console.log('Antes de limpiar:', total, enganche);
-                console.log('Después de limpiar:', totalNumero, engancheNumero);
+                //console.log('Antes de limpiar:', total, enganche);
+                //console.log('Después de limpiar:', totalNumero, engancheNumero);
 
                 // Validar que total no sea menor a cero
                 if (totalNumero <= 0) {

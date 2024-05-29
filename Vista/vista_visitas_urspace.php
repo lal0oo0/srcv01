@@ -167,7 +167,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           ?>
           <tr class="datos">
                     <td>
-                        <?php if(empty($filas['ENTRADA_URSPACE'])){ ?>
+                        <?php if(empty($filas['ENTRADA_URSPACE']) && empty($filas['SALIDA_RECEPCION']) && empty($filas['SALIDA_SEGURIDAD'])){ ?>
                         <a href="../Controlador/controlador_entrada_visitas_urspace.php?id=<?=$filas['ID_VISITA']?>" id="botonEntrada" class="link-danger"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                         <?php
                         }else{
@@ -181,7 +181,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <td><?php echo $filas['ASUNTO'] ?></td>
                     <td>
                         <?php 
-                        if(empty($filas['ENTRADA_URSPACE'])){
+                        if(empty($filas['ENTRADA_URSPACE']) || !empty($filas['SALIDA_RECEPCION']) || !empty($filas['SALIDA_SEGURIDAD'])){
                           echo '';
                         } else{
                         if(empty($filas['SALIDA_URSPACE'])){ ?>
