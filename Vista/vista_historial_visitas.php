@@ -198,7 +198,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     }
 
                     ///Desaparecer boton de modificar 
-                    if(empty($filas["SALIDA_RECEPCION"])){
+                    if(empty($filas["SALIDA_RECEPCION"]) && empty($filas['SALIDA_SEGURIDAD'])){
                     ?>
 
                  <!-- Modificar visitas -->
