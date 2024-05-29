@@ -334,12 +334,12 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     $salidaUrspace = $filas['SALIDA_URSPACE'];
                     $salidaSeguridad = $filas['SALIDA_SEGURIDAD'];
 
-                    // Imprimir valores para depuración
+                    /* Imprimir valores para depuración
                     echo "SALIDA_RECEPCION: " . (empty($salidaRecepcion) ? "empty" : "not empty") . "<br>";
                     echo "ENTRADA_RECEPCION: " . (empty($entradaRecepcion) ? "empty" : "not empty") . "<br>";
                     echo "ENTRADA_URSPACE: " . (empty($entradaUrspace) ? "empty" : "not empty") . "<br>";
                     echo "SALIDA_URSPACE: " . (empty($salidaUrspace) ? "empty" : "not empty") . "<br>";
-                    echo "SALIDA_SEGURIDAD: " . (empty($salidaSeguridad) ? "empty" : "not empty") . "<br>";
+                    echo "SALIDA_SEGURIDAD: " . (empty($salidaSeguridad) ? "empty" : "not empty") . "<br>";*/
 
                     // Inicializar variable para ocultar el botón
                     $hideButton = false;
