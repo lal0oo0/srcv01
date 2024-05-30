@@ -207,6 +207,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                           <form action="../Controlador/controlador_posponer_reservacion.php" class="formulario row g-3 needs-validation" name="<?php echo $idForm; ?>" id="<?php echo $idForm; ?>" method="post" novalidate>
                             <div class="mb-3"></div> <!-- Salto de línea -->
                               <input type="hidden" name="id" value="<?= $filas['ID_RESERVACION'] ?>">
+                              <input type="hidden" name="idsala" value="<?= $filas['ID_SALA'] ?>">
                             <div class="row">
                               <div class="col">
                                 <label for="Fecha inicio">Fecha de inicio *</label>

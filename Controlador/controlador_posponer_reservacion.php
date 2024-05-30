@@ -28,12 +28,15 @@ $variableab = $_POST['Abono'];
 // Eliminar el símbolo de la moneda y otros caracteres no numéricos
 $variable8 = floatval(preg_replace('/[^0-9.]/', '', $variableab));
 $variableSuma= $variable6+$variable8;
+$idSala = $_POST['idsala'];
 
 if(($variable7 = intval($variable5)-intval($variableSuma))<0){
   $mensaje = '<div class="alert alert-danger" role="alert">Error al registrar cambios: No se puede abonar una cantidad mayor al total</div>';
 }else{
 
-
+  $reservaciones = mysqli_query($conexion, "SELECT * FROM srcv_reservaciones WHERE ID_SALA = '$idSala' AND FECHA_ENTRADA = '$variable1' AND HORA_ENTRADA <= '$variable4' AND HORA_SALIDA >= '$variable3'");
+  $resenCurso = mysqli_num_rows($reservaciones);
+  if ($resenCurso < 1) {
     $consulta="UPDATE srcv_reservaciones SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', FECHA_ENTRADA='$variable1', FECHA_SALIDA='$variable2', HORA_ENTRADA='$variable3', HORA_SALIDA='$variable4', ENGANCHE='$variableSuma', LIQUIDACION='$variable7' WHERE ID_RESERVACION='$variable'";
     $sql=mysqli_query($conexion, $consulta);
   
@@ -48,7 +51,9 @@ if(($variable7 = intval($variable5)-intval($variableSuma))<0){
         // Error: alerta de Bootstrap error con detalles
         $mensaje = '<div class="alert alert-danger" role="alert">Error al registrar cambios: ' . mysqli_error($conexion) . '</div>';
     }
-    
+  } else {
+    $mensaje = '<div class="alert alert-danger" role="alert">Error al registrar cambios: Ya existe una reservación en el horario seleccionado</div>';
+}
     mysqli_close($conexion);}
     
     header("location: ../Vista/vista_reservaciones_urspace.php?mensaje=" . urlencode($mensaje));
