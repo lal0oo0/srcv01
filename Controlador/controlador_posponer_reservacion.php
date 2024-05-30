@@ -52,7 +52,7 @@ if(($variable7 = intval($variable5)-intval($variableSuma))<0){
         $mensaje = '<div class="alert alert-danger" role="alert">Error al registrar cambios: ' . mysqli_error($conexion) . '</div>';
     }
   } else {
-    $mensaje = '<div class="alert alert-danger" role="alert">Error al registrar cambios: Ya existe una reservación en el horario seleccionado</div>';
+    $mensaje = '<div class="alert alert-danger" role="alert">Ya existe una reservación en este espacio durante el horario seleccionado</div>';
 }
     mysqli_close($conexion);}
     

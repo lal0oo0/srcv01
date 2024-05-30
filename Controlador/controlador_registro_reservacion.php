@@ -72,7 +72,7 @@ if ($check == '1') {
             die('Error en la actualización: ' . mysqli_error($conexion));
         }
     } else {
-        echo json_encode(array('success' => false, 'error' => 'Ya existe una reservacion para esta sala en el horario seleccionado.'));
+        echo json_encode(array('success' => false, 'error' => 'Ya existe una reservación en este espacio durante el horario seleccionado.'));
         exit();
     }
 } else {
@@ -98,7 +98,7 @@ if ($check == '1') {
             die('Error en la inserción: ' . mysqli_error($conexion));
         }
     } else {
-        echo json_encode(array('success' => false, 'error' => 'Ya existe una reservacion para esta sala en el horario seleccionado.'));
+        echo json_encode(array('success' => false, 'error' => 'Ya existe una reservación en este espacio durante el horario seleccionado.'));
         exit();
     }
 }
