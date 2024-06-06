@@ -116,7 +116,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesión</a>
+                <a class="nav-link active" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesion</a>
               </li>
             </ul>
           </div>
@@ -179,7 +179,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
                 <div class="row">
                   <div class="col">
-                    <label for="he" class="form-label">Hora de entrada* </label>
+                    <label for="he" class="form-label">Hora de entrada </label>
                     <input type="time" disabled class="form-control" value="<?=$hora_actual?>" >
                     <input type="time" hidden class="form-control" id="he" name="he" value="<?= $hora_actual ?>" required>
                     <!--<div class="invalid-feedback">
@@ -327,7 +327,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <?php
                     if(empty($filas['SALIDA_SEGURIDAD'])){
                     ?>
-                    <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>"><i class="fa fa-sign-out" aria-hidden="true" id="botonSalida"></i></a>
+                    <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>" class="btn btn-primary btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1;">Salida <i class="fa fa-sign-out" aria-hidden="true" id="botonSalida" style="color:white; font-size: 12px;"></i></a>
                     <?php
                     }else{
                     }
@@ -336,12 +336,11 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <?php
                     if(empty($filas["ENTRADA_RECEPCION"]) && empty($filas["SALIDA_RECEPCION"]) && empty($filas["SALIDA_SEGURIDAD"]) && empty($filas["SALIDA_URSPACE"])){
                     ?>
-
-
-                    <a href="#" id="botonEliminar" data-bs-toggle="modal" data-bs-target="#eliminar">
-                    <i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" ></i>
+                    
+                    <a href="#" class="btn btn-primary btn-sm" id="botonEliminar" data-bs-toggle="modal" data-bs-target="#eliminar" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1;">Eliminar
+                    <i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" style="color:white; font-size: 12px;"></i>
                     </a>
-
+    
                     <!-- Modal -->
                     <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
