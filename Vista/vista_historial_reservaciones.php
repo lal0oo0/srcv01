@@ -145,8 +145,6 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <thead class="table-dark">
             <tr>
               <th scope="col">Nombre del cliente</th>
-              <th scope="col">Apellido paterno</th>
-              <th scope="col">Apellido Materno</th>
               <th scope="col">Espacio</th>
               <th scope="col">Correo electrónico</th>
               <th scope="col">Teléfono</th>
@@ -168,9 +166,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               while($filas  = mysqli_fetch_assoc($query)){
           ?>
           <tr class="datos">
-              <td><?php echo$filas ["NOMBRE_CLIENTE"] ?></td>
-              <td><?php echo$filas ["APELLIDO_PATERNO"] ?></td>
-              <td><?php echo$filas ["APELLIDO_MATERNO"] ?></td>
+              <td><?php echo$filas ["NOMBRE_CLIENTE"] ?>
+              <?php echo$filas ["APELLIDO_PATERNO"] ?>
+              <?php echo$filas ["APELLIDO_MATERNO"] ?></td>
               <td><?php echo$filas ["NOMBRE_ESPACIO"] ?></td>
               <td><?php echo$filas ["CORREO_ELECTRONICO"] ?></td>
               <td><?php echo$filas ["TELEFONO"] ?></td>
