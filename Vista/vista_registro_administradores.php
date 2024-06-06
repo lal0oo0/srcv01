@@ -302,19 +302,36 @@ $row = $resultado->fetch_assoc();
           echo$filas["ESTATUS"];
             ?></td>
             <td>
+            
             <?php
             if($filas["ESTATUS"]=='Activo'){
             ?>
-            <a href="../Controlador/controlador_eliminar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>" id="botonDesactivar"><i class="fa fa-times" aria-hidden="true" onclick="eliminar()" ></i></a>
+            <a class="btn btn-danger btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1;"
+            href="../Controlador/controlador_eliminar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>" 
+            id="botonDesactivar">
+            Desactivar
+            <i class="fa fa-times ms-1" aria-hidden="true" onclick="eliminar()" style="color:white; font-size: 12px;"></i>
+            </a><div class="mb-1"></div>
             <?php
             }elseif($filas["ESTATUS"]=='Inactivo'){
             ?>
-            <a href="../Controlador/controlador_activar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>" id="botonActivar"><i class="fa fa-check" aria-hidden="true"></i></a>
+            <a href="../Controlador/controlador_activar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>" id="botonActivar" 
+            class="btn btn-success btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1;">
+            Activar
+            <i class="fa fa-check" aria-hidden="true" style="color:white; font-size: 12px;"></i>
+            </a><div class="mb-1"></div>
             <?php
             }
             ?>
+            
                   <!-- Modificar usuario -->
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_ADMINISTRADOR'] ?>" onclick="VISITA('<?php $filas['ID_ADMINISTRADOR'] ?>')" id="botonAdmin"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_ADMINISTRADOR'] ?>" 
+                    onclick="VISITA('<?php $filas['ID_ADMINISTRADOR'] ?>')" id="botonAdmin" 
+                    class="btn btn-primary btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1;">
+                    Modificar
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" style="color:white; font-size: 12px;"></i>
+                    </a>
+
                   <!-- Modal para modificar usuarios-->
                   <div class="modal fade" id="exampleModal_<?php echo $filas['ID_ADMINISTRADOR'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
