@@ -523,6 +523,10 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('form').addEventListener('submit', function(event) {
         // Obtiene el valor del campo de abono
         var abono = parseFloat(document.querySelector('input[name="Abono"]').value);
+        var horainicio = document.querySelector('input[name="Horainicio"]').value;
+        var horafinalizacion = document.querySelector('input[name="Horafinalizacion"]').value;
+        var fechainicio = document.querySelector('input[name="Fechainicio"]').value;
+        var fechafinalizacion = document.querySelector('input[name="Fechafinalizacion"]').value;
 
         // Verifica si el abono es menor o igual a cero
         if ((abono) < 0) {
@@ -531,7 +535,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Evita que el formulario se envíe
             event.preventDefault();
-        }
+        }else
+             // Verificar si las fechas y horas son válidas
+            var fechaInicio = new Date(fechainicio + 'T' + horainicio);
+            var fechaFinalizacion = new Date(fechafinalizacion + 'T' + horafinalizacion);
+
+            if (fechaFinalizacion <= fechaInicio) {
+                valid = false;
+                swal('Error', 'Verifique los datos del horario de reservación.', 'error');
+                event.preventDefault();
+            }
     });
 });
 </script>

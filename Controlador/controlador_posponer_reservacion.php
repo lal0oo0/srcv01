@@ -36,7 +36,8 @@ if(($variable7 = intval($variable5)-intval($variableSuma))<0){
 
   $reservaciones = mysqli_query($conexion, "SELECT * FROM srcv_reservaciones WHERE ID_SALA = '$idSala' AND FECHA_ENTRADA = '$variable1' AND HORA_ENTRADA <= '$variable4' AND HORA_SALIDA >= '$variable3'");
   $resenCurso = mysqli_num_rows($reservaciones);
-  if ($resenCurso < 1) {
+  $filas  = mysqli_fetch_assoc($reservaciones);
+  if ($resenCurso < 1 || $resenCurso > 0 && $filas['ID_RESERVACION'] == $variable && $filas['FECHA_ENTRADA'] == $variable1 && $filas['FECHA_SALIDA'] == $variable2 && $filas['HORA_ENTRADA'] == $variable3 && $filas['HORA_SALIDA'] == $variable4 || $resenCurso == 1 && $filas['ID_RESERVACION'] == $variable) {
     $consulta="UPDATE srcv_reservaciones SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', FECHA_ENTRADA='$variable1', FECHA_SALIDA='$variable2', HORA_ENTRADA='$variable3', HORA_SALIDA='$variable4', ENGANCHE='$variableSuma', LIQUIDACION='$variable7' WHERE ID_RESERVACION='$variable'";
     $sql=mysqli_query($conexion, $consulta);
   
