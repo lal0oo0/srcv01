@@ -97,7 +97,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   $hoy=date("Y-m-d");
   require_once("../Modelo/conexion2.php");
   $conexion = conect();
-  $queryVisitas = mysqli_query($conexion, "select * from srcv_visitas where ESTATUS='1' and FECHA='$hoy'");
+  $queryVisitas = mysqli_query($conexion, "select * from srcv_visitas where ESTATUS='1' and FECHA='$hoy' ORDER BY ENTRADA_SEGURIDAD DESc");
   $queryempresa = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='empresa' and ESTATUS='1'");
   $queryasunto = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='asunto' and ESTATUS='1'");
   ?>
@@ -141,7 +141,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     <div class="row">
       <div class="col-md-9">
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" style="background-color: #008B8B" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <button type="button" onclick="actualizarHora()" class="btn btn-primary" style="background-color: #008B8B" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Nuevo Registro
       </button>
       </div>
@@ -180,7 +180,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <div class="row">
                   <div class="col">
                     <label for="he" class="form-label">Hora de entrada </label>
-                    <input type="time" disabled class="form-control" value="<?=$hora_actual?>" >
+                    <input type="time" id="hora_visible" disabled class="form-control" value="<?=$hora_actual?>" >
                     <input type="time" hidden class="form-control" id="he" name="he" value="<?= $hora_actual ?>" required>
                     <!--<div class="invalid-feedback">
                  Verifique los datos
@@ -522,6 +522,30 @@ document.addEventListener("DOMContentLoaded", function() {
         this.value = am;
     });
 });
+    // Función para actualizar la hora
+    function actualizarHora() {
+        var now = new Date();
+        var hours = String(now.getHours()).padStart(2, '0');
+        var minutes = String(now.getMinutes()).padStart(2, '0');
+        var currentTime = hours + ':' + minutes;
+        $('#hora_actual_mostrar').val(currentTime);
+        $('#he').val(currentTime);
+    }
+
+    // Escuchar el clic en el botón "Nuevo Registro" y actualizar la hora antes de abrir el modal
+    $('#staticBackdrop').on('show.bs.modal', function (e) {
+        actualizarHora();
+    });
+    $(document).ready(function() {
+        // Cuando se muestra el modal, actualizar el campo visible con el valor del campo oculto
+        $('#staticBackdrop').on('show.bs.modal', function (e) {
+            // Obtener el valor del campo oculto
+            var hora = $('#he').val();
+            
+            // Asignar el valor del campo oculto al campo visible
+            $('#hora_visible').val(hora);
+        });
+    });
 </script>
 </body>
 </html>
