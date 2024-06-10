@@ -160,7 +160,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <?php
               require_once("../Modelo/conexion2.php");
               $conexion = conect();
-              $query = mysqli_query ($conexion, "SELECT * FROM srcv_visitas WHERE ESTATUS= '1' AND EMPRESA='UrSpace'");
+              $query = mysqli_query ($conexion, "SELECT * FROM srcv_visitas WHERE ESTATUS= '1' AND EMPRESA LIKE '%Ur%'");
               while($filas  = mysqli_fetch_assoc($query)){
                 $idVis=$filas["ID_VISITA"];
                 $idForm='myForm_' . $idVis;
