@@ -225,17 +225,17 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             if($filas["ESTATUS"]==='Inactivo'){
             ?>
             <a href="../Controlador/controlador_activar_categorias.php?id=<?=$filas['ID_LISTA']?>" id="botonActivar"
-            class="btn btn-success btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1;">
+            class="btn btn-success btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1; color: black;">
             Activar
-            <i class="fa fa-check" aria-hidden="true"style="color:white; font-size: 12px;"></i>
+            <i class="fa fa-check" aria-hidden="true"style="font-size: 12px;"></i>
             </a>
             <?php
             }elseif($filas["ESTATUS"]==='Activo'){
             ?>
             <a href="../Controlador/controlador_desactivar_categorias.php?id=<?=$filas['ID_LISTA']?>" id="botonDesactivar"
-            class="btn btn-danger btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1;">
+            class="btn btn-danger btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1; color: black;">
             Desactivar
-            <i class="fa fa-times" aria-hidden="true" style="color:white; font-size: 12px;"></i>
+            <i class="fa fa-times" aria-hidden="true" style="font-size: 12px;"></i>
             </a>
             <?php
             }

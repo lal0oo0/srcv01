@@ -192,7 +192,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <?php
                     if(empty($filas['ENTRADA_RECEPCION']) && empty($filas['ENTRADA_URSPACE']) && empty($filas['SALIDA_SEGURIDAD'])){
                     ?>
-                    <a href="../Controlador/controlador_entrada_recepcion.php?id=<?=$filas['ID_VISITA']?>" id="botonEntrada" class="btn btn-primary btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1;">Entrada <i class="fa fa-sign-in" aria-hidden="true" style="color:white; font-size: 12px;"></i></a>
+                    <a href="../Controlador/controlador_entrada_recepcion.php?id=<?=$filas['ID_VISITA']?>" id="botonEntrada" class="btn btn-info btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Entrada 
+                    <i class="fa fa-sign-in" aria-hidden="true" style="font-size: 12px;"></i></a>
                     <?php
                     }else{ //Aqui desaparece el botón 
                     }
@@ -202,7 +203,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     ?>
 
                  <!-- Modificar visitas -->
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>" id="botonModificar" class="btn btn-primary btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1;">Modificar <i class="fa fa-pencil-square-o" aria-hidden="true" style="color:white; font-size: 12px;"></i></a>
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_VISITA'] ?>" id="botonModificar" class="btn btn-warning btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Modificar 
+                  <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 12px;"></i></a>
                   <!-- Modal para modificar visitas-->
                   <div class="modal fade" id="exampleModal_<?php echo $filas['ID_VISITA'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -386,7 +388,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     // Mostrar el botón si no se debe ocultar
                     if (!$hideButton) {
                         ?>
-                        <a href="../Controlador/controlador_salida_recepcion.php?id=<?=$filas['ID_VISITA']?>" id="botonSalida" class="btn btn-primary btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1;">Salida <i class="fa fa-sign-out" aria-hidden="true" style="color:white; font-size: 14px;"></i></a>
+                        <a href="../Controlador/controlador_salida_recepcion.php?id=<?=$filas['ID_VISITA']?>" id="botonSalida" class="btn btn-info btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Salida 
+                        <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 14px;"></i></a>
                         <?php
                     }
                     ?>

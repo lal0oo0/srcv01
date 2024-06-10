@@ -188,7 +188,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 
 
                   <!-- Modificar reservaciones -->
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_RESERVACION'] ?>" onclick="Reservacion('<?php $filas['ID_RESERVACION'] ?>')" class="btn btn-warning btn-sm d-flex align-items-center" style="padding-y: 0.1rem; font-size: 0.6rem; color:white;" id="botonModificar">Modificar
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_RESERVACION'] ?>" onclick="Reservacion('<?php $filas['ID_RESERVACION'] ?>')" class="btn btn-warning btn-sm d-flex align-items-center" style="padding-y: 0.1rem; font-size: 0.6rem; color: black;" id="botonModificar">Modificar
                   <i class="fa fa-pencil-square-o ms-1" aria-hidden="true"></i></a><div class="mb-1"></div> <!--Salto de linea-->
                   <!-- Modal para modificar reservaciones-->
                   <div class="modal fade" id="exampleModal_<?php echo $filas['ID_RESERVACION'] ?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -277,7 +277,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   $EUS = mysqli_fetch_assoc($entVis);
                   if(empty($EUS["ENTRADA_URSPACE"]) && empty($EUS["SALIDA_URSPACE"])){
                   ?>
-                  <a hhref="#" id="botonEliminar" data-bs-toggle="modal" data-bs-target="#eliminar" class="btn btn-danger btn-sm d-flex align-items-center" style="padding-y: 0.1rem; font-size: 0.6rem; color:white;">Cancelar
+                  <a hhref="#" id="botonEliminar" data-bs-toggle="modal" data-bs-target="#eliminar" class="btn btn-danger btn-sm d-flex align-items-center" style="padding-y: 0.1rem; font-size: 0.6rem; color: black;">Cancelar
                   <i class="fa fa-times ms-1" aria-hidden="true"></i></a><div class="mb-1"></div><!--Salto de linea-->
                   <!-- Modal de confirmación-->
                   <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -308,7 +308,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   date_default_timezone_set('America/Mexico_City');
                   $hora_actual = date("H:i:s");
                   if(!empty($fila_salida['SALIDA_URSPACE'])){ ?>
-                  <a href="../Controlador/controlador_uso_reservacion.php?id=<?=$filas['ID_RESERVACION']?>" class="btn btn-success btn-sm d-flex align-items-center" style="padding-y: 0.1rem; font-size: 0.6rem; color:white;" id="botonUso">Finalizar
+                  <a href="../Controlador/controlador_uso_reservacion.php?id=<?=$filas['ID_RESERVACION']?>" class="btn btn-success btn-sm d-flex align-items-center" style="padding-y: 0.1rem; font-size: 0.6rem; color: black;" id="botonUso">Finalizar
                     <i class="fa fa-check-square-o ms-1" aria-hidden="true"></i></a><div class="mb-1"></div><!--Salto de linea-->
                   <?php }?>
                   <?php
@@ -326,7 +326,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                           //echo '<i class="fa fa-sign-in" aria-hidden="true"></i>';
                       } else {
                           // Si la entrada no está confirmada se habilita el enlace para confirmar la entrada 
-                          echo '<a href="../Controlador/controlador_entrada_urspace.php?id=' . $id_vis_res . '" class="btn btn-info btn-sm d-flex align-items-center" style="padding-y: 0.1rem; font-size: 0.6rem; color:white;" id="botonEntrada">Entrada
+                          echo '<a href="../Controlador/controlador_entrada_urspace.php?id=' . $id_vis_res . '" class="btn btn-info btn-sm d-flex align-items-center" style="padding-y: 0.1rem; font-size: 0.6rem; color: black;" id="botonEntrada">Entrada
                           <i class="fa fa-sign-in ms-1" aria-hidden="true"></i></a><div class="mb-1"></div><!--Salto de linea-->';
                       }
                   } else {
@@ -354,7 +354,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                          // echo '<i class="fa fa-sign-out" aria-hidden="true"></i>';
                       } else {
                           // Si la salida no está confirmada se habilita el enlace para confirmar la salida 
-                          echo '<a href="../Controlador/controlador_salida_urspace.php?id=' . $id_vis_res . '" class="btn btn-info btn-sm d-flex align-items-center" style="padding-y: 0.1rem; font-size: 0.6rem; color:white;" id="botonSalida">Salida
+                          echo '<a href="../Controlador/controlador_salida_urspace.php?id=' . $id_vis_res . '" class="btn btn-info btn-sm d-flex align-items-center" style="padding-y: 0.1rem; font-size: 0.6rem; color: black;" id="botonSalida">Salida
                           <i class="fa fa-sign-out ms-1" aria-hidden="true"></i></a>';
                       }
                   } else {

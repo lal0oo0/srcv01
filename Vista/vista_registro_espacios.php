@@ -238,13 +238,13 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <?php
             if($filas["ESTATUS"]=='Inactivo'){
             ?>
-            <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>" class="btn btn-success btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1;" id="botonActivar">Activar
-            <i class="fa fa-check" aria-hidden="true" style="color:white; font-size: 12px;"></i></a>
+            <a href="../Controlador/controlador_activar_espacio.php?id=<?=$filas['ID_SALA']?>" class="btn btn-success btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1; color: black;" id="botonActivar">Activar
+            <i class="fa fa-check" aria-hidden="true" style="font-size: 12px;"></i></a>
             <?php
             }elseif($filas["ESTATUS"]=='Activo'){
             ?>
-            <a href="../Controlador/controlador_desactivar_espacio.php?id=<?=$filas['ID_SALA']?>" class="btn btn-danger btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1;" id="botonDesactivar">Desactivar
-            <i class="fa fa-times" aria-hidden="true" style="color:white; font-size: 12px;"></i></a>
+            <a href="../Controlador/controlador_desactivar_espacio.php?id=<?=$filas['ID_SALA']?>" class="btn btn-danger btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1; color: black;" id="botonDesactivar">Desactivar
+            <i class="fa fa-times" aria-hidden="true" style="font-size: 12px;"></i></a>
             <?php
             }
             ?>

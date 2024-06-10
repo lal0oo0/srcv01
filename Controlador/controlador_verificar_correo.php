@@ -15,7 +15,7 @@ $conexion = conect();
 $correo = $_POST['correo'];
 
 //Consulta para verificar si correo existe
-$sql =  (" SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' ");
+$sql =  (" SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO = '$correo' AND ESTATUS = '1'");
 $result=$conexion->query($sql);
 
 if ($result->num_rows==1) {

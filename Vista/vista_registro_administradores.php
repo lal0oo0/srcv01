@@ -306,19 +306,19 @@ $row = $resultado->fetch_assoc();
             <?php
             if($filas["ESTATUS"]=='Activo'){
             ?>
-            <a class="btn btn-danger btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1;"
+            <a class="btn btn-danger btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1; color: black;"
             href="../Controlador/controlador_eliminar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>" 
             id="botonDesactivar">
             Desactivar
-            <i class="fa fa-times ms-1" aria-hidden="true" onclick="eliminar()" style="color:white; font-size: 12px;"></i>
+            <i class="fa fa-times ms-1" aria-hidden="true" onclick="eliminar()" style="font-size: 12px;"></i>
             </a><div class="mb-1"></div>
             <?php
             }elseif($filas["ESTATUS"]=='Inactivo'){
             ?>
             <a href="../Controlador/controlador_activar_administrador.php?id=<?=$filas['ID_ADMINISTRADOR']?>" id="botonActivar" 
-            class="btn btn-success btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1;">
+            class="btn btn-success btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1; color: black;">
             Activar
-            <i class="fa fa-check" aria-hidden="true" style="color:white; font-size: 12px;"></i>
+            <i class="fa fa-check" aria-hidden="true" style="font-size: 12px;"></i>
             </a><div class="mb-1"></div>
             <?php
             }
@@ -327,9 +327,9 @@ $row = $resultado->fetch_assoc();
                   <!-- Modificar usuario -->
                     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $filas['ID_ADMINISTRADOR'] ?>" 
                     onclick="VISITA('<?php $filas['ID_ADMINISTRADOR'] ?>')" id="botonAdmin" 
-                    class="btn btn-primary btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1;">
+                    class="btn btn-warning btn-sm" style="font-size: 10px; padding: 2px 5 px; height: 20px; line-height: 1; color: black;">
                     Modificar
-                    <i class="fa fa-pencil-square-o" aria-hidden="true" style="color:white; font-size: 12px;"></i>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 12px;"></i>
                     </a>
 
                   <!-- Modal para modificar usuarios-->
