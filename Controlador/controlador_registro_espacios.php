@@ -12,6 +12,9 @@ include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
 
+// Obtén la fecha y hora actual
+date_default_timezone_set('America/Mexico_City');
+$fechaAlta = date('Y-m-d H:i:s');
 /*Para capturar los campos*/
 $nombre = $_POST['Nombre'];
 $ubicacion = $_POST['ubicacion'];
@@ -24,8 +27,8 @@ $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_salas WHERE NOMBRE =
     }
 
 	/*Codigo para guardar un registro temporalmente en una variable php*/
-	$consulta = "INSERT INTO srcv_salas(NOMBRE, UBICACION, ESTATUS, USUARIO_ALTA, USUARIO_MODIFICACION)
-	VALUES ('$nombre', '$ubicacion', '1', '$useralta', '$useralta')";
+	$consulta = "INSERT INTO srcv_salas(NOMBRE, UBICACION, ESTATUS, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION)
+	VALUES ('$nombre', '$ubicacion', '1', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta')";
 
     
 

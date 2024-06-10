@@ -12,6 +12,9 @@ include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
 
+// Obtén la fecha y hora actual
+date_default_timezone_set('America/Mexico_City');
+$fechaAlta = date('Y-m-d H:i:s');
 
 $nombre = $_POST['Nombre'];
 $categoria = $_POST['Categoria'];
@@ -24,16 +27,16 @@ $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_listas WHERE NOMBRE 
     }
 
     if ($categoria === "Empresa") {
-        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, USUARIO_ALTA, USUARIO_MODIFICACION) 
-        VALUES ('$nombre', 'Empresa', '1', '$useralta', '$useralta')";
+        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION) 
+        VALUES ('$nombre', 'Empresa', '1', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta')";
     
     } elseif ($categoria === "Asunto") {
-        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, USUARIO_ALTA, USUARIO_MODIFICACION) 
-        VALUES ('$nombre', 'Asunto', '1', '$useralta', '$useralta')";
+        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION) 
+        VALUES ('$nombre', 'Asunto', '1', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta')";
 
     } elseif ($categoria === "Piso") {
-        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, USUARIO_ALTA, USUARIO_MODIFICACION) 
-        VALUES ('$nombre', 'Piso', '1', '$useralta', '$useralta')";
+        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION) 
+        VALUES ('$nombre', 'Piso', '1', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta')";
     }
 
     $ejecutar = mysqli_query($conexion, $consulta);
