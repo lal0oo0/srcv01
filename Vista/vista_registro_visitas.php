@@ -97,9 +97,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   $hoy=date("Y-m-d");
   require_once("../Modelo/conexion2.php");
   $conexion = conect();
-  $queryVisitas = mysqli_query($conexion, "select * from srcv_visitas where ESTATUS='1' and FECHA='$hoy' ORDER BY ENTRADA_SEGURIDAD DESc");
-  $queryempresa = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='empresa' and ESTATUS='1'");
-  $queryasunto = mysqli_query($conexion, "select * from srcv_listas WHERE CATEGORIA='asunto' and ESTATUS='1'");
+  $queryVisitas = mysqli_query($conexion, "SELECT * FROM srcv_visitas where ESTATUS='1' and FECHA='$hoy' ORDER BY ENTRADA_SEGURIDAD DESC");
+  $queryempresa = mysqli_query($conexion, "SELECT * FROM srcv_listas WHERE CATEGORIA='empresa' and ESTATUS='1'");
+  $queryasunto = mysqli_query($conexion, "SELECT * FROM srcv_listas WHERE CATEGORIA='asunto' and ESTATUS='1'");
   ?>
   <!--aqui va la navbar-->
   <header>

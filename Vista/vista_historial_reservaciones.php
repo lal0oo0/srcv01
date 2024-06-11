@@ -162,7 +162,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <?php
               require_once("../Modelo/conexion2.php");
               $conexion = conect();
-              $query = mysqli_query ($conexion, "select * from srcv_reservaciones");
+              $query = mysqli_query ($conexion, "SELECT * FROM srcv_reservaciones ORDER BY FECHA_ENTRADA DESC, HORA_ENTRADA DESC");
               while($filas  = mysqli_fetch_assoc($query)){
           ?>
           <tr class="datos">

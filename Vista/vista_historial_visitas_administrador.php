@@ -97,7 +97,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <?php
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
-    $query = mysqli_query ($conexion, "select * from srcv_visitas");
+    $query = mysqli_query ($conexion, "SELECT * FROM srcv_visitas ORDER BY FECHA DESC");
 ?>
  
 <header>

@@ -163,7 +163,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <?php
               require_once("../Modelo/conexion2.php");
               $conexion = conect();
-              $query = mysqli_query ($conexion, "SELECT * FROM srcv_reservaciones WHERE ESTATUS='1' AND USO='0'");
+              $query = mysqli_query ($conexion, "SELECT * FROM srcv_reservaciones WHERE ESTATUS='1' AND USO='0' ORDER BY FECHA_ENTRADA DESC, HORA_ENTRADA DESC");
               while($filas  = mysqli_fetch_assoc($query)){
                 $idRegistro=$filas["ID_RESERVACION"];
                 $idForm='myForm_' . $idRegistro;
