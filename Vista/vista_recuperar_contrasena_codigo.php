@@ -88,18 +88,34 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <label for="" class="form-label">Ingresar código *</label>
                 <input type="text" class="form-control" style="border: 2px solid #007AB6;" id="codigo" name="codigo" required>
               </div>
-              <div class="col-md-6">
-                <label for="passwo1" class="form-label">Agregar nueva contraseña *</label>
-                <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="contrasena" name="contrasena" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-                <div class="invalid-feedback">*Campo obligatorio</div>
-              </div>
-              <div class="col-md-6">
-                <label for="confirmPasswo" class="form-label">Confirmar contraseña *</label>
-                <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
-                <div class="invalid-feedback" id="passwordMismatch" style="color: red; display: none;">
-                  Las contraseñas no coinciden.
+
+              <div class="row">
+                <div class="col-md-6">
+                    <label for="passwo1" class="form-label">Agregar nueva contraseña</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="contrasena" name="contrasena" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                        <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="togglePassword">
+                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="invalid-feedback">*La contraseña debe tener al menos 8 caracteres incluyendo un número, una mayúscula y un carácter especial</div>
                 </div>
-              </div>
+
+                <div class="col-md-6">
+                    <label for="confirmPasswo" class="form-label">Confirmar nueva contraseña</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" style="border: 2px solid #007AB6;" id="confirmPasswo" name="confirmPasswo" aria-describedby="passwordHelp" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+                        <button type="button" class="btn btn-outline-secondary" style="border: 2px solid #007AB6" id="toggleConfirmPassword">
+                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="invalid-feedback" id="passwordMismatch" style="color: red; display: none;">
+                        Las contraseñas no coinciden.
+                    </div>
+                </div>
+                
+             </div>
+
               <div class="col-12">
                 <button class="btn btn-primary" type="submit" id="enviar" onclick="return validarCampos()" name="enviar">GUARDAR</button>
               </div>
@@ -235,6 +251,34 @@ $(document).ready(function() {
         </ul>
         `,
         allowHTML: true // Esto permite que el contenido del tooltip se interprete como HTML
+    });
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('contrasena');
+        const icon = document.querySelector('#togglePassword i');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('confirmPasswo');
+        const icon = document.querySelector('#toggleConfirmPassword i');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
     });
 </script>
 </body>
