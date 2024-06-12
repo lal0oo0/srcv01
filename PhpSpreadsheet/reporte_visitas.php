@@ -536,7 +536,7 @@ while($rows = $resultado->fetch_assoc()){
 
 $sql = "SELECT NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA, ASUNTO, MOTIVO, ENTRADA_URSPACE, SALIDA_URSPACE 
 FROM srcv_visitas
-WHERE FECHA BETWEEN '$fecha_inicio' AND '$fecha_fin' AND FECHA BETWEEN '$fecha_inicio' AND '$fecha_fin'";
+WHERE FECHA BETWEEN '$fecha_inicio' AND '$fecha_fin' AND FECHA BETWEEN '$fecha_inicio' AND '$fecha_fin' AND EMPRESA LIKE '%Ur%'";
 $resultado = mysqli_query($conexion, $sql);
   
 $excel = new Spreadsheet();

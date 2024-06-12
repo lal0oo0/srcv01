@@ -54,7 +54,7 @@ if (empty($fecha_inicio) || empty($fecha_fin)) {
 
 if($rol_urspace->num_rows==1){
 
-$sql = "SELECT NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, TELEFONO, FECHA_ENTRADA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE FROM srcv_reservaciones
+$sql = "SELECT NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, TELEFONO, FECHA_ENTRADA, FECHA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE FROM srcv_reservaciones
 WHERE FECHA_ENTRADA BETWEEN '$fecha_inicio' AND '$fecha_fin' AND FECHA_SALIDA BETWEEN '$fecha_inicio' AND '$fecha_fin'";
 $resultado = mysqli_query($conexion, $sql);
 
@@ -150,7 +150,7 @@ $hojaActiva->getStyle('G1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL
 $hojaActiva->getStyle('G1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
 // Establecer la altura de una fila (por ejemplo, fila 1)
 $hojaActiva->getRowDimension(1)->setRowHeight(40); // Altura de la fila 1 ajustada
-$hojaActiva->setCellValue('G1', 'NUMERO PERSONAS');
+$hojaActiva->setCellValue('G1', 'FECHA SALIDA');
 $hojaActiva->getStyle('G1')->getFont()->getColor()->setRGB('FFFFFF'); // Obtener el estilo de la celda y establecer el color del texto en RGB
 $hojaActiva->getStyle('G1')->getAlignment()->setWrapText(true);// Ajustar el texto si es necesario
 
@@ -163,7 +163,7 @@ $hojaActiva->getStyle('H1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL
 $hojaActiva->getStyle('H1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
 // Establecer la altura de una fila (por ejemplo, fila 1)
 $hojaActiva->getRowDimension(1)->setRowHeight(40); // Altura de la fila 1 ajustada
-$hojaActiva->setCellValue('H1', 'SERVICIOS EXTRA');
+$hojaActiva->setCellValue('H1', 'NUMERO PERSONAS');
 $hojaActiva->getStyle('H1')->getFont()->getColor()->setRGB('FFFFFF'); // Obtener el estilo de la celda y establecer el color del texto en RGB
 $hojaActiva->getStyle('H1')->getAlignment()->setWrapText(true);// Ajustar el texto si es necesario
 
@@ -176,7 +176,7 @@ $hojaActiva->getStyle('I1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL
 $hojaActiva->getStyle('I1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
 // Establecer la altura de una fila (por ejemplo, fila 1)
 $hojaActiva->getRowDimension(1)->setRowHeight(40); // Altura de la fila 1 ajustada
-$hojaActiva->setCellValue('I1', 'TOTAL');
+$hojaActiva->setCellValue('I1', 'SERVICIOS EXTRA');
 $hojaActiva->getStyle('I1')->getFont()->getColor()->setRGB('FFFFFF'); // Obtener el estilo de la celda y establecer el color del texto en RGB
 $hojaActiva->getStyle('I1')->getAlignment()->setWrapText(true);// Ajustar el texto si es necesario
 
@@ -189,9 +189,22 @@ $hojaActiva->getStyle('J1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL
 $hojaActiva->getStyle('J1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
 // Establecer la altura de una fila (por ejemplo, fila 1)
 $hojaActiva->getRowDimension(1)->setRowHeight(40); // Altura de la fila 1 ajustada
-$hojaActiva->setCellValue('J1', 'ENGANCHE');
+$hojaActiva->setCellValue('J1', 'TOTAL');
 $hojaActiva->getStyle('J1')->getFont()->getColor()->setRGB('FFFFFF'); // Obtener el estilo de la celda y establecer el color del texto en RGB
 $hojaActiva->getStyle('J1')->getAlignment()->setWrapText(true);// Ajustar el texto si es necesario
+
+
+$hojaActiva->getStyle('K1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('CC0000'); // Color en la celda
+$hojaActiva->getStyle('K1')->getFont()->setSize(12); // Tamaño de letra en la celda
+$hojaActiva->getStyle('K1')->getFont()->setBold(true);// Establecer el texto en negrita
+$hojaActiva->getColumnDimension('K')->setWidth(20);// Establecer el ancho de la columna a 20 unidades de ancho
+$hojaActiva->getStyle('K1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+$hojaActiva->getStyle('K1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+// Establecer la altura de una fila (por ejemplo, fila 1)
+$hojaActiva->getRowDimension(1)->setRowHeight(40); // Altura de la fila 1 ajustada
+$hojaActiva->setCellValue('K1', 'ENGANCHE');
+$hojaActiva->getStyle('K1')->getFont()->getColor()->setRGB('FFFFFF'); // Obtener el estilo de la celda y establecer el color del texto en RGB
+$hojaActiva->getStyle('K1')->getAlignment()->setWrapText(true);// Ajustar el texto si es necesario
 
 
 $fila = 2;
@@ -254,7 +267,7 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('G'. $fila)->getFont()->setSize(11); // Tamaño de letra en la celda
     $hojaActiva->getStyle('G'. $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('G'. $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
-    $hojaActiva->setCellValue('G'.$fila, $rows['NUMERO_PERSONAS']);
+    $hojaActiva->setCellValue('G'.$fila, $rows['FECHA_SALIDA']);
     $hojaActiva->getStyle('G'.$fila)->getAlignment()->setWrapText(true);
 
 
@@ -262,7 +275,7 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('H'. $fila)->getFont()->setSize(11); // Tamaño de letra en la celda
     $hojaActiva->getStyle('H'. $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('H'. $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
-    $hojaActiva->setCellValue('H'.$fila, $rows['SERVICIOS_EXTRA']);
+    $hojaActiva->setCellValue('H'.$fila, $rows['NUMERO_PERSONAS']);
     $hojaActiva->getStyle('H'.$fila)->getAlignment()->setWrapText(true);
 
 
@@ -271,7 +284,7 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('I'. $fila)->getFont()->setSize(11); // Tamaño de letra en la celda
     $hojaActiva->getStyle('I'. $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('I'. $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
-    $hojaActiva->setCellValue('I'.$fila, $rows['TOTAL']);
+    $hojaActiva->setCellValue('I'.$fila, $rows['SERVICIOS_EXTRA']);
     $hojaActiva->getStyle('I'.$fila)->getAlignment()->setWrapText(true);
 
 
@@ -280,8 +293,17 @@ while($rows = $resultado->fetch_assoc()){
     $hojaActiva->getStyle('J'. $fila)->getFont()->setSize(11); // Tamaño de letra en la celda
     $hojaActiva->getStyle('J'. $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('J'. $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
-    $hojaActiva->setCellValue('J'.$fila, $rows['ENGANCHE']);
+    $hojaActiva->setCellValue('J'.$fila, $rows['TOTAL']);
     $hojaActiva->getStyle('J'.$fila)->getAlignment()->setWrapText(true);
+
+
+    $hojaActiva->getStyle('K'.$fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE); //Formato moneda
+    $hojaActiva->getStyle('K'. $fila)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('F0F0F0'); // Color en la celda
+    $hojaActiva->getStyle('K'. $fila)->getFont()->setSize(11); // Tamaño de letra en la celda
+    $hojaActiva->getStyle('K'. $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('K'. $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+    $hojaActiva->setCellValue('K'.$fila, $rows['ENGANCHE']);
+    $hojaActiva->getStyle('K'.$fila)->getAlignment()->setWrapText(true);
 
     $fila++;
 
@@ -296,38 +318,38 @@ while($rows = $resultado->fetch_assoc()){
     $fila += 1;
 
     // Definir los encabezados de la segunda tabla
-    $hojaActiva->setCellValue('H'.$fila, 'Total de registros:');
-    $hojaActiva->getStyle('H' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
-    $hojaActiva->getStyle('H' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
-    
-    $hojaActiva->setCellValue('I'.$fila, 'Sumatoria total:');
+    $hojaActiva->setCellValue('I'.$fila, 'Total de registros:');
     $hojaActiva->getStyle('I' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('I' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
-
-    $hojaActiva->setCellValue('J'.$fila, 'Sumatoria enganche:');
+    
+    $hojaActiva->setCellValue('J'.$fila, 'Sumatoria total:');
     $hojaActiva->getStyle('J' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('J' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+
+    $hojaActiva->setCellValue('K'.$fila, 'Sumatoria enganche:');
+    $hojaActiva->getStyle('K' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('K' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
   
     $fila++;
     //Fila para mostrar el total de registros
-    $hojaActiva->setCellValue('H' . $fila, $total_registros);
-    $hojaActiva->getStyle('H' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
-    $hojaActiva->getStyle('H' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
-    $hojaActiva->getStyle('H' . $fila)->getAlignment()->setWrapText(true); // Ajustar el texto si es necesario
-
-    //Fila para mostrar la sumatoria total
-    $hojaActiva->getStyle('I' . $fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
-    $hojaActiva->setCellValue('I' . $fila, $totalSum);
+    $hojaActiva->setCellValue('I' . $fila, $total_registros);
     $hojaActiva->getStyle('I' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('I' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
     $hojaActiva->getStyle('I' . $fila)->getAlignment()->setWrapText(true); // Ajustar el texto si es necesario
 
     //Fila para mostrar la sumatoria total
     $hojaActiva->getStyle('J' . $fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
-    $hojaActiva->setCellValue('J' . $fila, $totalEng);
+    $hojaActiva->setCellValue('J' . $fila, $totalSum);
     $hojaActiva->getStyle('J' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
     $hojaActiva->getStyle('J' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
     $hojaActiva->getStyle('J' . $fila)->getAlignment()->setWrapText(true); // Ajustar el texto si es necesario
+
+    //Fila para mostrar la sumatoria total
+    $hojaActiva->getStyle('K' . $fila)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
+    $hojaActiva->setCellValue('K' . $fila, $totalEng);
+    $hojaActiva->getStyle('K' . $fila)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Centrar texto horizontalmente en la celda
+    $hojaActiva->getStyle('K' . $fila)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER); // Centrar texto verticalmente en la celda
+    $hojaActiva->getStyle('K' . $fila)->getAlignment()->setWrapText(true); // Ajustar el texto si es necesario
 
 
 }else if ($rol_administrador->num_rows==1){

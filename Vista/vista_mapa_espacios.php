@@ -322,7 +322,7 @@ $row = $resultado->fetch_assoc();
                 </div>
 
                 <div class="col">
-                  <label for="se">Servicios extra</label>
+                  <label for="se">Servicios extra*</label>
                   <input type="text" class="form-control" name="Servicios" id="servicios" value="N/A" aria-label="servicios" aria-describedby="basic-addon1">
                 </div>
                 <div class="mb-4"></div> <!--Salto de linea-->
@@ -336,7 +336,8 @@ $row = $resultado->fetch_assoc();
                     </div>
                   </div>
                   <div class="col">
-                    <label for="se">Enganche*</label>
+                    <label for="se">Enganche*
+                    </label>
                     <input type="text" class="form-control" name="Enganche" id="<?php echo $enganche; ?>" placeholder="Enganche" aria-label="Enganche" aria-describedby="basic-addon1" onblur="formatoMoneda(this, '<?php echo $enganche;?>')" step="any" value="" required>
                     <div class="invalid-feedback">
                       Verifique los datos
