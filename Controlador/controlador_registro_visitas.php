@@ -22,15 +22,23 @@ $he = $_POST['he'];
 $fecha = $_POST['fecha'];
 $nombre = $_POST['nombre'];
 $apellidop = $_POST['ap'];
+if(empty($apellidop)){
+  $apellidop = 'N/A';
+}
 $apellidom = $_POST['am'];
+if(empty($apellidom)){
+  $apellidom = 'N/A';
+}
 $empresa = $_POST['empresa'];
 $asunto = $_POST['asunto'];
+$noPersonas = isset($_POST['noPersonas']) && is_numeric($_POST['noPersonas']) ? $_POST['noPersonas'] : 1;
+
 
 
 //y$variable11= $_POST['salaSeleccionada'];
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$visita = "INSERT INTO srcv_visitas(ID_VISITA, ENTRADA_SEGURIDAD, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
-VALUES ('$id_unico', '$he', '$fecha','$nombre','$apellidop','$apellidom','$empresa','$asunto', '$fechaAlta', '$fechaAlta', '$usuariom','$usuariom','1')";
+$visita = "INSERT INTO srcv_visitas(ID_VISITA, ENTRADA_SEGURIDAD, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, NUMERO_PERSONAS, EMPRESA, ASUNTO, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
+VALUES ('$id_unico', '$he', '$fecha','$nombre','$apellidop','$apellidom', '$noPersonas','$empresa','$asunto', '$fechaAlta', '$fechaAlta', '$usuariom','$usuariom','1')";
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $visita); 
 

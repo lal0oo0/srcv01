@@ -219,7 +219,7 @@ $row = $resultado->fetch_assoc();
                 <div class="col-md-12" id="<?php echo $idSelect;?>" style="display: none;">
                   <?php
                     $conexion = conect();
-                    $queryVisi= mysqli_query($conexion,"SELECT DISTINCT ID_VISITA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO FROM srcv_visitas WHERE EMPRESA = 'UrSpace' AND FECHA = '$fecha_actual' AND ESTATUS= '1'");
+                    $queryVisi= mysqli_query($conexion,"SELECT DISTINCT ID_VISITA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO FROM srcv_visitas WHERE EMPRESA LIKE '%Ur%' AND FECHA = '$fecha_actual' AND ESTATUS= '1'");
                   ?>
                   <select class="form-select mr-sm-2" title="Selecciona" id="<?php echo $idinput;?>" onchange="autofillForm(this)">
                     <option value="" >Selecciona </option>
