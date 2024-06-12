@@ -175,6 +175,19 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               <form id="myForm" action="../Controlador/controlador_registro_visitas.php" method="post" class="row g-3 needs-validation" novalidate>
                 <h5>Rellene los campos</h5>
 
+                <div class="mb-2"></div> <!-- Salto de línea -->
+
+                <div class="row">
+                  <div class="col"></div>
+                <div class="col-md-6 form-check">
+                <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" onchange="toggleGroupFields()">
+                <label class="form-check-label" for="check">
+                    Registrar grupo de visitas
+                </label>
+                </div> 
+                  <div class="col"></div>
+                </div>
+
                 <div class="mb-3"></div> <!-- Salto de línea -->
 
                 <div class="row">
@@ -199,14 +212,26 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
                 <br>
                 <div class="col">
-                  <label for="nombre" class="form-label">Nombre *</label>
+                  <label for="nombre" class="form-label" id="nombreLabel">Nombre *</label>
                   <input type="text" class="form-control" id="nombre" name="nombre" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required>
                   <div class="invalid-feedback">
                     Verifique los datos
                   </div>
                 </div>
 
-                <div class="row">
+                <div class="mb-2"></div> <!-- Salto de línea -->
+
+                <div class="row align-items-center" id="personas" style="display: none;">
+                  <div class="col"></div>
+                <div class="col">
+                  <label for="noPersonas" class="form-label">No. Personas *</label>
+                  <input type="number" class="form-control" id="noPersonas" value="1" name="noPersonas">
+                </div>
+                <div class="col"></div>
+                </div>
+                
+
+                <div class="row" id="apellidoFields">
                   <div class="col">
                     <div class="mb-3"></div> <!-- Salto de línea -->
                     <label for="ap" class="form-label">Apellido Paterno *</label>
@@ -273,7 +298,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <!--Botones para cancelar o enviar formulario del modal-->
                 <div class="modal-footer">
                   <button type="button" onclick="limpiar()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" class="btn btn-primary" onclick="validar()" >Confirmar</button>
+                  <button type="submit" class="btn btn-primary">Confirmar</button>
                 </div>
                 <br><br><br><br>
               </form>
@@ -377,7 +402,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!--sweetalert sea local-->
   <script src="../js/jquery-3.1.1.min.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
-  <script src="../js/validar_formulario.js" ></script>
+  <!--script src="../js/validar_formulario.js" ></script-->
   <script src="https://unpkg.com/@popperjs/core@2"></script><!-- Script para crear tippy-->
   <script src="https://unpkg.com/tippy.js@6"></script><!-- Script para crear tippy-->
 
@@ -546,6 +571,45 @@ document.addEventListener("DOMContentLoaded", function() {
             $('#hora_visible').val(hora);
         });
     });
+
+        //Limpiar fromulario
+    function limpiar() {
+    var formulario = document.getElementById('myForm');  
+    // Resetear el formulario
+    formulario.reset();
+    location.reload();
+}
+function toggleGroupFields() {
+  const checkbox = document.getElementById('flexCheckDefault');
+  const apellidoFields = document.getElementById('apellidoFields');
+  const noPersonasField = document.getElementById('personas');
+  const apField = document.getElementById('ap');
+  const amField = document.getElementById('am');
+  const noPersonasInput = document.getElementById('noPersonas');
+  const nombreLabel = document.getElementById('nombreLabel');
+  const nombreInput = document.getElementById('nombre');
+
+  if (checkbox.checked) {
+    apellidoFields.style.display = 'none';
+    noPersonasField.style.display = 'block';
+    noPersonasField.required = true;
+    apField.required = false;
+    amField.required = false;
+    noPersonasInput.required = true;
+    nombreLabel.textContent = 'Grupo *';
+    nombreInput.placeholder = 'Nombre del grupo';
+  } else {
+    apellidoFields.style.display = 'block';
+    noPersonasField.style.display = 'none';
+    noPersonasField.required = false;
+    apField.required = true;
+    amField.required = true;
+    noPersonasInput.required = false;
+    nombreLabel.textContent = 'Nombre *';
+    nombreInput.placeholder = '';
+  }
+}
+
 </script>
 </body>
 </html>

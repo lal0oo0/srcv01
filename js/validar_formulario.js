@@ -19,7 +19,7 @@ function validar(event) {
     }
 
     // Validación de horas de entrada y salida
-    var selectedTimeValue = document.getElementById('hs').value;
+   /* var selectedTimeValue = document.getElementById('hs').value;
     var selectedTimeValue2 = document.getElementById('he').value;
 
     if (selectedTimeValue != 0 && selectedTimeValue < selectedTimeValue2) {
@@ -27,7 +27,7 @@ function validar(event) {
       event.preventDefault();
     } else {
       document.getElementById('hs').classList.remove('is-invalid');
-    }
+    }*/
 
     // Validación de otros campos
     var fieldsToValidate = ['he', 'nombre', 'ap', 'am', 'empresa', 'asunto'];
