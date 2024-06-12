@@ -97,7 +97,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <?php
     require_once("../Modelo/conexion2.php");
     $conexion = conect();
-    $query = mysqli_query ($conexion, "SELECT * FROM srcv_visitas ORDER BY FECHA DESC");
+    $query = mysqli_query ($conexion, "SELECT * FROM srcv_visitas ORDER BY FECHA DESC, ENTRADA_SEGURIDAD DESC");
+    $queryempresa = mysqli_query($conexion, "SELECT * FROM srcv_listas WHERE CATEGORIA='empresa' and ESTATUS='1'");
+    $queryasunto = mysqli_query($conexion, "SELECT * FROM srcv_listas WHERE CATEGORIA='asunto' and ESTATUS='1'");
 ?>
  
 <header>
@@ -214,15 +216,48 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
     <div class="col-sm-12 col-md-8 highlight-container">
       <form action="../PhpSpreadsheet/reporte_visitas.php" method="post">
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <label for="fecha_inicio">Fecha de inicio:</label>
             <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control">
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <label for="fecha_fin">Fecha de fin:</label>
             <input type="date" id="fecha_fin" name="fecha_fin" class="form-control">
           </div>
-          <div class="col-sm-4 d-flex align-items-center justify-content-center"> <!-- Modificado para centrar el botón verticalmente -->
+          
+          <div class="col-sm-2">
+            <label class="form-label" for="empresa">Empresa</label><br>
+            <select class="form-select mr-sm-2" id="empresa" name="empresa">
+              <option selected value="">Elige</option>
+              <!--Se muestran las opciones de EMPRESA previamente registradas en la tabla listas-->
+              <?php
+                while ($filas = mysqli_fetch_assoc($queryempresa)) {
+              ?>
+              <option value="<?php echo $filas['NOMBRE']; ?>">
+                <?php echo $filas['NOMBRE']; ?>
+              </option>
+              <?php
+                }
+              ?>
+            </select>
+          </div>
+          <div class="col-sm-2">
+            <label class="form-label" for="asunto">Asunto</label><br>
+            <select class="form-select mr-sm-2" id="asunto" name="asunto">
+              <option selected value="">Elige</option>
+              <!--Se muestran las opciones de ASUNTO previamente registradas en la tabla listas-->
+              <?php
+                while ($filas = mysqli_fetch_assoc($queryasunto)) {
+              ?>
+              <option value="<?php echo $filas['NOMBRE']; ?>">
+                <?php echo $filas['NOMBRE']; ?>
+              </option>
+              <?php
+                }
+              ?>
+            </select>
+          </div>
+          <div class="col-sm-2 d-flex align-items-center justify-content-center"> <!-- Modificado para centrar el botón verticalmente -->
             <button type="submit" class="btn btn-dark tit-color" style="background-color:#008000; width: 150px;"> <!-- Ajusta el ancho del botón según tus necesidades -->
               <img src="../imagenes/excel.png" width="20px">Informe
             </button>
