@@ -18,9 +18,10 @@ date_default_timezone_set('America/Mexico_City');
 $fechamodificacion = date('Y-m-d H:i:s');
 $motivo= $_POST['motivo'];
 $id= $_POST['id'];
+$piso = $_POST['piso'];
 
 
-  $sql = "UPDATE srcv_visitas SET MOTIVO='$motivo', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' where ID_VISITA='$id'";
+  $sql = "UPDATE srcv_visitas SET PISO='$piso', MOTIVO='$motivo', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' where ID_VISITA='$id'";
   $resultado=mysqli_query($conexion,$sql);
 
 /*cambiar alertas*/

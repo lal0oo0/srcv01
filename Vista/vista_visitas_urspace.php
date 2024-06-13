@@ -153,8 +153,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <th scope="col">Apellido Paterno</th>
             <th scope="col">Apellido Materno</th>
             <th scope="col">Asunto</th>
-            <th scope="col">Hora de salida</th>
+            <th scope="col">Piso</th>
             <th scope="col">Motivo</th>
+            <th scope="col">Hora de salida</th>
+            <th scope="col">Acciones</th>
             </tr>
           </thead>
           <?php
@@ -180,6 +182,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
                     <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
                     <td><?php echo $filas['ASUNTO'] ?></td>
+                    <td><?php echo $filas['PISO'] ?></td>
+                    <td><?php echo $filas['MOTIVO']?></td>
                     <td>
                         <?php 
                         if(empty($filas['ENTRADA_URSPACE']) || !empty($filas['SALIDA_RECEPCION']) || !empty($filas['SALIDA_SEGURIDAD'])){
@@ -197,7 +201,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     </td>
                     <td>
                       <?php
-                      if(empty($filas['MOTIVO'])){
+                      if(empty($filas['MOTIVO']) || empty($filas['PISO'])){
                         ?>
                         
                   <!-- Modificar visitas -->
@@ -226,13 +230,43 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
                               <label for="Abono">Escriba el motivo de la visita o la persona con quien se dirige</label>
                               <div class="mb-3"></div>
-                              <input type="text" class="form-control" name="motivo" placeholder="Motivo" aria-label="Motivo" aria-describedby="basic-addon1" required>
+                              <input type="text" class="form-control" name="motivo" placeholder="Motivo" aria-label="Motivo" aria-describedby="basic-addon1" value="<?php echo $filas['MOTIVO'];?>" required>
                               <div class="invalid-feedback">
                                 Verifique los datos
                               </div>
                               <div class="col"></div>
                             </div>
                             <div class="col">
+                          </div>
+                          <div class="mb-5"></div> <!--Salto de linea-->
+                          <div class="row">
+
+                          <div class="col">
+                          <div class="row">
+                              <label class="form-label" for="asunto">Piso *</label><br>
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <?php
+                                    $conexion = conect();
+
+                                    $queryPiso= mysqli_query($conexion,"SELECT NOMBRE FROM srcv_listas WHERE CATEGORIA = 'Piso' and ESTATUS = '1';");
+                                ?>
+                                    <select class="form-select mr-sm-2" id="piso" name="piso" required="" title="Selecciona el piso ">
+                                        <option value="" >Selecciona el piso</option>
+                                        <?php
+                                            while($datosPiso = mysqli_fetch_array($queryPiso)){
+                                        ?>
+                                        <option value="<?php echo $datosPiso['NOMBRE']?>" <?php if($filas['PISO'] == $datosPiso['NOMBRE']) echo "selected"; ?>><?php echo $datosPiso['NOMBRE'];?></option>
+                                        <?php
+                                            }
+                                            $conexion->close();
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-3"></div>
+                              </div>
+                          </div>
+
                           </div>
                             <div class="mb-5"></div> <!--Salto de linea-->
                             <div class="modal-footer">
@@ -246,7 +280,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   </div>
                   <?php
                       }else{
-                        echo $filas['MOTIVO'];
+                        echo '';
                       }
                       ?>
                     </td>
