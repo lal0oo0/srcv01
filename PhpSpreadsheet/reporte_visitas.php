@@ -32,9 +32,11 @@ $rol3 = "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$CORREO' A
 $rol_urspace = mysqli_query($conexion, $rol3);
 
 
-// Obtener las fechas enviadas por el formulario
+// Obtener los campos enviados por el formulario
 $fecha_inicio = $_POST['fecha_inicio'];
 $fecha_fin = $_POST['fecha_fin'];
+$empresa = $_POST['empresa'];
+$asunto = $_POST['asunto'];
 
 // Verificar si no se ingreso ninguna fecha
 if (empty($fecha_inicio) || empty($fecha_fin)) {
@@ -60,7 +62,17 @@ if (empty($fecha_inicio) || empty($fecha_fin)) {
 if($rol_admin->num_rows==1){
 $sql = "SELECT NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, FECHA, EMPRESA, ASUNTO, ENTRADA_SEGURIDAD, ENTRADA_RECEPCION, ENTRADA_URSPACE, SALIDA_URSPACE, SALIDA_RECEPCION, SALIDA_SEGURIDAD  
 FROM srcv_visitas  
-WHERE FECHA BETWEEN '$fecha_inicio' AND '$fecha_fin' AND FECHA BETWEEN '$fecha_inicio' AND '$fecha_fin'";
+WHERE FECHA BETWEEN '$fecha_inicio' AND '$fecha_fin'";
+//si se selccionan ambos parametros se agregan a la consulta principal
+if (!empty($empresa) && !empty($asunto)) {
+    $sql .= " AND EMPRESA = '$empresa' AND ASUNTO = '$asunto'";
+// Si solo se selecciona empresa se agrega a la consulta principal
+} elseif (!empty($empresa)) {
+    $sql .= " AND EMPRESA = '$empresa'";
+// Si solo se selecciona empresa se agrega a la consulta principal
+} elseif (!empty($asunto)) {
+    $sql .= " AND ASUNTO = '$asunto'";
+}
 $resultado = mysqli_query($conexion, $sql);
 
 $excel = new Spreadsheet();
