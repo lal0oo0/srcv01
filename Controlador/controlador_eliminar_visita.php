@@ -19,7 +19,7 @@ $fechamodificacion = date('Y-m-d H:i:s');
 $id=$_GET["id"];
 
 
-$borrar="UPDATE srcv_visitas SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', ESTATUS='0' WHERE ID_VISITA='$id'";
+$borrar="UPDATE srcv_visitas SET LAST_UPDATED_BY='$usermodi', LAST_UPDATE_DATE='$fechamodificacion', ESTATUS='0' WHERE ID_VISITA='$id'";
 $sql=mysqli_query($conexion, $borrar);
 
 

@@ -30,7 +30,7 @@ if(empty($fila['ENTRADA_SEGURIDAD'])){
 </div>';
 } else {
   //ejecuta actualizacion
-  $consulta="UPDATE srcv_visitas SET SALIDA_SEGURIDAD='$hora_actual', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA='$id'";
+  $consulta="UPDATE srcv_visitas SET SALIDA_SEGURIDAD='$hora_actual', LAST_UPDATED_BY='$usermodi', LAST_UPDATE_DATE='$fechamodificacion' WHERE ID_VISITA='$id'";
   $sql=mysqli_query($conexion, $consulta); 
 
 if ($sql) {

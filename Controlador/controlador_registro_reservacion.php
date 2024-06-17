@@ -59,13 +59,13 @@ if ($check == '1') {
     $resenCurso = mysqli_num_rows($reservaciones);
     // Consulta para guardar solo en la tabla de reservaciones si ya existe una visita
     if ($resenCurso < 1) {
-        $consulta3 = "INSERT INTO srcv_reservaciones (ID_RESERVACION, ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, CORREO_ELECTRONICO, TELEFONO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE, LIQUIDACION, USO, ID_VISITA, ESTATUS, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION) 
+        $consulta3 = "INSERT INTO srcv_reservaciones (ID_RESERVACION, ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, CORREO_ELECTRONICO, TELEFONO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE, LIQUIDACION, USO, ID_VISITA, ESTATUS, CREATION_DATE, LAST_UPDATE_DATE, CREATED_BY, LAST_UPDATED_BY) 
         VALUES ('$id_unico', '$idsala', '$nombre', '$apellidop', '$apellidom', '$espacio', '$correo', '$telefono', '$fechaini', '$fechafin', '$horaini', '$horafin', '$personas', '$servicios', '$total', '$enganche', '$liquidacion', '0', '$idVisita', '1', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta')";
         $ejecutar3 = mysqli_query($conexion, $consulta3);
         if (!$ejecutar3) {
             die('Error en la inserción: ' . mysqli_error($conexion));
         }
-        $visita = "UPDATE srcv_visitas SET PISO = '$piso', ASUNTO = 'Reservación', USUARIO_MODIFICACION = '$useralta', FECHA_MODIFICACION='$fechaAlta' WHERE ID_VISITA = '$idVisita'";
+        $visita = "UPDATE srcv_visitas SET PISO = '$piso', ASUNTO = 'Reservación', LAST_UPDATED_BY = '$useralta', LAST_UPDATE_DATE='$fechaAlta' WHERE ID_VISITA = '$idVisita'";
         $ejecutar_visita = mysqli_query($conexion, $visita);
         if (!$ejecutar_visita) {
             die('Error en la actualización: ' . mysqli_error($conexion));
@@ -82,7 +82,7 @@ if ($check == '1') {
     }
     $resenCurso = mysqli_num_rows($reservaciones);
     if ($resenCurso < 1) {
-        $consulta1 = "INSERT INTO srcv_reservaciones (ID_RESERVACION, ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, CORREO_ELECTRONICO, TELEFONO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE, LIQUIDACION, USO, ID_VISITA, ESTATUS, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION) 
+        $consulta1 = "INSERT INTO srcv_reservaciones (ID_RESERVACION, ID_SALA, NOMBRE_CLIENTE, APELLIDO_PATERNO, APELLIDO_MATERNO, NOMBRE_ESPACIO, CORREO_ELECTRONICO, TELEFONO, FECHA_ENTRADA, FECHA_SALIDA, HORA_ENTRADA, HORA_SALIDA, NUMERO_PERSONAS, SERVICIOS_EXTRA, TOTAL, ENGANCHE, LIQUIDACION, USO, ID_VISITA, ESTATUS, CREATION_DATE, LAST_UPDATE_DATE, CREATED_BY, LAST_UPDATED_BY) 
         VALUES ('$id_unico', '$idsala', '$nombre', '$apellidop', '$apellidom', '$espacio', '$correo', '$telefono', '$fechaini', '$fechafin', '$horaini', '$horafin', '$personas', '$servicios', '$total', '$enganche', '$liquidacion', '0', '$id_unico', '1', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta')";
         $ejecutar = mysqli_query($conexion, $consulta1);
         if (!$ejecutar) {
@@ -90,7 +90,7 @@ if ($check == '1') {
         }
 
         // Consulta para guardar también el registro en la tabla de visitas
-        $consulta2 = "INSERT INTO srcv_visitas (ID_VISITA, HORA_ENTRADA, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, PISO, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS)
+        $consulta2 = "INSERT INTO srcv_visitas (ID_VISITA, HORA_ENTRADA, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, PISO, CREATION_DATE, LAST_UPDATE_DATE, CREATED_BY, LAST_UPDATED_BY, ESTATUS)
         VALUES ('$id_unico', '$horaini', '$fechaini', '$nombre', '$apellidop', '$apellidom', 'UrSpace', 'Reservacion', '$piso', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta', '1')";
         $ejecutar2 = mysqli_query($conexion, $consulta2);
         if (!$ejecutar2) {

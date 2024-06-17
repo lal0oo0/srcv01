@@ -48,7 +48,7 @@ $respuesta = $_POST['respuesta'];
 
 
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, ROL, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
+$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, ROL, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, CREATION_DATE, LAST_UPDATE_DATE, CREATED_BY, LAST_UPDATED_BY, ESTATUS) 
 VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$rol','$pregunta','$respuesta','$fechaAlta','$fechaAlta','$useralta','$useralta','1')";
 
 /*Evitar que el registro se repita*/ 

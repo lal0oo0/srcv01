@@ -21,7 +21,7 @@ $id= $_POST['id'];
 $piso = $_POST['piso'];
 
 
-  $sql = "UPDATE srcv_visitas SET PISO='$piso', MOTIVO='$motivo', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' where ID_VISITA='$id'";
+  $sql = "UPDATE srcv_visitas SET PISO='$piso', MOTIVO='$motivo', LAST_UPDATED_BY='$usermodi', LAST_UPDATE_DATE='$fechamodificacion' where ID_VISITA='$id'";
   $resultado=mysqli_query($conexion,$sql);
 
 /*cambiar alertas*/
