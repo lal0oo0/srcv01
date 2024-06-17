@@ -37,7 +37,7 @@ $noPersonas = isset($_POST['noPersonas']) && is_numeric($_POST['noPersonas']) ? 
 
 //y$variable11= $_POST['salaSeleccionada'];
 /*Codigo para guardar un registro temporalmente en una variable php*/
-$visita = "INSERT INTO srcv_visitas(ID_VISITA, ENTRADA_SEGURIDAD, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, NUMERO_PERSONAS, EMPRESA, ASUNTO, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION, ESTATUS) 
+$visita = "INSERT INTO srcv_visitas(ID_VISITA, ENTRADA_SEGURIDAD, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, NUMERO_PERSONAS, EMPRESA, ASUNTO, CREATION_DATE, LAST_UPDATE_DATE, CREATED_BY, LAST_UPDATED_BY, ESTATUS) 
 VALUES ('$id_unico', '$he', '$fecha','$nombre','$apellidop','$apellidom', '$noPersonas','$empresa','$asunto', '$fechaAlta', '$fechaAlta', '$usuariom','$usuariom','1')";
 /*Para ejecutar la consulta*/
 $ejecutar = mysqli_query($conexion, $visita); 
