@@ -27,7 +27,7 @@ $ubicacion = $_POST['piso'];
 
 
     $consulta="UPDATE srcv_visitas
-    SET NOMBRE='$nombre', APELLIDO_PATERNO='$apellidopa', APELLIDO_MATERNO='$apellidoma', EMPRESA='$empresa', ASUNTO='$asunto', PISO='$ubicacion', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA='$id'";
+    SET NOMBRE='$nombre', APELLIDO_PATERNO='$apellidopa', APELLIDO_MATERNO='$apellidoma', EMPRESA='$empresa', ASUNTO='$asunto', PISO='$ubicacion', CREATED_BY='$usermodi', CREATION_DATE='$fechamodificacion' WHERE ID_VISITA='$id'";
     $sql=mysqli_query($conexion, $consulta);
   
 

@@ -18,7 +18,7 @@ date_default_timezone_set('America/Mexico_City');
 $fechamodificacion = date('Y-m-d H:i:s');
 $id=$_GET["id"];
 
-  $sql = "UPDATE srcv_reservaciones SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', ESTATUS='0' WHERE ID_RESERVACION='$id'";
+  $sql = "UPDATE srcv_reservaciones SET CREATED_BY='$usermodi', CREATION_DATE='$fechamodificacion', ESTATUS='0' WHERE ID_RESERVACION='$id'";
   $resultado=mysqli_query($conexion,$sql);
 
 //Consulta para eliminar la reservacion de la tabla de visitas si la reservación se canceló
