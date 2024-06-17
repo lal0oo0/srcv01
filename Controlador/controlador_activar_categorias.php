@@ -12,7 +12,7 @@ date_default_timezone_set('America/Mexico_City');
 $fechamodificacion = date('Y-m-d H:i:s');
 $id=$_GET["id"];
 
-  $sql = "UPDATE srcv_listas SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', ESTATUS='1' where ID_LISTA ='$id'";
+  $sql = "UPDATE srcv_listas SET LAST_UPDATED_BY ='$usermodi', LAST_UPDATE_DATE ='$fechamodificacion', ESTATUS='1' where ID_LISTA ='$id'";
   $resultado=mysqli_query($conexion,$sql);
 
 /*cambiar alertas*/
