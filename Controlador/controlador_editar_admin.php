@@ -26,7 +26,7 @@ $correo = $_POST['correo'];
 
 
     $consulta="UPDATE srcv_administradores
-    SET NOMBRE='$nombre', APELLIDO_PATERNO='$apellidopa', APELLIDO_MATERNO='$apellidoma', ROL='$rol', CORREO_ELECTRONICO='$correo', CREATED_BY='$usermodi', CREATION_DATE='$fechamodificacion' WHERE ID_ADMINISTRADOR='$id'";
+    SET NOMBRE='$nombre', APELLIDO_PATERNO='$apellidopa', APELLIDO_MATERNO='$apellidoma', ROL='$rol', CORREO_ELECTRONICO='$correo', LAST_UPDATED_BY='$usermodi', LAST_UPDATE_DATE='$fechamodificacion' WHERE ID_ADMINISTRADOR='$id'";
     $sql=mysqli_query($conexion, $consulta);
   
 

@@ -50,7 +50,7 @@ if (!preg_match($correo_valido, $correo)) {
 }
 
 //Codigo para guardar un registro temporalmente en una variable php
-$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA,ROL, LAST_UPDATED_BY, CREATION_BY, ESTATUS) 
+$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA,ROL, LAST_UPDATED_BY, LAST_UPDATE_DATE, ESTATUS) 
 VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$pregunta','$respuesta', 'Administrador', '$correo','$correo', '1')";
 
 //Evitar que el registro se repita
