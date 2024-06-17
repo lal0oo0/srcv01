@@ -27,15 +27,15 @@ $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_listas WHERE NOMBRE 
     }
 
     if ($categoria === "Empresa") {
-        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION) 
+        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, CREATION_DATE, LAST_UPDATE_DATE, CREATED_BY, LAST_UPDATED_BY) 
         VALUES ('$nombre', 'Empresa', '1', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta')";
     
     } elseif ($categoria === "Asunto") {
-        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION) 
+        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, CREATION_DATE, LAST_UPDATE_DATE, CREATED_BY, LAST_UPDATED_BY) 
         VALUES ('$nombre', 'Asunto', '1', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta')";
 
     } elseif ($categoria === "Piso") {
-        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION) 
+        $consulta = "INSERT INTO srcv_listas(NOMBRE, CATEGORIA, ESTATUS, CREATION_DATE, LAST_UPDATE_DATE, CREATED_BY, LAST_UPDATED_BY) 
         VALUES ('$nombre', 'Piso', '1', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta')";
     }
 

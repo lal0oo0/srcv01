@@ -20,7 +20,7 @@ $fechamodificacion = date('Y-m-d H:i:s');
 $id=$_GET["id"];
 
 
-  $sql = "UPDATE srcv_administradores SET USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion', ESTATUS='0' where ID_ADMINISTRADOR='$id'";
+  $sql = "UPDATE srcv_administradores SET LAST_UPDATED_BY ='$usermodi', LAST_UPDATE_DATE ='$fechamodificacion', ESTATUS='0' where ID_ADMINISTRADOR='$id'";
   $resultado=mysqli_query($conexion,$sql);
 
 

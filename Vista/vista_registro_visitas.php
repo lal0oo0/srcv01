@@ -335,7 +335,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <tr class="datos">
                   <td>
                     <?php if(empty($filas['ENTRADA_SEGURIDAD'])){ ?>
-                  <a href="../Controlador/controlador_entrada_seguridad.php?id=<?=$filas['ID_VISITA']?>" id="botonEntrada"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                  <a href="../Controlador/controlador_entrada_seguridad.php?id=<?=$filas['ID_VISITA']?>" id="botonEntrada" class="btn btn-info btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Entrada
+                  <i class="fa fa-sign-in" aria-hidden="true" style="font-size: 12px;"></i></a>
                   <?php
                 }else{
                    echo $filas['ENTRADA_SEGURIDAD'];
@@ -352,7 +353,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <?php
                     if(empty($filas['SALIDA_SEGURIDAD'])){
                     ?>
-                    <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>" class="btn btn-primary btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1;">Salida <i class="fa fa-sign-out" aria-hidden="true" id="botonSalida" style="color:white; font-size: 12px;"></i></a>
+                    <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>" class="btn btn-info btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Salida 
+                    <i class="fa fa-sign-out" aria-hidden="true" id="botonSalida" style="font-size: 12px;"></i></a>
                     <?php
                     }else{
                     }
@@ -362,8 +364,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     if(empty($filas["ENTRADA_RECEPCION"]) && empty($filas["SALIDA_RECEPCION"]) && empty($filas["SALIDA_SEGURIDAD"]) && empty($filas["SALIDA_URSPACE"])){
                     ?>
                     
-                    <a href="#" class="btn btn-primary btn-sm" id="botonEliminar" data-bs-toggle="modal" data-bs-target="#eliminar" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1;">Eliminar
-                    <i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" style="color:white; font-size: 12px;"></i>
+                    <a href="#" class="btn btn-danger btn-sm" id="botonEliminar" data-bs-toggle="modal" data-bs-target="#eliminar" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Eliminar
+                    <i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" style="font-size: 12px;"></i>
                     </a>
     
                     <!-- Modal -->

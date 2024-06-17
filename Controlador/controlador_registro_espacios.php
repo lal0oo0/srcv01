@@ -27,7 +27,7 @@ $verificacion = mysqli_query($conexion, "SELECT * FROM srcv_salas WHERE NOMBRE =
     }
 
 	/*Codigo para guardar un registro temporalmente en una variable php*/
-	$consulta = "INSERT INTO srcv_salas(NOMBRE, UBICACION, ESTATUS, FECHA_ALTA, FECHA_MODIFICACION, USUARIO_ALTA, USUARIO_MODIFICACION)
+	$consulta = "INSERT INTO srcv_salas(NOMBRE, UBICACION, ESTATUS, LAST_UPDATE_DATE, CREATION_DATE, LAST_UPDATED_BY, CREATED_BY)
 	VALUES ('$nombre', '$ubicacion', '1', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta')";
 
     

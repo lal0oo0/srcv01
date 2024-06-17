@@ -20,7 +20,7 @@ $hora_actual = date("H:i");
 
 
   // Actualizar si la hora de entrada ya se confirmo
-  $consulta="UPDATE srcv_visitas SET SALIDA_RECEPCION='$hora_actual', USUARIO_MODIFICACION='$usermodi', FECHA_MODIFICACION='$fechamodificacion' WHERE ID_VISITA='$id'";
+  $consulta="UPDATE srcv_visitas SET SALIDA_RECEPCION='$hora_actual', CREATED_BY='$usermodi', CREATION_DATE='$fechamodificacion' WHERE ID_VISITA='$id'";
   $sql=mysqli_query($conexion, $consulta);
 
   if ($sql) {
