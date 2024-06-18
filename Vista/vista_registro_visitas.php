@@ -612,6 +612,7 @@ function toggleGroupFields() {
     noPersonasInput.required = true;
     nombreLabel.textContent = 'Grupo *';
     nombreInput.placeholder = 'Nombre del grupo';
+    nombreInput.pattern = "^[A-Za-z0-9áéíóúü \W]{2,30}$";
   } else {
     apellidoFields.style.display = 'block';
     noPersonasField.style.display = 'none';
@@ -621,6 +622,7 @@ function toggleGroupFields() {
     noPersonasInput.required = false;
     nombreLabel.textContent = 'Nombre *';
     nombreInput.placeholder = '';
+    nombreInput.pattern = "^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$";
   }
 }
 
