@@ -142,6 +142,7 @@ $row = $resultado->fetch_assoc();
   date_default_timezone_set('America/Mexico_City');
   $fecha_actual = date("Y-m-d");
   $hora_actual = date("H:i");
+  $fecha_concat = date("Y-m-d H:i:s");
   ?>
 <br><br><br><br><br>
 <h3 class="text-center">MAPA DE ESPACIOS</h3>
@@ -168,9 +169,7 @@ $row = $resultado->fetch_assoc();
      srcv_salas e 
      WHERE e.ID_SALA = $ID
      AND e.ID_SALA = r.ID_SALA
-     AND r.FECHA_ENTRADA = '$fecha_actual'
-     AND r.HORA_ENTRADA <= '$hora_actual'
-     AND r.HORA_SALIDA >= '$hora_actual'
+     AND '$fecha_concat' BETWEEN CONCAT(r.FECHA_ENTRADA, ' ', r.HORA_ENTRADA) and CONCAT(r.FECHA_SALIDA, ' ', r.HORA_SALIDA)
      AND r.ESTATUS = 1";
      $ocu = mysqli_query($conexion, $ocupado);
      ///si se ejecuta la consulta imprime las salas
