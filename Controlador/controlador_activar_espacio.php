@@ -14,7 +14,7 @@ $fechamodificacion = date('Y-m-d H:i:s');
 $id=$_GET["id"];
 
 
-  $sql = "UPDATE srcv_salas SET CREATED_BY='$usermodi', CREATION_DATE='$fechamodificacion', ESTATUS='1' where ID_SALA='$id'";
+  $sql = "UPDATE srcv_salas SET LAST_UPDATED_BY='$usermodi', LAST_UPDATE_DATE='$fechamodificacion', ESTATUS='1' where ID_SALA='$id'";
   $resultado=mysqli_query($conexion,$sql);
 
 /*cambiar alertas*/

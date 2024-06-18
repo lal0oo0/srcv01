@@ -10,6 +10,9 @@ include '../Modelo/conexion2.php';
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
 
+date_default_timezone_set('America/Mexico_City');
+// Obtén la fecha y hora actual
+$fechaAlta = date('Y-m-d H:i:s');
 //Para capturar los campos
 $nombre = $_POST['nombre'];
 $ap = $_POST['ap'];
@@ -50,8 +53,8 @@ if (!preg_match($correo_valido, $correo)) {
 }
 
 //Codigo para guardar un registro temporalmente en una variable php
-$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA,ROL, LAST_UPDATED_BY, CREATION_BY, ESTATUS) 
-VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$pregunta','$respuesta', 'Administrador', '$correo','$correo', '1')";
+$usuario = "INSERT INTO srcv_administradores(NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, CORREO_ELECTRONICO, CONTRASENA, PREGUNTA_SEGURIDAD, RESPUESTA_PREGUNTA, ROL, CREATION_DATE, LAST_UPDATE_DATE, CREATED_BY, LAST_UPDATED_BY, ESTATUS) 
+VALUES ('$nombre', '$ap', '$am', '$correo','$contraEncrip','$pregunta','$respuesta', 'Administrador', '$fechaAlta', '$fechaAlta', '$correo','$correo', '1')";
 
 //Evitar que el registro se repita
 $norepetir = mysqli_query($conexion, "SELECT * FROM srcv_administradores WHERE CORREO_ELECTRONICO='$correo'");
