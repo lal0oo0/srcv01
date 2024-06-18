@@ -225,7 +225,8 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <div class="col"></div>
                 <div class="col">
                   <label for="noPersonas" class="form-label">No. Personas *</label>
-                  <input type="number" class="form-control" id="noPersonas" value="1" name="noPersonas">
+                  <input type="number" class="form-control" id="noPersonas" min="1" max="200" value="1" name="noPersonas" required>
+                  <div class="invalid-feedback" id="person"></div>
                 </div>
                 <div class="col"></div>
                 </div>
@@ -318,9 +319,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               <tr>
                 <th scope="col">Hora de entrada</th>
                 <th scope="col">Fecha</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">Nombre/Grupo</th>
                 <th scope="col">Apellido Paterno</th>
                 <th scope="col">Apellido Materno</th>
+                <th scope="col">No. Personas</th>
                 <th scope="col">Empresa</th>
                 <th scope="col">Asunto</th>
                 <th scope="col">Hora de salida</th>
@@ -346,6 +348,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <td><?php echo $filas['NOMBRE'] ?></td>
                   <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
                   <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
+                  <td><?php echo $filas['NUMERO_PERSONAS'] ?></td>
                   <td><?php echo $filas['EMPRESA'] ?></td>
                   <td><?php echo $filas['ASUNTO'] ?></td>
                   <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
@@ -410,6 +413,15 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
 
 <script>
+  document.getElementById('myForm').addEventListener('submit', function(event) {
+  noPersonas = document.getElementById('noPersonas');
+  if(noPersonas <= 1){
+    document.getElementById('person').innerHTML = "El numero de personas debe ser mayor a 1";
+    document.getElementById('noPersonas').classList.add('id-invalid');
+    event.preventDefault();
+  }
+});
+
   // Crear tooltip para el botón 1
 tippy('#botonEntrada', {
         content: 'Confirmar entrada',

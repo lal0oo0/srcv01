@@ -159,9 +159,10 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
       <tr>
         <th scope="col">Hora de entrada</th>
         <th scope="col">Fecha</th>
-        <th scope="col">Nombre</th>
+        <th scope="col">Nombre/Grupo</th>
         <th scope="col">Apellido Paterno</th>
         <th scope="col">Apellido Materno</th>
+        <th scope="col">No. Personas</th>
         <th scope="col">Empresa</th>
         <th scope="col">Asunto</th>
         <th scope="col">Piso</th>
@@ -182,6 +183,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
           <td><?php echo $filas['NOMBRE'] ?></td>
           <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
           <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
+          <td><?php echo $filas['NUMERO_PERSONAS'] ?></td>
           <td><?php echo $filas['EMPRESA'] ?></td>
           <td><?php echo $filas['ASUNTO'] ?></td>
           <td><?php echo $filas['PISO'] ?></td>
