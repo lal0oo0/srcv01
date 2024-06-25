@@ -393,7 +393,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     // Mostrar el botón si no se debe ocultar
                     if (!$hideButton) {
                     ?>
-                      <a href="#" id="botonSalida" data-bs-toggle="modal" data-bs-target="#salida" class="btn btn-info btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Salida 
+                      <a href="#" id="botonSalida" data-id="<?=$filas['ID_VISITA']?>" data-bs-toggle="modal" data-bs-target="#salida" class="btn btn-info btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Salida 
                       <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 14px;"></i></a>
                       <!-- Modal confirmación de salida-->
                       <div class="modal fade" id="salida" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -406,7 +406,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                             
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                              <a href="../Controlador/controlador_salida_recepcion.php?id=<?=$filas['ID_VISITA']?>" class="btn btn-primary">Confirmar</a>
+                              <a href="#" id="confirmarSalida" class="btn btn-primary">Confirmar</a>
                             </div>
                           </div>
                         </div>
@@ -461,9 +461,24 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 <script src="https://unpkg.com/@popperjs/core@2"></script><!-- Script para crear tippy-->
 <script src="https://unpkg.com/tippy.js@6"></script><!-- Script para crear tippy-->
 
-
+<!-- JavaScript para manejar el ID dinámicamente -->
 <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var modalSalida = document.getElementById('salida');
+    var confirmarSalidaLink = document.getElementById('confirmarSalida');
 
+    modalSalida.addEventListener('show.bs.modal', function (event) {
+      // Botón que activó el modal
+      var button = event.relatedTarget;
+      // Extraer información de los atributos data-* 
+      var visitaId = button.getAttribute('data-id');
+
+      // Actualizar el enlace de confirmación con el ID correcto
+      confirmarSalidaLink.href = '../Controlador/controlador_salida_recepcion.php?id=' + visitaId;
+    });
+  });
+</script>
+<script>
   //Limpiar fromulario
   function limpiar(idForm) {
       var formulario = document.getElementById(idForm);
