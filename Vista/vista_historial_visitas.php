@@ -175,6 +175,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
       while ($filas = mysqli_fetch_assoc($query)) {
         $idRegistro=$filas["ID_VISITA"];
         $idForm='myForm_' . $idRegistro;
+        if($filas['SALIDA_SEGURIDAD'] == '00:00:00'){
+          $filas['SALIDA_SEGURIDAD']='';
+        }
 
       ?>
       <tr class="datos">

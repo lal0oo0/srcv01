@@ -185,7 +185,12 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 while ($filas = mysqli_fetch_assoc($query)) {
             ?>
             <tr class="datos">
-                <td><?php echo $filas['NOMBRE'] ?></td>
+                <td><?php  
+                if($filas['ERROR_SALIDA']==1){
+                  echo '<i class="fa fa-exclamation-triangle" aria-hidden="true" id="advertencia" style="font-size: 12px"></i> ';
+                }else{echo '';}
+                echo $filas['NOMBRE'];
+                ?></td>
                 <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
                 <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
                 <td><?php echo $filas['FECHA'] ?></td>
@@ -196,7 +201,20 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <td><?php echo $filas['ENTRADA_URSPACE'] ?></td>
                 <td><?php echo $filas['SALIDA_URSPACE'] ?></td>
                 <td><?php echo $filas['SALIDA_RECEPCION'] ?></td>
-                <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
+                <td>
+                  <?php
+                  if(!$filas["ERROR_SALIDA"]){
+                  echo $filas['SALIDA_SEGURIDAD'];
+                  }
+                  else{
+                    echo $filas['SALIDA_SEGURIDAD'];
+                    ?>
+                    <a href="../Controlador/controlador_borrar_salida.php?id=<?=$filas['ID_VISITA']?>" class="btn btn-light btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black; border-color: #000000">Borrar salida 
+                    <i class="fa fa-trash" aria-hidden="true" id="advertencia" style="font-size: 12px"></i></a>
+                  <?php
+                  } 
+                  ?>
+                </td>
             </tr>
             <?php
                 }

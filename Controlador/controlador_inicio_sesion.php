@@ -33,7 +33,8 @@ if (!filter_var($correoelectronico, FILTER_VALIDATE_EMAIL)) {
 $_SESSION['intentos']++;
 // Si el usuario ha excedido de 3 intentos lo redirige a la pantalla para recuperar contraseña
 if ($_SESSION['intentos'] > 3) {
-    header("Location: ../Vista/vista_recuperar_contrasena.php");
+    $mensaje = '<div class="alert alert-danger">Ha excedido el numero de intentos de inicio de sesión.</div>';
+    header("Location: ../Vista/vista_verificar_correo.php?mensaje=" . urlencode($mensaje));
     $_SESSION['intentos'] = 0;
     exit();
 }

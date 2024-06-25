@@ -333,6 +333,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               <!--Se imprimen todos los resultados registrados previamente-->
               <?php
               while ($filas = mysqli_fetch_assoc($queryVisitas)) {
+                if($filas['SALIDA_SEGURIDAD']=='00:00:00'){
+                  $filas['SALIDA_SEGURIDAD'] = '';
+                }
               ?>
                 <tr class="datos">
                   <td>
@@ -345,7 +348,14 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                    }?>
                   </td>
                   <td><?php echo $filas['FECHA'] ?></td>
-                  <td><?php echo $filas['NOMBRE'] ?></td>
+                  <td><?php
+                  if(!$filas["ERROR_SALIDA"]){
+                    echo $filas['NOMBRE']; 
+                  }else{
+                    echo'<i class="fa fa-exclamation-triangle" aria-hidden="true" id="advertencia" style="font-size: 12px"></i></a> '. $filas["NOMBRE"];
+                  }
+                  ?>
+                   </td>
                   <td><?php echo $filas['APELLIDO_PATERNO'] ?></td>
                   <td><?php echo $filas['APELLIDO_MATERNO'] ?></td>
                   <td><?php echo $filas['NUMERO_PERSONAS'] ?></td>
@@ -354,12 +364,32 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <td><?php echo $filas['SALIDA_SEGURIDAD'] ?></td>
                   <td>
                     <?php
-                    if(empty($filas['SALIDA_SEGURIDAD'])){
+                    if(empty($filas['SALIDA_SEGURIDAD']) || $filas['SALIDA_SEGURIDAD']=='00:00:00'){
                     ?>
-                    <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>" class="btn btn-info btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Salida 
-                    <i class="fa fa-sign-out" aria-hidden="true" id="botonSalida" style="font-size: 12px;"></i></a>
+                    <a href="#" class="btn btn-info btn-sm" id="botonSalida" data-bs-toggle="modal" data-bs-target="#salida" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Salida 
+                    <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 12px;"></i></a>
+                    <!-- Modal confirmación de salida-->
+                    <div class="modal fade" id="salida" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Deseas confirmar la salida de esta visita?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <a href="../Controlador/controlador_editar_visitas.php?id=<?=$filas['ID_VISITA']?>" class="btn btn-primary">Confirmar</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <?php
                     }else{
+                      ?>
+                      <a href="../Controlador/controlador_advertencia_salida.php?id=<?=$filas['ID_VISITA']?>" class="btn btn-light btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black; border-color: #000000">Notificar 
+                      <i class="fa fa-exclamation-triangle" aria-hidden="true" id="advertencia" style="font-size: 12px"></i></a>
+                      <?php
                     }
                     ?>
                     <!--Boton de eliminar-->
