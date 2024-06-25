@@ -18,7 +18,7 @@ $id_unico = (new DateTime())->format('YmdHis');
 $fechaAlta = date('Y-m-d H:i:s');
 
 /*Para capturar los campos*/
-$he = $_POST['he'];
+$he = date("H:i");
 $fecha = $_POST['fecha'];
 $nombre = $_POST['nombre'];
 $apellidop = $_POST['ap'];
