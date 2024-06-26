@@ -366,14 +366,14 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <?php
                     if(empty($filas['SALIDA_SEGURIDAD']) || $filas['SALIDA_SEGURIDAD']=='00:00:00'){
                     ?>
-                    <a href="#" class="btn btn-info btn-sm" id="botonSalida" data-id="<?=$filas['ID_VISITA']?>" data-bs-toggle="modal" data-bs-target="#salida" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Salida 
+                    <a href="#" class="btn btn-info btn-sm" id="botonSalida" data-id="<?=$filas['ID_VISITA']?>" data-nombre="<?=$filas['NOMBRE']?>" data-bs-toggle="modal" data-bs-target="#salida" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Salida 
                     <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 12px;"></i></a>
                     <!-- Modal confirmación de salida-->
                     <div class="modal fade" id="salida" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Deseas confirmar la salida de esta visita?</h1>
+                            <h1 class="modal-title fs-5" id="labelConfirmarSalida"></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           
@@ -397,7 +397,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     if(empty($filas["ENTRADA_RECEPCION"]) && empty($filas["SALIDA_RECEPCION"]) && empty($filas["SALIDA_SEGURIDAD"]) && empty($filas["SALIDA_URSPACE"])){
                     ?>
                     
-                    <a href="#" class="btn btn-danger btn-sm" id="botonEliminar" data-id="<?=$filas['ID_VISITA']?>" data-bs-toggle="modal" data-bs-target="#eliminar" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Eliminar
+                    <a href="#" class="btn btn-danger btn-sm" id="botonEliminar" data-id="<?=$filas['ID_VISITA']?>" data-nombre="<?=$filas['NOMBRE']?>" data-bs-toggle="modal" data-bs-target="#eliminar" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Eliminar
                     <i class="fa fa-trash-o" aria-hidden="true" onclick="eliminar()" style="font-size: 12px;"></i>
                     </a>
     
@@ -406,7 +406,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Estás seguro de que deseas eliminar esta visita?</h1>
+                            <h1 class="modal-title fs-5" id="labelConfirmarEliminar"></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           
@@ -449,10 +449,15 @@ document.addEventListener('DOMContentLoaded', function () {
   var confirmarSalidaLink = document.getElementById('confirmarSalida');
   var confirmarEliminarLink = document.getElementById('confirmarEliminar');
 
+  var textoConfirmarSalida = document.getElementById('labelConfirmarSalida');
+  var textoConfirmarEliminar = document.getElementById('labelConfirmarEliminar');
+
   // Evento para el modal de salida
   modalSalida.addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget;
     var visitaId = button.getAttribute('data-id');
+    var visitaNombre = button.getAttribute('data-nombre');
+    textoConfirmarSalida.textContent = '¿Deseas confirmar la salida de ' + visitaNombre + '?';
     confirmarSalidaLink.href = '../Controlador/controlador_editar_visitas.php?id=' + visitaId;
   });
 
@@ -460,6 +465,8 @@ document.addEventListener('DOMContentLoaded', function () {
   modalEliminar.addEventListener('show.bs.modal', function (event) {
     var button = event.relatedTarget;
     var visitaId = button.getAttribute('data-id');
+    var visitaNombre = button.getAttribute('data-nombre');
+    textoConfirmarEliminar.textContent = '¿Estás seguro de que deseas eliminar la visita de ' + visitaNombre + '?';
     confirmarEliminarLink.href = '../Controlador/controlador_eliminar_visita.php?id=' + visitaId;
   });
 });

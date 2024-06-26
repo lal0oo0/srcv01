@@ -393,14 +393,14 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     // Mostrar el botón si no se debe ocultar
                     if (!$hideButton) {
                     ?>
-                      <a href="#" id="botonSalida" data-id="<?=$filas['ID_VISITA']?>" data-bs-toggle="modal" data-bs-target="#salida" class="btn btn-info btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Salida 
+                      <a href="#" id="botonSalida" data-id="<?=$filas['ID_VISITA']?>" data-nombre="<?=$filas['NOMBRE']?>" data-bs-toggle="modal" data-bs-target="#salida" class="btn btn-info btn-sm" style="font-size: 10px; padding: 2px 5px; height: 20px; line-height: 1; color: black;">Salida 
                       <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 14px;"></i></a>
                       <!-- Modal confirmación de salida-->
                       <div class="modal fade" id="salida" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="exampleModalLabel">¿Deseas confirmar la salida de esta visita?</h1>
+                              <h1 class="modal-title fs-5" id="labelConfirmarSalida"></h1>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             
@@ -466,13 +466,16 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
   document.addEventListener('DOMContentLoaded', function () {
     var modalSalida = document.getElementById('salida');
     var confirmarSalidaLink = document.getElementById('confirmarSalida');
+    var textoConfirmarSalida = document.getElementById('labelConfirmarSalida');
 
     modalSalida.addEventListener('show.bs.modal', function (event) {
       // Botón que activó el modal
       var button = event.relatedTarget;
       // Extraer información de los atributos data-* 
       var visitaId = button.getAttribute('data-id');
-
+      var visitaNombre = button.getAttribute('data-nombre');
+      //Mostrar texto de confirmación mas el nombre de la visita
+      textoConfirmarSalida.textContent = '¿Deseas confirmar la salida de ' + visitaNombre + '?';
       // Actualizar el enlace de confirmación con el ID correcto
       confirmarSalidaLink.href = '../Controlador/controlador_salida_recepcion.php?id=' + visitaId;
     });
