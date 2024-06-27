@@ -188,7 +188,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               <div class="mb-3"></div> <!--Salto de linea-->
                 <div class="col-md-12">
                 <label for="file" class="form-label">Elija una imagen</label>
-                <input class="form-control" style="border: 2px solid #1E90FF;" type="file" id="file">
+                <input class="form-control" style="border: 2px solid #1E90FF;" type="file" name= "file[]" id="file">
                 </div>
                 <div class="mb-3"></div> <!--Salto de linea-->
               <label for="cuerpo" class="form-label">Cuerpo</label>
@@ -335,7 +335,69 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     </div>
                     <div class="modal-body">
                       <?php
+                      echo '
+                                  <form action="../Controlador/controlador_registrar_promos.php" method="POST" class="row g-3 needs-validation" name="myForm" id="myForm" novalidate>
+            
+                                  <div class="col-md-12">
+                                    <label for="nombre" class="form-label">Nombre de la promoción *</label>
+                                    <input type="text" class="form-control" style="border: 2px solid #1E90FF" name="nombre" id="nombre" value="'. $filas['NOMBRE_PROMOCION'] .'" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required>
+                                    <div class="invalid-feedback">
+                                    Ingrese informacion valida.
+                                    </div>
+                                  </div>
 
+                                  <h6 class="text-center">Datos del correo</h6>
+                                  <div class="col-md-12">
+                                    <label for="asunto" class="form-label">Asunto del correo *</label>
+                                    <div class="input-group has-validation">
+                                      <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="asunto" id="asunto" value="'. $filas['ASUNTO'] .'"  required>
+                                      <div class="invalid-feedback">
+                                      Ingrese informacion valida.
+                                      </div>
+                                    </div>
+                                    <div class="mb-3"></div> <!--Salto de linea-->
+                                    <div class="col-md-12">
+                                    <label for="encabezado" class="form-label">Encabezado *</label>
+                                    <div class="input-group has-validation">
+                                      <input type="text" class="form-control" style="border: 2px solid #1E90FF;" name="encabezado" id="encabezado" value="'. $filas['ENCABEZADO'] .'" required>
+                                      <div class="invalid-feedback">
+                                      Ingrese informacion valida.
+                                      </div>
+                                    </div>
+                                    <div class="mb-3"></div> <!--Salto de linea-->
+                                      <div class="col-md-12">
+                                      <label for="file" class="form-label">Elija una imagen</label>
+                                      <input class="form-control" style="border: 2px solid #1E90FF;" type="file" id="file">
+                                      </div>
+                                      <div class="mb-3"></div> <!--Salto de linea-->
+                                    <label for="cuerpo" class="form-label">Cuerpo</label>
+                                    <div class="input-group has-validation">
+                                      <textarea class="form-control" name="cuerpo" id="cuerpo" style="border: 2px solid #1E90FF;" aria-label="With textarea">'. $filas['CUERPO'] .'</textarea>
+                                      <div class="invalid-feedback">
+                                      Ingrese informacion valida.
+                                      </div>
+                                    </div>
+                                    <div class="mb-3"></div> <!--Salto de linea-->
+                                    <label for="foot" class="form-label">Pie de página *</label>
+                                    <div class="input-group has-validation">
+                                      <input type="text" class="form-control" style="border: 2px solid #1E90FF;" value="'. $filas['PIE_PAGINA'] .'" name="foot" id="foot" required>
+                                      <div class="invalid-feedback">
+                                      Ingrese informacion valida.
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+                                  </div>
+                                  <br>
+
+                                  <br>
+                                  <div class="col-12">
+                                    <input type="submit" value="Guardar" class="btn btn-primary" name="Guardar"></button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiar()">Cerrar</button>
+                                  </div>
+                                  </form>
+                      ';
                       ?>
                     </div>
                     <div class="modal-footer">

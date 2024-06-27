@@ -108,6 +108,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <a class="nav-link active" aria-current="page" href="vista_visitas_urspace.php">Visitas</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="vista_envio_spam.php">Spam</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesión</a>
           </li>
         </ul>

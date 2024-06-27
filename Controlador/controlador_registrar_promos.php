@@ -21,6 +21,7 @@ $encabezado = $_POST['encabezado'];
 $asunto = $_POST['asunto'];
 $cuerpo = $_POST['cuerpo'];
 $foot = $_POST['foot'];
+$imagen = v;
 
 	/*Codigo para guardar un registro temporalmente en una variable php*/
 	$consulta = "INSERT INTO srcv_promociones(NOMBRE_PROMOCION, ASUNTO, ENCABEZADO, CUERPO, PIE_PAGINA, ESTATUS, CREATION_DATE, LAST_UPDATE_DATE, CREATED_BY, LAST_UPDATED_BY)
