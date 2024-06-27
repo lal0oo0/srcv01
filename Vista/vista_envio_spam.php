@@ -157,7 +157,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
 
       <div class="card-body">
             
-            <form action="../Controlador/controlador_registrar_promos.php" method="POST" class="row g-3 needs-validation" name="myForm" id="myForm" novalidate>
+            <form action="../Controlador/controlador_registrar_promos.php" method="POST" class="row g-3 needs-validation" name="myForm" id="myForm" enctype="multipart/form-data" novalidate>
             
             <div class="col-md-12">
               <label for="nombre" class="form-label">Nombre de la promoción *</label>
@@ -188,7 +188,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               <div class="mb-3"></div> <!--Salto de linea-->
                 <div class="col-md-12">
                 <label for="file" class="form-label">Elija una imagen</label>
-                <input class="form-control" style="border: 2px solid #1E90FF;" type="file" name= "file[]" id="file">
+                <input class="form-control" style="border: 2px solid #1E90FF;" type="file" accept="image/jpeg" name= "file[]" id="file">
                 </div>
                 <div class="mb-3"></div> <!--Salto de linea-->
               <label for="cuerpo" class="form-label">Cuerpo</label>
@@ -336,7 +336,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                     <div class="modal-body">
                       <?php
                       echo '
-                                  <form action="../Controlador/controlador_registrar_promos.php" method="POST" class="row g-3 needs-validation" name="myForm" id="myForm" novalidate>
+                                  <form action="../Controlador/controlador_editar_promos.php" method="POST" class="row g-3 needs-validation" name="myForm2" id="myForm" novalidate>
             
                                   <div class="col-md-12">
                                     <label for="nombre" class="form-label">Nombre de la promoción *</label>
@@ -367,7 +367,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                                     <div class="mb-3"></div> <!--Salto de linea-->
                                       <div class="col-md-12">
                                       <label for="file" class="form-label">Elija una imagen</label>
-                                      <input class="form-control" style="border: 2px solid #1E90FF;" type="file" id="file">
+                                      <input class="form-control" style="border: 2px solid #1E90FF;" type="file" id="file2">
                                       </div>
                                       <div class="mb-3"></div> <!--Salto de linea-->
                                     <label for="cuerpo" class="form-label">Cuerpo</label>
@@ -444,7 +444,7 @@ tippy('#botonDesactivar', {
 // Espera a que el documento HTML esté completamente cargado antes de ejecutar el script
 $(document).ready(function() {
     // Captura el evento de envío del formulario con la clase 'formulario'
-    $(".myForm").submit(function(e) {
+    $("#myForm").submit(function(e) {
         // Previene el comportamiento predeterminado del formulario
         e.preventDefault();
         
