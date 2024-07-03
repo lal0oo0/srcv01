@@ -112,6 +112,9 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
             <a class="nav-link" href="vista_historial_reservaciones_admin.php">Historial reservaciones</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="vista_configuracion_correo.php">Configuracion de correo</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="../Controlador/controlador_cerrar_sesion.php" onclick="cerrarsesion(event)">Cerrar Sesión</a>
           </li>
       </div>
@@ -163,6 +166,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
               <option value="Empresa">Empresa</option>
               <option value="Asunto">Asunto</option>
               <option value="Piso">Piso</option>
+              <option value="Correo">Correo</option>
             </select>
           </div>
           <div class="col-sm-12 col-md-2">

@@ -9,7 +9,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require_once '../Modelo/conexion2.php';
-require_once '../PHPMailer/vendor/autoload.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/SMTP.php';
+
 
 $link = $_SERVER['HTTP_HOST'];
 
@@ -40,17 +43,45 @@ $ejecutar = mysqli_query($conexion, $consulta);
 $mail = new PHPMailer(true);
 
 try {
+    $correo = mysqli_query($conexion, "SELECT * FROM srcv_configuracion_correo WHERE ID_CORREO='1'");
+    $correos = mysqli_fetch_assoc($correo);
+    $host = $correos['HOST'];
+    $username = $correos['USERNAME'];
+    $passwordEncr = $correos['PASS'];
+        // Metodo para desencriptar la contrasenia
+        $clave = "55Eu47x";
+
+        function des_encrypt($string, $key)
+        {
+            $string = base64_decode($string);
+            $result = '';
+            for ($i = 0; $i < strlen($string); $i++) {
+                $char = substr($string, $i, 1);
+                $keychar = substr($key, ($i % strlen($key)) - 1, 1);
+                $char = chr(ord($char) - ord($keychar));
+                $result .= $char;
+            }
+            return $result;
+        }
+
+        // Desencriptar la contrasena:
+        $password = des_encrypt($passwordEncr, $clave);
+        //Fin del metodo de des-encriptar
+    $port = $correos['PORT'];
+    $remitente = $correos['EMAIL'];
     // Configuracion del servidor SMTP
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPDebug = 0;
+    $mail->Host = $host;
     $mail->SMTPAuth = true;
-    $mail->Username = 'itglobal071@gmail.com'; 
-    $mail->Password = 'sqtwacekbdmnqjyq'; 
+    $mail->Username = $remitente; 
+    $mail->Password = $password; 
     $mail->SMTPSecure = 'tls';
-    $mail->Port = 587;
+    $mail->Port = $port;
     $mail->CharSet = 'UTF-8';
-    // Configuracion del remitente y el destinatario
-    $mail->setFrom('itglobal071@gmail.com', 'iT-Global');
+
+    // Configuración del remitente y el destinatario
+    $mail->setFrom($remitente, $username);
     $mail->addAddress($destin);
     $mail->isHTML(true);
     $mail->Subject = 'Error en confirmación de salida';
@@ -83,7 +114,7 @@ try {
        header("Location: ../Vista/vista_registro_visitas.php?mensaje=" . urlencode($mensaje));
         exit();
 } catch (Exception $e) {
-    echo "Error al enviar el código a su correo electrónico: {$mail->ErrorInfo}";
+    echo "Error al enviar la advertencia: {$mail->ErrorInfo}";
 }
 
 mysqli_close($conexion);
