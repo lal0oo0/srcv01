@@ -227,7 +227,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                               <input type="hidden" name="idvisita" value="<?= $filas['ID_VISITA'] ?>">
                               <div class="col">
                                 <label for="se">Nombre *</label>
-                                <input type="text" class="form-control" name="nombre" id="nombre" value="<?=$filas['NOMBRE']?>" placeholder="Nombre" aria-label="nombre" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
+                                <input type="text" class="form-control" name="nombre" id="nombre" value="<?=$filas['NOMBRE']?>" placeholder="Nombre" aria-label="nombre" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W0-9]{3,30}$" required oninput="capitalizeFirstLetter(this)">
                                 <div class="invalid-feedback">
                                   Verifique los datos
                                 </div>
@@ -237,14 +237,14 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                               <div class="row">
                                 <div class="col">
                                   <label for="se">Apellido paterno *</label>
-                                  <input type="text" class="form-control" name="apellidopaterno" id="pellidopaterno" value="<?=$filas['APELLIDO_PATERNO']?>" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
+                                  <input type="text" class="form-control" name="apellidopaterno" id="pellidopaterno" value="<?=$filas['APELLIDO_PATERNO']?>" placeholder="Apellido paterno" aria-label="Apellido paterno" aria-describedby="basic-addon1" pattern="^(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
                                   <div class="invalid-feedback">
                                     Verifique los datos
                                   </div>
                                 </div>
                                 <div class="col">
                                   <label for="se">Apellido materno *</label>
-                                  <input type="text" class="form-control" name="apellidomaterno" id="apellidomaterno" placeholder="Apellido materno" value="<?=$filas['APELLIDO_MATERNO']?>" aria-label="Apellido materno" aria-describedby="basic-addon1" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
+                                  <input type="text" class="form-control" name="apellidomaterno" id="apellidomaterno" placeholder="Apellido materno" value="<?=$filas['APELLIDO_MATERNO']?>" aria-label="Apellido materno" aria-describedby="basic-addon1" pattern="^(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required oninput="capitalizeFirstLetter(this)">
                                   <div class="invalid-feedback">
                                     Verifique los datos
                                   </div>
@@ -623,7 +623,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('pellidopaterno').addEventListener('input', function() {
         var apellidopaterno = this.value.toLowerCase();
         apellidopaterno = capitalizeFirstLetter(apellidopaterno);
-        this.value = aapellidopaterno;
+        this.value = apellidopaterno;
     });
 
     document.getElementById('apellidomaterno').addEventListener('input', function() {
