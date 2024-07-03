@@ -9,7 +9,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require_once '../Modelo/conexion2.php';
-require_once '../PHPMailer/vendor/autoload.php';
+    // Llamar a la librería PHPMailer
+    require 'PHPMailer/src/PHPMailer.php';
+    require 'PHPMailer/src/Exception.php';
+    require 'PHPMailer/src/SMTP.php';
+
 
 /* Obtener la conexión a la base de datos */
 $conexion = conect();
@@ -48,20 +52,48 @@ $fila = mysqli_fetch_assoc($resultado);
 $nombre_usuario = $fila['NOMBRE'];
 
 // Inicializar PHPMailer
-$mail = new PHPMailer(true);
+$mail = new PHPMailer;
 
 try {
+    $correoR = mysqli_query($conexion, "SELECT * FROM srcv_configuracion_correo WHERE ID_CORREO='1'");
+    $correosR = mysqli_fetch_assoc($correoR);
+    $host = $correosR['HOST'];
+    $username = $correosR['USERNAME'];
+    $passwordEncr = $correosR['PASS'];
+        // Metodo para desencriptar la contrasenia
+        $clave = "55Eu47x";
+
+        function des_encrypt($string, $key)
+        {
+            $string = base64_decode($string);
+            $result = '';
+            for ($i = 0; $i < strlen($string); $i++) {
+                $char = substr($string, $i, 1);
+                $keychar = substr($key, ($i % strlen($key)) - 1, 1);
+                $char = chr(ord($char) - ord($keychar));
+                $result .= $char;
+            }
+            return $result;
+        }
+
+        // Desencriptar la contrasena:
+        $password = des_encrypt($passwordEncr, $clave);
+        //Fin del metodo de des-encriptar
+    $port = $correosR['PORT'];
+    $remitente = $correosR['EMAIL'];
     // Configuracion del servidor SMTP
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPDebug = 0;
+    $mail->Host = $host;
     $mail->SMTPAuth = true;
-    $mail->Username = 'itglobal071@gmail.com'; 
-    $mail->Password = 'sqtwacekbdmnqjyq'; 
+    $mail->Username = $remitente; 
+    $mail->Password = $password; 
     $mail->SMTPSecure = 'tls';
-    $mail->Port = 587;
+    $mail->Port = $port;
     $mail->CharSet = 'UTF-8';
-    // Configuracion del remitente y el destinatario
-    $mail->setFrom('itglobal071@gmail.com', 'iT-Global');
+
+    // Configuración del remitente y el destinatario
+    $mail->setFrom($remitente, $username);
     $mail->addAddress($correo);
     $mail->isHTML(true);
     $mail->Subject = 'Código de Verificación';
