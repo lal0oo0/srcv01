@@ -14,6 +14,30 @@ $conexion = conect();
 date_default_timezone_set('America/Mexico_City');
 $fechaAlta = date('Y-m-d H:i:s');
 
+
+// Obtener el campo 'nombre' de la tabla 'srcv_listas' donde la categoría sea 'Empresa'
+$consulta_empresa = "SELECT NOMBRE FROM srcv_listas WHERE ESTATUS='1' AND NOMBRE LIKE '%Ur%' AND CATEGORIA = 'Empresa'";
+$resultado_empresa = mysqli_query($conexion, $consulta_empresa);
+
+if ($resultado_empresa) {
+    $fila_empresa = mysqli_fetch_assoc($resultado_empresa);
+    $empresa = $fila_empresa['NOMBRE'];
+} else {
+    die('Error en la consulta de empresa: ' . mysqli_error($conexion));
+}
+
+// Obtener el campo 'nombre' de la tabla 'srcv_listas' donde la categoría sea diferente de 'Empresa'
+$consulta_asunto = "SELECT NOMBRE FROM srcv_listas WHERE ESTATUS='1' AND NOMBRE LIKE '%serva%' AND CATEGORIA = 'Asunto'";
+$resultado_asunto = mysqli_query($conexion, $consulta_asunto);
+
+if ($resultado_asunto) {
+    $fila_asunto = mysqli_fetch_assoc($resultado_asunto);
+    $asunto = $fila_asunto['NOMBRE'];
+} else {
+    die('Error en la consulta de asunto: ' . mysqli_error($conexion));
+}
+
+
 // Capturar los campos del formulario
 $check = isset($_POST['check']) ? $_POST['check'] : '0';
 $idVisita = $_POST['id_visita'];
@@ -91,7 +115,7 @@ if ($check == '1') {
 
         // Consulta para guardar también el registro en la tabla de visitas
         $consulta2 = "INSERT INTO srcv_visitas (ID_VISITA, HORA_ENTRADA, FECHA, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMPRESA, ASUNTO, PISO, CREATION_DATE, LAST_UPDATE_DATE, CREATED_BY, LAST_UPDATED_BY, ESTATUS)
-        VALUES ('$id_unico', '$horaini', '$fechaini', '$nombre', '$apellidop', '$apellidom', 'UrSpace', 'Reservacion', '$piso', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta', '1')";
+        VALUES ('$id_unico', '$horaini', '$fechaini', '$nombre', '$apellidop', '$apellidom', '$empresa', '$asunto', '$piso', '$fechaAlta', '$fechaAlta', '$useralta', '$useralta', '1')";
         $ejecutar2 = mysqli_query($conexion, $consulta2);
         if (!$ejecutar2) {
             die('Error en la inserción: ' . mysqli_error($conexion));

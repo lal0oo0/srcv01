@@ -3,7 +3,7 @@ session_start();
 $ROL=$_SESSION['rol'];
 $CORREO=$_SESSION['correo'];
 
-require ("../PhpSpreadsheet/vendor/autoload.php");
+require '../PhpSpreadsheet/vendor/autoload.php';
 require_once("../Modelo/conexion2.php");
 $conexion = conect();
 
@@ -13,6 +13,14 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;// Para color de fondo de celdas
 use PhpOffice\PhpSpreadsheet\Style\Color;// Para color de  letras de celdas.
 use PhpOffice\PhpSpreadsheet\Style\Alignment;// Para centrar el texto de las celdas
 use PhpOffice\PhpSpreadsheet\Style\Border;//Para los bordes de las celdas
+
+
+require '../PhpSpreadsheet/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Spreadsheet.php';
+require '../PhpSpreadsheet/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/IOFactory.php';
+require '../PhpSpreadsheet/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Style/Fill.php';
+require '../PhpSpreadsheet/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Style/Color.php';
+require '../PhpSpreadsheet/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Style/Alignment.php';
+require '../PhpSpreadsheet/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Style/Border.php';
 
 // Verificar si hay una sesión activa
 if (empty($_SESSION["correo"])){
@@ -52,9 +60,7 @@ if (empty($fecha_inicio) || empty($fecha_fin)) {
     header("location: ../Vista/vista_historial_visitas.php?mensaje=" . urlencode($mensaje));
 } elseif ($rol_urspace->num_rows == 1) {
     header("location: ../Vista/vista_visitas_urspace.php?mensaje=" . urlencode($mensaje));
-} else {
-    header("location: ../Vista/error.php?mensaje=" . urlencode($mensaje));
-}
+} 
     exit; 
 }
 

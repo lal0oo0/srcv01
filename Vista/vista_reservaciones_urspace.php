@@ -535,7 +535,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Evita que el formulario se envíe
             event.preventDefault();
-        }else
+        }else {
              // Verificar si las fechas y horas son válidas
             var fechaInicio = new Date(fechainicio + 'T' + horainicio);
             var fechaFinalizacion = new Date(fechafinalizacion + 'T' + horafinalizacion);
@@ -545,6 +545,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 swal('Error', 'Verifique los datos del horario de reservación.', 'error');
                 event.preventDefault();
             }
+        }
     });
 });
 </script>

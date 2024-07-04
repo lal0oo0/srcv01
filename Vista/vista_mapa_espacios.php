@@ -270,7 +270,8 @@ $row = $resultado->fetch_assoc();
                   </div>
                   <div class="col">
                     <label for="telefono">Teléfono</label>
-                    <input type="tel" class="form-control" id="telefono" name="Telefono" placeholder="Teléfono" aria-describedby="basic-addon1">
+                    <input type="tel" class="form-control" id="telefono" name="Telefono" placeholder="Teléfono" aria-describedby="basic-addon1" maxlength="10" oninput="validarTelefono(this)">
+                    <div class="invalid-feedback">El teléfono debe tener 10 dígitos.</div>
                   </div>
                 </div>
                 <div class="mb-2"></div> <!--Salto de linea-->
@@ -376,6 +377,18 @@ $row = $resultado->fetch_assoc();
 
 
 <script>
+//Función para validar telefono
+function validarTelefono(input) {
+  // Remover cualquier carácter no numérico
+  input.value = input.value.replace(/\D/g, '');
+
+  // Limitar la longitud a 10 caracteres
+  if (input.value.length > 10) {
+      input.value = input.value.slice(0, 10);
+  }
+ }
+
+
 //Funcion para ocultar o mostrar el select al presionar el check
   function toggleDisplay(id, checkboxId) {
     var selectContainer = document.getElementById(id);
@@ -459,26 +472,6 @@ function formatoMoneda(input) {
 }
 
 $(document).ready(function() {
-    /* Aplicar formato de moneda cuando se edita el campo
-    var totalElement = document.getElementById('<?php// echo $total; ?>');
-    var engancheElement = document.getElementById('<?php //echo $enganche; ?>');
-
-    if (totalElement) {
-        totalElement.addEventListener('input', function() {
-            formatoMoneda(this);
-        });
-    } else {
-        console.error('Element with ID "total" not found.');
-    }
-
-    if (engancheElement) {
-        engancheElement.addEventListener('input', function() {
-            formatoMoneda(this);
-        });
-    } else {
-        console.error('Element with ID "enganche" not found.');
-    }*/
-
     // Captura el evento de envío del formulario con la clase 'formulario'
     $(".formulario").submit(function(e) {
         // Previene el comportamiento predeterminado del formulario
@@ -498,6 +491,7 @@ $(document).ready(function() {
         var total = $(this).find('input[id^="total_"]').val();
         var enganche = $(this).find('input[id^="enganche_"]').val();
         var idSala = $(this).find('#id_sala').val();
+        var telefono = $(this).find('#telefono').val();
 
         //console.log("Total:", total);
         //console.log("Enganche:", enganche);
@@ -513,7 +507,7 @@ $(document).ready(function() {
 
             if (fechaFinalizacion <= fechaInicio) {
                 valid = false;
-                swal('Error', 'La hora de finalización debe ser mayor que la hora de inicio cuando las fechas son iguales', 'error');
+                swal('Error', 'Verifique que sus fechas y horas ingresadas sean correctas.', 'error');
             }
 
             // Limpiar el formato de moneda antes de convertir a número
@@ -548,6 +542,12 @@ $(document).ready(function() {
             if (parseInt(personas) <= 0) {
                 valid = false;
                 swal('Error', 'El numero de personas no puede ser menor o igual que cero', 'error');
+            }
+
+            // Verificar si el campo de teléfono está lleno y no tiene exactamente 10 dígitos
+            if (telefono && telefono.length !== 10) {
+              valid = false;
+              swal('Error', 'El teléfono debe tener exactamente 10 dígitos.', 'error');
             }
         }
 

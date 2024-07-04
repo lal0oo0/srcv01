@@ -213,7 +213,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                 <br>
                 <div class="col">
                   <label for="nombre" class="form-label" id="nombreLabel">Nombre *</label>
-                  <input type="text" class="form-control" id="nombre" name="nombre" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$" required>
+                  <input type="text" class="form-control" id="nombre" name="nombre" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúüÁÉÍÓÚÜ ]{3,30}$" required>
                   <div class="invalid-feedback">
                     Verifique los datos
                   </div>
@@ -225,7 +225,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <div class="col"></div>
                 <div class="col">
                   <label for="noPersonas" class="form-label">No. Personas *</label>
-                  <input type="number" class="form-control" id="noPersonas" min="1" max="200" value="1" name="noPersonas" required>
+                  <input type="number" class="form-control" id="noPersonas" min="2" max="200" value="2" name="noPersonas" required>
                   <div class="invalid-feedback" id="person"></div>
                 </div>
                 <div class="col"></div>
@@ -236,7 +236,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <div class="col">
                     <div class="mb-3"></div> <!-- Salto de línea -->
                     <label for="ap" class="form-label">Apellido Paterno *</label>
-                    <input type="text" class="form-control" id="ap" name="ap" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required>
+                    <input type="text" class="form-control" id="ap" name="ap" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúüÁÉÍÓÚÜ ]{3,30}$" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -245,7 +245,7 @@ $mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : "";
                   <div class="col">
                     <div class="mb-3"></div> <!-- Salto de línea -->
                     <label for="am" class="form-label">Apellido Materno *</label>
-                    <input type="text" class="form-control" id="am" name="am" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü\W]{3,30}$" required>
+                    <input type="text" class="form-control" id="am" name="am" pattern="^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúüÁÉÍÓÚÜ ]{3,30}$" required>
                     <div class="invalid-feedback">
                       Verifique los datos
                     </div>
@@ -681,7 +681,7 @@ function toggleGroupFields() {
     noPersonasInput.required = false;
     nombreLabel.textContent = 'Nombre *';
     nombreInput.placeholder = '';
-    nombreInput.pattern = "^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúü \W]{3,30}$";
+    nombreInput.pattern = "^(?=.*[a-záéíóúü])(?=.*[A-ZÁÉÍÓÚÜ])[A-Za-záéíóúüÁÉÍÓÚÜ ]{3,30}$";
   }
 }
 
