@@ -1,3 +1,3 @@
 <?php
-        header("location: ../srcv01/Vista/vista_inicio_sesion.php");
+        header("location: ../Vista/vista_inicio_sesion.php");
 ?>
